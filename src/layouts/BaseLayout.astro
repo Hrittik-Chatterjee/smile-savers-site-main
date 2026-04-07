@@ -1,0 +1,163 @@
+---
+/**
+ * BaseLayout — Core HTML shell for Smile Savers Dental
+ * ─────────────────────────────────────────────────────────
+ * Features:
+ *  - Self-hosted fonts (no Google Fonts privacy/perf hit)
+ *  - PWA manifest + service worker registration
+ *  - Full Open Graph + Twitter card meta
+ *  - Schema.org LocalBusiness structured data
+ *  - Preload LCP image for hero pages
+ *  - View Transitions for SPA-like navigation
+ *  - WCAG 2.1 AA: skip link, lang, color-scheme
+ */
+import ChatWidget from "@/components/common/ChatWidget.astro";
+import IconSprite from "@/components/icons/IconSprite.astro";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  /** Set to true on hero page to preload the hero image for LCP */
+  preloadHero?: boolean;
+}
+
+const {
+  title,
+  description = "Top-rated dental care in Woodside, Queens NYC. General dentistry, implants, CEREC same-day crowns, Invisalign. Est. 1987. Call (718) 956-8400.",
+  canonicalUrl = Astro.url.href,
+  ogImage = "/images/hero-dental-office.jpg",
+  preloadHero = false,
+} = Astro.props;
+
+const siteName  = "Smile Savers Dental";
+const fullTitle = title === "Home"
+  ? `${siteName} | Top-Rated Care in Woodside, NYC`
+  : `${title} | ${siteName}`;
+
+const schemaOrg = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "@id": "https://smilesavers.dental/#organization",
+  "name": "Smile Savers Dental",
+  "url": "https://smilesavers.dental",
+  "logo": "https://smilesavers.dental/logo.svg",
+  "image": `https://smilesavers.dental${ogImage}`,
+  "telephone": "+17189568400",
+  "email": "care@smilesavers.dental",
+  "foundingDate": "1987",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "3202 53rd Place",
+    "addressLocality": "Woodside",
+    "addressRegion": "NY",
+    "postalCode": "11377",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.7457,
+    "longitude": -73.9025
+  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "10:00", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday"], "opens": "09:00", "closes": "13:00" }
+  ],
+  "sameAs": [
+    "https://share.google/Giw216ZBKaD1h2nrM",
+    "https://www.facebook.com/smilesavers32"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "200",
+    "bestRating": "5"
+  }
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- Primary meta -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content={siteName} />
+    <meta property="og:url"         content={canonicalUrl} />
+    <meta property="og:title"       content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image"       content={`https://smilesavers.dental${ogImage}`} />
+    <meta property="og:image:width"  content="1400" />
+    <meta property="og:image:height" content="900" />
+    <meta property="og:locale"      content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={`https://smilesavers.dental${ogImage}`} />
+
+    <!-- Favicon + PWA -->
+    <link rel="icon"             type="image/svg+xml"  href="/favicon.svg" />
+    <link rel="icon"             type="image/x-icon"   href="/favicon.ico" />
+    <link rel="apple-touch-icon"                       href="/icons/icon-192.png" />
+    <link rel="manifest"                               href="/manifest.json" />
+    <meta name="theme-color"    content="#102B3F" />
+    <meta name="mobile-web-app-capable"               content="yes" />
+    <meta name="apple-mobile-web-app-capable"         content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title"            content="Smile Savers" />
+
+    <!-- Self-hosted fonts: preconnect not needed (same origin) -->
+    <link rel="preload" as="font" type="font/woff2"
+      href="/fonts/inter-variable.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2"
+      href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin />
+
+    <!-- Preload LCP hero image on homepage -->
+    {preloadHero && (
+      <link rel="preload" as="image"
+        href="/images/hero-dental-office.jpg"
+        fetchpriority="high" />
+    )}
+
+    <!-- Global styles (Tailwind v4 + DaisyUI + custom) -->
+    <style is:global>
+      @import "../styles/global.css";
+    </style>
+
+    <!-- View Transitions -->
+    <ClientRouter fallback="animate" />
+
+    <!-- Schema.org structured data -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+
+    <!-- Service Worker registration -->
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .catch(() => {/* SW not critical */});
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <IconSprite />
+    <slot />
+    <ChatWidget />
+  </body>
+</html>

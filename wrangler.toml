@@ -1,0 +1,60 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# Smile Savers Dental — Cloudflare Pages + Workers Configuration
+# Deployed to Cloudflare Pages (Free Tier) via wrangler
+# Docs: https://developers.cloudflare.com/pages/
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name                  = "smile-savers"
+compatibility_date    = "2025-01-01"
+compatibility_flags   = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+# ── Build ──────────────────────────────────────────────────────────────────────
+[build]
+command   = "npm run build:ci"
+directory = "dist"
+
+[build.upload]
+format = "directory"
+
+# ── Environment variables (non-secret, static config) ─────────────────────────
+[vars]
+ENVIRONMENT   = "production"
+SITE_URL      = "https://smilesavers.dental"
+NODE_VERSION  = "20"
+
+# ── Cloudflare Workers AI (100,000 req/day free) ──────────────────────────────
+[[ai]]
+binding = "AI"
+
+# ── KV Namespace — Chat cache + session storage (1 GB free) ───────────────────
+# Create in CF dashboard → Workers & Pages → KV
+# Then paste the namespace ID below
+[[kv_namespaces]]
+binding = "CHAT_CACHE"
+id      = "your-kv-namespace-id"
+
+# Preview KV (used in CF preview deployments)
+[[kv_namespaces]]
+binding  = "CHAT_CACHE"
+id       = "your-kv-preview-namespace-id"
+preview_id = "your-kv-preview-namespace-id"
+
+# ── Analytics Engine (free — no sampling) ────────────────────────────────────
+# [[analytics_engine_datasets]]
+# binding = "ANALYTICS"
+# dataset = "smile_savers_events"
+
+# ── Staging environment ───────────────────────────────────────────────────────
+[env.staging]
+name = "smile-savers-staging"
+[env.staging.vars]
+ENVIRONMENT = "staging"
+SITE_URL    = "https://staging.smilesavers.dental"
+
+# ── Development environment ───────────────────────────────────────────────────
+[env.development]
+name = "smile-savers-dev"
+[env.development.vars]
+ENVIRONMENT = "development"
+SITE_URL    = "http://localhost:4321"

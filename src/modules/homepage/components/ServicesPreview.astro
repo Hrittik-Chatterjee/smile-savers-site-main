@@ -1,0 +1,226 @@
+---
+/**
+ * ServicesPreview — enhanced grid, featured badge, crisp hover states
+ */
+import Button from '@/components/ui/Button.astro';
+
+const services = [
+  {
+    title: 'General Dentistry',
+    description: 'Comprehensive exams, cleanings, fillings, and preventive care to keep your whole family healthy for life.',
+    icon: 'tooth',
+    href: '/services/general-dentistry',
+    featured: false,
+    badge: null,
+    color: '#10B981',
+    colorLight: '#E8F5E9',
+  },
+  {
+    title: 'Dental Implants',
+    description: 'Permanent, natural-looking tooth replacement by our ICOI-certified implant specialist. Restore your smile and confidence.',
+    icon: 'implant',
+    href: '/services/dental-implants',
+    featured: false,
+    badge: 'ICOI Certified',
+    color: '#3B82F6',
+    colorLight: '#EFF6FF',
+  },
+  {
+    title: 'CEREC Same-Day Crowns',
+    description: 'Custom porcelain crowns designed, milled, and fitted in a single visit using advanced 3D digital technology.',
+    icon: 'crown',
+    href: '/services/cerec-crowns',
+    featured: true,
+    badge: 'Most Advanced',
+    color: '#2CABDF',
+    colorLight: '#E0F5FF',
+  },
+  {
+    title: 'Cosmetic Dentistry',
+    description: 'Teeth whitening, porcelain veneers, Invisalign, and full smile makeovers tailored to your unique goals.',
+    icon: 'sparkle',
+    href: '/services/cosmetic-dentistry',
+    featured: false,
+    badge: 'Popular',
+    color: '#F59E0B',
+    colorLight: '#FFFBEB',
+  },
+];
+
+const icons: Record<string, string> = {
+  tooth: 'M12 2C9.5 2 7 4 7 7c0 2 .8 3.5 1 5.5C8 15 7 17.5 9 19.5c1 1 2.5.5 2.5-1v-3.5c0-1 .7-1.5 1.5-1.5s1.5.5 1.5 1.5V18.5c0 1.5 1.5 2.5 2.5 1 2-2 1-4.5 1-7 .2-2 1-3.5 1-5.5C19 4 16.5 2 14 2h-2z',
+  implant: 'M12 3v4m0 0v3m0-3h-2m2 0h2m-2 3v3m0 0h-3m3 0h3m-3 3v5m-2 0h4',
+  crown: 'M3 11l3-8 3 5.5 3-5.5 3 5.5 3-5.5 3 8M3 11v7a2 2 0 002 2h14a2 2 0 002-2v-7',
+  sparkle: 'M9.937 15.5A2 2 0 008 17.5v1a2 2 0 002 2h4a2 2 0 002-2v-1a2 2 0 00-1.937-1.999M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5z',
+};
+---
+
+<section class="services-preview section" aria-labelledby="services-heading">
+  <div class="sp-container">
+
+    <header class="sp-header">
+      <span class="sp-eyebrow">What We Offer</span>
+      <h2 id="services-heading" class="sp-title">Dental Care for Every Need</h2>
+      <p class="sp-subtitle">
+        From routine checkups to advanced restorative procedures — comprehensive care for the whole family.
+      </p>
+    </header>
+
+    <div class="sp-grid">
+      {services.map((s) => (
+        <article class={`sp-card${s.featured ? ' sp-card--featured' : ''}`} style={`--card-color:${s.color};--card-color-light:${s.colorLight}`}>
+          {s.badge && (
+            <div class="sp-badge">{s.badge}</div>
+          )}
+          <div class="sp-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d={icons[s.icon]}/>
+            </svg>
+          </div>
+          <h3 class="sp-card-title">{s.title}</h3>
+          <p class="sp-card-desc">{s.description}</p>
+          <a href={s.href} class="sp-link" aria-label={`Learn more about ${s.title}`}>
+            Learn more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="sp-cta">
+      <Button href="/services" variant="outline">
+        View All Services
+      </Button>
+      <p class="sp-cta-hint">We accept most major dental insurance plans</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.services-preview{background:var(--color-surface)}
+.sp-container{width:100%;max-width:var(--container-xl);margin-inline:auto;padding-inline:var(--spacing-element)}
+@media(max-width:639px){.sp-container{padding-inline:.75rem}}
+
+.sp-header{text-align:center;max-width:580px;margin-inline:auto;margin-bottom:clamp(2rem,3vw,3rem)}
+.sp-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-secondary-dark);margin-bottom:.75rem;padding:.25rem .875rem;background:rgba(61,186,167,.1);border-radius:9999px}
+.sp-title{font-size:clamp(1.75rem,3.5vw,2.5rem);font-family:var(--font-family-heading);font-weight:700;color:var(--color-primary);letter-spacing:-.02em;margin:0 0 1rem;line-height:1.15}
+.sp-subtitle{font-size:var(--font-size-lg);color:var(--color-text-muted);line-height:1.65;margin:0}
+
+.sp-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
+}
+@media(min-width:640px){.sp-grid{grid-template-columns:repeat(2,1fr);gap:1.25rem}}
+@media(min-width:1024px){.sp-grid{grid-template-columns:repeat(4,1fr);gap:1.5rem}}
+
+.sp-card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  padding:1.75rem;
+  background:#fff;
+  border-radius:1.25rem;
+  border:1.5px solid var(--color-border);
+  transition:all .3s ease;
+  overflow:hidden;
+}
+.sp-card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,var(--card-color-light) 0%,transparent 60%);
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.sp-card:hover{
+  border-color:var(--card-color);
+  box-shadow:0 12px 36px rgba(16,43,63,.1);
+  transform:translateY(-3px);
+}
+.sp-card:hover::before{opacity:1}
+
+.sp-card--featured{
+  border-color:var(--card-color);
+  background:linear-gradient(135deg,var(--card-color-light) 0%,#fff 60%);
+}
+.sp-card--featured::before{opacity:1}
+
+.sp-badge{
+  position:absolute;
+  top:1rem;right:1rem;
+  font-size:.62rem;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--card-color);
+  background:var(--card-color-light);
+  border:1px solid var(--card-color);
+  padding:.2rem .625rem;
+  border-radius:9999px;
+}
+.sp-card--featured .sp-badge{
+  background:var(--card-color);
+  color:#fff;
+  border-color:var(--card-color);
+}
+
+.sp-icon{
+  position:relative;
+  width:3.25rem;height:3.25rem;
+  border-radius:.875rem;
+  background:var(--card-color-light);
+  color:var(--card-color);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.25rem;
+  transition:all .3s ease;
+}
+.sp-card:hover .sp-icon{background:var(--card-color);color:#fff}
+
+.sp-card-title{
+  font-size:var(--font-size-lg);
+  font-family:var(--font-family-heading);
+  font-weight:700;
+  color:var(--color-primary);
+  margin:0 0 .625rem;
+  line-height:1.3;
+  position:relative;
+}
+.sp-card-desc{
+  font-size:var(--font-size-sm);
+  color:var(--color-text-muted);
+  line-height:1.7;
+  margin:0 0 1.5rem;
+  flex-grow:1;
+  position:relative;
+}
+.sp-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.375rem;
+  font-size:var(--font-size-sm);
+  font-weight:700;
+  color:var(--card-color);
+  text-decoration:none;
+  text-underline-offset:3px;
+  transition:gap .2s ease;
+  min-height:44px;
+  position:relative;
+  margin-top:auto;
+}
+.sp-link:hover{gap:.625rem;text-decoration:underline}
+
+.sp-cta{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.875rem;
+  margin-top:clamp(2rem,3vw,3rem);
+}
+.sp-cta-hint{
+  font-size:var(--font-size-sm);
+  color:var(--color-text-muted);
+  margin:0;
+}
+</style>

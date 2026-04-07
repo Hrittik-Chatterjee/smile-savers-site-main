@@ -1,0 +1,169 @@
+---
+/**
+ * Navigation - Main navigation links
+ * Limited to 6 items per Hick's Law
+ * Supports dropdown menus for items with children
+ */
+
+import { mainNavigation } from '@/config/navigation';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class:list={['navigation', className]} aria-label="Main navigation">
+  <ul class="nav-list">
+    {mainNavigation.map((item) => (
+      <li class:list={['nav-item', { 'has-dropdown': item.children && item.children.length > 0 }]}>
+        <a
+          href={item.href}
+          class:list={['nav-link', { active: currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) }]}
+          aria-current={currentPath === item.href ? 'page' : undefined}
+          aria-haspopup={item.children ? 'true' : undefined}
+        >
+          {item.label}
+          {item.children && item.children.length > 0 && (
+            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          )}
+        </a>
+        {item.children && item.children.length > 0 && (
+          <ul class="dropdown-menu" role="menu">
+            {item.children.map((child) => (
+              <li role="none">
+                <a
+                  href={child.href}
+                  class:list={['dropdown-link', { active: currentPath === child.href }]}
+                  role="menuitem"
+                  aria-current={currentPath === child.href ? 'page' : undefined}
+                >
+                  {child.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .navigation {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-list {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-surface-sunken);
+      color: var(--color-primary);
+    }
+
+    &.active {
+      background-color: var(--color-primary);
+      color: var(--color-text-inverted);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  .dropdown-arrow {
+    transition: transform var(--transition-fast);
+  }
+
+  .has-dropdown:hover .dropdown-arrow,
+  .has-dropdown:focus-within .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown Menu */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    list-style: none;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity var(--transition-fast), visibility var(--transition-fast), transform var(--transition-fast);
+    z-index: var(--z-dropdown, 100);
+  }
+
+  .has-dropdown:hover .dropdown-menu,
+  .has-dropdown:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-link {
+    display: block;
+    padding: 0.625rem 1rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-surface-sunken);
+      color: var(--color-primary);
+    }
+
+    &.active {
+      background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+      color: var(--color-primary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: -2px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navigation {
+      display: none;
+    }
+  }
+</style>

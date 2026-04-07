@@ -1,0 +1,103 @@
+---
+/**
+ * Affiliations — Step 2 fix: larger containers, better filter, named alts
+ */
+const affiliations = [
+  { src: "/aff1.png", alt: "American Dental Association", w: 176, h: 37 },
+  { src: "/aff2.png", alt: "International Congress of Oral Implantologists (ICOI)", w: 122, h: 92 },
+  { src: "/aff3.png", alt: "NYU College of Dentistry Alumni", w: 133, h: 99 },
+  { src: "/aff4.png", alt: "Zocdoc Verified Provider", w: 121, h: 94 },
+  { src: "/aff5-300x68.png", alt: "Delta Dental Accepted Insurance", w: 300, h: 68 },
+  { src: "/aff6.png", alt: "New York State Dental Association", w: 140, h: 58 },
+];
+---
+
+<section class="aff" aria-label="Professional affiliations and accreditations">
+  <div class="aff-wrap">
+    <p class="aff-label">Trusted &middot; Certified &middot; Affiliated</p>
+    <div class="aff-grid">
+      {affiliations.map((a) => (
+        <div class="aff-item">
+          <img
+            src={a.src}
+            alt={a.alt}
+            width={a.w}
+            height={a.h}
+            loading="lazy"
+            class="aff-img"
+            decoding="async"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.aff {
+  padding: 2.5rem 0 2rem;
+  background: #fff;
+  border-bottom: 1px solid var(--color-border);
+}
+.aff-wrap {
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  padding-inline: clamp(.75rem, 3vw, var(--spacing-element));
+}
+.aff-label {
+  text-align: center;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+.aff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem 1rem;
+  align-items: center;
+  justify-items: center;
+}
+@media(min-width: 768px) {
+  .aff-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.aff-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 64px;
+  padding: .75rem .5rem;
+  border-radius: .75rem;
+  border: 1.5px solid transparent;
+  transition: all .3s ease;
+  cursor: default;
+}
+.aff-item:hover {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+.aff-img {
+  max-width: 100%;
+  max-height: 52px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  /* Desaturate but keep visible — less opacity reduction than before */
+  filter: grayscale(100%) brightness(0.7) contrast(1.2);
+  opacity: 0.65;
+  transition: filter .3s ease, opacity .3s ease;
+  display: block;
+}
+.aff-item:hover .aff-img {
+  filter: grayscale(0%) brightness(1) contrast(1);
+  opacity: 1;
+}
+@media(max-width: 639px) { .aff-wrap { padding-inline: .75rem } }
+</style>

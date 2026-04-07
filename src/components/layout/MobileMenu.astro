@@ -1,0 +1,490 @@
+---
+/**
+ * MobileMenu - Professional mobile navigation
+ * Uses JavaScript for proper state management with accessibility support
+ * Features: scroll lock, escape key close, proper focus management
+ */
+
+import { mainNavigation } from '@/config/navigation';
+import { siteConfig } from '@/config/site';
+import { formatPhone, formatPhoneLink } from '@/lib/utils';
+
+const currentPath = Astro.url.pathname;
+---
+
+<!-- Hamburger toggle button -->
+<button
+  type="button"
+  class="mobile-toggle"
+  aria-label="Toggle navigation"
+  aria-expanded="false"
+  aria-controls="mobile-nav-links"
+>
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
+
+<!-- Overlay backdrop -->
+<div class="mobile-menu-overlay" id="mobile-menu-overlay" aria-hidden="true"></div>
+
+<!-- Mobile nav links panel -->
+<ul id="mobile-nav-links" class="mobile-nav-links">
+  {mainNavigation.map((item) => (
+    <li>
+      {item.children ? (
+        <details class="mobile-nav-details">
+          <summary class:list={['mobile-nav-link', { active: currentPath.startsWith(item.href) }]}>
+            {item.label}
+            <svg xmlns="http://www.w3.org/2000/svg" class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </summary>
+          <ul class="mobile-submenu">
+            {item.children.map((child) => (
+              <li>
+                <a
+                  href={child.href}
+                  class:list={['mobile-submenu-link', { active: currentPath === child.href }]}
+                >
+                  {child.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : (
+        <a
+          href={item.href}
+          class:list={['mobile-nav-link', { active: currentPath === item.href }]}
+        >
+          {item.label}
+        </a>
+      )}
+    </li>
+  ))}
+
+  <!-- CTA buttons inside nav list -->
+  <li class="mobile-menu-cta">
+    <a href="/appointments" class="mobile-cta-btn mobile-cta-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      Book Appointment
+    </a>
+    <a href={formatPhoneLink(siteConfig.phone)} class="mobile-cta-btn mobile-cta-outline">
+      <svg class="phone-ring-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      Call {formatPhone(siteConfig.phone)}
+    </a>
+  </li>
+
+  <!-- Footer info -->
+  <li class="mobile-menu-footer">
+    <div class="mobile-footer-item">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+      Woodside, NY
+    </div>
+    <span class="mobile-footer-item">Open Mon-Sat</span>
+  </li>
+</ul>
+
+<style>
+  /* Phone Ring Animation */
+  @keyframes phone-ring {
+    0%, 100% { transform: rotate(0deg); }
+    5% { transform: rotate(15deg); }
+    10% { transform: rotate(-13deg); }
+    15% { transform: rotate(14deg); }
+    20% { transform: rotate(-12deg); }
+    25% { transform: rotate(10deg); }
+    30% { transform: rotate(0deg); }
+  }
+
+  .phone-ring-icon {
+    animation: phone-ring 3s ease-in-out infinite;
+    transform-origin: center center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .phone-ring-icon {
+      animation: none;
+    }
+  }
+
+  /* ============================================
+     HAMBURGER TOGGLE BUTTON
+     ============================================ */
+  .mobile-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    width: 42px;
+    height: 50px;
+    padding: 0;
+    background-color: var(--color-primary);
+    border: none;
+    cursor: pointer;
+    border-radius: var(--radius-xl);
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .mobile-toggle:hover {
+    background-color: var(--color-primary);
+    transform: scale(1.05);
+  }
+
+  .mobile-toggle:active {
+    background-color: var(--color-primary);
+    transform: scale(0.95);
+  }
+
+  .mobile-toggle:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  .mobile-toggle.open {
+    background-color: var(--color-primary);
+  }
+
+  .bar {
+    width: 18px;
+    height: 2px;
+    background: var(--color-text-inverted);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* Animate bars into X when open */
+  .mobile-toggle.open .bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .mobile-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-toggle.open .bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* ============================================
+     MOBILE NAV LINKS (hidden by default)
+     ============================================ */
+  .mobile-nav-links {
+    display: none;
+  }
+
+  /* ============================================
+     OVERLAY BACKDROP
+     ============================================ */
+  .mobile-menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-menu-overlay.open {
+    display: block;
+    opacity: 1;
+  }
+
+  /* ============================================
+     MOBILE STYLES (max-width: 768px)
+     ============================================ */
+  @media (max-width: 768px) {
+    .mobile-toggle {
+      display: flex;
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      position: fixed;
+      top: calc(var(--header-height, 70px) + 0.5rem);
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      width: 95%;
+      background-color: var(--color-surface-elevated);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.25rem;
+      list-style: none;
+      margin: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      max-height: calc(100vh - var(--header-height, 70px));
+      max-height: calc(100dvh - var(--header-height, 70px));
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      z-index: 9999;
+      border-radius: var(--radius-xl);
+    }
+
+    @media (max-width: 480px) {
+      .mobile-nav-links {
+        border-radius: var(--radius-lg);
+      }
+    }
+
+    .mobile-nav-links.open {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ----------------------------------------
+       NAVIGATION LINKS (WCAG 2.5.5 - 44px min touch target)
+       Complete 8 interactive states (Impeccable)
+       ---------------------------------------- */
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 44px;
+      padding: 0.75rem 1rem;
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text);
+      text-decoration: none;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-out-quart);
+      /* Default state */
+    }
+
+    /* Hover - fine pointer only */
+    @media (hover: hover) {
+      .mobile-nav-link:hover {
+        background-color: var(--color-surface-sunken);
+      }
+    }
+
+    /* Focus - keyboard navigation */
+    .mobile-nav-link:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    /* Active - being pressed */
+    .mobile-nav-link:active {
+      transform: scale(0.98);
+      background-color: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface-sunken));
+    }
+
+    /* Active/current page state */
+    .mobile-nav-link.active {
+      color: var(--color-primary);
+      background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    }
+
+    /* Disabled state */
+    .mobile-nav-link:disabled,
+    .mobile-nav-link[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Details/Summary for submenus */
+    .mobile-nav-details {
+      width: 100%;
+    }
+
+    .mobile-nav-details[open] .mobile-nav-chevron {
+      transform: rotate(180deg);
+    }
+
+    .mobile-nav-details summary {
+      list-style: none;
+    }
+
+    .mobile-nav-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .mobile-nav-chevron {
+      transition: transform 0.2s ease;
+    }
+
+    .mobile-submenu {
+      list-style: none;
+      margin: 0.25rem 0 0 0;
+      padding: 0 0 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+
+    .mobile-submenu-link {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0.5rem 1rem;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      transition: all var(--duration-fast) var(--ease-out-quart);
+    }
+
+    @media (hover: hover) {
+      .mobile-submenu-link:hover {
+        background-color: var(--color-surface-sunken);
+        color: var(--color-text);
+      }
+    }
+
+    .mobile-submenu-link:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    .mobile-submenu-link:active {
+      transform: scale(0.98);
+    }
+
+    .mobile-submenu-link.active {
+      color: var(--color-primary);
+      background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
+    }
+
+    /* ----------------------------------------
+       CTA BUTTONS
+       ---------------------------------------- */
+    .mobile-menu-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--color-border);
+      list-style: none;
+    }
+
+    .mobile-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-medium);
+      text-decoration: none;
+      border-radius: var(--radius-lg);
+      transition: background-color var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .mobile-cta-primary {
+      background-color: var(--color-primary);
+      color: var(--color-text-inverted);
+      border: 2px solid var(--color-primary);
+    }
+
+    .mobile-cta-primary:hover {
+      background-color: var(--color-primary-dark);
+      border-color: var(--color-primary-dark);
+    }
+
+    .mobile-cta-outline {
+      background-color: transparent;
+      color: var(--color-text);
+      border: 2px solid var(--color-border);
+    }
+
+    .mobile-cta-outline:hover {
+      background-color: var(--color-surface-sunken);
+    }
+
+    /* ----------------------------------------
+       FOOTER
+       ---------------------------------------- */
+    .mobile-menu-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      list-style: none;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .mobile-footer-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-muted);
+    }
+  }
+</style>
+
+<script>
+  function initMobileMenu() {
+    const toggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.getElementById('mobile-nav-links');
+    const overlay = document.getElementById('mobile-menu-overlay');
+
+    if (!toggle || !navLinks || !overlay) return;
+
+    // Prevent duplicate initialization (astro:page-load fires on initial load too)
+    if (toggle.hasAttribute('data-initialized')) return;
+    toggle.setAttribute('data-initialized', '');
+
+    function setMenuOpen(isOpen: boolean) {
+      navLinks.classList.toggle('open', isOpen);
+      toggle.classList.toggle('open', isOpen);
+      overlay.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    toggle.addEventListener('click', () => {
+      const isOpen = !navLinks.classList.contains('open');
+      setMenuOpen(isOpen);
+    });
+
+    // Close on overlay click
+    overlay.addEventListener('click', () => {
+      setMenuOpen(false);
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+        setMenuOpen(false);
+        (toggle as HTMLElement).focus();
+      }
+    });
+
+    // Close when clicking a nav link
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        setTimeout(() => {
+          setMenuOpen(false);
+        }, 100);
+      });
+    });
+  }
+
+  // astro:page-load fires on initial load AND on View Transition navigations
+  document.addEventListener('astro:page-load', initMobileMenu);
+</script>

@@ -1,0 +1,338 @@
+---
+/**
+ * PersonaPageLayout - Template for "[service] for [audience]" pages
+ *
+ * URL Pattern: /for/[audience]/
+ * Example: /for/families/, /for/seniors/
+ *
+ * This layout provides unique value through:
+ * - Audience-specific messaging
+ * - Relevant service highlighting
+ * - Targeted testimonials
+ * - Persona-specific FAQs
+ */
+
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FAQSection from '../components/FAQSection.astro';
+import CTABanner from '../components/CTABanner.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+import TrustBadges from '../components/TrustBadges.astro';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Benefit {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  slug: string;
+  persona: string;
+  personaDisplay: string;
+  tagline: string;
+  intro: string;
+  benefits: Benefit[];
+  services: string[];
+  faqs: FAQItem[];
+}
+
+const {
+  slug,
+  persona,
+  personaDisplay,
+  tagline,
+  intro,
+  benefits,
+  services,
+  faqs,
+} = Astro.props;
+
+// SEO
+const title = `Dental Care for ${personaDisplay} | Smile Savers`;
+const description = `${tagline} Smile Savers offers specialized dental services for ${personaDisplay.toLowerCase()} in Queens, NY. Book your appointment today.`;
+const canonicalUrl = `/for/${slug}/`;
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'For You', href: '/for' },
+  { label: personaDisplay },
+];
+
+const iconPaths: Record<string, string> = {
+  family: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+  heart: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z',
+  clock: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 6v6l4 2',
+  shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+  smile: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01',
+  star: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+  calendar: 'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z',
+  dollar: 'M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6',
+};
+---
+
+<PageLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <article class="persona-page">
+    <div class="page-container">
+      <Breadcrumbs items={breadcrumbs} />
+
+      <!-- Hero Section -->
+      <header class="persona-hero">
+        <span class="persona-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d={iconPaths.family} />
+          </svg>
+          For {personaDisplay}
+        </span>
+
+        <h1 class="page-title">
+          Dental Care Designed for {personaDisplay}
+        </h1>
+
+        <p class="page-tagline">{tagline}</p>
+
+        <div class="hero-actions">
+          <a href="/appointments" class="btn btn-primary">
+            Book Appointment
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+          <a href="tel:+17189568400" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            (718) 956-8400
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <TrustBadges variant="inline" size="sm" />
+        </div>
+      </header>
+
+      <!-- Introduction -->
+      <section class="intro-section">
+        <div class="intro-content" set:html={intro} />
+      </section>
+
+      <!-- Benefits Grid -->
+      <section class="benefits-section" aria-labelledby="benefits-heading">
+        <h2 id="benefits-heading" class="section-title">Why {personaDisplay} Choose Smile Savers</h2>
+        <div class="benefits-grid">
+          {benefits.map((benefit) => (
+            <div class="benefit-card">
+              <div class="benefit-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d={iconPaths[benefit.icon] || iconPaths.star} />
+                </svg>
+              </div>
+              <h3 class="benefit-title">{benefit.title}</h3>
+              <p class="benefit-desc">{benefit.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Recommended Services -->
+      <section class="services-section" aria-labelledby="services-heading">
+        <h2 id="services-heading" class="section-title">Recommended Services for {personaDisplay}</h2>
+        <RelatedServices services={services} limit={6} />
+      </section>
+
+      <!-- FAQ Section -->
+      {faqs.length > 0 && (
+        <FAQSection
+          items={faqs}
+          title={`Dental Care for ${personaDisplay}: FAQ`}
+        />
+      )}
+
+      <!-- CTA Banner -->
+      <CTABanner
+        headline={`Ready to Experience Dental Care Made for ${personaDisplay}?`}
+        description="Join thousands of satisfied patients who trust Smile Savers for their dental care. Book your first appointment today."
+      />
+    </div>
+  </article>
+</PageLayout>
+
+<style>
+  .persona-page {
+    padding-bottom: var(--spacing-section);
+  }
+
+  .page-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+  }
+
+  .persona-hero {
+    text-align: center;
+    padding-block: var(--spacing-block);
+    max-width: var(--container-lg);
+    margin-inline: auto;
+  }
+
+  .persona-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-size: var(--font-size-4xl);
+    line-height: var(--line-height-tight);
+    margin-bottom: 1rem;
+  }
+
+  .page-tagline {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: var(--radius-lg);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-text-inverted);
+    box-shadow: 0 4px 14px rgba(33, 150, 243, 0.3);
+  }
+
+  .btn-secondary {
+    background: var(--color-surface-elevated);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero-trust {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .intro-section {
+    max-width: var(--container-prose);
+    margin-inline: auto;
+    padding-block: var(--spacing-element);
+  }
+
+  .intro-content {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    text-align: center;
+  }
+
+  .intro-content :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .benefits-section {
+    padding-block: var(--spacing-block);
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    text-align: center;
+    margin-bottom: var(--spacing-element);
+  }
+
+  .benefits-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .benefits-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .benefits-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .benefit-card {
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    text-align: center;
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .benefit-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .benefit-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
+    border-radius: var(--radius-lg);
+    color: var(--color-primary-dark);
+    margin-bottom: 1rem;
+  }
+
+  .benefit-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: 0.5rem;
+  }
+
+  .benefit-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+  }
+
+  .services-section {
+    padding-block: var(--spacing-block);
+  }
+</style>

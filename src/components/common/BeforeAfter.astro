@@ -1,0 +1,237 @@
+---
+/**
+ * BeforeAfter — CSS-only slider reveal component
+ * No JS required — uses <input type=range> + CSS custom property trick
+ */
+interface Props {
+  items: {
+    before: string;  // alt text describing before state
+    after:  string;  // alt text describing after state
+    label?: string;  // e.g. "CEREC Crown", "Teeth Whitening"
+    bgBefore?: string; // CSS colour if no real image
+    bgAfter?:  string;
+  }[];
+  title?: string;
+}
+const { items, title = "Real Patient Results" } = Astro.props;
+---
+
+<section class="ba-section" aria-label={title}>
+  <div class="ba-wrap">
+    <h2 class="ba-title">{title}</h2>
+    <p class="ba-sub">Drag the slider to reveal the before and after.</p>
+
+    <div class="ba-grid">
+      {items.map((item, i) => (
+        <div class="ba-card">
+          {item.label && <span class="ba-label">{item.label}</span>}
+          <div class="ba-slider-wrap">
+
+            <!-- Before panel -->
+            <div class="ba-before" aria-hidden="true">
+              <div class="ba-img ba-img--before"
+                style={`background:${item.bgBefore ?? '#e8d5c4'}`}
+                role="img" aria-label={item.before}>
+                <span class="ba-tag ba-tag--before">Before</span>
+              </div>
+            </div>
+
+            <!-- After panel (clips based on slider) -->
+            <div class="ba-after" aria-hidden="true">
+              <div class="ba-img ba-img--after"
+                style={`background:${item.bgAfter ?? '#d4eee9'}`}
+                role="img" aria-label={item.after}>
+                <span class="ba-tag ba-tag--after">After</span>
+              </div>
+            </div>
+
+            <!-- Drag handle -->
+            <div class="ba-handle" aria-hidden="true">
+              <div class="ba-line"></div>
+              <div class="ba-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"/><polyline points="9 18 3 12 9 6"/>
+                  <polyline points="15 6 21 12 15 18"/><polyline points="9 6 15 12 9 18"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Range input controls the reveal -->
+            <input
+              type="range"
+              class="ba-range"
+              min="0" max="100" value="50"
+              aria-label={`Reveal result: ${item.before} vs ${item.after}`}
+              style={`--pos:50%`}
+              oninput="this.style.setProperty('--pos',this.value+'%');this.parentElement.style.setProperty('--pos',this.value+'%')"
+            />
+
+          </div>
+          <div class="ba-captions">
+            <span class="ba-caption ba-caption--before">{item.before}</span>
+            <span class="ba-caption ba-caption--after">{item.after}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <p class="ba-disclaimer">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      Individual results may vary. Illustrations represent typical treatment outcomes.
+    </p>
+  </div>
+</section>
+
+<style>
+.ba-section {
+  padding: clamp(2.5rem,4vw,4rem) 0;
+  background: var(--color-surface);
+}
+.ba-wrap {
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  padding-inline: clamp(.75rem,3vw,var(--spacing-element));
+}
+.ba-title {
+  font-size: clamp(1.5rem,2.5vw,2rem);
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+  margin: 0 0 .5rem;
+}
+.ba-sub {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin: 0 0 2.5rem;
+}
+
+.ba-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media(min-width:640px) { .ba-grid { grid-template-columns: repeat(2,1fr) } }
+@media(min-width:1024px) { .ba-grid { grid-template-columns: repeat(3,1fr) } }
+
+.ba-card { display: flex; flex-direction: column; gap: .75rem; position: relative }
+.ba-label {
+  display: inline-block;
+  font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--color-secondary-dark);
+  background: rgba(61,186,167,.1);
+  border-radius: 9999px;
+  padding: .25rem .875rem;
+  width: fit-content;
+}
+
+/* Slider container */
+.ba-slider-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: ew-resize;
+  user-select: none;
+  border: 1.5px solid var(--color-border);
+  --pos: 50%;
+}
+
+/* Before / After panels */
+.ba-before,
+.ba-after {
+  position: absolute;
+  inset: 0;
+}
+.ba-after { clip-path: inset(0 0 0 var(--pos, 50%)) }
+
+.ba-img {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: .75rem;
+}
+.ba-img--before {
+  /* Warm / natural tooth tone */
+  background: linear-gradient(135deg, #e8d5c4 0%, #d4b896 100%);
+}
+.ba-img--after {
+  /* Fresh / clean dental result */
+  background: linear-gradient(135deg, #d4eee9 0%, #a8e0d6 100%);
+}
+
+.ba-tag {
+  font-size: .68rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .07em;
+  padding: .2rem .625rem;
+  border-radius: 9999px;
+}
+.ba-tag--before { background: rgba(0,0,0,.35); color: #fff }
+.ba-tag--after  { background: var(--color-primary); color: #fff }
+
+/* Handle */
+.ba-handle {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: var(--pos, 50%);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+}
+.ba-line {
+  width: 2px;
+  flex: 1;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0,0,0,.3);
+}
+.ba-circle {
+  width: 2.5rem; height: 2.5rem;
+  border-radius: 50%;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+  color: var(--color-primary);
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+}
+
+/* Range input — invisible but functional */
+.ba-range {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+  margin: 0;
+  z-index: 20;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Captions */
+.ba-captions {
+  display: flex;
+  justify-content: space-between;
+  font-size: .75rem;
+  color: var(--color-text-muted);
+}
+.ba-caption--before::before { content: "Before: "; font-weight: 700; color: var(--color-text-muted) }
+.ba-caption--after::after  { content: " (After)"; font-weight: 700; color: var(--color-secondary-dark) }
+
+.ba-disclaimer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+  font-size: .73rem;
+  color: var(--color-text-muted);
+  margin-top: 2rem;
+  text-align: center;
+}
+.ba-disclaimer svg { flex-shrink: 0; color: var(--color-warning) }
+</style>

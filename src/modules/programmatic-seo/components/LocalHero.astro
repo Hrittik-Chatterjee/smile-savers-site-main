@@ -1,0 +1,205 @@
+---
+/**
+ * LocalHero - Hero section for location-based pages
+ * Includes dynamic content based on service and neighborhood
+ */
+
+import TrustBadges from './TrustBadges.astro';
+
+interface Props {
+  service: string;
+  serviceTitle: string;
+  neighborhood: string;
+  neighborhoodDisplay: string;
+  description: string;
+}
+
+const { service, serviceTitle, neighborhood, neighborhoodDisplay, description } = Astro.props;
+
+// Generate current year for freshness
+const currentYear = new Date().getFullYear();
+---
+
+<section class="local-hero">
+  <div class="hero-container">
+    <div class="hero-content">
+      <span class="hero-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        Serving {neighborhoodDisplay}, Queens
+      </span>
+
+      <h1 class="hero-title">
+        {serviceTitle} in {neighborhoodDisplay}: {currentYear} Guide
+      </h1>
+
+      <p class="hero-description">{description}</p>
+
+      <div class="hero-trust">
+        <TrustBadges variant="inline" size="sm" />
+      </div>
+
+      <div class="hero-actions">
+        <a href="/appointments" class="btn btn-primary">
+          Book Appointment
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <a href="tel:+17189568400" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          (718) 956-8400
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-map">
+      <div class="map-placeholder">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <p>32-02 53rd Place<br/>Woodside, Queens</p>
+        <span class="travel-note">Short distance from {neighborhoodDisplay}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .local-hero {
+    background: linear-gradient(135deg, var(--color-surface-sunken) 0%, var(--color-surface) 100%);
+    padding: var(--spacing-section) 0;
+  }
+
+  .hero-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-container {
+      grid-template-columns: 1fr 400px;
+      gap: 4rem;
+    }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-4xl);
+    line-height: var(--line-height-tight);
+    margin-bottom: 1rem;
+  }
+
+  .hero-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+  }
+
+  .hero-trust {
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: var(--radius-lg);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-text-inverted);
+    box-shadow: 0 4px 14px rgba(33, 150, 243, 0.3);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+  }
+
+  .btn-secondary {
+    background: var(--color-surface-elevated);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .hero-map {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-map {
+      display: block;
+    }
+  }
+
+  .map-placeholder {
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  .map-placeholder svg {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .map-placeholder p {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .travel-note {
+    font-size: var(--font-size-sm);
+    color: var(--color-secondary);
+  }
+</style>

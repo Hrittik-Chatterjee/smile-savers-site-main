@@ -1,0 +1,581 @@
+[2m20:32:19[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m20:32:20[22m [34m[content][39m Syncing content
+[2m20:32:20[22m [34m[content][39m Synced content
+[2m20:32:20[22m [34m[types][39m Generated [2m1.39s[22m
+[2m20:32:20[22m [34m[check][39m Getting diagnostics for Astro files in C:\New Smile Savers\smile-savers-site...
+[96msrc/content.config.ts[0m:[93m191[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m191[0m     lastUpdated: z.coerce.date(),
+[7m   [0m [93m                 ~[0m
+[96msrc/content.config.ts[0m:[93m190[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m190[0m     description: z.string().max(160),
+[7m   [0m [93m                 ~[0m
+[96msrc/content.config.ts[0m:[93m189[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m189[0m     title: z.string().min(1),
+[7m   [0m [93m           ~[0m
+[96msrc/content.config.ts[0m:[93m188[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m188[0m   schema: z.object({
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m182[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m182[0m     featured: z.boolean().default(false),
+[7m   [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m181[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m181[0m     date: z.coerce.date(),
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m180[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m180[0m     service: z.string().optional(),
+[7m   [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m179[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m179[0m     quote: z.string().max(400),
+[7m   [0m [93m           ~[0m
+[96msrc/content.config.ts[0m:[93m178[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m178[0m     rating: z.number().min(1).max(5),
+[7m   [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m177[0m:[93m21[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m177[0m     authorInitials: z.string().max(3),
+[7m   [0m [93m                    ~[0m
+[96msrc/content.config.ts[0m:[93m176[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m176[0m     authorName: z.string(),
+[7m   [0m [93m                ~[0m
+[96msrc/content.config.ts[0m:[93m175[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m175[0m   schema: z.object({
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m165[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m165[0m     order: z.number().default(0),
+[7m   [0m [93m           ~[0m
+[96msrc/content.config.ts[0m:[93m163[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m163[0m       year: z.number(),
+[7m   [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m162[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m162[0m       degree: z.string(),
+[7m   [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m161[0m:[93m20[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m161[0m       institution: z.string(),
+[7m   [0m [93m                   ~[0m
+[96msrc/content.config.ts[0m:[93m160[0m:[93m24[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m160[0m     education: z.array(z.object({
+[7m   [0m [93m                       ~[0m
+[96msrc/content.config.ts[0m:[93m160[0m:[93m16[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m160[0m     education: z.array(z.object({
+[7m   [0m [93m               ~[0m
+[96msrc/content.config.ts[0m:[93m159[0m:[93m26[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m159[0m     specialties: z.array(z.string()),
+[7m   [0m [93m                         ~[0m
+[96msrc/content.config.ts[0m:[93m159[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m159[0m     specialties: z.array(z.string()),
+[7m   [0m [93m                 ~[0m
+[96msrc/content.config.ts[0m:[93m158[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m158[0m     shortBio: z.string().max(200),
+[7m   [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m157[0m:[93m26[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m157[0m     credentials: z.array(z.string()),
+[7m   [0m [93m                         ~[0m
+[96msrc/content.config.ts[0m:[93m157[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m157[0m     credentials: z.array(z.string()),
+[7m   [0m [93m                 ~[0m
+[96msrc/content.config.ts[0m:[93m156[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m156[0m     role: z.string(),
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m155[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m155[0m     slug: z.string(),
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m154[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m154[0m     name: z.string(),
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m153[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m153[0m   schema: z.object({
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m142[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m142[0m       answer: z.string(),
+[7m   [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m141[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m141[0m       question: z.string(),
+[7m   [0m [93m                ~[0m
+[96msrc/content.config.ts[0m:[93m140[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m140[0m     faqs: z.array(z.object({
+[7m   [0m [93m                  ~[0m
+[96msrc/content.config.ts[0m:[93m140[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m140[0m     faqs: z.array(z.object({
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m139[0m:[93m23[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m139[0m     services: z.array(z.string()),
+[7m   [0m [93m                      ~[0m
+[96msrc/content.config.ts[0m:[93m139[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m139[0m     services: z.array(z.string()),
+[7m   [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m137[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m137[0m       icon: z.string(),
+[7m   [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m136[0m:[93m20[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m136[0m       description: z.string(),
+[7m   [0m [93m                   ~[0m
+[96msrc/content.config.ts[0m:[93m135[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m135[0m       title: z.string(),
+[7m   [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m134[0m:[93m23[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m134[0m     benefits: z.array(z.object({
+[7m   [0m [93m                      ~[0m
+[96msrc/content.config.ts[0m:[93m134[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m134[0m     benefits: z.array(z.object({
+[7m   [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m133[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m133[0m     intro: z.string(),
+[7m   [0m [93m           ~[0m
+[96msrc/content.config.ts[0m:[93m132[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m132[0m     tagline: z.string(),
+[7m   [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m131[0m:[93m21[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m131[0m     personaDisplay: z.string(),
+[7m   [0m [93m                    ~[0m
+[96msrc/content.config.ts[0m:[93m130[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m130[0m     persona: z.string(),
+[7m   [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m129[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m129[0m     slug: z.string().regex(/^[a-z0-9-]+$/),
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m128[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m128[0m   schema: z.object({
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m117[0m:[93m30[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m117[0m     relatedServices: z.array(z.string()).optional(),
+[7m   [0m [93m                             ~[0m
+[96msrc/content.config.ts[0m:[93m117[0m:[93m22[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m117[0m     relatedServices: z.array(z.string()).optional(),
+[7m   [0m [93m                     ~[0m
+[96msrc/content.config.ts[0m:[93m115[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m115[0m       answer: z.string(),
+[7m   [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m114[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m114[0m       question: z.string(),
+[7m   [0m [93m                ~[0m
+[96msrc/content.config.ts[0m:[93m113[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m113[0m     faqs: z.array(z.object({
+[7m   [0m [93m                  ~[0m
+[96msrc/content.config.ts[0m:[93m113[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m113[0m     faqs: z.array(z.object({
+[7m   [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m112[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m112[0m     verdict: z.string(),
+[7m   [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m111[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m111[0m     intro: z.string(),
+[7m   [0m [93m           ~[0m
+[96msrc/content.config.ts[0m:[93m109[0m:[93m16[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m109[0m       bestFor: z.string(),
+[7m   [0m [93m               ~[0m
+[96msrc/content.config.ts[0m:[93m108[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m108[0m       longevity: z.string(),
+[7m   [0m [93m                 ~[0m
+[96msrc/content.config.ts[0m:[93m107[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m107[0m       duration: z.string(),
+[7m   [0m [93m                ~[0m
+[96msrc/content.config.ts[0m:[93m106[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m106[0m       cost: z.string(),
+[7m   [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m105[0m:[93m21[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m105[0m       cons: z.array(z.string()),
+[7m   [0m [93m                    ~[0m
+[96msrc/content.config.ts[0m:[93m105[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m105[0m       cons: z.array(z.string()),
+[7m   [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m104[0m:[93m21[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m104[0m       pros: z.array(z.string()),
+[7m   [0m [93m                    ~[0m
+[96msrc/content.config.ts[0m:[93m104[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m104[0m       pros: z.array(z.string()),
+[7m   [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m103[0m:[93m20[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m103[0m       description: z.string(),
+[7m   [0m [93m                   ~[0m
+[96msrc/content.config.ts[0m:[93m102[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m102[0m       slug: z.string(),
+[7m   [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m101[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m101[0m       name: z.string(),
+[7m   [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m100[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m100[0m     optionB: z.object({
+[7m   [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m98[0m:[93m16[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m98[0m       bestFor: z.string(),
+[7m  [0m [93m               ~[0m
+[96msrc/content.config.ts[0m:[93m97[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m97[0m       longevity: z.string(),
+[7m  [0m [93m                 ~[0m
+[96msrc/content.config.ts[0m:[93m96[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m96[0m       duration: z.string(),
+[7m  [0m [93m                ~[0m
+[96msrc/content.config.ts[0m:[93m95[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m95[0m       cost: z.string(),
+[7m  [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m94[0m:[93m21[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m94[0m       cons: z.array(z.string()),
+[7m  [0m [93m                    ~[0m
+[96msrc/content.config.ts[0m:[93m94[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m94[0m       cons: z.array(z.string()),
+[7m  [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m93[0m:[93m21[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m93[0m       pros: z.array(z.string()),
+[7m  [0m [93m                    ~[0m
+[96msrc/content.config.ts[0m:[93m93[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m93[0m       pros: z.array(z.string()),
+[7m  [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m92[0m:[93m20[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m92[0m       description: z.string(),
+[7m  [0m [93m                   ~[0m
+[96msrc/content.config.ts[0m:[93m91[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m91[0m       slug: z.string(),
+[7m  [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m90[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m90[0m       name: z.string(),
+[7m  [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m89[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m89[0m     optionA: z.object({
+[7m  [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m88[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m88[0m     slug: z.string().regex(/^[a-z0-9-]+$/),
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m87[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m87[0m   schema: z.object({
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m75[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m75[0m       answer: z.string(),
+[7m  [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m74[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m74[0m       question: z.string(),
+[7m  [0m [93m                ~[0m
+[96msrc/content.config.ts[0m:[93m73[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m73[0m     faqs: z.array(z.object({
+[7m  [0m [93m                  ~[0m
+[96msrc/content.config.ts[0m:[93m73[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m73[0m     faqs: z.array(z.object({
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m72[0m:[93m30[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m72[0m     relatedServices: z.array(z.string()).optional(),
+[7m  [0m [93m                             ~[0m
+[96msrc/content.config.ts[0m:[93m72[0m:[93m22[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m72[0m     relatedServices: z.array(z.string()).optional(),
+[7m  [0m [93m                     ~[0m
+[96msrc/content.config.ts[0m:[93m70[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m70[0m       slug: z.string(),
+[7m  [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m69[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m69[0m       term: z.string(),
+[7m  [0m [93m            ~[0m
+[96msrc/content.config.ts[0m:[93m68[0m:[93m27[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m68[0m     relatedTerms: z.array(z.object({
+[7m  [0m [93m                          ~[0m
+[96msrc/content.config.ts[0m:[93m68[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m68[0m     relatedTerms: z.array(z.object({
+[7m  [0m [93m                  ~[0m
+[96msrc/content.config.ts[0m:[93m67[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m67[0m     definition: z.string().min(50).max(300),
+[7m  [0m [93m                ~[0m
+[96msrc/content.config.ts[0m:[93m66[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m66[0m     termDisplay: z.string(),
+[7m  [0m [93m                 ~[0m
+[96msrc/content.config.ts[0m:[93m65[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m65[0m     term: z.string().regex(/^[a-z0-9-]+$/),
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m64[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m64[0m   schema: z.object({
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m53[0m:[93m30[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m53[0m     relatedServices: z.array(z.string()).optional(),
+[7m  [0m [93m                             ~[0m
+[96msrc/content.config.ts[0m:[93m53[0m:[93m22[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m53[0m     relatedServices: z.array(z.string()).optional(),
+[7m  [0m [93m                     ~[0m
+[96msrc/content.config.ts[0m:[93m51[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m51[0m       answer: z.string(),
+[7m  [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m50[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m50[0m       question: z.string(),
+[7m  [0m [93m                ~[0m
+[96msrc/content.config.ts[0m:[93m49[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m49[0m     faqs: z.array(z.object({
+[7m  [0m [93m                  ~[0m
+[96msrc/content.config.ts[0m:[93m49[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m49[0m     faqs: z.array(z.object({
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m47[0m:[93m16[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m47[0m       content: z.string(),
+[7m  [0m [93m               ~[0m
+[96msrc/content.config.ts[0m:[93m46[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m46[0m       title: z.string(),
+[7m  [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m45[0m:[93m23[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m45[0m     sections: z.array(z.object({
+[7m  [0m [93m                      ~[0m
+[96msrc/content.config.ts[0m:[93m45[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m45[0m     sections: z.array(z.object({
+[7m  [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m44[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m44[0m     intro: z.string().min(100),
+[7m  [0m [93m           ~[0m
+[96msrc/content.config.ts[0m:[93m43[0m:[93m26[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m43[0m     neighborhoodDisplay: z.string(),
+[7m  [0m [93m                         ~[0m
+[96msrc/content.config.ts[0m:[93m42[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m42[0m     neighborhood: z.string().regex(/^[a-z0-9-]+$/),
+[7m  [0m [93m                  ~[0m
+[96msrc/content.config.ts[0m:[93m41[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m41[0m     serviceTitle: z.string(),
+[7m  [0m [93m                  ~[0m
+[96msrc/content.config.ts[0m:[93m40[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m40[0m     service: z.string().regex(/^[a-z0-9-]+$/),
+[7m  [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m39[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m39[0m   schema: z.object({
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m23[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m23[0m       answer: z.string().min(20),
+[7m  [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m22[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m22[0m       question: z.string().min(10),
+[7m  [0m [93m                ~[0m
+[96msrc/content.config.ts[0m:[93m21[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m21[0m     faq: z.array(z.object({
+[7m  [0m [93m                 ~[0m
+[96msrc/content.config.ts[0m:[93m21[0m:[93m10[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m21[0m     faq: z.array(z.object({
+[7m  [0m [93m         ~[0m
+[96msrc/content.config.ts[0m:[93m20[0m:[93m23[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m20[0m     benefits: z.array(z.string().min(5)).min(1).max(10),
+[7m  [0m [93m                      ~[0m
+[96msrc/content.config.ts[0m:[93m20[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m20[0m     benefits: z.array(z.string().min(5)).min(1).max(10),
+[7m  [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m19[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m19[0m     duration: z.string().optional(),
+[7m  [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m18[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m18[0m     order: z.number().int().min(0).max(100),
+[7m  [0m [93m           ~[0m
+[96msrc/content.config.ts[0m:[93m17[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m17[0m     featured: z.boolean().default(false),
+[7m  [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m16[0m:[93m15[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m16[0m     category: z.enum(['preventive', 'cosmetic', 'restorative', 'emergency']),
+[7m  [0m [93m              ~[0m
+[96msrc/content.config.ts[0m:[93m15[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m15[0m     icon: z.string(),
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m14[0m:[93m23[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m14[0m     shortDescription: z.string().min(20).max(100),
+[7m  [0m [93m                      ~[0m
+[96msrc/content.config.ts[0m:[93m13[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m13[0m     description: z.string().min(50).max(160),
+[7m  [0m [93m                 ~[0m
+[96msrc/content.config.ts[0m:[93m12[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m12[0m     slug: z.string().regex(/^[a-z0-9-]+$/),
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m11[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m11[0m     title: z.string().min(1).max(60),
+[7m  [0m [93m           ~[0m
+[96msrc/content.config.ts[0m:[93m10[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m10[0m   schema: z.object({
+[7m  [0m [93m          ~[0m
+[96msrc/content.config.ts[0m:[93m1[0m:[93m28[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m1[0m import { defineCollection, z } from 'astro:content';
+[7m [0m [93m                           ~[0m
+
+[96msrc/components/grids/ServiceGridPremium.astro[0m:[93m72[0m:[93m32[0m - [91merror[0m[90m ts(7006): [0mParameter 'index' implicitly has an 'any' type.
+
+[7m72[0m         services.map((service, index) => (
+[7m  [0m [91m                               ~~~~~[0m
+[96msrc/components/grids/ServiceGridPremium.astro[0m:[93m72[0m:[93m23[0m - [91merror[0m[90m ts(7006): [0mParameter 'service' implicitly has an 'any' type.
+
+[7m72[0m         services.map((service, index) => (
+[7m  [0m [91m                      ~~~~~~~[0m
+
+[96msrc/components/layout/MobileMenu.astro[0m:[93m7[0m:[93m26[0m - [93mwarning[0m[90m ts(6133): [0m'ctaButton' is declared but its value is never read.
+
+[7m7[0m import { mainNavigation, ctaButton } from '@/config/navigation';
+[7m [0m [93m                         ~~~~~~~~~[0m
+
+[96msrc/modules/contact/components/LocationMap.astro[0m:[93m9[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'mapUrl' is declared but its value is never read.
+
+[7m9[0m const mapUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodedAddress}`;
+[7m [0m [93m      ~~~~~~[0m
+
+[96msrc/modules/programmatic-seo/components/Breadcrumbs.astro[0m:[93m52[0m:[93m9[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m52[0m <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+[7m  [0m [93m        ~~~~[0m
+
+[96msrc/modules/programmatic-seo/components/FAQSection.astro[0m:[93m58[0m:[93m9[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m58[0m <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+[7m  [0m [93m        ~~~~[0m
+
+[96msrc/modules/programmatic-seo/components/LocalHero.astro[0m:[93m17[0m:[93m32[0m - [93mwarning[0m[90m ts(6133): [0m'neighborhood' is declared but its value is never read.
+
+[7m17[0m const { service, serviceTitle, neighborhood, neighborhoodDisplay, description } = Astro.props;
+[7m  [0m [93m                               ~~~~~~~~~~~~[0m
+[96msrc/modules/programmatic-seo/components/LocalHero.astro[0m:[93m17[0m:[93m9[0m - [93mwarning[0m[90m ts(6133): [0m'service' is declared but its value is never read.
+
+[7m17[0m const { service, serviceTitle, neighborhood, neighborhoodDisplay, description } = Astro.props;
+[7m  [0m [93m        ~~~~~~~[0m
+
+[96msrc/modules/programmatic-seo/layouts/GlossaryPageLayout.astro[0m:[93m173[0m:[93m11[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m173[0m   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+[7m   [0m [93m          ~~~~[0m
+
+[96msrc/modules/programmatic-seo/layouts/LocationPageLayout.astro[0m:[93m53[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'serviceDescription' is declared but its value is never read.
+
+[7m53[0m   serviceDescription,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/modules/programmatic-seo/layouts/PersonaPageLayout.astro[0m:[93m46[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'persona' is declared but its value is never read.
+
+[7m46[0m   persona,
+[7m  [0m [93m  ~~~~~~~[0m
+
+[96msrc/pages/learn/[term].astro[0m:[93m26[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'Content' is declared but its value is never read.
+
+[7m26[0m const { Content } = await render(entry);
+[7m  [0m [93m      ~~~~~~~~~~~[0m
+
+Result (72 files): 
+- 2 errors
+- 0 warnings
+- 135 hints
+

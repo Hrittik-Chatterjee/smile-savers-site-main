@@ -1,0 +1,48 @@
+---
+/**
+ * About Page
+ * Clinic story, values, and team information
+ */
+
+import PageLayout from "@/layouts/PageLayout.astro";
+import PageHeader from "@/components/common/PageHeader.astro";
+import CTASection from "@/components/common/CTASection.astro";
+import ClinicStory from "@/modules/about/components/ClinicStory.astro";
+import ValuesList from "@/modules/about/components/ValuesList.astro";
+import TeamGrid from "@/modules/about/components/TeamGrid.astro";
+
+const title = "About Us";
+const description =
+  "Learn about Smile Savers, our experienced dental team, and our commitment to providing exceptional care to the Woodside community since 1987.";
+---
+
+<PageLayout title={title} description={description}>
+  <main id="main-content">
+    <PageHeader
+      title="About Smile Savers"
+      description="Creating smiles and building lasting relationships with our patients since 1987."
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "About" }
+      ]}
+    />
+
+    <!-- Clinic Story -->
+    <ClinicStory />
+
+    <!-- Values -->
+    <ValuesList />
+
+    <!-- Team -->
+    <TeamGrid />
+
+    <CTASection
+      title="Ready to Experience the Difference?"
+      description="Schedule your visit and discover why families throughout Queens trust Smile Savers for their dental care."
+      buttons={[
+        { label: "Book Appointment", href: "/appointments", variant: "primary" },
+        { label: "Contact Us", href: "/contact", variant: "outline" }
+      ]}
+    />
+  </main>
+</PageLayout>

@@ -1,0 +1,210 @@
+---
+/**
+ * MobileBottomBar - Sticky bottom bar for mobile with appointment booking
+ * Only visible on mobile devices (< 768px)
+ * Features: Call button + Book Online button + Accessibility button
+ */
+
+import { ctaButton } from '@/config/navigation';
+import { siteConfig } from '@/config/site';
+import { formatPhoneLink } from '@/lib/utils';
+---
+
+<div class="mobile-bottom-row" id="mobile-bottom-row">
+  <!-- Call Button (left) - outline style with text -->
+  <a href={formatPhoneLink(siteConfig.phone)} class="mobile-call-btn-outline">
+    <svg class="phone-ring-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+    <span>Call</span>
+  </a>
+
+  <!-- Book Service Button (middle) - filled style -->
+  <a href={ctaButton.href} class="mobile-book-btn-filled">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+      <line x1="16" y1="2" x2="16" y2="6"/>
+      <line x1="8" y1="2" x2="8" y2="6"/>
+      <line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>
+    <span>Book Service</span>
+  </a>
+
+  <!-- Accessibility Button (right) -->
+  <label for="a11y-toggle" class="mobile-a11y-btn-separate" aria-label="Accessibility settings">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"/>
+      <circle cx="12" cy="8" r="2"/>
+      <path d="M12 10v8"/>
+      <path d="M8 14l4 2 4-2"/>
+    </svg>
+  </label>
+</div>
+
+<style>
+  /* Phone Ring Animation */
+  @keyframes phone-ring {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    5% {
+      transform: rotate(15deg);
+    }
+    10% {
+      transform: rotate(-13deg);
+    }
+    15% {
+      transform: rotate(14deg);
+    }
+    20% {
+      transform: rotate(-12deg);
+    }
+    25% {
+      transform: rotate(10deg);
+    }
+    30% {
+      transform: rotate(0deg);
+    }
+  }
+
+  .phone-ring-icon {
+    animation: phone-ring 3s ease-in-out infinite;
+    transform-origin: center center;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .phone-ring-icon {
+      animation: none;
+    }
+  }
+
+  .mobile-bottom-row {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: fixed;
+      bottom: 0.5rem;
+      left: 0.75rem;
+      right: 0.75rem;
+      z-index: var(--z-sticky);
+      /* iOS safe area support */
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    @media (max-width: 480px) {
+      .mobile-bottom-row {
+        bottom: 0.25rem;
+        left: 0.5rem;
+        right: 0.5rem;
+      }
+    }
+
+    /* Call Button - Outline style with text */
+    .mobile-call-btn-outline {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      height: 44px;
+      padding: 0 1rem;
+      background-color: var(--color-surface-elevated);
+      color: var(--color-primary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      text-decoration: none;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+      &:hover {
+        background-color: var(--color-surface-sunken);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+    }
+
+    /* Book Service Button - Filled style, takes remaining space */
+    .mobile-book-btn-filled {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      height: 44px;
+      padding: 0 1.25rem;
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-xl);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      text-decoration: none;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+      &:hover {
+        background-color: var(--color-primary-dark);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+    }
+
+    /* Accessibility Button - Separate from main bar, matches hamburger style */
+    .mobile-a11y-btn-separate {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-full);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+      &:hover {
+        background-color: var(--color-primary);
+        transform: scale(1.05);
+      }
+
+      &:active {
+        background-color: var(--color-primary);
+        transform: scale(0.95);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 3px;
+      }
+    }
+  }
+</style>
+

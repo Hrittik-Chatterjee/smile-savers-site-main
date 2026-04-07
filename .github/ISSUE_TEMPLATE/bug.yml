@@ -1,0 +1,24 @@
+name: Bug Report
+description: Something isn't working correctly
+labels: [bug]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+      placeholder: e.g. /services/cerec-crowns
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device
+      options: [Desktop, Mobile, Tablet]
+    validations:
+      required: true

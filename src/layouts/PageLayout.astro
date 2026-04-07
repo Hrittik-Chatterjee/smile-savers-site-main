@@ -1,0 +1,67 @@
+---
+/**
+ * PageLayout - Page wrapper with Header and Footer
+ * Extends BaseLayout with navigation structure
+ */
+
+import BaseLayout from './BaseLayout.astro';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import SkipLink from '@/components/common/SkipLink.astro';
+import AccessibilityMenu from '@/modules/accessibility/components/AccessibilityMenu.astro';
+import MobileBottomBar from '@/components/layout/MobileBottomBar.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  preloadHero?: boolean;
+}
+
+const { title, description, canonicalUrl, ogImage, preloadHero = false } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage} preloadHero={preloadHero}>
+  <SkipLink />
+  <Header />
+
+  <main id="main-content" tabindex="-1">
+    <slot />
+  </main>
+
+  <Footer />
+  
+  <!-- White spacer for mobile bottom bar to blend into -->
+  <div class="mobile-bottom-spacer"></div>
+  
+  <MobileBottomBar />
+  <AccessibilityMenu />
+</BaseLayout>
+
+<style>
+  /* White spacer for mobile bottom bar to blend into */
+  .mobile-bottom-spacer {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-bottom-spacer {
+      display: block;
+      height: calc(4.25rem + env(safe-area-inset-bottom, 0)); /* 68px + safe area */
+      background-color: white;
+      /* This creates the white space at the bottom for the bar to blend into */
+    }
+
+    :global(footer) {
+      /* Minimal padding */
+      padding-bottom: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mobile-bottom-spacer {
+      height: calc(3.75rem + env(safe-area-inset-bottom, 0)); /* 60px + safe area */
+    }
+  }
+</style>

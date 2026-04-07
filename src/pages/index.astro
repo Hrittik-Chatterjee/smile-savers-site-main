@@ -1,0 +1,26 @@
+---
+/**
+ * Homepage - Smile Savers Dental Clinic
+ */
+
+import PageLayout from "../layouts/PageLayout.astro";
+import Hero from "../modules/homepage/components/Hero.astro";
+import Affiliations from "../modules/homepage/components/Affiliations.astro";
+import TrustSignals from "../modules/homepage/components/TrustSignals.astro";
+import ServicesPreview from "../modules/homepage/components/ServicesPreview.astro";
+import DoctorsList from "../modules/homepage/components/DoctorsList.astro";
+import TestimonialsSlider from "../modules/homepage/components/TestimonialsSlider.astro";
+import HomeFAQ from "../modules/homepage/components/HomeFAQ.astro";
+import HomeCTA from "../modules/homepage/components/HomeCTA.astro";
+---
+
+<PageLayout title="Home" preloadHero={true}>
+  <Hero />
+  <Affiliations />
+  <ServicesPreview />
+  <TrustSignals />
+  <DoctorsList />
+  <TestimonialsSlider />
+  <HomeFAQ />
+  <HomeCTA />
+</PageLayout>

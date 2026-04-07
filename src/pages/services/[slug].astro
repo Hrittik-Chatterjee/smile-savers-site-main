@@ -1,0 +1,93 @@
+---
+/**
+ * Service Detail Page — PageHeader + BeforeAfter (CEREC/Cosmetic/Invisalign) + dark CTA
+ */
+import { getCollection } from "astro:content";
+import PageLayout from "../../layouts/PageLayout.astro";
+import PageHeader from "../../components/common/PageHeader.astro";
+import CTASection from "../../components/common/CTASection.astro";
+import BeforeAfter from "../../components/common/BeforeAfter.astro";
+import ServiceDetail from "../../modules/services/components/ServiceDetail.astro";
+
+export async function getStaticPaths() {
+  const services = await getCollection("services");
+  return services.map((service) => ({
+    params: { slug: service.id },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const { title, description, category } = service.data;
+
+const categoryMap: Record<string, string> = {
+  preventive: "Preventive Care",
+  cosmetic:   "Cosmetic Dentistry",
+  restorative:"Restorative Care",
+  emergency:  "Emergency Services",
+};
+
+type BAItem = { before: string; after: string; label: string; bgBefore?: string; bgAfter?: string };
+const beforeAfterMap: Record<string, BAItem[]> = {
+  "cerec-crowns": [
+    { label:"Broken Molar",         before:"Cracked, worn molar",            after:"Perfect ceramic crown — same day",      bgBefore:"linear-gradient(135deg,#d4b896,#c09a78)", bgAfter:"linear-gradient(135deg,#d4eee9,#a8e0d6)" },
+    { label:"Old Crown Replaced",   before:"Discoloured 15-year-old crown",  after:"Natural-matching CEREC crown",          bgBefore:"linear-gradient(135deg,#c8b89a,#b89870)", bgAfter:"linear-gradient(135deg,#dff0ec,#b8e0d8)" },
+    { label:"Front Tooth Fracture", before:"Chipped front tooth from impact", after:"Seamless ceramic restoration",         bgBefore:"linear-gradient(135deg,#e0cdb8,#c8aa88)", bgAfter:"linear-gradient(135deg,#e4f4f0,#c0e8e0)" },
+  ],
+  "cosmetic-dentistry": [
+    { label:"Whitening",     before:"Stained, coffee-darkened enamel",  after:"8 shades brighter — one session",      bgBefore:"linear-gradient(135deg,#d8c8a8,#c4ac80)", bgAfter:"linear-gradient(135deg,#f8f4ee,#f0e8d8)" },
+    { label:"Veneers",       before:"Uneven, chipped front teeth",       after:"Symmetrical porcelain veneers",         bgBefore:"linear-gradient(135deg,#d0b898,#b89870)", bgAfter:"linear-gradient(135deg,#f4f0ec,#ece4d8)" },
+    { label:"Smile Makeover",before:"Crowded, discoloured smile",        after:"Complete smile transformation",         bgBefore:"linear-gradient(135deg,#c8b898,#b0987a)", bgAfter:"linear-gradient(135deg,#f0eee8,#e8e0d0)" },
+  ],
+  "invisalign": [
+    { label:"Crowded Teeth", before:"Overlapping lower front teeth",     after:"Straight, aligned — 12 months",        bgBefore:"linear-gradient(135deg,#d8c8b8,#c0a888)", bgAfter:"linear-gradient(135deg,#e4f0ec,#c8e4dc)" },
+    { label:"Spacing Gaps",  before:"Noticeable gaps between front teeth",after:"Closed gaps, even spacing",           bgBefore:"linear-gradient(135deg,#d4c0a8,#bca080)", bgAfter:"linear-gradient(135deg,#e0eee8,#c4e0d8)" },
+  ],
+};
+const baItems = beforeAfterMap[service.id] ?? null;
+---
+
+<PageLayout title={`${title} | Smile Savers`} description={description}>
+  <main id="main-content">
+
+    <PageHeader
+      title={title}
+      description={description}
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "Services", href: "/services" },
+        { label: title }
+      ]}
+      badge={categoryMap[category]}
+    />
+
+    <div class="svc-detail-wrap">
+      <ServiceDetail service={service} />
+    </div>
+
+    {baItems && (
+      <BeforeAfter
+        items={baItems}
+        title={`${title} — Before & After`}
+      />
+    )}
+
+    <CTASection
+      title="Ready to Book This Service?"
+      description={`Schedule your ${title.toLowerCase()} appointment today. Our team will confirm within 24 hours.`}
+      buttons={[
+        { label: `Book ${title}`, href: "/appointments", variant: "primary" },
+        { label: "Ask a Question", href: "/contact", variant: "outline" }
+      ]}
+    />
+
+  </main>
+</PageLayout>
+
+<style>
+.svc-detail-wrap {
+  max-width: var(--container-lg);
+  margin-inline: auto;
+  padding-inline: clamp(.75rem, 3vw, var(--spacing-element));
+}
+</style>

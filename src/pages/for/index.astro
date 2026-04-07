@@ -1,0 +1,165 @@
+---
+/**
+ * Personas Hub Page
+ * URL: /for/
+ *
+ * Lists all audience-specific pages
+ */
+
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../modules/programmatic-seo/components/Breadcrumbs.astro';
+
+const personas = await getCollection('personas');
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'For You' },
+];
+
+const iconPaths: Record<string, string> = {
+  family: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+  senior: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+  professional: 'M20 7h-4V3H8v4H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z',
+};
+---
+
+<PageLayout
+  title="Dental Care For You | Personalized Services | Smile Savers"
+  description="Find dental care tailored to your needs. Specialized services for families, seniors, busy professionals, and more at Smile Savers in Queens."
+>
+  <div class="page-container">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="page-header">
+      <span class="content-type">Personalized Care</span>
+      <h1 class="page-title">Dental Care Designed For You</h1>
+      <p class="page-description">
+        We understand that different patients have different needs. Explore how Smile Savers
+        provides specialized dental care tailored to your unique situation.
+      </p>
+    </header>
+
+    <section class="personas-grid grid-auto" style="--grid-min: var(--grid-min-lg);" aria-label="Patient types">
+      {personas.map((persona) => (
+        <a href={`/for/${persona.data.slug}/`} class="persona-card">
+          <div class="persona-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d={iconPaths[persona.data.slug] || iconPaths.family} />
+            </svg>
+          </div>
+          <h2 class="persona-title">For {persona.data.personaDisplay}</h2>
+          <p class="persona-tagline">{persona.data.tagline}</p>
+          <span class="explore-link">
+            Explore
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+        </a>
+      ))}
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .page-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+    padding-bottom: var(--spacing-section);
+  }
+
+  .page-header {
+    text-align: center;
+    padding-block: var(--spacing-block);
+    max-width: var(--container-md);
+    margin-inline: auto;
+  }
+
+  .content-type {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-size: var(--font-size-4xl);
+    margin-bottom: 1rem;
+  }
+
+  .page-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* Grid layout handled by .grid-auto utility class */
+
+  .persona-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .persona-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .persona-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
+    border-radius: var(--radius-xl);
+    color: var(--color-primary-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .persona-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: 0.75rem;
+  }
+
+  .persona-tagline {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .explore-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-primary);
+    margin-top: auto;
+  }
+
+  .persona-card:hover .explore-link {
+    gap: 0.75rem;
+  }
+</style>

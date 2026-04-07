@@ -1,0 +1,168 @@
+---
+/**
+ * Contact Page
+ * Contact form, info, hours, and map
+ */
+
+import PageLayout from "../layouts/PageLayout.astro";
+import PageHeader from "../components/common/PageHeader.astro";
+import ContactForm from "../modules/contact/components/ContactForm.astro";
+import ContactInfo from "../modules/contact/components/ContactInfo.astro";
+import OfficeHours from "../modules/contact/components/OfficeHours.astro";
+import LocationMap from "../modules/contact/components/LocationMap.astro";
+
+const title = "Contact Us";
+const description =
+  "Get in touch with Smile Savers. Call us, send a message, or visit our Woodside, NY office. We're here to help with all your dental needs.";
+---
+
+<PageLayout title={title} description={description}>
+  <main id="main-content">
+    <PageHeader
+      title="Contact Us"
+      description="Have questions? We're here to help. Reach out and our team will get back to you within 24 hours."
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "Contact" }
+      ]}
+    />
+
+    <!-- Contact Bento Grid -->
+    <section class="contact-section section">
+      <div class="contact-container">
+        <div class="bento-grid">
+          <div class="bento-card bento-form">
+            <ContactForm />
+          </div>
+          <div class="bento-card bento-info">
+            <ContactInfo />
+          </div>
+          <div class="bento-card bento-hours">
+            <OfficeHours />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+      <div class="map-container">
+        <LocationMap />
+      </div>
+    </section>
+  </main>
+</PageLayout>
+
+<style>
+  .contact-section {
+    background: var(--color-bg-human);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(229, 231, 235, 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(229, 231, 235, 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Bento Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: 1.2fr 1fr;
+      grid-template-rows: auto auto;
+    }
+  }
+
+  /* Bento Cards Base */
+  .bento-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    border-radius: var(--radius-2xl);
+    padding: 0;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    overflow: hidden;
+  }
+
+  .bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(16, 43, 63, 0.3);
+  }
+
+  /* Form Card - Large */
+  .bento-form {
+    grid-row: span 2;
+  }
+
+  .bento-form :global(.contact-form-wrapper) {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    height: 100%;
+  }
+
+  /* Info Card */
+  .bento-info :global(.contact-info) {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    height: 100%;
+  }
+
+  /* Hours Card */
+  .bento-hours :global(.office-hours) {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    height: 100%;
+  }
+
+  /* Mobile: Stack everything */
+  @media (max-width: 767px) {
+    .bento-form {
+      grid-row: span 1;
+    }
+  }
+
+  .map-section {
+    padding-block: var(--spacing-section);
+    background: var(--color-surface-sunken);
+  }
+
+  .map-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+  }
+</style>

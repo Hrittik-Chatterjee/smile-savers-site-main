@@ -1,0 +1,237 @@
+---
+/**
+ * Accessibility Page
+ * Comprehensive accessibility statement and commitment
+ */
+
+import PageLayout from "@/layouts/PageLayout.astro";
+
+const title = "Accessibility";
+const description = "Our commitment to providing full and equal access to everyone who visits our facility and website.";
+---
+
+<PageLayout title={title} description={description}>
+  <article class="legal-page">
+    <div class="legal-container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-current="page">Accessibility</li>
+        </ol>
+      </nav>
+
+      <header class="legal-header">
+        <h1>Accessibility Statement</h1>
+        <p class="last-updated">Last updated: January 2026</p>
+      </header>
+
+      <div class="legal-content">
+        <section class="policy-section">
+          <h2>Overview</h2>
+          <p>At Smile Savers Creating Smiles, we respect the dignity and independence of our guests and we are committed to providing full and equal access to everyone who visits our facility and website. Here's what you can expect from us:</p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Communication</h2>
+          <p>We are committed to effectively communicating with our guests. We provide, at no charge, auxiliary aids and services which are reasonably necessary to achieve effective communication. We accept Operator Relay Service calls, and Teletypewriter (TTY/TDD) calls through 711, in the same manner as traditional telephonic channels.</p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Website Access</h2>
+          <p>We endeavor to develop and update website content using current technologies that effectively communicate with and afford full and equal access to persons with disabilities. We make every effort necessary to meet online usability and design requirements, including those recommended by the World Wide Web Consortium (W3C) in its Web Content Accessibility Guidelines 2.1 as well as requirements under the Twenty-First Century Communications and Video Accessibility Act of 2010.</p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Assistive Devices</h2>
+          <p>Our customers and guests are welcome to use their own personal assistive devices to access our merchandise and services. If an assistive device or technology is incompatible with our facilities, we will work with our customers and guests to provide full and equal access through alternative measures.</p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Companions and Service Animals</h2>
+          <p>Companions, guide dogs or other service animals are welcome to accompany guests with disabilities while visiting our facility. We will also sensitively, respectfully and discretely provide personal assistance when requested.</p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Interruption of Services</h2>
+          <p>If we are temporarily unable to offer any special facilities or services that assist customers and guests with disabilities, we will immediately provide notice of this interruption and the anticipated time when these services will be resumed.</p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Training</h2>
+          <p>Our entire staff receives ongoing and documented training in order to properly communicate with and provide sensitive, helpful and respectful assistance to our customers and guests with disabilities.</p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Modification of Policies or Procedures</h2>
+          <p>We will make reasonable modifications to our policies or procedures when it is necessary to provide our customers and guests with full and equal access to our facility, website or communications channels.</p>
+          <p>We are continuously working to improve the accessibility of content on our website. If you are looking for mouse and keyboard alternatives, speech recognition software such as Dragon NaturallySpeaking may help you navigate web pages and online services. This software allows the user to move focus around a web page or application screen through voice controls.</p>
+        </section>
+
+        <section class="policy-section contact-section">
+          <h2>Customer Feedback</h2>
+          <p>We actively encourage the participation of all customers and guests in our feedback process. In addition to sharing your comments in person, you may also contact us by:</p>
+
+          <address class="contact-info">
+            <div class="contact-item">
+              <strong>Mail:</strong>
+              <p>3202 53rd Place, Woodside, NY 11377</p>
+            </div>
+
+            <div class="contact-item">
+              <strong>Email:</strong>
+              <p><a href="mailto:bhagatsmilesavers@gmail.com">bhagatsmilesavers@gmail.com</a></p>
+            </div>
+          </address>
+
+          <p class="highlight-note">If you feel that these standards have not been maintained in your situation, please let us know by calling: <a href="tel:+17189568400">(718) 956-8400</a> — we gladly accept TRS calls.</p>
+        </section>
+      </div>
+    </div>
+  </article>
+</PageLayout>
+
+<style>
+  .legal-page {
+    padding-block: var(--spacing-section);
+  }
+
+  .legal-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+  }
+
+  .breadcrumb {
+    margin-block-end: var(--spacing-element);
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .breadcrumb li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:not(:last-child)::after {
+      content: "/";
+      color: var(--color-text-muted);
+    }
+  }
+
+  .breadcrumb a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb [aria-current="page"] {
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .legal-header {
+    margin-block-end: var(--spacing-block);
+  }
+
+  .legal-header h1 {
+    font-size: var(--font-size-4xl);
+    color: var(--color-primary-dark);
+    margin-block-end: 0.25rem;
+  }
+
+  .last-updated {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  .legal-content {
+    line-height: var(--line-height-relaxed);
+  }
+
+  .policy-section {
+    margin-block-end: var(--spacing-block);
+    padding-block-end: var(--spacing-block);
+    border-block-end: 1px solid var(--color-border);
+
+    &:last-child {
+      border-block-end: none;
+      margin-block-end: 0;
+      padding-block-end: 0;
+    }
+  }
+
+  .policy-section h2 {
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
+    margin-block-end: 1rem;
+  }
+
+  .policy-section p {
+    margin-block-end: 1rem;
+    color: var(--color-text);
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+  }
+
+  .policy-section a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+
+    &:hover {
+      color: var(--color-primary-dark);
+    }
+  }
+
+  .contact-section address {
+    font-style: normal;
+    margin-block: 1.5rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    background-color: var(--color-surface-sunken);
+    padding: var(--spacing-element);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .contact-item strong {
+    display: block;
+    color: var(--color-text);
+    margin-block-end: 0.25rem;
+  }
+
+  .contact-item p {
+    margin: 0;
+    color: var(--color-text);
+  }
+
+  .highlight-note {
+    font-style: italic;
+    color: var(--color-text-muted);
+    background-color: var(--color-surface-sunken);
+    padding: var(--spacing-element);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+</style>

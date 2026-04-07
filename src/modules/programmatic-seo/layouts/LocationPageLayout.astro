@@ -1,0 +1,315 @@
+---
+/**
+ * LocationPageLayout - Template for "[service] in [neighborhood]" pages
+ *
+ * URL Pattern: /[service]/[neighborhood]/
+ * Example: /dental-implants/woodside/
+ *
+ * This layout provides unique value through:
+ * - Neighborhood-specific context and travel info
+ * - Local service availability
+ * - Connection to main service pages
+ * - Internal linking to nearby areas
+ */
+
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import LocalHero from '../components/LocalHero.astro';
+import FAQSection from '../components/FAQSection.astro';
+import CTABanner from '../components/CTABanner.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+import NearbyLocations from '../components/NearbyLocations.astro';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  // Service info
+  service: string;
+  serviceTitle: string;
+  serviceDescription: string;
+
+  // Location info
+  neighborhood: string;
+  neighborhoodDisplay: string;
+
+  // Content
+  intro: string;
+  sections: {
+    title: string;
+    content: string;
+  }[];
+  faqs: FAQItem[];
+
+  // Related content
+  relatedServices?: string[];
+}
+
+const {
+  service,
+  serviceTitle,
+  serviceDescription,
+  neighborhood,
+  neighborhoodDisplay,
+  intro,
+  sections,
+  faqs,
+  relatedServices,
+} = Astro.props;
+
+// SEO
+const currentYear = new Date().getFullYear();
+const title = `${serviceTitle} in ${neighborhoodDisplay}, Queens | ${currentYear} | Smile Savers`;
+const description = `Looking for ${serviceTitle.toLowerCase()} in ${neighborhoodDisplay}? Smile Savers offers professional dental care with 35+ years of experience serving Queens communities. Book today!`;
+const canonicalUrl = `/${service}/${neighborhood}/`;
+
+// Breadcrumb data
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: serviceTitle, href: `/services/${service}` },
+  { label: neighborhoodDisplay },
+];
+---
+
+<PageLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <article class="location-page">
+    <div class="page-container">
+      <Breadcrumbs items={breadcrumbs} />
+    </div>
+
+    <LocalHero
+      service={service}
+      serviceTitle={serviceTitle}
+      neighborhood={neighborhood}
+      neighborhoodDisplay={neighborhoodDisplay}
+      description={intro}
+    />
+
+    <div class="page-container">
+      <div class="content-wrapper">
+        <!-- Main content sections -->
+        <div class="content-sections">
+          {sections.map((section) => (
+            <section class="content-section">
+              <h2 class="section-title">{section.title}</h2>
+              <div class="section-content" set:html={section.content} />
+            </section>
+          ))}
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Why Choose Smile Savers?</h3>
+            <ul class="benefits-list">
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                35+ years serving Queens
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                Board certified dentists
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                Easy access from {neighborhoodDisplay}
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                Same-day appointments available
+              </li>
+            </ul>
+            <a href="/appointments" class="sidebar-cta">Book Now</a>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Office Hours</h3>
+            <dl class="hours-list">
+              <div class="hours-row">
+                <dt>Mon - Thu</dt>
+                <dd>10:00 AM - 6:00 PM</dd>
+              </div>
+              <div class="hours-row">
+                <dt>Friday</dt>
+                <dd>9:00 AM - 6:00 PM</dd>
+              </div>
+              <div class="hours-row">
+                <dt>Saturday</dt>
+                <dd>9:00 AM – 1:00 PM</dd>
+              </div>
+              <div class="hours-row">
+                <dt>Sunday</dt>
+                <dd>Closed</dd>
+              </div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+
+      <!-- FAQ Section -->
+      {faqs.length > 0 && (
+        <FAQSection
+          items={faqs}
+          title={`${serviceTitle} in ${neighborhoodDisplay}: FAQ`}
+        />
+      )}
+
+      <!-- CTA Banner -->
+      <CTABanner
+        headline={`Ready for ${serviceTitle} in ${neighborhoodDisplay}?`}
+        description={`Schedule your appointment at Smile Savers. Just minutes from ${neighborhoodDisplay} with convenient parking and easy access.`}
+      />
+
+      <!-- Related Services -->
+      <RelatedServices
+        services={relatedServices}
+        title="Other Services We Offer"
+        excludeSlug={service}
+      />
+
+      <!-- Nearby Locations -->
+      <NearbyLocations
+        service={service}
+        currentNeighborhood={neighborhood}
+      />
+    </div>
+  </article>
+</PageLayout>
+
+<style>
+  .location-page {
+    padding-bottom: var(--spacing-section);
+  }
+
+  .page-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+  }
+
+  .content-wrapper {
+    display: grid;
+    gap: 2rem;
+    padding-block: var(--spacing-block);
+  }
+
+  @media (min-width: 1024px) {
+    .content-wrapper {
+      grid-template-columns: 1fr 320px;
+      gap: 3rem;
+    }
+  }
+
+  .content-sections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-block);
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: 1rem;
+  }
+
+  .section-content {
+    font-size: var(--font-size-base);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .section-content :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .section-content :global(ul) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .section-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .sidebar-card {
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+  }
+
+  .sidebar-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: 1rem;
+  }
+
+  .benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .benefits-list svg {
+    color: var(--color-success);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .sidebar-cta {
+    display: block;
+    text-align: center;
+    padding: 0.875rem;
+    background: var(--color-primary);
+    color: var(--color-text-inverted);
+    border-radius: var(--radius-lg);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    transition: background-color var(--transition-fast);
+  }
+
+  .sidebar-cta:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .hours-list {
+    margin: 0;
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--font-size-sm);
+  }
+
+  .hours-row:last-child {
+    border-bottom: none;
+  }
+
+  .hours-row dt {
+    color: var(--color-text-muted);
+  }
+
+  .hours-row dd {
+    font-weight: var(--font-weight-medium);
+    margin: 0;
+  }
+</style>

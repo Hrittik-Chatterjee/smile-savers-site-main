@@ -1,0 +1,167 @@
+---
+/**
+ * TestimonialsSlider — reads from content collection · Google/Yelp/Zocdoc attribution
+ */
+import { getCollection } from "astro:content";
+
+const allTestimonials = await getCollection("testimonials");
+const testimonials = allTestimonials
+  .sort((a, b) => (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0))
+  .slice(0, 5)
+  .map(t => ({
+    quote:     t.data.quote,
+    author:    t.data.authorName,
+    initials:  t.data.authorInitials,
+    location:  t.data.location ?? "Queens, NY",
+    rating:    t.data.rating ?? 5,
+    source:    t.data.source ?? "Google",
+    sourceDot: t.data.source === "Yelp" ? "#C0392B" : t.data.source === "Zocdoc" ? "#00B5AD" : "#4285F4",
+    verified:  true,
+  }));
+
+const initials = (n: string) => n.split(' ').map(x => x[0]).join('');
+---
+
+<section class="tsl section" aria-labelledby="tsl-heading">
+  <div class="tsl-wrap">
+
+    <header class="tsl-hdr">
+      <span class="tsl-eye">Patient Stories</span>
+      <h2 id="tsl-heading" class="tsl-h2">Real Stories From Your Neighbors</h2>
+      <p class="tsl-sub">Families across Queens trust Smile Savers. Here's what they say.</p>
+      <div class="tsl-agg" aria-label="5 stars from 200 plus reviews">
+        <div class="tsl-stars" aria-hidden="true">{"★★★★★"}</div>
+        <span class="tsl-agg-txt"><strong>5.0</strong> out of 5 &middot; 200+ verified reviews</span>
+      </div>
+    </header>
+
+    <div class="tsl-slider" role="region" aria-label="Patient testimonials">
+      <div class="tsl-track">
+        {testimonials.map((t) => (
+          <article class="tsl-card" aria-label={`Review from ${t.author}`}>
+
+            <div class="tsl-qmark" aria-hidden="true">&ldquo;</div>
+
+            <div class="tsl-stars-sm" aria-label={`${t.rating} out of 5 stars`}>
+              {[1,2,3,4,5].map((i) => (
+                <svg width="15" height="15" viewBox="0 0 24 24" fill={i<=t.rating?"#FBBC05":"#E5E7EB"} aria-hidden="true">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              ))}
+            </div>
+
+            <blockquote class="tsl-text"><p>{t.quote}</p></blockquote>
+
+            <footer class="tsl-foot">
+              <div class="tsl-author-row">
+                <div class="tsl-avatar" aria-hidden="true">{t.initials || initials(t.author)}</div>
+                <div>
+                  <cite class="tsl-name">{t.author}</cite>
+                  <span class="tsl-loc">{t.location}</span>
+                </div>
+              </div>
+              <div class="tsl-badges">
+                {t.verified && (
+                  <span class="tsl-verified">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    Verified
+                  </span>
+                )}
+                <span class="tsl-source" style={`color:${t.sourceDot}`}>via {t.source}</span>
+              </div>
+            </footer>
+
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <p class="tsl-hint" aria-hidden="true">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      Swipe to read more
+    </p>
+
+  </div>
+</section>
+
+<style>
+.tsl { background: var(--color-bg-human) }
+.tsl-wrap { max-width: var(--container-xl); margin-inline: auto; padding-inline: clamp(.75rem,3vw,var(--spacing-element)) }
+
+.tsl-hdr { text-align: center; max-width: 600px; margin-inline: auto; margin-bottom: clamp(2rem,3.5vw,3rem) }
+.tsl-eye {
+  display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--color-secondary-dark); background: rgba(61,186,167,.12);
+  border-radius: 9999px; padding: .25rem .875rem; margin-bottom: .875rem;
+}
+.tsl-h2 { font-size: clamp(1.75rem,3.5vw,2.5rem); font-family: var(--font-family-heading); font-weight: 700; color: var(--color-primary); letter-spacing: -.025em; line-height: 1.15; margin: 0 0 1rem }
+.tsl-sub { font-size: var(--font-size-lg); color: var(--color-text-muted); line-height: 1.65; margin: 0 0 1.25rem }
+.tsl-agg { display: flex; align-items: center; justify-content: center; gap: .625rem; flex-wrap: wrap }
+.tsl-stars { color: #FBBC05; font-size: 1.05rem; letter-spacing: .1em }
+.tsl-agg-txt { font-size: .85rem; color: var(--color-text-muted) }
+.tsl-agg-txt strong { color: var(--color-text) }
+
+.tsl-slider {
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  scrollbar-width: none; -ms-overflow-style: none; padding-bottom: .5rem;
+}
+.tsl-slider::-webkit-scrollbar { display: none }
+.tsl-track { display: flex; gap: 1.25rem; padding: .25rem .125rem 1rem }
+
+@media(min-width:1024px){
+  .tsl-slider { overflow: visible }
+  .tsl-track { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem }
+  .tsl-card:nth-child(n+4) { display: none }
+}
+
+.tsl-card {
+  flex: 0 0 min(360px,82vw); scroll-snap-align: start;
+  background: #fff; border-radius: 1.25rem; border: 1.5px solid var(--color-border);
+  padding: 1.625rem; display: flex; flex-direction: column; gap: .875rem;
+  position: relative; overflow: hidden;
+  box-shadow: 0 2px 12px rgba(16,43,63,.05);
+  transition: all .3s ease;
+}
+.tsl-card:hover { border-color: var(--color-secondary); box-shadow: 0 12px 36px rgba(16,43,63,.1); transform: translateY(-3px) }
+@media(min-width:1024px){ .tsl-card { flex: none } }
+
+.tsl-qmark {
+  position: absolute; top: .75rem; right: 1.125rem;
+  font-size: 4.5rem; font-family: Georgia,serif; line-height: 1;
+  color: var(--color-secondary); opacity: .12;
+  pointer-events: none; user-select: none;
+}
+.tsl-stars-sm { display: flex; gap: 2px; position: relative }
+.tsl-text { margin: 0; flex: 1; position: relative }
+.tsl-text p { font-size: var(--font-size-base); line-height: 1.75; color: var(--color-text); font-style: italic; margin: 0 }
+
+.tsl-foot {
+  padding-top: .875rem; border-top: 1px solid var(--color-border);
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.tsl-author-row { display: flex; align-items: center; gap: .75rem }
+.tsl-avatar {
+  width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  background: linear-gradient(135deg,var(--color-primary),var(--color-secondary-dark));
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: .875rem; flex-shrink: 0;
+}
+.tsl-name { font-style: normal; font-weight: 700; font-size: var(--font-size-sm); color: var(--color-text); display: block }
+.tsl-loc { font-size: .72rem; color: var(--color-text-muted); display: block }
+
+.tsl-badges { display: flex; align-items: center; gap: .625rem }
+.tsl-verified {
+  display: inline-flex; align-items: center; gap: .25rem;
+  font-size: .68rem; font-weight: 600;
+  color: var(--color-success-dark); background: var(--color-success-light);
+  padding: .2rem .5rem; border-radius: 9999px;
+}
+.tsl-source { font-size: .72rem; font-weight: 700; margin-left: auto }
+
+.tsl-hint {
+  display: flex; align-items: center; justify-content: center; gap: .375rem;
+  margin-top: 1.5rem; font-size: var(--font-size-sm); color: var(--color-text-muted);
+}
+@media(min-width:1024px){ .tsl-hint { display: none } }
+@media(prefers-reduced-motion:reduce){ .tsl-card { transition: none; transform: none } }
+</style>

@@ -1,0 +1,56 @@
+# ═══════════════════════════════════════════════════════════
+# Cloudflare Pages — Security + Performance Headers
+# Smile Savers Dental | smilesavers.dental
+# ═══════════════════════════════════════════════════════════
+
+/*
+  # ── Security ─────────────────────────────────────────────
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(self), payment=()
+
+  # ── HSTS (only enable after SSL confirmed) ───────────────
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # ── CSP — tight, allows self + CDN fonts ─────────────────
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://maps.openstreetmap.org https://tile.openstreetmap.org https://images.pexels.com; connect-src 'self' https://api.mailchannels.net; frame-src https://www.openstreetmap.org; upgrade-insecure-requests
+
+  # ── Performance ──────────────────────────────────────────
+  X-Robots-Tag: index, follow
+
+# ── Fonts: long-lived immutable cache ────────────────────────
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# ── Static assets: long-lived (hashed filenames) ─────────────
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# ── Images: 1-week cache ────────────────────────────────────
+/images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/icons/*
+  Cache-Control: public, max-age=604800, immutable
+
+# ── PWA files: short cache for updates ──────────────────────
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+  Service-Worker-Allowed: /
+
+/manifest.json
+  Cache-Control: public, max-age=3600
+
+# ── API: no caching ─────────────────────────────────────────
+/api/*
+  Cache-Control: no-store, no-cache
+  Access-Control-Allow-Origin: https://smilesavers.dental
+  Access-Control-Allow-Methods: POST, OPTIONS
+  Access-Control-Allow-Headers: Content-Type
+
+# ── HTML pages: CDN cache + revalidate ──────────────────────
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

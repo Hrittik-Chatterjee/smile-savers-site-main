@@ -1,0 +1,20 @@
+# ═══════════════════════════════════════════════════════════
+# Cloudflare Pages — Redirects
+# ═══════════════════════════════════════════════════════════
+
+# www → non-www canonical
+https://www.smilesavers.dental/*  https://smilesavers.dental/:splat  301
+
+# Legacy / common misspellings
+/services/cerec               /services/cerec-crowns          301
+/services/whitening           /services/cosmetic-dentistry    301
+/services/braces              /services/invisalign            301
+/services/crowns              /services/cerec-crowns          301
+/booking                      /appointments                   301
+/book                         /appointments                   301
+/about-us                     /about                          301
+/our-team                     /about                          301
+/team                         /about                          301
+
+# SPA fallback (should not be needed for static, but safety net)
+# /404                          /404.html                     404

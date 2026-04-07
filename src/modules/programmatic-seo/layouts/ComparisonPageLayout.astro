@@ -1,0 +1,360 @@
+---
+/**
+ * ComparisonPageLayout - Template for "[X] vs [Y]" comparison pages
+ *
+ * URL Pattern: /compare/[x]-vs-[y]/
+ * Example: /compare/implants-vs-dentures/
+ *
+ * This layout provides unique value through:
+ * - Honest, balanced comparisons
+ * - Clear feature breakdowns
+ * - Expert recommendations by use case
+ * - Connection to relevant services
+ */
+
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import FAQSection from '../components/FAQSection.astro';
+import CTABanner from '../components/CTABanner.astro';
+import RelatedServices from '../components/RelatedServices.astro';
+import TrustBadges from '../components/TrustBadges.astro';
+
+interface ComparisonOption {
+  name: string;
+  slug: string;
+  description: string;
+  pros: string[];
+  cons: string[];
+  cost: string;
+  duration: string;
+  longevity: string;
+  bestFor: string;
+}
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  slug: string;
+  optionA: ComparisonOption;
+  optionB: ComparisonOption;
+  intro: string;
+  verdict: string;
+  faqs: FAQItem[];
+  relatedServices: string[];
+}
+
+const {
+  slug,
+  optionA,
+  optionB,
+  intro,
+  verdict,
+  faqs,
+  relatedServices,
+} = Astro.props;
+
+// SEO
+const currentYear = new Date().getFullYear();
+const title = `${optionA.name} vs ${optionB.name}: Which Is Right for You? (${currentYear}) | Smile Savers`;
+const description = `Compare ${optionA.name.toLowerCase()} and ${optionB.name.toLowerCase()}: costs, benefits, and which option is best for your dental needs. Expert guide from Smile Savers.`;
+const canonicalUrl = `/compare/${slug}/`;
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Compare', href: '/compare' },
+  { label: `${optionA.name} vs ${optionB.name}` },
+];
+---
+
+<PageLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <article class="comparison-page">
+    <div class="page-container">
+      <Breadcrumbs items={breadcrumbs} />
+
+      <!-- Hero Section -->
+      <header class="comparison-hero">
+        <span class="content-type">Comparison Guide</span>
+        <h1 class="page-title">
+          {optionA.name} vs {optionB.name}
+        </h1>
+        <p class="page-subtitle">An honest comparison to help you make the right choice for your dental health</p>
+
+        <div class="hero-trust">
+          <TrustBadges variant="inline" size="sm" />
+        </div>
+      </header>
+
+      <!-- Quick Summary Cards -->
+      <section class="quick-summary" aria-labelledby="summary-heading">
+        <h2 id="summary-heading" class="sr-only">Quick Summary</h2>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <h3 class="summary-title">{optionA.name}</h3>
+            <p class="summary-desc">{optionA.description}</p>
+            <div class="summary-meta">
+              <span class="summary-cost">{optionA.cost}</span>
+              <span class="summary-best">Best for: {optionA.bestFor}</span>
+            </div>
+          </div>
+          <div class="vs-divider">
+            <span>VS</span>
+          </div>
+          <div class="summary-card">
+            <h3 class="summary-title">{optionB.name}</h3>
+            <p class="summary-desc">{optionB.description}</p>
+            <div class="summary-meta">
+              <span class="summary-cost">{optionB.cost}</span>
+              <span class="summary-best">Best for: {optionB.bestFor}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Introduction -->
+      <section class="intro-section">
+        <div class="intro-content" set:html={intro} />
+      </section>
+
+      <!-- Detailed Comparison Table -->
+      <section class="comparison-section" aria-labelledby="comparison-heading">
+        <h2 id="comparison-heading" class="section-title">Feature-by-Feature Comparison</h2>
+        <ComparisonTable optionA={optionA} optionB={optionB} />
+      </section>
+
+      <!-- Our Verdict -->
+      <section class="verdict-section" aria-labelledby="verdict-heading">
+        <h2 id="verdict-heading" class="section-title">Our Recommendation</h2>
+        <div class="verdict-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="verdict-icon">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 16v-4M12 8h.01"/>
+          </svg>
+          <div class="verdict-content" set:html={verdict} />
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      {faqs.length > 0 && (
+        <FAQSection
+          items={faqs}
+          title={`${optionA.name} vs ${optionB.name}: Common Questions`}
+        />
+      )}
+
+      <!-- Related Services -->
+      <RelatedServices
+        services={relatedServices}
+        title="Related Services at Smile Savers"
+      />
+
+      <!-- CTA Banner -->
+      <CTABanner
+        headline="Not Sure Which Option Is Right for You?"
+        description="Schedule a consultation with our dental team. We'll examine your unique situation and recommend the best treatment option for your needs and budget."
+      />
+    </div>
+  </article>
+</PageLayout>
+
+<style>
+  .comparison-page {
+    padding-bottom: var(--spacing-section);
+  }
+
+  .page-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+  }
+
+  .comparison-hero {
+    text-align: center;
+    padding-block: var(--spacing-block);
+    max-width: var(--container-lg);
+    margin-inline: auto;
+  }
+
+  .content-type {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--color-accent);
+    color: #5D4037;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-size: var(--font-size-4xl);
+    line-height: var(--line-height-tight);
+    margin-bottom: 1rem;
+  }
+
+  .page-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-trust {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .quick-summary {
+    padding-block: var(--spacing-element);
+  }
+
+  .summary-grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .summary-grid {
+      grid-template-columns: 1fr auto 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .summary-card {
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+  }
+
+  .summary-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: 0.75rem;
+  }
+
+  .summary-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 1rem;
+  }
+
+  .summary-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-sm);
+  }
+
+  .summary-cost {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+  }
+
+  .summary-best {
+    color: var(--color-text-muted);
+  }
+
+  .vs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vs-divider span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--color-primary);
+    color: var(--color-text-inverted);
+    border-radius: var(--radius-full);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+  }
+
+  .intro-section {
+    max-width: var(--container-prose);
+    margin-inline: auto;
+    padding-block: var(--spacing-element);
+  }
+
+  .intro-content {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .intro-content :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .comparison-section {
+    padding-block: var(--spacing-block);
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-element);
+    text-align: center;
+  }
+
+  .verdict-section {
+    padding-block: var(--spacing-block);
+  }
+
+  .verdict-box {
+    display: flex;
+    gap: 1.5rem;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    max-width: var(--container-md);
+    margin-inline: auto;
+  }
+
+  .verdict-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .verdict-content {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .verdict-content :global(p) {
+    margin-bottom: 0.75rem;
+  }
+
+  .verdict-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .verdict-content :global(strong) {
+    color: var(--color-text);
+  }
+</style>

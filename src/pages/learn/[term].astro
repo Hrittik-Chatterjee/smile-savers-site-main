@@ -1,0 +1,37 @@
+---
+/**
+ * Dynamic Glossary Page
+ * URL: /learn/[term]/
+ * Example: /learn/dental-implants/
+ *
+ * Renders educational glossary pages
+ */
+
+import { getCollection, render } from 'astro:content';
+import GlossaryPageLayout from '@/modules/programmatic-seo/layouts/GlossaryPageLayout.astro';
+
+export async function getStaticPaths() {
+  const glossaryEntries = await getCollection('glossary');
+
+  return glossaryEntries.map((entry) => ({
+    params: { term: entry.data.term },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { term, termDisplay, definition, relatedTerms, relatedServices, faqs } = entry.data;
+
+// Render the markdown content to HTML
+const { Content } = await render(entry);
+---
+
+<GlossaryPageLayout
+  term={term}
+  termDisplay={termDisplay}
+  definition={definition}
+  content={entry.body ?? ''}
+  faqs={faqs || []}
+  relatedTerms={relatedTerms || []}
+  relatedServices={relatedServices || []}
+/>

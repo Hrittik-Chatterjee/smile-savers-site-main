@@ -1,0 +1,216 @@
+---
+/**
+ * Footer — Enhanced · Google rating bar · insurance logos · trust strip
+ */
+import { siteConfig } from '@/config/site';
+import { footerNavigation } from '@/config/navigation';
+import { formatPhone, formatPhoneLink } from '@/lib/utils';
+
+const currentYear = new Date().getFullYear();
+
+const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "United Healthcare"];
+---
+
+<footer class="site-footer">
+
+  <!-- Trust bar -->
+  <div class="ft-trust-bar">
+    <div class="ft-trust-inner">
+      <!-- Google rating — links to GBP -->
+      <a href="https://share.google/Giw216ZBKaD1h2nrM" target="_blank" rel="noopener noreferrer"
+        class="ft-rating ft-rating--link" aria-label="Read our Google reviews — 5.0 stars">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <div>
+          <span class="ft-stars" aria-label="5 stars">★★★★★</span>
+          <span class="ft-rating-text"><strong>5.0</strong> · 200+ Google Reviews</span>
+        </div>
+      </a>
+
+      <div class="ft-trust-div" aria-hidden="true"></div>
+
+      <!-- Insurance -->
+      <div class="ft-insurance">
+        <span class="ft-ins-label">We Accept:</span>
+        <div class="ft-ins-chips">
+          {insurers.slice(0, 4).map((ins) => (
+            <span class="ft-ins-chip">{ins}</span>
+          ))}
+          <span class="ft-ins-more">+2 more</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main footer -->
+  <div class="footer-container">
+    <div class="footer-grid grid-auto" style="--grid-min:14rem;">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="/" class="footer-logo" aria-label={`${siteConfig.name} — Home`}>
+          <img src="/logo.svg" alt={siteConfig.name} width="180" height="36" loading="lazy" />
+        </a>
+        <p class="footer-description">
+          Serving Queens families since 1987. Compassionate, advanced dental care for every generation.
+        </p>
+        <address class="footer-contact">
+          <a href={formatPhoneLink(siteConfig.phone)} class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            {formatPhone(siteConfig.phone)}
+          </a>
+          <a href={`https://maps.google.com/?q=${encodeURIComponent(`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.state} ${siteConfig.address.zip}`)}`} target="_blank" rel="noopener noreferrer" class="contact-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            {siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.state}
+          </a>
+        </address>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-links">
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-list">
+          {footerNavigation.company.map((link) => (
+            <li><a href={link.href} class="footer-link">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-links">
+        <h3 class="footer-heading">Services</h3>
+        <ul class="footer-list">
+          {footerNavigation.services.map((link) => (
+            <li><a href={link.href} class="footer-link">{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Hours -->
+      <div class="footer-hours">
+        <h3 class="footer-heading">Office Hours</h3>
+        <dl class="hours-list">
+          <div class="hours-item"><dt>Mon – Thu</dt><dd>10 AM – 6 PM</dd></div>
+          <div class="hours-item"><dt>Friday</dt><dd class="hours-closed">Closed</dd></div>
+          <div class="hours-item hours-item--highlight"><dt>Saturday</dt><dd>9 AM – 1 PM</dd></div>
+          <div class="hours-item"><dt>Sunday</dt><dd class="hours-closed">Closed</dd></div>
+        </dl>
+        <a href="/appointments" class="footer-book-cta">Book Appointment →</a>
+      </div>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+      <p class="copyright">
+        &copy; {currentYear} {siteConfig.name} · Serving Queens Since 1987
+      </p>
+      <nav class="footer-legal" aria-label="Legal links">
+        {footerNavigation.legal.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+    </div>
+  </div>
+
+</footer>
+
+<style>
+/* Trust bar */
+.ft-trust-bar {
+  background: #102B3F;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  padding: 1rem 0;
+}
+.ft-trust-inner {
+  max-width: var(--container-xl); margin-inline: auto;
+  padding-inline: clamp(.75rem,3vw,var(--spacing-element));
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 1rem;
+}
+.ft-rating {
+  display: flex; align-items: center; gap: .75rem;
+}
+.ft-stars { color: #FBBC05; letter-spacing: .05em; font-size: .9rem }
+.ft-rating-text { font-size: .78rem; color: rgba(255,255,255,.6) }
+.ft-rating-text strong { color: #fff }
+.ft-trust-div { width: 1px; height: 1.5rem; background: rgba(255,255,255,.15) }
+@media(max-width:639px){ .ft-trust-div { display: none } }
+.ft-insurance { display: flex; align-items: center; gap: .625rem; flex-wrap: wrap }
+.ft-ins-label { font-size: .7rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: rgba(255,255,255,.4); white-space: nowrap }
+.ft-ins-chips { display: flex; gap: .4rem; flex-wrap: wrap }
+.ft-ins-chip {
+  font-size: .68rem; font-weight: 600;
+  color: rgba(255,255,255,.7); background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  padding: .2rem .6rem; border-radius: 9999px;
+}
+.ft-ins-more { font-size: .68rem; color: rgba(255,255,255,.35); align-self: center }
+
+/* Main footer */
+.site-footer { background-color: #0D2233; color: rgba(255,255,255,.75) }
+.footer-container { max-width: var(--container-xl); margin-inline: auto; padding: clamp(2.5rem,4vw,4rem) clamp(.75rem,3vw,var(--spacing-element)) clamp(1.5rem,2vw,2rem) }
+.footer-grid { gap: clamp(2rem,3vw,2.5rem) }
+.footer-brand {}
+.footer-logo { display: inline-flex; text-decoration: none; margin-bottom: 1rem; opacity: .85; transition: opacity .2s }
+.footer-logo:hover { opacity: 1 }
+.footer-description { font-size: var(--font-size-sm); line-height: 1.75; color: rgba(255,255,255,.5); margin: 0 0 1.25rem }
+.footer-contact { display: flex; flex-direction: column; gap: .625rem; font-style: normal }
+.contact-link {
+  display: flex; align-items: center; gap: .5rem;
+  font-size: var(--font-size-sm); color: rgba(255,255,255,.55);
+  text-decoration: none; transition: color .2s;
+}
+.contact-link svg { flex-shrink: 0; color: #3DBAA7 }
+.contact-link:hover { color: #fff }
+
+.footer-heading {
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); margin: 0 0 1rem;
+}
+.footer-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .5rem }
+.footer-link {
+  font-size: var(--font-size-sm); color: rgba(255,255,255,.55);
+  text-decoration: none; transition: all .2s;
+  display: inline-flex; align-items: center; gap: .25rem;
+  padding-left: 0;
+}
+.footer-link:hover { color: #fff; padding-left: .35rem }
+
+.hours-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: .375rem }
+.hours-item { display: flex; justify-content: space-between; font-size: var(--font-size-sm) }
+.hours-item dt { color: rgba(255,255,255,.45) }
+.hours-item dd { margin: 0; font-weight: 600; color: rgba(255,255,255,.7) }
+.hours-item--highlight dd { color: #3DBAA7 }
+.hours-closed { color: rgba(255,255,255,.25) !important }
+.footer-book-cta {
+  display: inline-block; margin-top: 1.25rem;
+  font-size: .8rem; font-weight: 700;
+  color: #3DBAA7; text-decoration: none;
+  border: 1px solid rgba(61,186,167,.35);
+  padding: .5rem 1rem; border-radius: .5rem;
+  transition: all .25s ease; background: rgba(61,186,167,.08);
+}
+.footer-book-cta:hover { background: rgba(61,186,167,.18); border-color: #3DBAA7; color: #fff }
+
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+  padding-top: 1.75rem;
+  margin-top: 1.75rem;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.copyright { font-size: .78rem; color: rgba(255,255,255,.3); margin: 0 }
+.footer-legal { display: flex; gap: 1rem; flex-wrap: wrap }
+.footer-legal a { font-size: .78rem; color: rgba(255,255,255,.3); text-decoration: none; transition: color .2s }
+.footer-legal a:hover { color: rgba(255,255,255,.65) }
+
+@media(max-width:639px){
+  .footer-container { padding-inline: .75rem }
+  .footer-bottom { flex-direction: column; align-items: flex-start }
+}
+</style>

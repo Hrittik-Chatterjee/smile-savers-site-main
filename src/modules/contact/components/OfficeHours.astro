@@ -1,0 +1,106 @@
+---
+/**
+ * OfficeHours — Enhanced · today highlighted · open/closed status · clean table
+ */
+const hours = [
+  { day: "Monday",    open: "10:00 AM", close: "6:00 PM" },
+  { day: "Tuesday",   open: "10:00 AM", close: "6:00 PM" },
+  { day: "Wednesday", open: "10:00 AM", close: "6:00 PM" },
+  { day: "Thursday",  open: "10:00 AM", close: "6:00 PM" },
+  { day: "Friday",    open: null,       close: null },
+  { day: "Saturday",  open: "9:00 AM",  close: "1:00 PM" },
+  { day: "Sunday",    open: null,       close: null },
+];
+
+const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+const todayRow = hours.find(h => h.day === today);
+const isOpenToday = todayRow?.open !== null;
+---
+
+<div class="oh">
+  <div class="oh-header">
+    <div>
+      <h3 class="oh-title">Office Hours</h3>
+      <p class="oh-sub">Walk-ins welcome during open hours</p>
+    </div>
+    <div class={`oh-status ${isOpenToday ? 'oh-status--open' : 'oh-status--closed'}`}>
+      <span class="oh-dot" aria-hidden="true"></span>
+      {isOpenToday ? 'Open Today' : 'Closed Today'}
+    </div>
+  </div>
+
+  <ul class="oh-list">
+    {hours.map((h) => {
+      const isToday = h.day === today;
+      const isClosed = h.open === null;
+      return (
+        <li class={`oh-row ${isToday ? 'oh-row--today' : ''} ${isClosed ? 'oh-row--closed' : ''}`}>
+          <span class="oh-day">
+            {h.day}
+            {isToday && <span class="oh-today-tag">Today</span>}
+          </span>
+          <span class="oh-time">
+            {isClosed ? 'Closed' : `${h.open} – ${h.close}`}
+          </span>
+        </li>
+      );
+    })}
+  </ul>
+
+  <p class="oh-note">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Dental emergencies: call <a href="tel:+17189568400">(718) 956-8400</a> any time
+  </p>
+</div>
+
+<style>
+@keyframes dot-pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+.oh { padding:2rem; height:100%; display:flex; flex-direction:column; gap:1.25rem }
+.oh-header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem }
+.oh-title { font-size:var(--font-size-2xl); font-family:var(--font-family-heading); font-weight:700; color:var(--color-primary); margin:0 0 .25rem }
+.oh-sub { font-size:var(--font-size-sm); color:var(--color-text-muted); margin:0 }
+.oh-status {
+  display:flex; align-items:center; gap:.4rem;
+  font-size:.72rem; font-weight:700; padding:.3rem .75rem; border-radius:9999px; flex-shrink:0;
+}
+.oh-status--open { background:#E8F5E9; color:#2E7D32 }
+.oh-status--closed { background:#FEF2F2; color:#C62828 }
+.oh-dot {
+  width:.45rem; height:.45rem; border-radius:50%; flex-shrink:0;
+  animation:dot-pulse 2s ease-in-out infinite;
+}
+.oh-status--open .oh-dot { background:#4CAF50 }
+.oh-status--closed .oh-dot { background:#EF4444 }
+
+.oh-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0; flex:1 }
+.oh-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:.625rem 0; border-bottom:1px solid var(--color-border);
+  font-size:var(--font-size-sm);
+}
+.oh-row:last-child { border-bottom:none }
+.oh-row--today {
+  background:rgba(61,186,167,.07);
+  margin-inline: -.75rem; padding-inline: .75rem;
+  border-radius: .5rem; border-bottom:none;
+  font-weight:600;
+}
+.oh-row--today .oh-time { color:var(--color-secondary-dark) }
+.oh-row--closed .oh-day,.oh-row--closed .oh-time { color:var(--color-text-muted); opacity:.5 }
+.oh-day { display:flex; align-items:center; gap:.5rem; color:var(--color-text) }
+.oh-today-tag {
+  font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+  background:var(--color-secondary); color:#fff;
+  padding:.15rem .5rem; border-radius:9999px;
+}
+.oh-time { color:var(--color-text-muted); font-weight:500 }
+
+.oh-note {
+  display:flex; align-items:flex-start; gap:.4rem;
+  font-size:.78rem; color:var(--color-text-muted); line-height:1.5; margin:0;
+}
+.oh-note svg { flex-shrink:0; margin-top:.1rem; color:var(--color-warning) }
+.oh-note a { color:var(--color-primary); font-weight:600; text-decoration:none }
+.oh-note a:hover { text-decoration:underline }
+@media(prefers-reduced-motion:reduce){ .oh-dot { animation:none } }
+</style>

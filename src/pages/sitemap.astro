@@ -1,0 +1,170 @@
+---
+/**
+ * Sitemap Page
+ * Site navigation overview
+ */
+
+import PageLayout from "@/layouts/PageLayout.astro";
+import { mainNavigation, footerNavigation } from "@/config/navigation";
+
+const title = "Sitemap";
+const description = "Complete navigation guide to all pages on the Smile Savers website.";
+---
+
+<PageLayout title={title} description={description}>
+  <section class="legal-page">
+    <div class="legal-container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-current="page">Sitemap</li>
+        </ol>
+      </nav>
+
+      <h1>Sitemap</h1>
+
+      <div class="sitemap-content">
+        <p class="intro">Find your way around the Smile Savers website.</p>
+
+        <!-- Main Pages -->
+        <section class="sitemap-section">
+          <h2>Main Pages</h2>
+          <ul>
+            {mainNavigation.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+                {item.children && (
+                  <ul>
+                    {item.children.map((child) => (
+                      <li><a href={child.href}>{child.label}</a></li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Resources -->
+        <section class="sitemap-section">
+          <h2>Resources</h2>
+          <ul>
+            {footerNavigation.resources.map((item) => (
+              <li><a href={item.href}>{item.label}</a></li>
+            ))}
+          </ul>
+        </section>
+
+        <!-- Legal -->
+        <section class="sitemap-section">
+          <h2>Legal</h2>
+          <ul>
+            {footerNavigation.legal.map((item) => (
+              <li><a href={item.href}>{item.label}</a></li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .legal-page {
+    padding-block: var(--spacing-section);
+  }
+
+  .legal-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+  }
+
+  .breadcrumb {
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .breadcrumb li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &:not(:last-child)::after {
+      content: "/";
+      color: var(--color-text-muted);
+    }
+  }
+
+  .breadcrumb a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+  }
+
+  .breadcrumb [aria-current="page"] {
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+  }
+
+  h1 {
+    font-size: var(--font-size-4xl);
+    color: var(--color-primary-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .intro {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .sitemap-section {
+    margin-bottom: 2rem;
+  }
+
+  .sitemap-section h2 {
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sitemap-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sitemap-section > ul > li {
+    margin-bottom: 0.5rem;
+  }
+
+  .sitemap-section ul ul {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .sitemap-section a {
+    color: var(--color-primary);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+</style>

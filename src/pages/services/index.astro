@@ -1,0 +1,71 @@
+---
+/**
+ * Services Index Page
+ * Displays all dental services in a filterable grid
+ */
+
+import PageLayout from "@/layouts/PageLayout.astro";
+import PageHeader from "@/components/common/PageHeader.astro";
+import CTASection from "@/components/common/CTASection.astro";
+import ServiceGrid from "@/modules/services/components/ServiceGrid.astro";
+
+const title = "Our Services";
+const description =
+  "Comprehensive dental services from preventive care to advanced restorative procedures. Smile Savers offers expert care for the whole family.";
+---
+
+<PageLayout title={title} description={description}>
+  <main id="main-content">
+    <PageHeader
+      title={title}
+      description="From routine checkups to advanced restorative procedures, we provide comprehensive dental care for patients of all ages."
+      breadcrumbs={[
+        { label: "Home", href: "/" },
+        { label: "Services" }
+      ]}
+    />
+
+    <!-- Services Grid -->
+    <section class="services-section section" aria-labelledby="all-services">
+      <div class="services-container">
+        <h2 id="all-services" class="sr-only">All Services</h2>
+        <ServiceGrid />
+      </div>
+    </section>
+
+    <CTASection
+      title="Not Sure Which Service You Need?"
+      description="Schedule a consultation and our team will help you find the right treatment plan for your needs."
+      buttons={[
+        { label: "Book Consultation", href: "/appointments", variant: "primary" },
+        { label: "Contact Us", href: "/contact", variant: "outline" }
+      ]}
+    />
+  </main>
+</PageLayout>
+
+<style>
+  /* Services Section */
+  .services-section {
+    background: var(--color-surface);
+  }
+
+  .services-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+  }
+
+  /* Utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>

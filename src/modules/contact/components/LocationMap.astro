@@ -1,0 +1,121 @@
+---
+/**
+ * LocationMap — OpenStreetMap embed (no API key, no restrictions)
+ * Address: 3202 53rd Place, Woodside, NY 11377
+ * OSM coordinates: lat=40.7457, lon=-73.9025
+ */
+const address = "3202 53rd Place, Woodside, NY 11377";
+const encodedAddress = encodeURIComponent(address);
+const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
+
+// OpenStreetMap embed — free, no key, no X-Frame-Options restrictions
+// bbox calculated around the address: lon1,lat1,lon2,lat2
+const osmEmbed = "https://www.openstreetmap.org/export/embed.html?bbox=-73.9125%2C40.7357%2C-73.8925%2C40.7557&layer=mapnik&marker=40.7457%2C-73.9025";
+---
+
+<div class="lm">
+  <div class="lm-header">
+    <h3 class="lm-title">Find Us</h3>
+    <span class="lm-address">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      {address}
+    </span>
+  </div>
+
+  <div class="lm-map-wrap">
+    <iframe
+      title="Smile Savers Dental location on map"
+      src={osmEmbed}
+      width="100%"
+      height="360"
+      loading="lazy"
+      class="lm-iframe"
+      referrerpolicy="no-referrer"
+      sandbox="allow-scripts allow-same-origin"
+    ></iframe>
+  </div>
+
+  <div class="lm-footer">
+    <a href={directionsUrl} target="_blank" rel="noopener noreferrer" class="lm-directions">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+      </svg>
+      Get Directions
+    </a>
+    <span class="lm-note">Near Woodside Ave · Ample street parking</span>
+  </div>
+</div>
+
+<style>
+.lm {
+  background: #fff;
+  border: 1.5px solid var(--color-border);
+  border-radius: 1.125rem;
+  overflow: hidden;
+}
+.lm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: 1rem 1.25rem .875rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.lm-title {
+  font-size: var(--font-size-lg);
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+.lm-address {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.lm-address svg { color: var(--color-secondary); flex-shrink: 0 }
+
+.lm-map-wrap { position: relative; background: #e8f0e8 }
+.lm-iframe {
+  display: block;
+  width: 100%;
+  height: 360px;
+  border: none;
+}
+@media(max-width:639px){ .lm-iframe { height: 280px } }
+
+.lm-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: .875rem 1.25rem;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+.lm-directions {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-primary);
+  padding: .5rem 1.125rem;
+  border-radius: .6rem;
+  text-decoration: none;
+  transition: all .2s ease;
+  box-shadow: 0 2px 8px rgba(16,43,63,.2);
+}
+.lm-directions:hover { background: var(--color-primary-light); transform: translateY(-1px) }
+.lm-note {
+  font-size: .75rem;
+  color: var(--color-text-muted);
+}
+</style>

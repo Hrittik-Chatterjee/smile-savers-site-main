@@ -1,0 +1,192 @@
+---
+/**
+ * Comparison Hub Page
+ * URL: /compare/
+ *
+ * Lists all comparison guides
+ */
+
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../modules/programmatic-seo/components/Breadcrumbs.astro';
+
+const comparisons = await getCollection('comparisons');
+
+const breadcrumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Compare' },
+];
+---
+
+<PageLayout
+  title="Dental Treatment Comparisons | Compare Your Options | Smile Savers"
+  description="Compare dental treatments side-by-side. Implants vs dentures, crowns vs fillings, and more. Make informed decisions about your dental care."
+>
+  <div class="page-container">
+    <Breadcrumbs items={breadcrumbs} />
+
+    <header class="page-header">
+      <span class="content-type">Decision Guides</span>
+      <h1 class="page-title">Compare Dental Treatments</h1>
+      <p class="page-description">
+        Making the right choice for your dental care is easier when you understand your options.
+        Explore our honest, side-by-side comparisons of common dental treatments.
+      </p>
+    </header>
+
+    <section class="comparisons-grid" aria-label="Treatment comparisons">
+      {comparisons.map((comparison) => (
+        <a href={`/compare/${comparison.data.slug}/`} class="comparison-card">
+          <div class="vs-badge">VS</div>
+          <h2 class="comparison-title">
+            {comparison.data.optionA.name} vs {comparison.data.optionB.name}
+          </h2>
+          <div class="options-preview">
+            <div class="option">
+              <span class="option-name">{comparison.data.optionA.name}</span>
+              <span class="option-cost">{comparison.data.optionA.cost}</span>
+            </div>
+            <div class="option">
+              <span class="option-name">{comparison.data.optionB.name}</span>
+              <span class="option-cost">{comparison.data.optionB.cost}</span>
+            </div>
+          </div>
+          <span class="read-comparison">
+            Read comparison
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+        </a>
+      ))}
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .page-container {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: var(--spacing-element);
+    padding-bottom: var(--spacing-section);
+  }
+
+  .page-header {
+    text-align: center;
+    padding-block: var(--spacing-block);
+    max-width: var(--container-md);
+    margin-inline: auto;
+  }
+
+  .content-type {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--color-accent);
+    color: #5D4037;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-size: var(--font-size-4xl);
+    margin-bottom: 1rem;
+  }
+
+  .page-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .comparisons-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .comparisons-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .comparison-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .comparison-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .vs-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--color-primary);
+    color: var(--color-text-inverted);
+    border-radius: var(--radius-full);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    margin-bottom: 1rem;
+  }
+
+  .comparison-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: 1.5rem;
+  }
+
+  .options-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .option {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: var(--color-surface-sunken);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .option-name {
+    font-weight: var(--font-weight-medium);
+  }
+
+  .option-cost {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .read-comparison {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-primary);
+    margin-top: auto;
+  }
+
+  .comparison-card:hover .read-comparison {
+    gap: 0.75rem;
+  }
+</style>

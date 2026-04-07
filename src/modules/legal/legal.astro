@@ -1,0 +1,28 @@
+---
+/**
+ * Legal Module Entry Point
+ * Enforced by Smile Savers Elite Persona
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const legalDocs = await getCollection('legal');
+---
+
+<BaseLayout title="Legal | Smile Savers">
+  <main class="section container prose">
+    <h1>Legal Information</h1>
+    <p class="text-pretty">
+      Smile Savers is committed to transparency and compliance. Review our policies below.
+    </p>
+    
+    <div class="grid gap-6 mt-8">
+      {legalDocs.map(doc => (
+        <article class="card p-6">
+          <h2 class="text-2xl font-semibold mb-2">{doc.data.title}</h2>
+          <p class="text-text-muted">{doc.data.description}</p>
+        </article>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,1175 @@
+---
+/**
+ * BookingWizard - CSS-first multi-step booking form
+ * Uses radio buttons + :checked state for step navigation (no JS required)
+ */
+
+import { getCollection } from "astro:content";
+import { doctors } from "../../../config/doctors";
+
+const services = await getCollection("services");
+const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
+
+// Create doctor name map for JavaScript
+const doctorNames = Object.fromEntries(
+  doctors.map((d) => [d.id, d.name])
+);
+
+// Create service title map for JavaScript
+const serviceTitles = Object.fromEntries(
+  sortedServices.map((s) => [s.data.slug, s.data.title])
+);
+
+// Contact info
+const emailAddress = "care@smilesavers.dental";
+
+// Generate time slots
+const timeSlots = [
+  "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+  "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM",
+  "4:00 PM", "4:30 PM", "5:00 PM"
+];
+---
+
+<div class="booking-wizard">
+  <!-- Step Navigation Radio Inputs (hidden) -->
+  <input type="radio" name="wizard-step" id="step-1" class="step-radio" checked />
+  <input type="radio" name="wizard-step" id="step-2" class="step-radio" />
+  <input type="radio" name="wizard-step" id="step-3" class="step-radio" />
+  <input type="radio" name="wizard-step" id="step-4" class="step-radio" />
+  <input type="radio" name="wizard-step" id="step-5" class="step-radio" />
+
+  <!-- Progress Indicator -->
+  <div class="progress-bar">
+    <div class="progress-step" data-step="1">
+      <span class="step-number">1</span>
+      <span class="step-label">Service</span>
+    </div>
+    <div class="progress-step" data-step="2">
+      <span class="step-number">2</span>
+      <span class="step-label">Doctor</span>
+    </div>
+    <div class="progress-step" data-step="3">
+      <span class="step-number">3</span>
+      <span class="step-label">Date & Time</span>
+    </div>
+    <div class="progress-step" data-step="4">
+      <span class="step-number">4</span>
+      <span class="step-label">Your Info</span>
+    </div>
+    <div class="progress-step" data-step="5">
+      <span class="step-number">5</span>
+      <span class="step-label">Confirm</span>
+    </div>
+  </div>
+
+  <!-- Form wraps all steps -->
+  <form class="wizard-form" id="booking-form">
+    <!-- Step 1: Service Selection -->
+    <div class="wizard-step" data-step="1">
+      <h2 class="step-title">Select a Service</h2>
+      <p class="step-description">Choose the service you'd like to book.</p>
+
+      <div class="service-options">
+        {sortedServices.map((service, index) => (
+          <label class="service-option">
+            <input
+              type="radio"
+              name="service"
+              value={service.data.slug}
+              required
+              checked={index === 0}
+            />
+            <span class="option-content">
+              <span class="option-title">{service.data.title}</span>
+              <span class="option-description">{service.data.shortDescription}</span>
+              {service.data.duration && (
+                <span class="option-duration">{service.data.duration}</span>
+              )}
+            </span>
+          </label>
+        ))}
+      </div>
+
+      <div class="step-actions">
+        <label for="step-2" class="btn btn-primary">
+          Continue
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 2: Doctor Selection -->
+    <div class="wizard-step" data-step="2">
+      <h2 class="step-title">Choose Your Doctor</h2>
+      <p class="step-description">Select the dentist you'd like to see.</p>
+
+      <div class="doctor-options">
+        {doctors.map((doctor, index) => (
+          <label class="doctor-option">
+            <input
+              type="radio"
+              name="doctor"
+              value={doctor.id}
+              required
+              checked={index === 0}
+            />
+            <span class="doctor-content">
+              <span class="doctor-avatar">
+                {doctor.image ? (
+                  <img src={doctor.image} alt={doctor.name} loading="lazy" />
+                ) : (
+                  <span class="doctor-initials">{doctor.name.split(' ').map(n => n[0]).join('')}</span>
+                )}
+              </span>
+              <span class="doctor-info">
+                <span class="doctor-name">{doctor.name}, {doctor.credentials}</span>
+                <span class="doctor-title">{doctor.title}</span>
+                <span class="doctor-specialty">{doctor.specialty}</span>
+              </span>
+            </span>
+          </label>
+        ))}
+      </div>
+
+      <div class="step-actions">
+        <label for="step-1" class="btn btn-outline">Back</label>
+        <label for="step-3" class="btn btn-primary">
+          Continue
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 3: Date & Time Selection -->
+    <div class="wizard-step" data-step="3">
+      <h2 class="step-title">Choose Date & Time</h2>
+      <p class="step-description">Select your preferred appointment slot.</p>
+
+      <div class="datetime-grid">
+        <div class="date-picker">
+          <label for="date" class="form-label">Preferred Date</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            required
+            min={new Date().toISOString().split('T')[0]}
+            class="form-input"
+          />
+        </div>
+
+        <div class="time-picker">
+          <label class="form-label">Preferred Time</label>
+          <div class="time-slots">
+            {timeSlots.map((slot, index) => (
+              <label class="time-slot">
+                <input type="radio" name="time" value={slot} required checked={index === 0} />
+                <span>{slot}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <label for="step-2" class="btn btn-outline">Back</label>
+        <label for="step-4" class="btn btn-primary">
+          Continue
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 4: Patient Information -->
+    <div class="wizard-step" data-step="4">
+      <h2 class="step-title">Your Information</h2>
+      <p class="step-description">Please provide your contact details.</p>
+
+      <div class="patient-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName" class="form-label">First Name *</label>
+            <input type="text" id="firstName" name="firstName" required autocomplete="given-name" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label for="lastName" class="form-label">Last Name *</label>
+            <input type="text" id="lastName" name="lastName" required autocomplete="family-name" class="form-input" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email" class="form-label">Email *</label>
+            <input type="email" id="email" name="email" required autocomplete="email" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone *</label>
+            <input type="tel" id="phone" name="phone" required autocomplete="tel" class="form-input" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes" class="form-label">Additional Notes</label>
+          <textarea id="notes" name="notes" rows="3" class="form-textarea" placeholder="Any special requests or concerns..."></textarea>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="newPatient" value="yes" />
+            <span>I am a new patient</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <label for="step-3" class="btn btn-outline">Back</label>
+        <label for="step-5" class="btn btn-primary">
+          Review Booking
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 5: Confirmation -->
+    <div class="wizard-step" data-step="5">
+      <h2 class="step-title">Review Your Booking</h2>
+      <p class="step-description">Please verify all details are correct before sending.</p>
+
+      <!-- Dynamic Booking Summary -->
+      <div class="booking-summary" id="booking-summary">
+        <div class="summary-section">
+          <h3 class="summary-heading">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Appointment Details
+          </h3>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <span class="summary-label">Service</span>
+              <span class="summary-value" id="summary-service">-</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Doctor</span>
+              <span class="summary-value" id="summary-doctor">-</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Date</span>
+              <span class="summary-value" id="summary-date">-</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Time</span>
+              <span class="summary-value" id="summary-time">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-section">
+          <h3 class="summary-heading">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Patient Information
+          </h3>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <span class="summary-label">Name</span>
+              <span class="summary-value" id="summary-name">-</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Phone</span>
+              <span class="summary-value" id="summary-phone">-</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Email</span>
+              <span class="summary-value" id="summary-email">-</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">New Patient</span>
+              <span class="summary-value" id="summary-new-patient">-</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-section" id="summary-notes-section">
+          <h3 class="summary-heading">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Additional Notes
+          </h3>
+          <p class="summary-notes" id="summary-notes">-</p>
+        </div>
+      </div>
+
+      <div class="terms-group">
+        <label class="checkbox-label">
+          <input type="checkbox" name="terms" required id="terms-checkbox" />
+          <span>I agree to the <a href="/terms">terms of service</a> and <a href="/privacy">privacy policy</a></span>
+        </label>
+      </div>
+
+      <!-- Submit Section -->
+      <div class="submit-section">
+        <div id="bw-submit-idle">
+          <p class="submit-info">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Your details are private and only sent to Smile Savers.
+          </p>
+          <div class="submit-buttons">
+            <button type="button" id="submit-request" class="btn btn-submit-primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Confirm Appointment Request
+            </button>
+            <a href="tel:+17189568400" class="btn btn-submit-call">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              Call Instead
+            </a>
+          </div>
+          <p class="submit-note">We confirm every appointment within 24 hours.</p>
+        </div>
+        <!-- Success state -->
+        <div id="bw-submit-success" class="bw-success" hidden>
+          <div class="bw-success-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3 class="bw-success-title">Request Sent!</h3>
+          <p class="bw-success-msg">We've received your appointment request and will confirm within 24 hours. Check your email for a copy.</p>
+          <a href="/" class="btn btn-outline" style="margin-top:1rem">Back to Home</a>
+        </div>
+        <!-- Error state -->
+        <div id="bw-submit-error" class="bw-error" hidden>
+          <p id="bw-error-msg"></p>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <label for="step-4" class="btn btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to Edit
+        </label>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Booking Form JavaScript -->
+<script define:vars={{ serviceTitles, doctorNames, emailAddress }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('booking-form');
+    const step5Radio = document.getElementById('step-5');
+    const whatsappBtn = document.getElementById('submit-whatsapp');
+    const emailBtn = document.getElementById('submit-email');
+
+    // Format date to readable string (e.g., "Monday, January 15, 2024")
+    function formatDate(dateString) {
+      if (!dateString) return '-';
+      const date = new Date(dateString + 'T00:00:00');
+      return date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    // Get all form data
+    function getFormData() {
+      const data = new FormData(form);
+      const serviceSlug = data.get('service');
+      const serviceTitle = serviceTitles[serviceSlug] || serviceSlug;
+      const doctorId = data.get('doctor');
+      const doctorName = doctorNames[doctorId] || doctorId;
+
+      return {
+        service: serviceTitle,
+        serviceSlug: serviceSlug,
+        doctor: doctorName,
+        doctorId: doctorId,
+        date: data.get('date'),
+        dateFormatted: formatDate(data.get('date')),
+        time: data.get('time'),
+        firstName: data.get('firstName'),
+        lastName: data.get('lastName'),
+        fullName: `${data.get('firstName') || ''} ${data.get('lastName') || ''}`.trim(),
+        email: data.get('email'),
+        phone: data.get('phone'),
+        notes: data.get('notes') || '',
+        isNewPatient: data.get('newPatient') === 'yes',
+        termsAccepted: document.getElementById('terms-checkbox').checked
+      };
+    }
+
+    // Update summary display when entering Step 5
+    function updateSummary() {
+      const data = getFormData();
+
+      document.getElementById('summary-service').textContent = data.service || '-';
+      document.getElementById('summary-doctor').textContent = data.doctor || '-';
+      document.getElementById('summary-date').textContent = data.dateFormatted || '-';
+      document.getElementById('summary-time').textContent = data.time || '-';
+      document.getElementById('summary-name').textContent = data.fullName || '-';
+      document.getElementById('summary-phone').textContent = data.phone || '-';
+      document.getElementById('summary-email').textContent = data.email || '-';
+      document.getElementById('summary-new-patient').textContent = data.isNewPatient ? 'Yes' : 'No';
+
+      const notesSection = document.getElementById('summary-notes-section');
+      const notesEl = document.getElementById('summary-notes');
+      if (data.notes) {
+        notesSection.style.display = 'block';
+        notesEl.textContent = data.notes;
+      } else {
+        notesSection.style.display = 'none';
+      }
+    }
+
+    // Listen for Step 5 activation
+    step5Radio.addEventListener('change', () => {
+      if (step5Radio.checked) {
+        updateSummary();
+      }
+    });
+
+    // Validate before sending
+    function validateForm() {
+      const data = getFormData();
+      const errors = [];
+
+      if (!data.serviceSlug) errors.push('Please select a service');
+      if (!data.doctorId) errors.push('Please select a doctor');
+      if (!data.date) errors.push('Please select a date');
+      if (!data.time) errors.push('Please select a time');
+      if (!data.firstName) errors.push('Please enter your first name');
+      if (!data.lastName) errors.push('Please enter your last name');
+      if (!data.email) errors.push('Please enter your email');
+      if (!data.phone) errors.push('Please enter your phone number');
+      if (!data.termsAccepted) errors.push('Please accept the terms and conditions');
+
+      if (errors.length > 0) {
+        alert('Please complete all required fields:\n\n• ' + errors.join('\n• '));
+        return false;
+      }
+      return true;
+    }
+
+    // Format message for WhatsApp
+    function formatWhatsAppMessage(data) {
+      let message = `*APPOINTMENT REQUEST*
+*Smile Savers Dental*
+
+-----------------------
+*APPOINTMENT DETAILS*
+-----------------------
+Service: ${data.service}
+Doctor: ${data.doctor}
+Date: ${data.dateFormatted}
+Time: ${data.time}
+
+-----------------------
+*PATIENT INFORMATION*
+-----------------------
+Name: ${data.fullName}
+Phone: ${data.phone}
+Email: ${data.email}
+New Patient: ${data.isNewPatient ? 'Yes' : 'No'}`;
+
+      if (data.notes) {
+        message += `
+
+-----------------------
+*ADDITIONAL NOTES*
+-----------------------
+${data.notes}`;
+      }
+
+      return message;
+    }
+
+    // Format message for Email
+    function formatEmailBody(data) {
+      let body = `APPOINTMENT REQUEST
+Smile Savers Dental
+========================
+
+APPOINTMENT DETAILS
+-------------------
+Service: ${data.service}
+Preferred Doctor: ${data.doctor}
+Preferred Date: ${data.dateFormatted}
+Preferred Time: ${data.time}
+
+PATIENT INFORMATION
+-------------------
+Name: ${data.fullName}
+Phone: ${data.phone}
+Email: ${data.email}
+New Patient: ${data.isNewPatient ? 'Yes' : 'No'}`;
+
+      if (data.notes) {
+        body += `
+
+ADDITIONAL NOTES
+----------------
+${data.notes}`;
+      }
+
+      return body;
+    }
+
+    // ── Submit via real API ──────────────────────────────
+    async function submitRequest() {
+      if (!validateForm()) return;
+
+      const data = getFormData();
+      const submitBtn = document.getElementById('submit-request');
+      const idleDiv   = document.getElementById('bw-submit-idle');
+      const successDiv = document.getElementById('bw-submit-success');
+      const errorDiv  = document.getElementById('bw-submit-error');
+      const errorMsg  = document.getElementById('bw-error-msg');
+
+      if (!submitBtn) return;
+
+      // Loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending request…';
+
+      try {
+        const formData = new FormData();
+        formData.append('name',       `${data.firstName} ${data.lastName}`);
+        formData.append('email',       data.email);
+        formData.append('phone',       data.phone);
+        formData.append('service',     data.service);
+        formData.append('message',
+          `APPOINTMENT REQUEST\n\nService: ${data.service}\nDoctor: ${data.doctor}\nDate: ${data.dateFormatted}\nTime: ${data.time}\nNew Patient: ${data.isNewPatient ? 'Yes' : 'No'}${data.notes ? '\n\nNotes: ' + data.notes : ''}`
+        );
+        formData.append('newPatient',  data.isNewPatient ? 'yes' : 'no');
+
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData,
+        });
+        const json = await res.json();
+
+        if (json.success) {
+          if (idleDiv)    idleDiv.hidden = true;
+          if (successDiv) successDiv.hidden = false;
+        } else {
+          throw new Error(json.error || 'Submission failed');
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Confirm Appointment Request';
+        if (errorDiv && errorMsg) {
+          errorMsg.textContent = `Unable to send: ${err.message}. Please call (718) 956-8400.`;
+          errorDiv.hidden = false;
+        }
+      }
+    }
+
+    // Attach submit listener
+    const submitBtn = document.getElementById('submit-request');
+    if (submitBtn) submitBtn.addEventListener('click', submitRequest);
+  });
+</script>
+
+<style>
+  .booking-wizard {
+    background: var(--color-surface-elevated);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  /* Hide radio inputs but keep functional */
+  .step-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Progress Bar */
+  /* ── Progress bar ───────────────────────────── */
+  .progress-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1.75rem 2rem 1.25rem;
+    background: #fff;
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    gap: 0;
+  }
+
+  /* Horizontal connector track behind all steps */
+  .progress-bar::before {
+    content: '';
+    position: absolute;
+    top: calc(1.75rem + 16px); /* top-padding + half circle height */
+    left: calc(2rem + 16px);   /* left-padding + half circle width */
+    right: calc(2rem + 16px);
+    height: 2px;
+    background: var(--color-border);
+    z-index: 0;
+  }
+
+  .progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-surface-elevated);
+    border: 2px solid var(--color-border);
+    font-weight: 700;
+    font-size: .82rem;
+    color: var(--color-text-muted);
+    transition: all .3s ease;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 4px #fff;
+  }
+
+  .step-label {
+    font-size: .7rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color .3s ease;
+  }
+
+  /* ── Completed steps (all before current) ──── */
+  #step-1:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
+  #step-2:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
+  #step-3:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
+  #step-3:checked ~ .progress-bar .progress-step[data-step="2"] .step-number,
+  #step-4:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
+  #step-4:checked ~ .progress-bar .progress-step[data-step="2"] .step-number,
+  #step-4:checked ~ .progress-bar .progress-step[data-step="3"] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step="2"] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step="3"] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step="4"] .step-number {
+    background: var(--color-secondary);
+    border-color: var(--color-secondary);
+    color: #fff;
+  }
+
+  /* ── Current active step (ring highlight) ──── */
+  #step-1:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
+  #step-2:checked ~ .progress-bar .progress-step[data-step="2"] .step-number,
+  #step-3:checked ~ .progress-bar .progress-step[data-step="3"] .step-number,
+  #step-4:checked ~ .progress-bar .progress-step[data-step="4"] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step="5"] .step-number {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--color-primary);
+  }
+
+  /* ── Active step label ───────────────────────── */
+  #step-1:checked ~ .progress-bar .progress-step[data-step="1"] .step-label,
+  #step-2:checked ~ .progress-bar .progress-step[data-step="2"] .step-label,
+  #step-3:checked ~ .progress-bar .progress-step[data-step="3"] .step-label,
+  #step-4:checked ~ .progress-bar .progress-step[data-step="4"] .step-label,
+  #step-5:checked ~ .progress-bar .progress-step[data-step="5"] .step-label {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  /* ── Connector fill (teal) for completed range ── */
+  /* Uses a pseudo on each completed step to fill the track */
+  #step-2:checked ~ .progress-bar::before,
+  #step-3:checked ~ .progress-bar::before,
+  #step-4:checked ~ .progress-bar::before,
+  #step-5:checked ~ .progress-bar::before {
+    background: linear-gradient(to right, var(--color-secondary) 0%, var(--color-border) 100%);
+  }
+  #step-3:checked ~ .progress-bar::before {
+    background: linear-gradient(to right, var(--color-secondary) 40%, var(--color-border) 40%);
+  }
+  #step-4:checked ~ .progress-bar::before {
+    background: linear-gradient(to right, var(--color-secondary) 65%, var(--color-border) 65%);
+  }
+  #step-5:checked ~ .progress-bar::before {
+    background: var(--color-secondary);
+  }
+
+  /* Wizard Steps */
+  .wizard-step {
+    display: none;
+    padding: 2rem;
+  }
+
+  #step-1:checked ~ .wizard-form .wizard-step[data-step="1"],
+  #step-2:checked ~ .wizard-form .wizard-step[data-step="2"],
+  #step-3:checked ~ .wizard-form .wizard-step[data-step="3"],
+  #step-4:checked ~ .wizard-form .wizard-step[data-step="4"],
+  #step-5:checked ~ .wizard-form .wizard-step[data-step="5"] {
+    display: block;
+  }
+
+  .step-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .step-description {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+
+  /* Service Options */
+  .service-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .service-option {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .service-option input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .option-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-elevated);
+    transition: all var(--transition-fast);
+  }
+
+  .service-option input:checked + .option-content {
+    border-color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+  }
+
+  .service-option:hover .option-content {
+    border-color: var(--color-primary-light);
+  }
+
+  .option-title {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+  }
+
+  .option-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  .option-duration {
+    font-size: var(--font-size-xs);
+    color: var(--color-primary);
+  }
+
+  /* Doctor Options */
+  .doctor-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .doctor-option {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .doctor-option input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .doctor-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-elevated);
+    transition: all var(--transition-fast);
+  }
+
+  .doctor-option input:checked + .doctor-content {
+    border-color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 5%, transparent);
+  }
+
+  .doctor-option:hover .doctor-content {
+    border-color: var(--color-primary-light);
+  }
+
+  .doctor-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--color-surface-sunken);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .doctor-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .doctor-initials {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+  }
+
+  .doctor-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .doctor-name {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+  }
+
+  .doctor-title {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  .doctor-specialty {
+    font-size: var(--font-size-xs);
+    color: var(--color-primary);
+  }
+
+  /* Date/Time Selection */
+  .datetime-grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .time-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .time-slot {
+    cursor: pointer;
+  }
+
+  .time-slot input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .time-slot span {
+    display: block;
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    background: var(--color-surface-elevated);
+    transition: all var(--transition-fast);
+  }
+
+  .time-slot input:checked + span {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-inverted);
+  }
+
+  .time-slot:hover span {
+    border-color: var(--color-primary-light);
+  }
+
+  /* Form Styles */
+  .patient-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    background: var(--color-surface-elevated);
+    color: var(--color-text);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent);
+    }
+  }
+
+  .checkbox-group {
+    flex-direction: row;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+  }
+
+  .checkbox-label input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+  }
+
+  /* Confirmation */
+  .confirmation-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--color-surface-sunken);
+    border-radius: var(--radius-lg);
+    margin-bottom: 2rem;
+  }
+
+  .confirmation-icon {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .confirmation-text {
+    color: var(--color-text-muted);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .terms-group {
+    margin-bottom: 2rem;
+  }
+
+  .terms-group a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  /* Actions */
+  .step-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-text-inverted);
+
+    &:hover {
+      background: var(--color-accent-dark);
+    }
+  }
+
+  .btn-outline {
+    background: var(--color-surface-elevated);
+    border: 2px solid var(--color-border-strong);
+    color: var(--color-text);
+
+    &:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+  }
+
+  /* Booking Summary Styles */
+  .booking-summary {
+    background: var(--color-surface-sunken);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .summary-section {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }
+
+  .summary-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+
+    svg {
+      flex-shrink: 0;
+      color: var(--color-primary);
+    }
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .summary-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .summary-value {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+  }
+
+  .summary-notes {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: var(--line-height-relaxed);
+    white-space: pre-wrap;
+  }
+
+  /* Submit Section Styles */
+  .submit-section { margin-bottom: 1.5rem }
+
+  .submit-info {
+    display: flex; align-items: center; gap: .4rem;
+    font-size: var(--font-size-sm); color: var(--color-text-muted); margin: 0 0 1rem;
+  }
+  .submit-info svg { color: var(--color-success); flex-shrink: 0 }
+
+  .submit-buttons {
+    display: flex; flex-direction: column; gap: .75rem;
+    margin-bottom: .75rem;
+  }
+  @media(min-width:480px){ .submit-buttons { flex-direction: row } }
+
+  .btn-submit-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    padding: .9rem 1.5rem; background: var(--color-primary); color: #fff;
+    border: none; border-radius: .75rem;
+    font-size: var(--font-size-base); font-weight: 700; font-family: inherit;
+    cursor: pointer; flex: 1; min-height: 48px;
+    box-shadow: 0 4px 16px rgba(16,43,63,.3); transition: all .25s ease;
+  }
+  .btn-submit-primary:hover:not(:disabled) { background: var(--color-primary-light); transform: translateY(-1px) }
+  .btn-submit-primary:disabled { opacity: .7; cursor: not-allowed; transform: none }
+
+  .btn-submit-call {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    padding: .9rem 1.25rem; background: transparent; color: var(--color-primary);
+    border: 1.5px solid var(--color-border); border-radius: .75rem;
+    font-size: var(--font-size-sm); font-weight: 600; text-decoration: none;
+    transition: all .2s ease; white-space: nowrap;
+  }
+  .btn-submit-call:hover { border-color: var(--color-primary); background: rgba(16,43,63,.04) }
+
+  .submit-note { font-size: .78rem; color: var(--color-text-muted); margin: 0; text-align: center }
+
+  .bw-success {
+    text-align: center; padding: 2rem 1rem;
+    display: flex; flex-direction: column; align-items: center; gap: .75rem;
+  }
+  .bw-success-icon {
+    width: 4rem; height: 4rem; border-radius: 50%;
+    background: #E8F5E9; color: #2E7D32;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .bw-success-title {
+    font-size: var(--font-size-2xl); font-family: var(--font-family-heading);
+    font-weight: 700; color: var(--color-primary); margin: 0;
+  }
+  .bw-success-msg { font-size: var(--font-size-sm); color: var(--color-text-muted); max-width: 400px; line-height: 1.6; margin: 0 }
+  .bw-error { background: #FFEBEE; border: 1px solid #FFCDD2; border-radius: .75rem; padding: .875rem 1rem; font-size: var(--font-size-sm); color: #C62828; font-weight: 500 }
+</style>

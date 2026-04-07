@@ -1,0 +1,159 @@
+---
+/**
+ * PageHeader — enhanced · diagonal pattern · badge support · animations
+ * Used on: About, Services, Appointments, Contact, team pages
+ */
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+interface Props {
+  title: string;
+  description: string;
+  breadcrumbs: BreadcrumbItem[];
+  badge?: string;
+  badgeColor?: string;
+}
+const { title, description, breadcrumbs, badge, badgeColor = '#3DBAA7' } = Astro.props;
+---
+
+<section class="ph" aria-label="Page header">
+  <!-- Background texture -->
+  <div class="ph-bg" aria-hidden="true">
+    <div class="ph-gradient"></div>
+    <div class="ph-grid"></div>
+    <div class="ph-shape-1"></div>
+    <div class="ph-shape-2"></div>
+  </div>
+
+  <div class="ph-wrap">
+    <!-- Breadcrumb -->
+    <nav class="ph-bread" aria-label="Breadcrumb">
+      <ol>
+        {breadcrumbs.map((item, i) => (
+          <li aria-current={i === breadcrumbs.length - 1 ? 'page' : undefined}>
+            {item.href ? (
+              <a href={item.href}>{item.label}</a>
+            ) : item.label}
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    <!-- Optional badge -->
+    {badge && (
+      <div class="ph-badge" style={`--bc:${badgeColor}`}>
+        <span class="ph-badge-dot" aria-hidden="true"></span>
+        {badge}
+      </div>
+    )}
+
+    <h1 class="ph-h1">{title}</h1>
+    <p class="ph-desc">{description}</p>
+  </div>
+</section>
+
+<style>
+@keyframes ph-dot-pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.ph {
+  position: relative;
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+.ph-bg { position: absolute; inset: 0; z-index: 0 }
+.ph-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg,
+    #E8F4F0 0%,
+    #EFF6EE 40%,
+    #E0F0FA 100%);
+}
+.ph-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(16,43,63,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,43,63,.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.ph-shape-1 {
+  position: absolute;
+  top: -4rem; right: -4rem;
+  width: 22rem; height: 22rem;
+  background: radial-gradient(circle, rgba(61,186,167,.18) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.ph-shape-2 {
+  position: absolute;
+  bottom: -6rem; left: -2rem;
+  width: 18rem; height: 18rem;
+  background: radial-gradient(circle, rgba(44,171,223,.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.ph-wrap {
+  position: relative; z-index: 1;
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  padding-inline: clamp(.75rem,3vw,var(--spacing-element));
+  text-align: center;
+}
+
+/* Breadcrumb */
+.ph-bread { margin-bottom: 1.25rem }
+.ph-bread ol {
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: .375rem; list-style: none; margin: 0; padding: 0;
+  font-size: var(--font-size-sm);
+}
+.ph-bread li {
+  display: flex; align-items: center; gap: .375rem; color: var(--color-text-muted);
+}
+.ph-bread li:not(:last-child)::after {
+  content: '›'; opacity: .5;
+}
+.ph-bread a {
+  color: var(--color-primary); text-decoration: none; font-weight: 500;
+  transition: color .2s;
+}
+.ph-bread a:hover { color: var(--color-secondary-dark); text-decoration: underline }
+.ph-bread [aria-current="page"] { color: var(--color-text); font-weight: 600 }
+
+/* Badge */
+.ph-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--bc);
+  background: color-mix(in srgb, var(--bc) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bc) 30%, transparent);
+  padding: .3rem .875rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+.ph-badge-dot {
+  width: .45rem; height: .45rem; border-radius: 50%;
+  background: var(--bc);
+  animation: ph-dot-pulse 2s ease-in-out infinite;
+}
+
+/* Title */
+.ph-h1 {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -.025em;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+.ph-desc {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin-inline: auto;
+  line-height: 1.7;
+}
+
+@media(prefers-reduced-motion:reduce){.ph-badge-dot{animation:none}}
+</style>

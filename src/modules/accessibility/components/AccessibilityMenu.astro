@@ -1,0 +1,374 @@
+---
+/**
+ * AccessibilityMenu - CSS-first accessibility controls
+ * Uses checkbox pattern for zero-JS state management
+ */
+---
+
+<div class="a11y-menu" id="accessibility-menu">
+  <!-- Hidden checkbox for state -->
+  <input type="checkbox" id="a11y-toggle" class="a11y-checkbox" />
+
+  <!-- Toggle Button -->
+  <label for="a11y-toggle" class="a11y-trigger" aria-label="Open accessibility settings">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10"/>
+      <circle cx="12" cy="8" r="2"/>
+      <path d="M12 10v8"/>
+      <path d="M8 14l4 2 4-2"/>
+    </svg>
+    <span class="sr-only">Accessibility Options</span>
+  </label>
+
+  <!-- Menu Panel -->
+  <div class="a11y-panel" role="dialog" aria-label="Accessibility settings">
+    <div class="a11y-header">
+      <h2 class="a11y-title">Accessibility</h2>
+      <label for="a11y-toggle" class="a11y-close" aria-label="Close accessibility menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </label>
+    </div>
+
+    <div class="a11y-options">
+      <!-- Text Size -->
+      <fieldset class="a11y-fieldset">
+        <legend class="a11y-legend">Text Size</legend>
+        <div class="a11y-radio-group">
+          <input type="radio" name="text-size" id="text-normal" value="normal" checked />
+          <label for="text-normal">Normal</label>
+
+          <input type="radio" name="text-size" id="text-large" value="large" />
+          <label for="text-large">Large</label>
+
+          <input type="radio" name="text-size" id="text-xl" value="xl" />
+          <label for="text-xl">Extra Large</label>
+        </div>
+      </fieldset>
+
+      <!-- High Contrast -->
+      <div class="a11y-option">
+        <input type="checkbox" id="high-contrast" class="a11y-switch" />
+        <label for="high-contrast" class="a11y-label">
+          <span class="a11y-label-text">High Contrast</span>
+          <span class="a11y-switch-track">
+            <span class="a11y-switch-thumb"></span>
+          </span>
+        </label>
+      </div>
+
+      <!-- Highlight Links -->
+      <div class="a11y-option">
+        <input type="checkbox" id="highlight-links" class="a11y-switch" />
+        <label for="highlight-links" class="a11y-label">
+          <span class="a11y-label-text">Highlight Links</span>
+          <span class="a11y-switch-track">
+            <span class="a11y-switch-thumb"></span>
+          </span>
+        </label>
+      </div>
+
+      <!-- Grayscale -->
+      <div class="a11y-option">
+        <input type="checkbox" id="grayscale-mode" class="a11y-switch" />
+        <label for="grayscale-mode" class="a11y-label">
+          <span class="a11y-label-text">Grayscale</span>
+          <span class="a11y-switch-track">
+            <span class="a11y-switch-thumb"></span>
+          </span>
+        </label>
+      </div>
+
+      <!-- Pause Animations -->
+      <div class="a11y-option">
+        <input type="checkbox" id="pause-animations" class="a11y-switch" />
+        <label for="pause-animations" class="a11y-label">
+          <span class="a11y-label-text">Pause Animations</span>
+          <span class="a11y-switch-track">
+            <span class="a11y-switch-thumb"></span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <button type="button" class="a11y-reset" onclick="location.reload()">
+      Reset All Settings
+    </button>
+  </div>
+</div>
+
+<style>
+  /* CSS-based accessibility state management using :has() */
+
+  /* Text Size States */
+  :root:has(#text-large:checked) {
+    font-size: 112.5%;
+  }
+
+  :root:has(#text-xl:checked) {
+    font-size: 125%;
+  }
+
+  /* High Contrast State */
+  :root:has(#high-contrast:checked) {
+    --color-text: #0D0D0D;
+    --color-surface: #FFFFFF;
+    --color-surface-elevated: #FFFFFF;
+    --color-border: #333333;
+  }
+
+  /* Highlight Links State */
+  :root:has(#highlight-links:checked) a:not(.btn):not(.logo):not(.nav-link):not(.mobile-nav-link) {
+    background-color: #FFF3CD;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  /* Grayscale State */
+  :root:has(#grayscale-mode:checked) body {
+    filter: grayscale(1);
+  }
+
+  /* Pause Animations State */
+  :root:has(#pause-animations:checked) *,
+  :root:has(#pause-animations:checked) *::before,
+  :root:has(#pause-animations:checked) *::after {
+    animation-play-state: paused !important;
+    transition: none !important;
+  }
+
+  /* Menu Styles */
+  .a11y-menu {
+    position: fixed;
+    bottom: var(--spacing-element);
+    right: var(--spacing-element);
+    z-index: var(--z-popover);
+  }
+
+  .a11y-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .a11y-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--color-primary);
+    color: var(--color-text-inverted);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+
+    &:hover {
+      transform: scale(1.05);
+      background: var(--color-primary-dark);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+  }
+
+  /* Hide trigger on mobile - accessibility button is in MobileBottomBar */
+  @media (max-width: 768px) {
+    .a11y-trigger {
+      display: none !important;
+    }
+
+    .a11y-panel {
+      position: fixed;
+      bottom: 70px;
+      right: 0.75rem;
+    }
+  }
+
+  .a11y-panel {
+    position: absolute;
+    bottom: calc(100% + 1rem);
+    right: 0;
+    width: 300px;
+    background: var(--color-surface-elevated);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--color-border);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.95);
+    transition: opacity var(--transition-normal), visibility var(--transition-normal), transform var(--transition-normal);
+  }
+
+  .a11y-checkbox:checked ~ .a11y-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  .a11y-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .a11y-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+  }
+
+  .a11y-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+
+    &:hover {
+      background-color: var(--color-neutral-100);
+    }
+  }
+
+  .a11y-options {
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .a11y-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .a11y-legend {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .a11y-radio-group {
+    display: flex;
+    gap: 0.5rem;
+
+    input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    label {
+      flex: 1;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: var(--font-size-sm);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background-color var(--transition-fast), border-color var(--transition-fast);
+
+      &:hover {
+        background-color: var(--color-neutral-100);
+      }
+    }
+
+    input:checked + label {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-text-inverted);
+    }
+
+    input:focus-visible + label {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  .a11y-option {
+    display: flex;
+    align-items: center;
+  }
+
+  .a11y-switch {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .a11y-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .a11y-label-text {
+    font-size: var(--font-size-sm);
+  }
+
+  .a11y-switch-track {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: var(--color-neutral-300);
+    border-radius: var(--radius-full);
+    transition: background-color var(--transition-fast);
+  }
+
+  .a11y-switch-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast);
+  }
+
+  .a11y-switch:checked + .a11y-label .a11y-switch-track {
+    background: var(--color-primary);
+  }
+
+  .a11y-switch:checked + .a11y-label .a11y-switch-thumb {
+    transform: translateX(20px);
+  }
+
+  .a11y-switch:focus-visible + .a11y-label .a11y-switch-track {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .a11y-reset {
+    display: block;
+    width: calc(100% - 2.5rem);
+    margin: 0 1.25rem 1rem;
+    padding: 0.75rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    background: var(--color-neutral-100);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+
+    &:hover {
+      background: var(--color-neutral-200);
+    }
+  }
+</style>

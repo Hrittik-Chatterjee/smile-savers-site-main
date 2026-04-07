@@ -1,0 +1,39 @@
+---
+/**
+ * Dynamic Location Page
+ * URL: /[service]/[neighborhood]/
+ * Example: /dental-implants/woodside/
+ *
+ * Renders location-based programmatic SEO pages
+ */
+
+import { getCollection } from 'astro:content';
+import LocationPageLayout from '../../../modules/programmatic-seo/layouts/LocationPageLayout.astro';
+
+export async function getStaticPaths() {
+  const locations = await getCollection('locations');
+
+  return locations.map((location) => ({
+    params: {
+      service: location.data.service,
+      neighborhood: location.data.neighborhood,
+    },
+    props: { location },
+  }));
+}
+
+const { location } = Astro.props;
+const { service, serviceTitle, neighborhood, neighborhoodDisplay, intro, sections, faqs, relatedServices } = location.data;
+---
+
+<LocationPageLayout
+  service={service}
+  serviceTitle={serviceTitle}
+  serviceDescription={intro}
+  neighborhood={neighborhood}
+  neighborhoodDisplay={neighborhoodDisplay}
+  intro={intro}
+  sections={sections}
+  faqs={faqs}
+  relatedServices={relatedServices}
+/>

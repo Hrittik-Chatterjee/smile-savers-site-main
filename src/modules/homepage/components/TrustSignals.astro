@@ -1,0 +1,218 @@
+---
+/**
+ * TrustSignals — fixed background, better icon colours, credential cards
+ */
+const stats = [
+  {
+    value: "5.0",
+    sub: "★ Stars",
+    label: "Google Rating",
+    icon: "star",
+    bg: "#FBBC05",
+    bgLight: "rgba(251,188,5,.12)",
+  },
+  {
+    value: "ICOI",
+    sub: "Diplomate",
+    label: "Board Certified Implantologist",
+    icon: "shield",
+    bg: "#2CABDF",
+    bgLight: "rgba(44,171,223,.12)",
+  },
+  {
+    value: "NYU",
+    sub: "Alumni",
+    label: "NYU College of Dentistry",
+    icon: "award",
+    bg: "#3DBAA7",
+    bgLight: "rgba(61,186,167,.12)",
+  },
+  {
+    value: "3",
+    sub: "Dentists",
+    label: "Expert Specialist Team",
+    icon: "users",
+    bg: "#10B981",
+    bgLight: "rgba(16,185,129,.12)",
+  },
+];
+
+const icons: Record<string, string> = {
+  star:   "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
+  shield: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z M9 12l2 2 4-4",
+  award:  "M8.21 13.89L7 23l5-3 5 3-1.21-9.11 M12 15a7 7 0 100-14 7 7 0 000 14z",
+  users:  "M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75",
+};
+---
+
+<section class="trust" aria-label="Credentials and trust indicators">
+  <div class="trust-wrap">
+
+    <header class="trust-hdr">
+      <span class="trust-eye">Why Choose Smile Savers</span>
+      <h2 class="trust-h2">Credentials That Speak for Themselves</h2>
+    </header>
+
+    <div class="trust-grid">
+      {stats.map((s, i) => (
+        i === 0 ? (
+          <a href="https://share.google/Giw216ZBKaD1h2nrM" target="_blank" rel="noopener noreferrer"
+            class="tc tc--link" style={`--tbg:${s.bg};--tbl:${s.bgLight}`}
+            aria-label="Read our Google reviews — 5.0 stars">
+            <div class="tc-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                {icons[s.icon].split(' M').map((d, i) => (
+                  <path d={i === 0 ? d : 'M' + d}/>
+                ))}
+              </svg>
+            </div>
+            <div class="tc-num-row">
+              <span class="tc-val">{s.value}</span>
+              <span class="tc-sub">{s.sub}</span>
+            </div>
+            <p class="tc-lbl">{s.label}</p>
+            <span class="tc-reviews-link">Read 200+ reviews →</span>
+          </a>
+        ) : (
+          <div class="tc" style={`--tbg:${s.bg};--tbl:${s.bgLight}`}>
+            <div class="tc-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                {icons[s.icon].split(' M').map((d, i) => (
+                  <path d={i === 0 ? d : 'M' + d}/>
+                ))}
+              </svg>
+            </div>
+            <div class="tc-num-row">
+              <span class="tc-val">{s.value}</span>
+              <span class="tc-sub">{s.sub}</span>
+            </div>
+            <p class="tc-lbl">{s.label}</p>
+          </div>
+        )
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+.trust {
+  padding: clamp(3rem,5vw,5.5rem) 0;
+  background: var(--color-primary);
+  position: relative;
+  overflow: hidden;
+}
+.trust::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(61,186,167,.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(44,171,223,.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+.trust::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+}
+
+.trust-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  padding-inline: clamp(.75rem,3vw,var(--spacing-element));
+}
+
+.trust-hdr { text-align: center; margin-bottom: clamp(2rem,3.5vw,3rem) }
+.trust-eye {
+  display: inline-block;
+  font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(61,186,167,.85);
+  margin-bottom: .75rem;
+}
+.trust-h2 {
+  font-size: clamp(1.6rem,3vw,2.4rem);
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media(min-width:768px) { .trust-grid { grid-template-columns: repeat(4,1fr); gap: 1.5rem } }
+
+.tc {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 1.5rem 1rem;
+  background: rgba(255,255,255,.055);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 1.125rem;
+  backdrop-filter: blur(8px);
+  transition: all .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.tc--link { text-decoration: none; cursor: pointer }
+.tc--link:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px }
+.tc-reviews-link {
+  font-size: .68rem; font-weight: 600;
+  color: #FBBC05; margin-top: .375rem;
+  opacity: .8; transition: opacity .2s;
+}
+.tc--link:hover .tc-reviews-link { opacity: 1 }
+.tc::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--tbg);
+  opacity: .7;
+}
+.tc:hover {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.2);
+  transform: translateY(-3px);
+}
+.tc:hover::before { opacity: 1 }
+
+.tc-icon {
+  width: 2.75rem; height: 2.75rem;
+  border-radius: .75rem;
+  background: var(--tbl);
+  color: var(--tbg);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: .875rem;
+}
+.tc-num-row { display: flex; align-items: baseline; gap: .3rem; margin-bottom: .375rem }
+.tc-val {
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  font-family: var(--font-family-heading);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.025em;
+  line-height: 1;
+}
+.tc-sub {
+  font-size: .82rem; font-weight: 600; color: var(--tbg);
+  line-height: 1;
+}
+.tc-lbl {
+  font-size: .75rem; color: rgba(255,255,255,.55);
+  margin: 0; line-height: 1.4;
+}
+
+@media(prefers-reduced-motion:reduce){.tc{transition:none}}
+</style>

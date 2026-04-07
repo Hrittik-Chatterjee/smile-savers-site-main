@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Offline | Smile Savers Dental" description="You appear to be offline.">
+  <main id="main-content" class="offline-page">
+    <div class="offline-wrap">
+      <div class="offline-icon" aria-hidden="true">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M1 6s4-4 11-4 11 4 11 4"/><path d="M5 10s2-2 7-2 7 2 7 2"/>
+          <path d="M9 14s1-1 3-1 3 1 3 1"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+          <line x1="2" y1="2" x2="22" y2="22"/>
+        </svg>
+      </div>
+      <h1 class="offline-title">You're offline</h1>
+      <p class="offline-body">
+        It looks like your internet connection dropped. Some pages may still work from cache.
+        For dental emergencies, call us directly:
+      </p>
+      <a href="tel:+17189568400" class="offline-call">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.11 9.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        (718) 956-8400
+      </a>
+      <button onclick="window.location.reload()" class="offline-retry">Try again</button>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+.offline-page { min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: 2rem }
+.offline-wrap { text-align: center; max-width: 420px; display: flex; flex-direction: column; align-items: center; gap: 1.25rem }
+.offline-icon { color: var(--color-secondary); opacity: .7 }
+.offline-title { font-size: 2rem; font-family: var(--font-family-heading); font-weight: 800; color: var(--color-primary); margin: 0 }
+.offline-body { color: var(--color-text-muted); line-height: 1.7; margin: 0 }
+.offline-call {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .9rem 2rem; background: var(--color-primary); color: #fff;
+  border-radius: .875rem; font-weight: 700; font-size: 1.1rem;
+  text-decoration: none; transition: background .2s;
+}
+.offline-call:hover { background: var(--color-primary-light) }
+.offline-retry {
+  font-size: .9rem; color: var(--color-text-muted); background: none;
+  border: 1.5px solid var(--color-border); border-radius: .6rem;
+  padding: .5rem 1.5rem; cursor: pointer; font-family: inherit; transition: all .2s;
+}
+.offline-retry:hover { border-color: var(--color-primary); color: var(--color-primary) }
+</style>

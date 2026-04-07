@@ -1,0 +1,35 @@
+---
+/**
+ * Dynamic Persona Page
+ * URL: /for/[slug]/
+ * Example: /for/families/
+ *
+ * Renders audience-specific landing pages
+ */
+
+import { getCollection } from 'astro:content';
+import PersonaPageLayout from '../../modules/programmatic-seo/layouts/PersonaPageLayout.astro';
+
+export async function getStaticPaths() {
+  const personas = await getCollection('personas');
+
+  return personas.map((persona) => ({
+    params: { slug: persona.data.slug },
+    props: { persona },
+  }));
+}
+
+const { persona } = Astro.props;
+const { slug, persona: personaName, personaDisplay, tagline, intro, benefits, services, faqs } = persona.data;
+---
+
+<PersonaPageLayout
+  slug={slug}
+  persona={personaName}
+  personaDisplay={personaDisplay}
+  tagline={tagline}
+  intro={intro}
+  benefits={benefits}
+  services={services}
+  faqs={faqs || []}
+/>

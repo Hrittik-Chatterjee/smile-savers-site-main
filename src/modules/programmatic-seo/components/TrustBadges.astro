@@ -1,0 +1,93 @@
+---
+/**
+ * TrustBadges - Compact trust indicators for programmatic pages
+ * Reusable component showing key trust signals
+ */
+
+interface Props {
+  variant?: 'inline' | 'grid';
+  size?: 'sm' | 'md';
+}
+
+const { variant = 'inline', size = 'sm' } = Astro.props;
+
+const badges = [
+  { icon: 'calendar', value: '35+ Years', label: 'Experience' },
+  { icon: 'star', value: '5.0', label: 'Google Rating' },
+  { icon: 'award', value: 'ICOI', label: 'Board Certified' },
+];
+
+const iconPaths: Record<string, string> = {
+  calendar: 'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z',
+  star: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+  award: 'M12 15l-2 5 2-1 2 1-2-5zM8 9a4 4 0 108 0 4 4 0 00-8 0z',
+};
+---
+
+<div class={`trust-badges trust-badges--${variant} trust-badges--${size}`}>
+  {badges.map((badge) => (
+    <div class="trust-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width={size === 'sm' ? 18 : 24} height={size === 'sm' ? 18 : 24} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="badge-icon">
+        <path d={iconPaths[badge.icon]} />
+      </svg>
+      <div class="badge-content">
+        <span class="badge-value">{badge.value}</span>
+        <span class="badge-label">{badge.label}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .trust-badges {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .trust-badges--inline {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .trust-badges--grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .badge-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .badge-content {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  .trust-badges--sm .badge-value {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .trust-badges--sm .badge-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .trust-badges--md .badge-value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .trust-badges--md .badge-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+</style>

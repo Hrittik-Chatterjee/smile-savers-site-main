@@ -1,0 +1,47 @@
+---
+/**
+ * ServiceGrid - Responsive grid of service cards
+ * Fetches from services content collection
+ */
+
+import { getCollection } from 'astro:content';
+import ServiceCard from './ServiceCard.astro';
+
+interface Props {
+  featured?: boolean;
+  category?: 'preventive' | 'cosmetic' | 'restorative' | 'emergency';
+  limit?: number;
+}
+
+const { featured, category, limit } = Astro.props;
+
+let services = await getCollection('services');
+
+// Filter by featured if specified
+if (featured !== undefined) {
+  services = services.filter(s => s.data.featured === featured);
+}
+
+// Filter by category if specified
+if (category) {
+  services = services.filter(s => s.data.category === category);
+}
+
+// Sort by order
+services = services.sort((a, b) => a.data.order - b.data.order);
+
+// Limit results if specified
+if (limit) {
+  services = services.slice(0, limit);
+}
+---
+
+<div class="service-grid grid-content">
+  {services.map((service) => (
+    <ServiceCard service={service} />
+  ))}
+</div>
+
+<style>
+  /* Grid layout handled by .grid-content utility class */
+</style>

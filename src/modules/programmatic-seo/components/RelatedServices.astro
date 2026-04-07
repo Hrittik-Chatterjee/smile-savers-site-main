@@ -1,0 +1,151 @@
+---
+/**
+ * RelatedServices - Grid of related service cards
+ * Links to relevant service pages for internal linking
+ */
+
+import { getCollection } from 'astro:content';
+
+interface Props {
+  services?: string[];  // Array of service slugs to show
+  limit?: number;
+  title?: string;
+  excludeSlug?: string;
+}
+
+const { services, limit = 3, title = "Related Services", excludeSlug } = Astro.props;
+
+const allServices = await getCollection('services');
+
+let displayServices = allServices;
+
+// Filter by specific slugs if provided
+if (services && services.length > 0) {
+  displayServices = allServices.filter(s => services.includes(s.id));
+}
+
+// Exclude current service if specified
+if (excludeSlug) {
+  displayServices = displayServices.filter(s => s.id !== excludeSlug);
+}
+
+// Limit results
+displayServices = displayServices.slice(0, limit);
+
+const iconPaths: Record<string, string> = {
+  tooth: 'M12 2C8 2 6 5 6 8c0 2 1 4 1 6 0 3-1 6 2 8 1.5 1 3 0 3-2v-4c0-1 1-2 2-2s2 1 2 2v4c0 2 1.5 3 3 2 3-2 2-5 2-8 0-2 1-4 1-6 0-3-2-6-6-6h-4z',
+  implant: 'M12 2v4M12 6v4M12 10v4M12 14v4M8 22h8M9 6h6M10 10h4M10 14h4',
+  crown: 'M3 12l3-9 3 6 3-6 3 6 3-6 3 9M3 12v6a3 3 0 003 3h12a3 3 0 003-3v-6',
+  sparkle: 'M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z',
+  shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+  heart: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z',
+};
+---
+
+{displayServices.length > 0 && (
+  <section class="related-services" aria-labelledby="related-services-heading">
+    <h2 id="related-services-heading" class="section-title">{title}</h2>
+    <div class="services-grid">
+      {displayServices.map((service) => (
+        <a href={`/services/${service.id}`} class="service-link-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d={iconPaths[service.data.icon] || iconPaths.tooth} />
+            </svg>
+          </div>
+          <div class="service-info">
+            <h3 class="service-name">{service.data.title}</h3>
+            <p class="service-desc">{service.data.shortDescription}</p>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="arrow-icon">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-services {
+    padding-block: var(--spacing-element);
+  }
+
+  .section-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-element);
+  }
+
+  .services-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .service-link-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  .service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
+    border-radius: var(--radius-md);
+    color: var(--color-primary-dark);
+    flex-shrink: 0;
+  }
+
+  .service-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .service-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 0.25rem;
+  }
+
+  .service-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .arrow-icon {
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+    transition: transform var(--transition-fast), color var(--transition-fast);
+  }
+
+  .service-link-card:hover .arrow-icon {
+    transform: translateX(4px);
+    color: var(--color-primary);
+  }
+</style>

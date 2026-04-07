@@ -1,0 +1,613 @@
+---
+/**
+ * Smile Savers Chat Widget
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Branding: "Smile" — the Smile Savers AI assistant
+ * Icon:     Custom SVG tooth + sparkle (matches brand)
+ * Features: Quick replies, typing indicator, conversation history,
+ *           graceful degradation, keyboard-accessible, WCAG 2.1 AA
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+---
+
+<!-- ── Trigger ─────────────────────────────────────────────────── -->
+<button
+  id="chat-trigger"
+  class="chat-trigger"
+  aria-label="Chat with Smile, our AI dental assistant"
+  aria-expanded="false"
+  aria-controls="chat-panel"
+>
+  <!-- Custom Smile Savers tooth+sparkle icon -->
+  <span class="chat-trigger-icon" aria-hidden="true" id="chat-icon-open">
+    <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Tooth shape -->
+      <path d="M16 3C12.5 3 10 6 10 9.5c0 2.5.6 4 .6 6.5s-1.2 5-1.2 7.5c0 2.5 1.8 5 3.6 5s2.4-1.5 3-4c.6 2.5 1.2 4 3 4s3.6-2.5 3.6-5c0-2.5-1.2-5-1.2-7.5s.6-4 .6-6.5C22 6 19.5 3 16 3z"
+        fill="white" fill-opacity="0.95"/>
+      <!-- Sparkle top-right -->
+      <path d="M25 5l.7 1.5L27 7l-1.3.5L25 9l-.7-1.5L23 7l1.3-.5L25 5z"
+        fill="white" fill-opacity="0.8"/>
+      <!-- Sparkle small -->
+      <path d="M22 2l.4 1L23 3.4l-1 .4L22 5l-.4-1-.6-.6 1-.4L22 2z"
+        fill="white" fill-opacity="0.6"/>
+    </svg>
+  </span>
+  <!-- Close X icon -->
+  <span class="chat-trigger-icon" aria-hidden="true" id="chat-icon-close" style="display:none">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </span>
+  <span class="chat-trigger-label">Ask Smile</span>
+  <span class="chat-pulse-dot" aria-hidden="true"></span>
+</button>
+
+<!-- ── Chat panel ──────────────────────────────────────────────── -->
+<div
+  id="chat-panel"
+  class="chat-panel"
+  hidden
+  role="dialog"
+  aria-label="Chat with Smile, Smile Savers AI assistant"
+  aria-modal="false"
+>
+  <!-- Header -->
+  <div class="chat-header">
+    <div class="chat-header-brand">
+      <!-- Inline tooth SVG -->
+      <div class="chat-brand-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+          <path d="M16 3C12.5 3 10 6 10 9.5c0 2.5.6 4 .6 6.5s-1.2 5-1.2 7.5c0 2.5 1.8 5 3.6 5s2.4-1.5 3-4c.6 2.5 1.2 4 3 4s3.6-2.5 3.6-5c0-2.5-1.2-5-1.2-7.5s.6-4 .6-6.5C22 6 19.5 3 16 3z"
+            fill="white" fill-opacity="0.95"/>
+          <path d="M25 5l.7 1.5L27 7l-1.3.5L25 9l-.7-1.5L23 7l1.3-.5L25 5z" fill="white" fill-opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="chat-brand-text">
+        <p class="chat-brand-name">Smile</p>
+        <p class="chat-brand-sub">
+          <span class="chat-online-dot" aria-hidden="true"></span>Smile Savers Assistant
+        </p>
+      </div>
+    </div>
+    <button id="chat-close" class="chat-close-btn" aria-label="Close chat">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Messages -->
+  <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-atomic="false">
+    <!-- Welcome message -->
+    <div class="chat-msg chat-msg--bot">
+      <div class="chat-msg-avatar" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="none">
+          <path d="M16 3C12.5 3 10 6 10 9.5c0 2.5.6 4 .6 6.5s-1.2 5-1.2 7.5c0 2.5 1.8 5 3.6 5s2.4-1.5 3-4c.6 2.5 1.2 4 3 4s3.6-2.5 3.6-5c0-2.5-1.2-5-1.2-7.5s.6-4 .6-6.5C22 6 19.5 3 16 3z"
+            fill="currentColor"/>
+        </svg>
+      </div>
+      <p>Hi! I'm <strong>Smile</strong>, Smile Savers' AI assistant. Ask me anything about our services, hours, or insurance. For dental emergencies, call <a href="tel:+17189568400">(718) 956-8400</a> directly.</p>
+    </div>
+
+    <!-- Quick replies -->
+    <div class="chat-quick-replies" id="chat-quick-replies" role="group" aria-label="Common questions">
+      <button class="chat-quick-btn" data-q="What are your opening hours?">🕐 Hours</button>
+      <button class="chat-quick-btn" data-q="Do you accept dental insurance?">🏥 Insurance</button>
+      <button class="chat-quick-btn" data-q="What is a CEREC same-day crown?">👑 CEREC Crowns</button>
+      <button class="chat-quick-btn" data-q="How do I book an appointment?">📅 Book Appt</button>
+      <button class="chat-quick-btn" data-q="Do you treat dental emergencies?">🚨 Emergency</button>
+    </div>
+  </div>
+
+  <!-- Input area -->
+  <div class="chat-input-area">
+    <form id="chat-form" class="chat-input-row" onsubmit="return false">
+      <label for="chat-input" class="sr-only">Type your question</label>
+      <input
+        type="text"
+        id="chat-input"
+        class="chat-input"
+        placeholder="Ask about services, hours, insurance…"
+        maxlength="400"
+        autocomplete="off"
+        spellcheck="true"
+      />
+      <button type="submit" id="chat-send" class="chat-send-btn" aria-label="Send message" disabled>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </form>
+    <p class="chat-footer-note">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      AI assistant · Not medical advice ·
+      <a href="tel:+17189568400">Call for emergencies</a>
+    </p>
+  </div>
+</div>
+
+<style>
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes chat-slide-up {
+  from { opacity:0; transform:translateY(14px) scale(.96) }
+  to   { opacity:1; transform:translateY(0) scale(1) }
+}
+@keyframes chat-pulse-ring {
+  0%,100% { transform:scale(1); opacity:1 }
+  50%      { transform:scale(1.5); opacity:0 }
+}
+@keyframes typing-bounce {
+  0%,60%,100% { transform:translateY(0) }
+  30%          { transform:translateY(-5px) }
+}
+@keyframes spin { to { transform:rotate(360deg) } }
+
+/* ── Trigger button ─────────────────────────────────────────── */
+.chat-trigger {
+  position: fixed;
+  bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  right: 1.25rem;
+  z-index: 190;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .7rem 1.125rem .7rem .875rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  font-size: .85rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(16,43,63,.35), 0 1px 0 rgba(255,255,255,.1) inset;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  white-space: nowrap;
+}
+.chat-trigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(16,43,63,.45);
+}
+.chat-trigger:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.chat-trigger:active { transform: scale(.97) }
+
+.chat-trigger-icon { display: flex; align-items: center }
+.chat-trigger-label { letter-spacing: -.01em }
+
+/* Pulsing online dot */
+.chat-pulse-dot {
+  width: .45rem;
+  height: .45rem;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  position: relative;
+  flex-shrink: 0;
+}
+.chat-pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid var(--color-secondary);
+  animation: chat-pulse-ring 2s ease-in-out infinite;
+}
+
+@media(max-width:380px) { .chat-trigger-label { display:none } }
+@media(min-width:769px) {
+  .chat-trigger { bottom:1.5rem; right:1.5rem }
+}
+
+/* ── Chat panel ─────────────────────────────────────────────── */
+.chat-panel {
+  position: fixed;
+  bottom: calc(5rem + env(safe-area-inset-bottom, 0px) + 3.5rem);
+  right: 1.25rem;
+  z-index: 191;
+  width: min(380px, calc(100vw - 1.5rem));
+  background: #fff;
+  border-radius: 1.375rem;
+  box-shadow:
+    0 24px 64px rgba(16,43,63,.18),
+    0 4px 20px rgba(16,43,63,.1),
+    0 0 0 1px rgba(16,43,63,.06);
+  display: flex;
+  flex-direction: column;
+  max-height: min(520px, 72vh);
+  animation: chat-slide-up .22s cubic-bezier(.22,1,.36,1) both;
+  overflow: hidden;
+}
+@media(min-width:769px) {
+  .chat-panel { bottom: calc(1.5rem + 4rem + .75rem); right:1.5rem }
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .875rem 1rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  flex-shrink: 0;
+  border-radius: 1.375rem 1.375rem 0 0;
+}
+.chat-header-brand { display:flex; align-items:center; gap:.625rem }
+.chat-brand-icon {
+  width: 2.25rem; height: 2.25rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  display: flex; align-items:center; justify-content:center;
+  color: #fff;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255,255,255,.25);
+}
+.chat-brand-name {
+  font-size: .92rem; font-weight: 800; color: #fff;
+  letter-spacing: -.02em; margin: 0; line-height: 1.15;
+}
+.chat-brand-sub {
+  display: flex; align-items: center; gap: .3rem;
+  font-size: .68rem; color: rgba(255,255,255,.65); margin: 0;
+}
+.chat-online-dot {
+  width: .4rem; height: .4rem;
+  border-radius: 50%; background: var(--color-secondary);
+  flex-shrink: 0;
+  animation: chat-pulse-ring 3s ease-in-out infinite;
+}
+.chat-close-btn {
+  width: 1.875rem; height: 1.875rem;
+  border-radius: .4rem;
+  background: rgba(255,255,255,.12);
+  border: none; color: rgba(255,255,255,.8);
+  cursor: pointer; display:flex; align-items:center; justify-content:center;
+  transition: background .15s, color .15s;
+}
+.chat-close-btn:hover { background:rgba(255,255,255,.22); color:#fff }
+
+/* ── Messages ───────────────────────────────────────────────── */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: .875rem;
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+/* Custom scrollbar */
+.chat-messages::-webkit-scrollbar { width: 4px }
+.chat-messages::-webkit-scrollbar-track { background: transparent }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 99px }
+
+.chat-msg {
+  display: flex;
+  gap: .5rem;
+  max-width: 90%;
+  font-size: .84rem;
+  line-height: 1.55;
+}
+.chat-msg p { margin: 0 }
+.chat-msg a { color: var(--color-accent); font-weight: 600; text-decoration: none }
+.chat-msg a:hover { text-decoration: underline }
+
+.chat-msg--bot {
+  align-self: flex-start;
+}
+.chat-msg--bot .chat-msg-bubble {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 0 1rem 1rem 1rem;
+  padding: .625rem .875rem;
+  border: 1px solid var(--color-border);
+}
+.chat-msg-avatar {
+  width: 1.75rem; height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: rgba(255,255,255,.9);
+  display: flex; align-items:center; justify-content:center;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+/* Direct p in bot message (first welcome) */
+.chat-msg--bot > p {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 0 1rem 1rem 1rem;
+  padding: .625rem .875rem;
+  border: 1px solid var(--color-border);
+  margin: 0;
+}
+.chat-msg--user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+.chat-msg--user .chat-msg-bubble {
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 1rem 0 1rem 1rem;
+  padding: .625rem .875rem;
+}
+.chat-msg--error .chat-msg-bubble {
+  background: #FEF2F2;
+  color: #C62828;
+  border: 1px solid #FECACA;
+  border-radius: 0 1rem 1rem 1rem;
+  padding: .625rem .875rem;
+  font-size: .78rem;
+}
+
+/* Typing indicator */
+.chat-typing {
+  display: flex; gap: .25rem;
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0 1rem 1rem 1rem;
+  padding: .625rem .875rem;
+  width: fit-content;
+}
+.chat-typing span {
+  width: .375rem; height: .375rem;
+  border-radius: 50%; background: var(--color-text-muted);
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: .15s }
+.chat-typing span:nth-child(3) { animation-delay: .3s }
+
+/* Quick replies */
+.chat-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
+  margin-top: .25rem;
+}
+.chat-quick-btn {
+  font-size: .75rem; font-weight: 600; font-family: inherit;
+  padding: .35rem .8rem;
+  background: #fff;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-primary);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all .15s ease;
+  white-space: nowrap;
+}
+.chat-quick-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ── Input ──────────────────────────────────────────────────── */
+.chat-input-area {
+  padding: .625rem .75rem .5rem;
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 0 0 1.375rem 1.375rem;
+}
+.chat-input-row {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+.chat-input {
+  flex: 1; min-width: 0;
+  padding: .55rem .875rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 9999px;
+  font-size: .84rem; font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+.chat-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(44,171,223,.12);
+  background: #fff;
+}
+.chat-input::placeholder { color: var(--color-text-muted); opacity: .7 }
+.chat-send-btn {
+  width: 2.125rem; height: 2.125rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  border: none; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items:center; justify-content:center;
+  transition: background .15s, transform .15s;
+}
+.chat-send-btn:disabled { background: var(--color-border); cursor:not-allowed }
+.chat-send-btn:not(:disabled):hover { background: var(--color-primary-light); transform:scale(1.08) }
+.chat-send-btn:not(:disabled):active { transform: scale(.95) }
+
+.chat-footer-note {
+  display: flex; align-items: center; gap: .3rem;
+  font-size: .65rem; color: var(--color-text-muted);
+  margin: .375rem 0 0; text-align:center; justify-content:center; flex-wrap:wrap;
+}
+.chat-footer-note a { color: inherit; text-decoration:underline }
+.chat-footer-note svg { flex-shrink:0; color: var(--color-success) }
+
+.sr-only {
+  position:absolute; width:1px; height:1px;
+  padding:0; margin:-1px; overflow:hidden;
+  clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .chat-trigger,.chat-send-btn { transition:none }
+  .chat-pulse-dot::after,.chat-online-dot,.chat-typing span { animation:none }
+  .chat-panel { animation:none }
+}
+</style>
+
+<script>
+(function () {
+  const trigger   = document.getElementById('chat-trigger');
+  const panel     = document.getElementById('chat-panel');
+  const closeBtn  = document.getElementById('chat-close');
+  const input     = /** @type {HTMLInputElement} */ (document.getElementById('chat-input'));
+  const sendBtn   = /** @type {HTMLButtonElement} */ (document.getElementById('chat-send'));
+  const messagesEl= document.getElementById('chat-messages');
+  const quickR    = document.getElementById('chat-quick-replies');
+  const iconOpen  = document.getElementById('chat-icon-open');
+  const iconClose = document.getElementById('chat-icon-close');
+  const form      = document.getElementById('chat-form');
+
+  if (!trigger || !panel || !input || !sendBtn || !messagesEl) return;
+
+  /** @type {{ role: string; content: string }[]} */
+  let history = [];
+  let isOpen  = false;
+  let isBusy  = false;
+
+  // ── Open / close ────────────────────────────────────────────
+  function open() {
+    isOpen = true;
+    panel.hidden = false;
+    trigger.setAttribute('aria-expanded', 'true');
+    if (iconOpen)  iconOpen.style.display  = 'none';
+    if (iconClose) iconClose.style.display = '';
+    requestAnimationFrame(() => input.focus());
+  }
+
+  function close() {
+    isOpen = false;
+    panel.hidden = true;
+    trigger.setAttribute('aria-expanded', 'false');
+    if (iconOpen)  iconOpen.style.display  = '';
+    if (iconClose) iconClose.style.display = 'none';
+    trigger.focus();
+  }
+
+  trigger.addEventListener('click', () => isOpen ? close() : open());
+  closeBtn?.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) close(); });
+
+  // ── Enable/disable send ──────────────────────────────────────
+  input.addEventListener('input', () => {
+    sendBtn.disabled = !input.value.trim() || isBusy;
+  });
+
+  // ── Quick replies ────────────────────────────────────────────
+  quickR?.querySelectorAll('.chat-quick-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = /** @type {HTMLButtonElement} */ (btn).dataset.q || '';
+      quickR.remove();
+      if (q) send(q);
+    });
+  });
+
+  // ── Submit ───────────────────────────────────────────────────
+  form?.addEventListener('submit', () => {
+    const text = input.value.trim();
+    if (text && !isBusy) send(text);
+  });
+
+  sendBtn.addEventListener('click', () => {
+    const text = input.value.trim();
+    if (text && !isBusy) send(text);
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (text && !isBusy) send(text);
+    }
+  });
+
+  // ── Core send function ───────────────────────────────────────
+  async function send(text) {
+    isBusy = true;
+    sendBtn.disabled = true;
+    input.value = '';
+    quickR?.remove();
+
+    addMsg(text, 'user');
+    history.push({ role: 'user', content: text });
+
+    const typing = addTyping();
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, history: history.slice(-6) }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const reply = data.reply || "I'm not sure about that. Please call (718) 956-8400.";
+
+      typing.remove();
+      addMsg(reply, 'bot');
+      history.push({ role: 'assistant', content: reply });
+
+    } catch (err) {
+      typing.remove();
+      addMsg("Something went wrong. Please call Smile Savers at (718) 956-8400.", 'error');
+    } finally {
+      isBusy = false;
+      sendBtn.disabled = !input.value.trim();
+      input.focus();
+    }
+  }
+
+  // ── DOM helpers ──────────────────────────────────────────────
+  function addMsg(text, type) {
+    const wrap = document.createElement('div');
+    wrap.className = `chat-msg chat-msg--${type}`;
+
+    if (type === 'bot') {
+      const avatar = document.createElement('div');
+      avatar.className = 'chat-msg-avatar';
+      avatar.setAttribute('aria-hidden', 'true');
+      avatar.innerHTML = `<svg width="14" height="14" viewBox="0 0 32 32" fill="none"><path d="M16 3C12.5 3 10 6 10 9.5c0 2.5.6 4 .6 6.5s-1.2 5-1.2 7.5c0 2.5 1.8 5 3.6 5s2.4-1.5 3-4c.6 2.5 1.2 4 3 4s3.6-2.5 3.6-5c0-2.5-1.2-5-1.2-7.5s.6-4 .6-6.5C22 6 19.5 3 16 3z" fill="currentColor"/></svg>`;
+      wrap.appendChild(avatar);
+    }
+
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-msg-bubble';
+    // Linkify phone numbers
+    const safe = text.replace(/</g, '&lt;').replace(/\(718\) 956-8400/g,
+      '<a href="tel:+17189568400">(718) 956-8400</a>');
+    bubble.innerHTML = `<p>${safe}</p>`;
+    wrap.appendChild(bubble);
+
+    messagesEl?.appendChild(wrap);
+    scrollBottom();
+    return wrap;
+  }
+
+  function addTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'chat-msg chat-msg--bot';
+    const avatar = document.createElement('div');
+    avatar.className = 'chat-msg-avatar';
+    avatar.setAttribute('aria-hidden', 'true');
+    avatar.innerHTML = `<svg width="14" height="14" viewBox="0 0 32 32" fill="none"><path d="M16 3C12.5 3 10 6 10 9.5c0 2.5.6 4 .6 6.5s-1.2 5-1.2 7.5c0 2.5 1.8 5 3.6 5s2.4-1.5 3-4c.6 2.5 1.2 4 3 4s3.6-2.5 3.6-5c0-2.5-1.2-5-1.2-7.5s.6-4 .6-6.5C22 6 19.5 3 16 3z" fill="currentColor"/></svg>`;
+    const dots = document.createElement('div');
+    dots.className = 'chat-typing';
+    dots.setAttribute('aria-label', 'Smile is typing');
+    dots.innerHTML = '<span></span><span></span><span></span>';
+    wrap.appendChild(avatar);
+    wrap.appendChild(dots);
+    messagesEl?.appendChild(wrap);
+    scrollBottom();
+    return wrap;
+  }
+
+  function scrollBottom() {
+    if (messagesEl) messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+})();
+</script>

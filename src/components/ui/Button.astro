@@ -1,0 +1,133 @@
+---
+/**
+ * Button — enhanced · accent colour · touch targets · all variants
+ */
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  class?: string;
+  'aria-label'?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  class: className = '',
+  'aria-label': ariaLabel,
+} = Astro.props;
+
+const El = href ? 'a' : 'button';
+---
+
+<El
+  class:list={['btn', `btn-${variant}`, `btn-${size}`, className]}
+  href={href}
+  type={!href ? type : undefined}
+  disabled={disabled}
+  aria-label={ariaLabel}
+  aria-disabled={disabled ? 'true' : undefined}
+>
+  <slot />
+</El>
+
+<style>
+/* ── Base ───────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all .25s ease;
+  white-space: nowrap;
+  font-family: inherit;
+  border-radius: .75rem;
+  /* Minimum touch target */
+  min-height: 44px;
+}
+.btn:focus-visible {
+  outline: 2.5px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.btn[disabled], .btn[aria-disabled="true"] {
+  opacity: .45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Sizes ──────────────────────────────────── */
+.btn-sm { padding: .45rem 1rem; font-size: var(--font-size-sm); border-radius: .5rem; min-height: 36px }
+.btn-md { padding: .75rem 1.5rem; font-size: var(--font-size-base) }
+.btn-lg { padding: .9rem 2rem; font-size: var(--font-size-lg); border-radius: .875rem }
+
+/* ── Primary — brand accent cyan ───────────── */
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(44,171,223,.3);
+}
+.btn-primary:hover {
+  background: var(--color-accent-dark);
+  box-shadow: 0 8px 24px rgba(44,171,223,.45);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(44,171,223,.3) }
+
+/* ── Secondary — navy ───────────────────────── */
+.btn-secondary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(16,43,63,.2);
+}
+.btn-secondary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+/* ── Outline ────────────────────────────────── */
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+.btn-outline:hover {
+  background: var(--color-primary);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(16,43,63,.2);
+}
+
+/* ── Ghost ──────────────────────────────────── */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1.5px solid var(--color-border);
+}
+.btn-ghost:hover {
+  background: var(--color-surface-sunken);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+/* ── Danger ─────────────────────────────────── */
+.btn-danger {
+  background: var(--color-error);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(229,57,53,.25);
+}
+.btn-danger:hover {
+  background: var(--color-error-dark);
+  transform: translateY(-1px);
+}
+
+@media(prefers-reduced-motion:reduce){.btn{transition:none;transform:none}}
+</style>

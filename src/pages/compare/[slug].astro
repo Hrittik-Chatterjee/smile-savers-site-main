@@ -1,0 +1,34 @@
+---
+/**
+ * Dynamic Comparison Page
+ * URL: /compare/[slug]/
+ * Example: /compare/implants-vs-dentures/
+ *
+ * Renders comparison pages for dental treatments
+ */
+
+import { getCollection } from 'astro:content';
+import ComparisonPageLayout from '../../modules/programmatic-seo/layouts/ComparisonPageLayout.astro';
+
+export async function getStaticPaths() {
+  const comparisons = await getCollection('comparisons');
+
+  return comparisons.map((comparison) => ({
+    params: { slug: comparison.data.slug },
+    props: { comparison },
+  }));
+}
+
+const { comparison } = Astro.props;
+const { slug, optionA, optionB, intro, verdict, faqs, relatedServices } = comparison.data;
+---
+
+<ComparisonPageLayout
+  slug={slug}
+  optionA={optionA}
+  optionB={optionB}
+  intro={intro}
+  verdict={verdict}
+  faqs={faqs || []}
+  relatedServices={relatedServices || []}
+/>

@@ -1,0 +1,131 @@
+---
+/**
+ * CTASection — enhanced · dark navy · phone · trust signals
+ * Used on: About, Services pages
+ */
+import Button from "@/components/ui/Button.astro";
+
+interface CTAButton {
+  label: string;
+  href: string;
+  variant?: "primary" | "outline" | "secondary";
+}
+interface Props {
+  title: string;
+  description: string;
+  buttons: CTAButton[];
+  showPhone?: boolean;
+}
+const { title, description, buttons, showPhone = true } = Astro.props;
+---
+
+<section class="ctas">
+  <div class="ctas-bg" aria-hidden="true">
+    <div class="ctas-glow-1"></div>
+    <div class="ctas-glow-2"></div>
+    <div class="ctas-grid"></div>
+  </div>
+  <div class="ctas-wrap">
+    <span class="ctas-eye">Take the Next Step</span>
+    <h2 class="ctas-h2">{title}</h2>
+    <p class="ctas-desc">{description}</p>
+    <div class="ctas-btns">
+      {buttons.map((b) => (
+        <Button href={b.href} variant={b.variant || 'primary'}>{b.label}</Button>
+      ))}
+      {showPhone && (
+        <a href="tel:+17189568400" class="ctas-phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          (718) 956-8400
+        </a>
+      )}
+    </div>
+    <p class="ctas-micro">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      No referral needed · Same-day emergencies welcome · Most insurance accepted
+    </p>
+  </div>
+</section>
+
+<style>
+.ctas {
+  position: relative;
+  background: #102B3F;
+  padding: clamp(3.5rem,6vw,6rem) 0;
+  overflow: hidden;
+}
+.ctas-bg { position: absolute; inset: 0; pointer-events: none }
+.ctas-glow-1 {
+  position: absolute; top:-8rem; left:-6rem;
+  width: 32rem; height: 32rem; border-radius: 50%;
+  background: radial-gradient(circle, rgba(61,186,167,.18), transparent 70%);
+}
+.ctas-glow-2 {
+  position: absolute; bottom:-10rem; right:-4rem;
+  width: 28rem; height: 28rem; border-radius: 50%;
+  background: radial-gradient(circle, rgba(44,171,223,.14), transparent 70%);
+}
+.ctas-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.ctas-wrap {
+  position: relative; z-index: 1;
+  max-width: 680px;
+  margin-inline: auto;
+  padding-inline: clamp(.75rem,3vw,var(--spacing-element));
+  text-align: center;
+}
+.ctas-eye {
+  display: inline-block;
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(61,186,167,.85);
+  margin-bottom: 1rem;
+}
+.ctas-h2 {
+  font-size: clamp(1.75rem,3.5vw,2.75rem);
+  font-family: var(--font-family-heading);
+  font-weight: 700; color: #fff;
+  letter-spacing: -.02em; line-height: 1.15;
+  margin: 0 0 1rem;
+}
+.ctas-desc {
+  font-size: var(--font-size-lg);
+  color: rgba(255,255,255,.65);
+  line-height: 1.7; margin: 0 0 2rem;
+}
+.ctas-btns {
+  display: flex; flex-wrap: wrap;
+  justify-content: center; align-items: center;
+  gap: .875rem; margin-bottom: 1.25rem;
+}
+/* Override button colours for dark bg */
+.ctas-btns :global(.btn-outline) {
+  color: rgba(255,255,255,.85);
+  border-color: rgba(255,255,255,.35);
+}
+.ctas-btns :global(.btn-outline:hover) {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  border-color: rgba(255,255,255,.6);
+}
+.ctas-phone {
+  display: inline-flex; align-items: center; gap: .4rem;
+  color: #3DBAA7; font-weight: 700;
+  font-size: var(--font-size-base);
+  text-decoration: none;
+  min-height: 44px;
+  transition: color .2s;
+}
+.ctas-phone:hover { color: #fff }
+.ctas-micro {
+  display: flex; align-items: center; justify-content: center;
+  gap: .4rem; flex-wrap: wrap;
+  font-size: .78rem; color: rgba(255,255,255,.38);
+  margin: 0;
+}
+.ctas-micro svg { color: rgba(61,186,167,.6); flex-shrink: 0 }
+</style>

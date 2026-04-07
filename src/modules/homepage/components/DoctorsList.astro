@@ -1,0 +1,402 @@
+---
+/**
+ * DoctorsList — Enhanced · Local images · Accessible · All breakpoints
+ * Sprint 1 critical fix: Use /images/doctors/ local paths
+ */
+import Button from '@/components/ui/Button.astro';
+
+const doctors = [
+  {
+    name: 'Dr. Deepak Bhagat',
+    credentials: 'DDS',
+    credentialFull: 'Doctor of Dental Surgery',
+    title: 'Lead Dentist & Founder',
+    specialty: 'General Dentistry & Implantology',
+    bio: 'Graduated from NYU College of Dentistry in 1987. Serving Woodside, Queens for over 35 years. In 2004, became a Diplomate of the International Congress of Oral Implantology (ICOI) — held by only a select group of dentists worldwide.',
+    image: '/images/doctors/dr-bhagat.jpg',
+    slug: 'dr-deepak-bhagat',
+    badge: 'ICOI Diplomate',
+    badgeBg: '#2CABDF',
+    rating: '5.0',
+    reviews: '120+',
+    isLead: true,
+    accentColor: '#2CABDF',
+  },
+  {
+    name: 'Dr. Julie Islam',
+    credentials: 'DDS',
+    credentialFull: 'Doctor of Dental Surgery',
+    title: 'Co-Dentist',
+    specialty: 'Preventive & Cosmetic Dentistry',
+    bio: 'NYU College of Dentistry graduate with a focus on gentle, patient-centred care. Dr. Islam has a unique ability to transform dental anxiety into dental confidence — patients consistently praise her calm, thorough approach.',
+    image: '/images/doctors/dr-islam.jpg',
+    slug: 'dr-julie-islam',
+    badge: null,
+    badgeBg: null,
+    rating: '5.0',
+    reviews: '80+',
+    isLead: false,
+    accentColor: '#3DBAA7',
+  },
+  {
+    name: 'Dr. Lee',
+    credentials: 'DDS',
+    credentialFull: 'Doctor of Dental Surgery',
+    title: 'Associate Dentist',
+    specialty: 'Restorative & Emergency Dentistry',
+    bio: 'Stony Brook University School of Dental Medicine graduate with advanced expertise in restorative procedures, root canal therapy, and emergency care. Known for his thorough explanations and calm chairside manner.',
+    image: '/images/doctors/dr-li.jpg',
+    slug: 'dr-lee',
+    badge: 'Emergency Specialist',
+    badgeBg: '#10B981',
+    rating: '4.9',
+    reviews: '60+',
+    isLead: false,
+    accentColor: '#10B981',
+  },
+];
+---
+
+<section class="doctors section" aria-labelledby="doctors-heading">
+  <div class="doc-wrap">
+
+    <header class="doc-header">
+      <span class="eyebrow">Our Expert Team</span>
+      <h2 id="doctors-heading" class="doc-h2">
+        Meet the Dentists<br class="br-d"/> Who Care
+      </h2>
+      <p class="doc-sub">
+        Three experienced dentists. One shared commitment to your comfort and long-term oral health.
+      </p>
+    </header>
+
+    <div class="doc-grid">
+      {doctors.map((doc) => (
+        <article class={`doc-card${doc.isLead ? ' doc-card--lead' : ''}`} style={`--acc:${doc.accentColor}`}>
+
+          <!-- Image -->
+          <div class="doc-photo">
+            <img
+              src={doc.image}
+              alt={`${doc.name}, ${doc.credentials} — ${doc.title}`}
+              width="400" height="500"
+              loading="lazy"
+              class="doc-img"
+            />
+            {doc.badge && (
+              <span class="doc-badge" style={`background:${doc.badgeBg}`}>{doc.badge}</span>
+            )}
+            <!-- Hover overlay CTA -->
+            <div class="doc-photo-overlay" aria-hidden="true">
+              <span class="overlay-btn">View Profile →</span>
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="doc-info">
+            <!-- Name + rating row -->
+            <div class="doc-toprow">
+              <div>
+                <h3 class="doc-name">
+                  <a href={`/team/${doc.slug}`} class="doc-name-link">{doc.name}</a>
+                </h3>
+                <div class="doc-cred-row">
+                  <span class="doc-cred">{doc.credentials}</span>
+                  {doc.isLead && <span class="doc-lead-tag">Lead</span>}
+                </div>
+              </div>
+              <div class="doc-rating" aria-label={`${doc.rating} stars, ${doc.reviews} reviews`}>
+                <span class="rating-star" aria-hidden="true">★</span>
+                <span class="rating-num">{doc.rating}</span>
+                <span class="rating-ct">({doc.reviews})</span>
+              </div>
+            </div>
+
+            <!-- Role -->
+            <p class="doc-role">{doc.title}</p>
+
+            <!-- Specialty chip -->
+            <p class="doc-spec">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              {doc.specialty}
+            </p>
+
+            <!-- Bio -->
+            <p class="doc-bio">{doc.bio}</p>
+
+            <!-- CTA -->
+            <a href={`/team/${doc.slug}`} class="doc-cta" aria-label={`View ${doc.name}'s full profile`}>
+              View Full Profile
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+        </article>
+      ))}
+    </div>
+
+    <div class="doc-footer-cta">
+      <Button href="/about#team" variant="outline">Learn More About Our Team</Button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ── Container ───────────────────────────────── */
+.doctors { background: var(--color-surface-elevated) }
+.doc-wrap {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  padding-inline: clamp(.75rem, 3vw, var(--spacing-element));
+}
+
+/* ── Header ──────────────────────────────────── */
+.doc-header {
+  text-align: center;
+  max-width: 560px;
+  margin-inline: auto;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.eyebrow {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--color-secondary-dark);
+  background: rgba(61,186,167,.1);
+  border-radius: 9999px;
+  padding: .25rem .875rem;
+  margin-bottom: .875rem;
+}
+.doc-h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -.025em;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+.br-d { display: none }
+@media(min-width:768px){ .br-d { display: block } }
+.doc-sub {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Grid ────────────────────────────────────── */
+.doc-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media(min-width:640px) { .doc-grid { grid-template-columns: repeat(2, 1fr) } }
+@media(min-width:1024px) { .doc-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem } }
+
+/* On tablet 2-col: make 3rd card centered */
+@media(min-width:640px) and (max-width:1023px) {
+  .doc-card:last-child { grid-column: 1 / -1; max-width: 480px; margin-inline: auto; }
+}
+
+/* ── Card ────────────────────────────────────── */
+.doc-card {
+  background: #fff;
+  border-radius: 1.25rem;
+  border: 1.5px solid var(--color-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease;
+  position: relative;
+}
+.doc-card:hover {
+  box-shadow: 0 20px 50px rgba(16,43,63,.12);
+  transform: translateY(-4px);
+  border-color: var(--acc);
+}
+.doc-card--lead {
+  border-color: var(--acc);
+  box-shadow: 0 4px 20px rgba(44,171,223,.1);
+}
+.doc-card--lead::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--acc);
+}
+
+/* ── Photo ───────────────────────────────────── */
+.doc-photo {
+  position: relative;
+  aspect-ratio: 3/4;
+  background: linear-gradient(160deg,#EFF6EE 0%,var(--color-secondary-light) 100%);
+  overflow: hidden;
+}
+@media(min-width:640px) { .doc-photo { aspect-ratio: 4/5 } }
+
+.doc-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform .5s ease;
+  display: block;
+}
+.doc-card:hover .doc-img { transform: scale(1.04) }
+
+.doc-badge {
+  position: absolute;
+  bottom: .875rem; left: .875rem;
+  color: #fff;
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: .3rem .75rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  backdrop-filter: blur(4px);
+}
+
+.doc-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(16,43,63,.75) 0%, transparent 50%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1rem;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.doc-card:hover .doc-photo-overlay { opacity: 1 }
+.overlay-btn {
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 600;
+  padding: .4rem 1rem;
+  border: 1.5px solid rgba(255,255,255,.6);
+  border-radius: 9999px;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Info ────────────────────────────────────── */
+.doc-info {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .625rem;
+  flex: 1;
+}
+@media(min-width:1024px) { .doc-info { padding: 1.5rem } }
+
+.doc-toprow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: .5rem;
+}
+.doc-name {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 .25rem;
+  line-height: 1.2;
+}
+.doc-name-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color .2s;
+}
+.doc-name-link:hover { color: var(--acc); text-decoration: underline; text-underline-offset: 3px }
+
+.doc-cred-row { display: flex; align-items: center; gap: .375rem }
+.doc-cred {
+  font-size: .72rem; font-weight: 600;
+  color: var(--acc);
+  background: color-mix(in srgb, var(--acc) 12%, transparent);
+  padding: .15rem .5rem;
+  border-radius: 9999px;
+}
+.doc-lead-tag {
+  font-size: .62rem; font-weight: 700;
+  color: #fff;
+  background: var(--acc);
+  padding: .15rem .5rem;
+  border-radius: 9999px;
+  letter-spacing: .04em;
+}
+
+.doc-rating {
+  display: flex; align-items: center; gap: .2rem;
+  flex-shrink: 0;
+  background: #FFFBEB;
+  border: 1px solid #FEF08A;
+  padding: .2rem .5rem;
+  border-radius: .5rem;
+}
+.rating-star { color: #FBBC05; font-size: .95rem }
+.rating-num { font-size: .78rem; font-weight: 700; color: var(--color-text) }
+.rating-ct { font-size: .68rem; color: var(--color-text-muted) }
+
+.doc-role {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--acc);
+  margin: 0;
+}
+
+.doc-spec {
+  display: flex; align-items: center; gap: .375rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+  font-weight: 500;
+}
+.doc-spec svg { flex-shrink: 0; color: var(--acc) }
+
+.doc-bio {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0;
+  flex: 1;
+}
+
+.doc-cta {
+  display: inline-flex; align-items: center; gap: .375rem;
+  font-size: .82rem; font-weight: 700;
+  color: var(--acc);
+  text-decoration: none;
+  min-height: 44px;
+  transition: gap .2s ease, color .2s ease;
+  margin-top: auto;
+  border: 1.5px solid color-mix(in srgb, var(--acc) 30%, transparent);
+  padding: .5rem 1rem;
+  border-radius: .6rem;
+  width: fit-content;
+  background: color-mix(in srgb, var(--acc) 5%, transparent);
+}
+.doc-cta:hover {
+  gap: .625rem;
+  border-color: var(--acc);
+  background: color-mix(in srgb, var(--acc) 10%, transparent);
+}
+
+/* ── Footer CTA ──────────────────────────────── */
+.doc-footer-cta {
+  display: flex; justify-content: center;
+  margin-top: clamp(2rem, 3.5vw, 3rem);
+}
+
+/* ── Reduced motion ──────────────────────────── */
+@media(prefers-reduced-motion:reduce) {
+  .doc-card,.doc-img { transition: none }
+}
+</style>

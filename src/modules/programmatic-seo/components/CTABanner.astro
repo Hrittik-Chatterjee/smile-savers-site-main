@@ -1,0 +1,126 @@
+---
+/**
+ * CTABanner - Call-to-action banner for programmatic pages
+ * Reusable component with customizable messaging
+ */
+
+interface Props {
+  headline?: string;
+  description?: string;
+  primaryCTA?: { text: string; href: string };
+  secondaryCTA?: { text: string; href: string };
+  variant?: 'default' | 'compact';
+}
+
+const {
+  headline = "Ready to Get Started?",
+  description = "Schedule your appointment with Smile Savers today and experience the difference 35+ years of expertise makes.",
+  primaryCTA = { text: "Book Appointment", href: "/appointments" },
+  secondaryCTA = { text: "Call (718) 956-8400", href: "tel:+17189568400" },
+  variant = 'default',
+} = Astro.props;
+---
+
+<section class={`cta-banner cta-banner--${variant}`}>
+  <div class="cta-content">
+    <h2 class="cta-headline">{headline}</h2>
+    <p class="cta-description">{description}</p>
+    <div class="cta-actions">
+      <a href={primaryCTA.href} class="cta-button cta-button--primary">
+        {primaryCTA.text}
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+      <a href={secondaryCTA.href} class="cta-button cta-button--secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        {secondaryCTA.text}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-banner {
+    background: linear-gradient(135deg, var(--color-accent) 0%, #1A95C9 100%);
+    color: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-block);
+    text-align: center;
+  }
+
+  .cta-banner--compact {
+    padding: var(--spacing-element);
+  }
+
+  .cta-content {
+    max-width: var(--container-md);
+    margin-inline: auto;
+  }
+
+  .cta-headline {
+    font-size: var(--font-size-2xl);
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-banner--compact .cta-headline {
+    font-size: var(--font-size-xl);
+  }
+
+  .cta-description {
+    font-size: var(--font-size-lg);
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+    line-height: var(--line-height-relaxed);
+  }
+
+  .cta-banner--compact .cta-description {
+    font-size: var(--font-size-base);
+    margin-bottom: 1rem;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: var(--radius-lg);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .cta-button--primary {
+    background: var(--color-text-inverted);
+    color: var(--color-primary-dark);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .cta-button--secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--color-text-inverted);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  }
+</style>
