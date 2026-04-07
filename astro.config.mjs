@@ -5,6 +5,8 @@ import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
 import robotsTxt from 'astro-robots-txt';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://smilesavers.dental',
@@ -70,4 +72,6 @@ export default defineConfig({
       include: ['clsx', 'tailwind-merge'],
     },
   },
+
+  adapter: cloudflare(),
 });
