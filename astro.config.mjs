@@ -5,8 +5,6 @@ import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
 import robotsTxt from 'astro-robots-txt';
 
-import cloudflare from '@astrojs/cloudflare';
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://smilesavers.dental',
@@ -37,7 +35,6 @@ export default defineConfig({
     service: {
       entrypoint: 'astro/assets/services/sharp',
     },
-    defaultFormat: 'webp',
     remotePatterns: [
       { protocol: 'https', hostname: '*.pexels.com' },
       { protocol: 'https', hostname: '*.unsplash.com' },
@@ -73,5 +70,4 @@ export default defineConfig({
     },
   },
 
-  adapter: cloudflare(),
 });
