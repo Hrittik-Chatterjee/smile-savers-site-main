@@ -72,16 +72,19 @@ const affiliations = [
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 64px;
-  padding: .75rem .5rem;
-  border-radius: .75rem;
+  min-height: 80px;
+  padding: 1rem .75rem;
+  border-radius: .875rem;
+  background: var(--color-primary);
   border: 1.5px solid transparent;
-  transition: all .3s ease;
+  transition: background .25s ease, transform .2s ease, box-shadow .2s ease;
   cursor: default;
+  box-shadow: 0 2px 8px rgba(16,43,63,.12);
 }
 .aff-item:hover {
-  background: var(--color-surface);
-  border-color: var(--color-border);
+  background: color-mix(in srgb, var(--color-primary) 80%, var(--color-primary-light) 20%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16,43,63,.2);
 }
 .aff-img {
   max-width: 100%;
@@ -89,14 +92,13 @@ const affiliations = [
   width: auto;
   height: auto;
   object-fit: contain;
-  /* Desaturate but keep visible — less opacity reduction than before */
-  filter: grayscale(100%) brightness(0.7) contrast(1.2);
-  opacity: 0.65;
-  transition: filter .3s ease, opacity .3s ease;
+  /* White logos on dark card — no filter needed */
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+  transition: opacity .25s ease;
   display: block;
 }
 .aff-item:hover .aff-img {
-  filter: grayscale(0%) brightness(1) contrast(1);
   opacity: 1;
 }
 @media(max-width: 639px) { .aff-wrap { padding-inline: .75rem } }
