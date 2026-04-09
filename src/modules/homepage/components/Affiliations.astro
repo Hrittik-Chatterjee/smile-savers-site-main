@@ -1,6 +1,8 @@
 ---
 /**
- * Affiliations — Step 2 fix: larger containers, better filter, named alts
+ * Affiliations
+ * Desktop: 6-column grid
+ * Mobile:  infinite auto-scroll marquee (logos duplicated for seamless loop)
  */
 const affiliations = [
   { src: "/aff1.png", alt: "American Dental Association", w: 176, h: 37 },
@@ -15,7 +17,9 @@ const affiliations = [
 <section class="aff" aria-label="Professional affiliations and accreditations">
   <div class="aff-wrap">
     <p class="aff-label">Trusted &middot; Certified &middot; Affiliated</p>
-    <div class="aff-grid">
+
+    <!-- ── Desktop: grid ─────────────────────────────────────── -->
+    <div class="aff-grid" aria-hidden="false">
       {affiliations.map((a) => (
         <div class="aff-item">
           <img
@@ -30,10 +34,31 @@ const affiliations = [
         </div>
       ))}
     </div>
+
+    <!-- ── Mobile: infinite marquee ──────────────────────────── -->
+    <!-- Logos rendered twice so the loop is perfectly seamless  -->
+    <div class="aff-marquee" aria-hidden="true">
+      <div class="aff-track">
+        {[...affiliations, ...affiliations].map((a) => (
+          <div class="aff-item">
+            <img
+              src={a.src}
+              alt=""
+              width={a.w}
+              height={a.h}
+              loading="lazy"
+              class="aff-img"
+              decoding="async"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
+/* ── Section ─────────────────────────────────────────────────── */
 .aff {
   padding: 2.5rem 0 2rem;
   background: #fff;
@@ -42,7 +67,6 @@ const affiliations = [
 .aff-wrap {
   max-width: var(--container-xl);
   margin-inline: auto;
-  padding-inline: clamp(.75rem, 3vw, var(--spacing-element));
 }
 .aff-label {
   text-align: center;
@@ -51,35 +75,23 @@ const affiliations = [
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  margin-bottom: 2rem;
-}
-.aff-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem 1rem;
-  align-items: center;
-  justify-items: center;
-}
-@media(min-width: 768px) {
-  .aff-grid {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1.5rem;
-  }
+  margin-bottom: 1.75rem;
 }
 
+/* ── Shared card style ───────────────────────────────────────── */
 .aff-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   min-height: 80px;
-  padding: 1rem .75rem;
+  padding: 1rem .875rem;
   border-radius: .875rem;
   background: var(--color-primary);
   border: 1.5px solid transparent;
+  box-shadow: 0 2px 8px rgba(16,43,63,.12);
   transition: background .25s ease, transform .2s ease, box-shadow .2s ease;
   cursor: default;
-  box-shadow: 0 2px 8px rgba(16,43,63,.12);
+  flex-shrink: 0;
 }
 .aff-item:hover {
   background: color-mix(in srgb, var(--color-primary) 80%, var(--color-primary-light) 20%);
@@ -88,18 +100,75 @@ const affiliations = [
 }
 .aff-img {
   max-width: 100%;
-  max-height: 52px;
+  max-height: 48px;
   width: auto;
   height: auto;
   object-fit: contain;
-  /* White logos on dark card — no filter needed */
   filter: brightness(0) invert(1);
   opacity: 0.92;
   transition: opacity .25s ease;
   display: block;
 }
-.aff-item:hover .aff-img {
-  opacity: 1;
+.aff-item:hover .aff-img { opacity: 1; }
+
+/* ── Desktop: 6-column grid (≥768px) ────────────────────────── */
+.aff-grid {
+  display: none; /* hidden on mobile */
+  padding-inline: clamp(.75rem, 3vw, var(--spacing-element));
 }
-@media(max-width: 639px) { .aff-wrap { padding-inline: .75rem } }
+.aff-marquee { display: block; } /* visible on mobile */
+
+@media(min-width: 768px) {
+  .aff-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.25rem;
+    align-items: center;
+    justify-items: center;
+  }
+  .aff-grid .aff-item { width: 100%; }
+  .aff-marquee { display: none; } /* hidden on desktop */
+}
+
+/* ── Mobile: infinite marquee (<768px) ──────────────────────── */
+.aff-marquee {
+  overflow: hidden;
+  /* soft fade edges */
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+.aff-track {
+  display: flex;
+  gap: .875rem;
+  width: max-content;
+  /* Scroll exactly half (the duplicated set) for seamless loop */
+  animation: aff-scroll 22s linear infinite;
+  padding: .25rem .5rem;
+}
+.aff-track .aff-item {
+  width: 110px;
+}
+
+@keyframes aff-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Pause on hover/focus for accessibility */
+.aff-marquee:hover .aff-track,
+.aff-marquee:focus-within .aff-track {
+  animation-play-state: paused;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .aff-track { animation: none; }
+  .aff-marquee {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .aff-track .aff-item { scroll-snap-align: center; }
+}
 </style>
