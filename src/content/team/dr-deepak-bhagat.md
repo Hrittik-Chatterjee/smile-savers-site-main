@@ -1,7 +1,7 @@
 ---
 name: "Dr. Deepak Bhagat"
 slug: "dr-deepak-bhagat"
-role: "Founder & Lead Dentist"
+role: "Lead Dentist"
 image: "../../assets/team/dr-deepak-bhagat.jpg"
 credentials:
   - "DDS"

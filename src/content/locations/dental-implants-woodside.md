@@ -7,7 +7,7 @@ intro: Looking for dental implants in Woodside, Queens? Smile Savers has been pr
 sections:
   - title: Why Choose Smile Savers for Dental Implants in Woodside
     content: |
-      <p>As Woodside's trusted dental implant provider, Smile Savers combines decades of experience with cutting-edge technology. Dr. Deepak Bhagat, our founder and lead implant specialist, holds ICOI Diplomate certification—the highest credential in implant dentistry.</p>
+      <p>As Woodside's trusted dental implant provider, Smile Savers combines decades of experience with cutting-edge technology. Dr. Deepak Bhagat, our lead implant specialist, holds ICOI Diplomate certification—the highest credential in implant dentistry.</p>
       <p>Our Woodside location at 32-02 53rd Place is easily accessible, with convenient parking and just steps from the 7 train. We've helped thousands of Woodside residents restore their smiles with dental implants.</p>
   - title: The Dental Implant Process
     content: |

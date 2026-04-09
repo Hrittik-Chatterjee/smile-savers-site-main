@@ -21,7 +21,7 @@ export const doctors: Doctor[] = [
     id: 'dr-deepak-bhagat',
     name: 'Dr. Deepak Bhagat',
     credentials: 'DDS',
-    title: 'Lead Dentist & Founder',
+    title: 'Lead Dentist ',
     specialty: 'General Dentistry & Implantology',
     bio: 'Graduated from New York University in 1987. Over two decades of experience in Woodside, NY. Diplomate of the International Congress of Oral Implantology.',
     image: '/images/doctors/dr-bhagat.jpg',

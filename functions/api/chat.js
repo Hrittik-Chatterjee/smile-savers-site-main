@@ -20,7 +20,7 @@ CLINIC DETAILS:
 - Accepting new patients — no referral needed
 
 TEAM:
-- Dr. Deepak Bhagat DDS — Founder, Lead Dentist, ICOI Diplomate (implant specialist)
+- Dr. Deepak Bhagat DDS —  Lead Dentist, ICOI Diplomate (implant specialist)
 - Dr. Julie Islam DDS — Co-Dentist, gentle care specialist
 - Dr. Lee DDS — Associate, emergency and restorative focus
 
@@ -109,7 +109,7 @@ export async function onRequestPost(context) {
     catch { return json({ error: 'Invalid JSON' }, 400, origin); }
 
     const rawMessage = sanitise(body.message || '');
-    const history    = Array.isArray(body.history) ? body.history.slice(-6) : [];
+    const history = Array.isArray(body.history) ? body.history.slice(-6) : [];
 
     if (!rawMessage) return json({ error: 'Message required' }, 400, origin);
     if (rawMessage.length < 2) return json({ error: 'Message too short' }, 400, origin);
