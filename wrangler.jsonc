@@ -19,7 +19,7 @@
   "vars": {
     "ENVIRONMENT": "production",
     "SITE_URL": "https://smilesavers.dental",
-    "NODE_VERSION": "20"
+    "NODE_VERSION": "22"
   },
 
   // ── Cloudflare Workers AI (10,000 req/day free) ────────────────────────────
