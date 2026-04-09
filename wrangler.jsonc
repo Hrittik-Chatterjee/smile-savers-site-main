@@ -2,6 +2,7 @@
   // ═══════════════════════════════════════════════════════════════════════════
   // Smile Savers Dental — Cloudflare Pages Configuration (wrangler.jsonc)
   // Docs: https://developers.cloudflare.com/pages/
+  // NOTE: Pages only supports "preview" and "production" named environments
   // ═══════════════════════════════════════════════════════════════════════════
 
   "name": "smile-savers",
@@ -22,17 +23,13 @@
   },
 
   // ── Cloudflare Workers AI (10,000 req/day free) ────────────────────────────
-  // After deploying, also enable this in CF Dashboard:
-  // Workers & Pages → your project → Settings → Functions → Workers AI Bindings
-  // Add binding with variable name: AI
   "ai": {
     "binding": "AI"
   },
 
-  // ── KV Namespace — Chat cache (1 GB free) ─────────────────────────────────
+  // ── KV Namespace — Chat cache (optional, only needed for rate-limiting) ────
   // To enable: run `npx wrangler kv namespace create CHAT_CACHE`
-  // then replace "your-kv-namespace-id" with the returned ID.
-  // If you skip this, the chat still works — KV is only used for rate-limiting.
+  // then uncomment and replace "your-kv-namespace-id" with the returned ID.
   // "kv_namespaces": [
   //   {
   //     "binding": "CHAT_CACHE",
@@ -40,20 +37,12 @@
   //   }
   // ],
 
-  // ── Staging environment ───────────────────────────────────────────────────
+  // ── Preview environment (branch/PR deploys) ────────────────────────────────
   "env": {
-    "staging": {
-      "name": "smile-savers-staging",
+    "preview": {
       "vars": {
-        "ENVIRONMENT": "staging",
-        "SITE_URL": "https://staging.smilesavers.dental"
-      }
-    },
-    "development": {
-      "name": "smile-savers-dev",
-      "vars": {
-        "ENVIRONMENT": "development",
-        "SITE_URL": "http://localhost:4321"
+        "ENVIRONMENT": "preview",
+        "SITE_URL": "https://smile-savers-site-main.pages.dev"
       }
     }
   }
