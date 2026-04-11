@@ -70,24 +70,25 @@ const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "Unit
         </address>
       </div>
 
-      <!-- Quick Links -->
-      <div class="footer-links">
-        <h3 class="footer-heading">Quick Links</h3>
-        <ul class="footer-list">
-          {footerNavigation.company.map((link) => (
-            <li><a href={link.href} class="footer-link">{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
+      <!-- Quick Links + Services -->
+      <div class="footer-links-group">
+        <div class="footer-links">
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul class="footer-list">
+            {footerNavigation.company.map((link) => (
+              <li><a href={link.href} class="footer-link">{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
 
-      <!-- Services -->
-      <div class="footer-links">
-        <h3 class="footer-heading">Services</h3>
-        <ul class="footer-list">
-          {footerNavigation.services.map((link) => (
-            <li><a href={link.href} class="footer-link">{link.label}</a></li>
-          ))}
-        </ul>
+        <div class="footer-links">
+          <h3 class="footer-heading">Services</h3>
+          <ul class="footer-list">
+            {footerNavigation.services.map((link) => (
+              <li><a href={link.href} class="footer-link">{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <!-- Hours -->
@@ -167,6 +168,12 @@ const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "Unit
 }
 .contact-link svg { flex-shrink: 0; color: #3DBAA7 }
 .contact-link:hover { color: #fff }
+
+.footer-links-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
 
 .footer-heading {
   font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
