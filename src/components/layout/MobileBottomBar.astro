@@ -89,19 +89,22 @@ import { formatPhoneLink } from '@/lib/utils';
       align-items: center;
       gap: 0.5rem;
       position: fixed;
-      bottom: 0.5rem;
-      left: 0.75rem;
-      right: 0.75rem;
+      bottom: 0;
+      left: 0;
+      right: 0;
       z-index: var(--z-sticky);
+      background-color: #ffffff;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+      padding: 0.625rem 0.75rem;
       /* iOS safe area support */
-      padding-bottom: env(safe-area-inset-bottom, 0);
+      padding-bottom: calc(0.625rem + env(safe-area-inset-bottom, 0px));
     }
 
     @media (max-width: 480px) {
       .mobile-bottom-row {
-        bottom: 0.25rem;
-        left: 0.5rem;
-        right: 0.5rem;
+        padding: 0.5rem 0.5rem;
+        padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
       }
     }
 
