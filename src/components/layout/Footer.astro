@@ -116,6 +116,10 @@ const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "Unit
         ))}
       </nav>
     </div>
+    <p class="footer-credit">
+      Built with <span class="footer-credit-heart" aria-hidden="true">♥</span> by
+      <a href="http://trendtoksocials.com/" target="_blank" rel="noopener noreferrer" class="footer-credit-link">TrendTok Socials</a>
+    </p>
   </div>
 
 </footer>
@@ -219,5 +223,26 @@ const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "Unit
 @media(max-width:639px){
   .footer-container { padding-inline: .75rem }
   .footer-bottom { flex-direction: column; align-items: flex-start }
+}
+
+.footer-credit {
+  text-align: center;
+  font-size: .72rem;
+  color: rgba(255,255,255,.2);
+  margin: 1rem 0 0;
+  padding-bottom: .5rem;
+}
+.footer-credit-heart {
+  color: #e05a5a;
+  font-size: .8rem;
+}
+.footer-credit-link {
+  color: rgba(255,255,255,.35);
+  text-decoration: none;
+  transition: color .2s;
+}
+.footer-credit-link:hover {
+  color: #3DBAA7;
+  text-decoration: underline;
 }
 </style>
