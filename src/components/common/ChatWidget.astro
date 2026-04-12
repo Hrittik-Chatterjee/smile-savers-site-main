@@ -42,6 +42,9 @@
   <span class="chat-pulse-dot" aria-hidden="true"></span>
 </button>
 
+<!-- ── Backdrop ───────────────────────────────────────────────── -->
+<div id="chat-backdrop" class="chat-backdrop" aria-hidden="true" hidden></div>
+
 <!-- ── Chat panel ──────────────────────────────────────────────── -->
 <div
   id="chat-panel"
@@ -133,6 +136,14 @@
   from { opacity:0; transform:translateY(14px) scale(.96) }
   to   { opacity:1; transform:translateY(0) scale(1) }
 }
+@keyframes chat-modal-in {
+  from { opacity:0; transform:translate(-50%, -46%) scale(.96) }
+  to   { opacity:1; transform:translate(-50%, -50%) scale(1) }
+}
+@keyframes chat-backdrop-in {
+  from { opacity:0 }
+  to   { opacity:1 }
+}
 @keyframes chat-pulse-ring {
   0%,100% { transform:scale(1); opacity:1 }
   50%      { transform:scale(1.5); opacity:0 }
@@ -198,7 +209,23 @@
 
 @media(max-width:380px) { .chat-trigger-label { display:none } }
 @media(min-width:769px) {
-  .chat-trigger { bottom:1.5rem; right:5.5rem }
+  .chat-trigger {
+    bottom: 1.5rem;
+    right: unset;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: .85rem 2.5rem .85rem 2rem;
+    font-size: 1rem;
+    gap: .75rem;
+    min-width: 220px;
+    justify-content: center;
+  }
+  .chat-trigger:hover {
+    transform: translateX(-50%) translateY(-2px);
+  }
+  .chat-trigger:active {
+    transform: translateX(-50%) scale(.97);
+  }
 }
 
 /* ── Chat panel ─────────────────────────────────────────────── */
@@ -221,7 +248,16 @@
   overflow: hidden;
 }
 @media(min-width:769px) {
-  .chat-panel { bottom: calc(1.5rem + 4rem + .75rem); right:5.5rem }
+  .chat-panel {
+    top: 50%;
+    left: 50%;
+    bottom: unset;
+    right: unset;
+    transform: translate(-50%, -50%);
+    width: min(680px, calc(100vw - 2rem));
+    max-height: min(600px, 80vh);
+    animation: chat-modal-in .22s cubic-bezier(.22,1,.36,1) both;
+  }
 }
 
 /* ── Header ─────────────────────────────────────────────────── */
@@ -442,6 +478,23 @@
   clip:rect(0,0,0,0); white-space:nowrap; border:0;
 }
 
+/* ── Backdrop (desktop only) ────────────────────────────────── */
+.chat-backdrop {
+  display: none;
+}
+@media(min-width:769px) {
+  .chat-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 34, 51, 0.45);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 190;
+    animation: chat-backdrop-in .2s ease both;
+  }
+}
+
 @media(prefers-reduced-motion:reduce) {
   .chat-trigger,.chat-send-btn { transition:none }
   .chat-pulse-dot::after,.chat-online-dot,.chat-typing span { animation:none }
@@ -451,85 +504,88 @@
 
 <script>
 (function () {
-  const trigger   = document.getElementById('chat-trigger');
-  const panel     = document.getElementById('chat-panel');
-  const closeBtn  = document.getElementById('chat-close');
-  const input     = /** @type {HTMLInputElement} */ (document.getElementById('chat-input'));
-  const sendBtn   = /** @type {HTMLButtonElement} */ (document.getElementById('chat-send'));
-  const messagesEl= document.getElementById('chat-messages');
-  const quickR    = document.getElementById('chat-quick-replies');
-  const iconOpen  = document.getElementById('chat-icon-open');
-  const iconClose = document.getElementById('chat-icon-close');
-  const form      = document.getElementById('chat-form');
+  const trigger    = document.getElementById('chat-trigger') as HTMLButtonElement | null;
+  const panel      = document.getElementById('chat-panel') as HTMLElement | null;
+  const closeBtn   = document.getElementById('chat-close') as HTMLButtonElement | null;
+  const backdrop   = document.getElementById('chat-backdrop') as HTMLElement | null;
+  const input      = document.getElementById('chat-input') as HTMLInputElement | null;
+  const sendBtn    = document.getElementById('chat-send') as HTMLButtonElement | null;
+  const messagesEl = document.getElementById('chat-messages') as HTMLElement | null;
+  const quickR     = document.getElementById('chat-quick-replies') as HTMLElement | null;
+  const iconOpen   = document.getElementById('chat-icon-open') as HTMLElement | null;
+  const iconClose  = document.getElementById('chat-icon-close') as HTMLElement | null;
+  const form       = document.getElementById('chat-form') as HTMLFormElement | null;
 
   if (!trigger || !panel || !input || !sendBtn || !messagesEl) return;
 
-  /** @type {{ role: string; content: string }[]} */
-  let history = [];
-  let isOpen  = false;
-  let isBusy  = false;
+  const history: { role: string; content: string }[] = [];
+  let isOpen = false;
+  let isBusy = false;
 
   // ── Open / close ────────────────────────────────────────────
   function open() {
     isOpen = true;
-    panel.hidden = false;
-    trigger.setAttribute('aria-expanded', 'true');
+    panel!.hidden = false;
+    if (backdrop) backdrop.hidden = false;
+    trigger!.setAttribute('aria-expanded', 'true');
     if (iconOpen)  iconOpen.style.display  = 'none';
     if (iconClose) iconClose.style.display = '';
-    requestAnimationFrame(() => input.focus());
+    requestAnimationFrame(() => input!.focus());
   }
 
   function close() {
     isOpen = false;
-    panel.hidden = true;
-    trigger.setAttribute('aria-expanded', 'false');
+    panel!.hidden = true;
+    if (backdrop) backdrop.hidden = true;
+    trigger!.setAttribute('aria-expanded', 'false');
     if (iconOpen)  iconOpen.style.display  = '';
     if (iconClose) iconClose.style.display = 'none';
-    trigger.focus();
+    trigger!.focus();
   }
 
   trigger.addEventListener('click', () => isOpen ? close() : open());
   closeBtn?.addEventListener('click', close);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) close(); });
+  backdrop?.addEventListener('click', close);
+  document.addEventListener('keydown', (e: KeyboardEvent) => { if (e.key === 'Escape' && isOpen) close(); });
 
   // ── Enable/disable send ──────────────────────────────────────
   input.addEventListener('input', () => {
-    sendBtn.disabled = !input.value.trim() || isBusy;
+    sendBtn!.disabled = !input!.value.trim() || isBusy;
   });
 
   // ── Quick replies ────────────────────────────────────────────
   quickR?.querySelectorAll('.chat-quick-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const q = /** @type {HTMLButtonElement} */ (btn).dataset.q || '';
-      quickR.remove();
+      const q = (btn as HTMLButtonElement).dataset.q || '';
+      quickR!.remove();
       if (q) send(q);
     });
   });
 
   // ── Submit ───────────────────────────────────────────────────
   form?.addEventListener('submit', () => {
-    const text = input.value.trim();
+    const text = input!.value.trim();
     if (text && !isBusy) send(text);
   });
 
   sendBtn.addEventListener('click', () => {
-    const text = input.value.trim();
+    const text = input!.value.trim();
     if (text && !isBusy) send(text);
   });
 
-  input.addEventListener('keydown', e => {
+  input.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      const text = input.value.trim();
+      const text = input!.value.trim();
       if (text && !isBusy) send(text);
     }
   });
 
   // ── Core send function ───────────────────────────────────────
-  async function send(text) {
+  async function send(text: string): Promise<void> {
     isBusy = true;
-    sendBtn.disabled = true;
-    input.value = '';
+    sendBtn!.disabled = true;
+    input!.value = '';
     quickR?.remove();
 
     addMsg(text, 'user');
@@ -546,7 +602,7 @@
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const reply = data.reply || "I'm not sure about that. Please call (718) 956-8400.";
+      const reply: string = data.reply || "I'm not sure about that. Please call (718) 956-8400.";
 
       typing.remove();
       addMsg(reply, 'bot');
@@ -557,13 +613,13 @@
       addMsg("Something went wrong. Please call Smile Savers at (718) 956-8400.", 'error');
     } finally {
       isBusy = false;
-      sendBtn.disabled = !input.value.trim();
-      input.focus();
+      sendBtn!.disabled = !input!.value.trim();
+      input!.focus();
     }
   }
 
   // ── DOM helpers ──────────────────────────────────────────────
-  function addMsg(text, type) {
+  function addMsg(text: string, type: string): HTMLDivElement {
     const wrap = document.createElement('div');
     wrap.className = `chat-msg chat-msg--${type}`;
 
@@ -583,12 +639,12 @@
     bubble.innerHTML = `<p>${safe}</p>`;
     wrap.appendChild(bubble);
 
-    messagesEl?.appendChild(wrap);
+    messagesEl!.appendChild(wrap);
     scrollBottom();
     return wrap;
   }
 
-  function addTyping() {
+  function addTyping(): HTMLDivElement {
     const wrap = document.createElement('div');
     wrap.className = 'chat-msg chat-msg--bot';
     const avatar = document.createElement('div');
@@ -601,13 +657,14 @@
     dots.innerHTML = '<span></span><span></span><span></span>';
     wrap.appendChild(avatar);
     wrap.appendChild(dots);
-    messagesEl?.appendChild(wrap);
+    messagesEl!.appendChild(wrap);
     scrollBottom();
     return wrap;
   }
 
-  function scrollBottom() {
+  function scrollBottom(): void {
     if (messagesEl) messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 })();
 </script>
+
