@@ -5,12 +5,11 @@
  * Mobile:  infinite auto-scroll marquee (logos duplicated for seamless loop)
  */
 const affiliations = [
-  { src: "/aff1.png", alt: "American Dental Association", w: 176, h: 37 },
-  { src: "/aff2.png", alt: "International Congress of Oral Implantologists (ICOI)", w: 122, h: 92 },
-  { src: "/aff3.png", alt: "NYU College of Dentistry Alumni", w: 133, h: 99 },
-  { src: "/aff4.png", alt: "Zocdoc Verified Provider", w: 121, h: 94 },
-  { src: "/aff5-300x68.png", alt: "Delta Dental Accepted Insurance", w: 300, h: 68 },
-  { src: "/aff6.png", alt: "New York State Dental Association", w: 140, h: 58 },
+  { src: '/aff1.png', alt: 'American Dental Association', w: 176, h: 37 },
+  { src: '/aff2.png', alt: 'International Congress of Oral Implantologists (ICOI)', w: 122, h: 92 },
+  { src: '/aff3.png', alt: 'NYU College of Dentistry Alumni', w: 133, h: 99 },
+  { src: '/aff4.png', alt: 'Zocdoc Verified Provider', w: 121, h: 94 },
+  { src: '/aff5-300x68.png', alt: 'Delta Dental Accepted Insurance', w: 300, h: 68 },
 ];
 ---
 
@@ -20,30 +19,12 @@ const affiliations = [
 
     <!-- ── Desktop: grid ─────────────────────────────────────── -->
     <div class="aff-grid" aria-hidden="false">
-      {affiliations.map((a) => (
-        <div class="aff-item">
-          <img
-            src={a.src}
-            alt={a.alt}
-            width={a.w}
-            height={a.h}
-            loading="lazy"
-            class="aff-img"
-            decoding="async"
-          />
-        </div>
-      ))}
-    </div>
-
-    <!-- ── Mobile: infinite marquee ──────────────────────────── -->
-    <!-- Logos rendered twice so the loop is perfectly seamless  -->
-    <div class="aff-marquee" aria-hidden="true">
-      <div class="aff-track">
-        {[...affiliations, ...affiliations].map((a) => (
+      {
+        affiliations.map((a) => (
           <div class="aff-item">
             <img
               src={a.src}
-              alt=""
+              alt={a.alt}
               width={a.w}
               height={a.h}
               loading="lazy"
@@ -51,124 +32,171 @@ const affiliations = [
               decoding="async"
             />
           </div>
-        ))}
+        ))
+      }
+    </div>
+
+    <!-- ── Mobile: infinite marquee ──────────────────────────── -->
+    <!-- Logos rendered twice so the loop is perfectly seamless  -->
+    <div class="aff-marquee" aria-hidden="true">
+      <div class="aff-track">
+        {
+          [...affiliations, ...affiliations].map((a) => (
+            <div class="aff-item">
+              <img
+                src={a.src}
+                alt=""
+                width={a.w}
+                height={a.h}
+                loading="lazy"
+                class="aff-img"
+                decoding="async"
+              />
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
 </section>
 
 <style>
-/* ── Section ─────────────────────────────────────────────────── */
-.aff {
-  padding: 2.5rem 0 2rem;
-  background: #fff;
-  border-bottom: 1px solid var(--color-border);
-}
-.aff-wrap {
-  max-width: var(--container-xl);
-  margin-inline: auto;
-}
-.aff-label {
-  text-align: center;
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  margin-bottom: 1.75rem;
-}
+  /* ── Section ─────────────────────────────────────────────────── */
+  .aff {
+    padding: 2.5rem 0 2rem;
+    background: #fff;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .aff-wrap {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+  }
+  .aff-label {
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1.75rem;
+  }
 
-/* ── Shared card style ───────────────────────────────────────── */
-.aff-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 80px;
-  padding: 1rem .875rem;
-  border-radius: .875rem;
-  background: var(--color-primary);
-  border: 1.5px solid transparent;
-  box-shadow: 0 2px 8px rgba(16,43,63,.12);
-  transition: background .25s ease, transform .2s ease, box-shadow .2s ease;
-  cursor: default;
-  flex-shrink: 0;
-}
-.aff-item:hover {
-  background: color-mix(in srgb, var(--color-primary) 80%, var(--color-primary-light) 20%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(16,43,63,.2);
-}
-.aff-img {
-  max-width: 100%;
-  max-height: 48px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-  opacity: 0.92;
-  transition: opacity .25s ease;
-  display: block;
-}
-.aff-item:hover .aff-img { opacity: 1; }
-
-/* ── Desktop: 6-column grid (≥768px) ────────────────────────── */
-.aff-grid {
-  display: none; /* hidden on mobile */
-  padding-inline: clamp(.75rem, 3vw, var(--spacing-element));
-}
-.aff-marquee { display: block; } /* visible on mobile */
-
-@media(min-width: 768px) {
-  .aff-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1.25rem;
+  /* ── Shared card style ───────────────────────────────────────── */
+  .aff-item {
+    display: flex;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
+    min-height: 80px;
+    padding: 1rem 0.875rem;
+    border-radius: 0.875rem;
+    background: var(--color-primary);
+    border: 1.5px solid transparent;
+    box-shadow: 0 2px 8px rgba(16, 43, 63, 0.12);
+    transition:
+      background 0.25s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    cursor: default;
+    flex-shrink: 0;
   }
-  .aff-grid .aff-item { width: 100%; }
-  .aff-marquee { display: none; } /* hidden on desktop */
-}
+  .aff-item:hover {
+    background: color-mix(in srgb, var(--color-primary) 80%, var(--color-primary-light) 20%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 43, 63, 0.2);
+  }
+  .aff-img {
+    max-width: 100%;
+    max-height: 48px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.92;
+    transition: opacity 0.25s ease;
+    display: block;
+  }
+  .aff-item:hover .aff-img {
+    opacity: 1;
+  }
 
-/* ── Mobile: infinite marquee (<768px) ──────────────────────── */
-.aff-marquee {
-  overflow: hidden;
-  /* soft fade edges */
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-}
-.aff-track {
-  display: flex;
-  gap: .875rem;
-  width: max-content;
-  /* Scroll exactly half (the duplicated set) for seamless loop */
-  animation: aff-scroll 22s linear infinite;
-  padding: .25rem .5rem;
-}
-.aff-track .aff-item {
-  width: 110px;
-}
-
-@keyframes aff-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* Pause on hover/focus for accessibility */
-.aff-marquee:hover .aff-track,
-.aff-marquee:focus-within .aff-track {
-  animation-play-state: paused;
-}
-
-/* Respect reduced-motion preference */
-@media (prefers-reduced-motion: reduce) {
-  .aff-track { animation: none; }
+  /* ── Desktop: 6-column grid (≥768px) ────────────────────────── */
+  .aff-grid {
+    display: none; /* hidden on mobile */
+    padding-inline: clamp(0.75rem, 3vw, var(--spacing-element));
+  }
   .aff-marquee {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    mask-image: none;
-    -webkit-mask-image: none;
+    display: block;
+  } /* visible on mobile */
+
+  @media (min-width: 768px) {
+    .aff-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.25rem;
+      align-items: center;
+      justify-items: center;
+    }
+    .aff-grid .aff-item {
+      width: 100%;
+    }
+    .aff-marquee {
+      display: none;
+    } /* hidden on desktop */
   }
-  .aff-track .aff-item { scroll-snap-align: center; }
-}
+
+  /* ── Mobile: infinite marquee (<768px) ──────────────────────── */
+  .aff-marquee {
+    overflow: hidden;
+    /* soft fade edges */
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+  .aff-track {
+    display: flex;
+    gap: 0.875rem;
+    width: max-content;
+    /* Scroll exactly half (the duplicated set) for seamless loop */
+    animation: aff-scroll 22s linear infinite;
+    padding: 0.25rem 0.5rem;
+  }
+  .aff-track .aff-item {
+    width: 110px;
+  }
+
+  @keyframes aff-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Pause on hover/focus for accessibility */
+  .aff-marquee:hover .aff-track,
+  .aff-marquee:focus-within .aff-track {
+    animation-play-state: paused;
+  }
+
+  /* Respect reduced-motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .aff-track {
+      animation: none;
+    }
+    .aff-marquee {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+    .aff-track .aff-item {
+      scroll-snap-align: center;
+    }
+  }
 </style>
