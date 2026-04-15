@@ -4,30 +4,38 @@
  * Uses radio buttons + :checked state for step navigation (no JS required)
  */
 
-import { getCollection } from "astro:content";
-import { doctors } from "../../../config/doctors";
+import { getCollection } from 'astro:content';
+import { doctors } from '../../../config/doctors';
 
-const services = await getCollection("services");
+const services = await getCollection('services');
 const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
 
 // Create doctor name map for JavaScript
-const doctorNames = Object.fromEntries(
-  doctors.map((d) => [d.id, d.name])
-);
+const doctorNames = Object.fromEntries(doctors.map((d) => [d.id, d.name]));
 
 // Create service title map for JavaScript
-const serviceTitles = Object.fromEntries(
-  sortedServices.map((s) => [s.data.slug, s.data.title])
-);
+const serviceTitles = Object.fromEntries(sortedServices.map((s) => [s.data.slug, s.data.title]));
 
 // Contact info
-const emailAddress = "care@smilesavers.dental";
+const emailAddress = 'dentalsmilesavers@gmail.com';
 
 // Generate time slots
 const timeSlots = [
-  "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
-  "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM",
-  "4:00 PM", "4:30 PM", "5:00 PM"
+  '9:00 AM',
+  '9:30 AM',
+  '10:00 AM',
+  '10:30 AM',
+  '11:00 AM',
+  '11:30 AM',
+  '1:00 PM',
+  '1:30 PM',
+  '2:00 PM',
+  '2:30 PM',
+  '3:00 PM',
+  '3:30 PM',
+  '4:00 PM',
+  '4:30 PM',
+  '5:00 PM',
 ];
 ---
 
@@ -71,30 +79,44 @@ const timeSlots = [
       <p class="step-description">Choose the service you'd like to book.</p>
 
       <div class="service-options">
-        {sortedServices.map((service, index) => (
-          <label class="service-option">
-            <input
-              type="radio"
-              name="service"
-              value={service.data.slug}
-              required
-              checked={index === 0}
-            />
-            <span class="option-content">
-              <span class="option-title">{service.data.title}</span>
-              <span class="option-description">{service.data.shortDescription}</span>
-              {service.data.duration && (
-                <span class="option-duration">{service.data.duration}</span>
-              )}
-            </span>
-          </label>
-        ))}
+        {
+          sortedServices.map((service, index) => (
+            <label class="service-option">
+              <input
+                type="radio"
+                name="service"
+                value={service.data.slug}
+                required
+                checked={index === 0}
+              />
+              <span class="option-content">
+                <span class="option-title">{service.data.title}</span>
+                <span class="option-description">{service.data.shortDescription}</span>
+                {service.data.duration && (
+                  <span class="option-duration">{service.data.duration}</span>
+                )}
+              </span>
+            </label>
+          ))
+        }
       </div>
 
       <div class="step-actions">
         <label for="step-2" class="btn btn-primary">
           Continue
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"
+            ></polyline></svg
+          >
         </label>
       </div>
     </div>
@@ -105,38 +127,53 @@ const timeSlots = [
       <p class="step-description">Select the dentist you'd like to see.</p>
 
       <div class="doctor-options">
-        {doctors.map((doctor, index) => (
-          <label class="doctor-option">
-            <input
-              type="radio"
-              name="doctor"
-              value={doctor.id}
-              required
-              checked={index === 0}
-            />
-            <span class="doctor-content">
-              <span class="doctor-avatar">
-                {doctor.image ? (
-                  <img src={doctor.image} alt={doctor.name} loading="lazy" />
-                ) : (
-                  <span class="doctor-initials">{doctor.name.split(' ').map(n => n[0]).join('')}</span>
-                )}
+        {
+          doctors.map((doctor, index) => (
+            <label class="doctor-option">
+              <input type="radio" name="doctor" value={doctor.id} required checked={index === 0} />
+              <span class="doctor-content">
+                <span class="doctor-avatar">
+                  {doctor.image ? (
+                    <img src={doctor.image} alt={doctor.name} loading="lazy" />
+                  ) : (
+                    <span class="doctor-initials">
+                      {doctor.name
+                        .split(' ')
+                        .map((n) => n[0])
+                        .join('')}
+                    </span>
+                  )}
+                </span>
+                <span class="doctor-info">
+                  <span class="doctor-name">
+                    {doctor.name}, {doctor.credentials}
+                  </span>
+                  <span class="doctor-title">{doctor.title}</span>
+                  <span class="doctor-specialty">{doctor.specialty}</span>
+                </span>
               </span>
-              <span class="doctor-info">
-                <span class="doctor-name">{doctor.name}, {doctor.credentials}</span>
-                <span class="doctor-title">{doctor.title}</span>
-                <span class="doctor-specialty">{doctor.specialty}</span>
-              </span>
-            </span>
-          </label>
-        ))}
+            </label>
+          ))
+        }
       </div>
 
       <div class="step-actions">
         <label for="step-1" class="btn btn-outline">Back</label>
         <label for="step-3" class="btn btn-primary">
           Continue
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"
+            ></polyline></svg
+          >
         </label>
       </div>
     </div>
@@ -162,12 +199,14 @@ const timeSlots = [
         <div class="time-picker">
           <label class="form-label">Preferred Time</label>
           <div class="time-slots">
-            {timeSlots.map((slot, index) => (
-              <label class="time-slot">
-                <input type="radio" name="time" value={slot} required checked={index === 0} />
-                <span>{slot}</span>
-              </label>
-            ))}
+            {
+              timeSlots.map((slot, index) => (
+                <label class="time-slot">
+                  <input type="radio" name="time" value={slot} required checked={index === 0} />
+                  <span>{slot}</span>
+                </label>
+              ))
+            }
           </div>
         </div>
       </div>
@@ -176,7 +215,19 @@ const timeSlots = [
         <label for="step-2" class="btn btn-outline">Back</label>
         <label for="step-4" class="btn btn-primary">
           Continue
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"
+            ></polyline></svg
+          >
         </label>
       </div>
     </div>
@@ -190,28 +241,61 @@ const timeSlots = [
         <div class="form-row">
           <div class="form-group">
             <label for="firstName" class="form-label">First Name *</label>
-            <input type="text" id="firstName" name="firstName" required autocomplete="given-name" class="form-input" />
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              required
+              autocomplete="given-name"
+              class="form-input"
+            />
           </div>
           <div class="form-group">
             <label for="lastName" class="form-label">Last Name *</label>
-            <input type="text" id="lastName" name="lastName" required autocomplete="family-name" class="form-input" />
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              required
+              autocomplete="family-name"
+              class="form-input"
+            />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label for="email" class="form-label">Email *</label>
-            <input type="email" id="email" name="email" required autocomplete="email" class="form-input" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="email"
+              class="form-input"
+            />
           </div>
           <div class="form-group">
             <label for="phone" class="form-label">Phone *</label>
-            <input type="tel" id="phone" name="phone" required autocomplete="tel" class="form-input" />
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              autocomplete="tel"
+              class="form-input"
+            />
           </div>
         </div>
 
         <div class="form-group">
           <label for="notes" class="form-label">Additional Notes</label>
-          <textarea id="notes" name="notes" rows="3" class="form-textarea" placeholder="Any special requests or concerns..."></textarea>
+          <textarea
+            id="notes"
+            name="notes"
+            rows="3"
+            class="form-textarea"
+            placeholder="Any special requests or concerns..."></textarea>
         </div>
 
         <div class="form-group checkbox-group">
@@ -226,7 +310,19 @@ const timeSlots = [
         <label for="step-3" class="btn btn-outline">Back</label>
         <label for="step-5" class="btn btn-primary">
           Review Booking
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"
+            ></polyline></svg
+          >
         </label>
       </div>
     </div>
@@ -240,7 +336,19 @@ const timeSlots = [
       <div class="booking-summary" id="booking-summary">
         <div class="summary-section">
           <h3 class="summary-heading">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline
+                points="22 4 12 14.01 9 11.01"></polyline></svg
+            >
             Appointment Details
           </h3>
           <div class="summary-grid">
@@ -265,7 +373,21 @@ const timeSlots = [
 
         <div class="summary-section">
           <h3 class="summary-heading">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle
+                cx="12"
+                cy="7"
+                r="4"></circle></svg
+            >
             Patient Information
           </h3>
           <div class="summary-grid">
@@ -290,7 +412,23 @@ const timeSlots = [
 
         <div class="summary-section" id="summary-notes-section">
           <h3 class="summary-heading">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline
+                points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line
+                x1="16"
+                y1="17"
+                x2="8"
+                y2="17"></line></svg
+            >
             Additional Notes
           </h3>
           <p class="summary-notes" id="summary-notes">-</p>
@@ -300,7 +438,11 @@ const timeSlots = [
       <div class="terms-group">
         <label class="checkbox-label">
           <input type="checkbox" name="terms" required id="terms-checkbox" />
-          <span>I agree to the <a href="/terms">terms of service</a> and <a href="/privacy">privacy policy</a></span>
+          <span
+            >I agree to the <a href="/terms">terms of service</a> and <a href="/privacy"
+              >privacy policy</a
+            ></span
+          >
         </label>
       </div>
 
@@ -308,29 +450,67 @@ const timeSlots = [
       <div class="submit-section">
         <div id="bw-submit-idle">
           <p class="submit-info">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
+            >
             Your details are private and only sent to Smile Savers.
           </p>
           <div class="submit-buttons">
             <button type="button" id="submit-request" class="btn btn-submit-primary">
               <!-- WhatsApp icon -->
-              <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 0C7.164 0 0 7.163 0 16c0 2.824.738 5.476 2.027 7.781L0 32l8.437-2.012A15.93 15.93 0 0016 32c8.836 0 16-7.163 16-16S24.836 0 16 0zm0 29.25a13.21 13.21 0 01-6.727-1.837l-.482-.286-4.994 1.191 1.235-4.864-.317-.502A13.19 13.19 0 012.75 16C2.75 8.682 8.682 2.75 16 2.75S29.25 8.682 29.25 16 23.318 29.25 16 29.25zm7.23-9.916c-.396-.198-2.344-1.157-2.708-1.288-.363-.132-.628-.198-.892.198-.264.396-1.023 1.288-1.254 1.553-.23.264-.462.297-.858.099-.396-.198-1.672-.617-3.185-1.966-1.177-1.05-1.972-2.347-2.203-2.743-.23-.396-.025-.61.174-.807.178-.177.396-.462.594-.693.198-.23.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.892-2.15-1.222-2.944-.322-.773-.65-.668-.892-.68l-.76-.013c-.264 0-.693.099-.957.462-.264.363-1.023 1.057-1.023 2.578 0 1.52 1.056 2.99 1.188 3.188.132.198 1.99 3.186 4.961 4.343.693.281 1.234.45 1.656.577.696.208 1.33.179 1.83.108.558-.078 2.344-.957 2.675-1.88.33-.924.33-1.716.23-1.88-.099-.165-.363-.264-.76-.462z"/></svg>
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"
+                ><path
+                  d="M16 0C7.164 0 0 7.163 0 16c0 2.824.738 5.476 2.027 7.781L0 32l8.437-2.012A15.93 15.93 0 0016 32c8.836 0 16-7.163 16-16S24.836 0 16 0zm0 29.25a13.21 13.21 0 01-6.727-1.837l-.482-.286-4.994 1.191 1.235-4.864-.317-.502A13.19 13.19 0 012.75 16C2.75 8.682 8.682 2.75 16 2.75S29.25 8.682 29.25 16 23.318 29.25 16 29.25zm7.23-9.916c-.396-.198-2.344-1.157-2.708-1.288-.363-.132-.628-.198-.892.198-.264.396-1.023 1.288-1.254 1.553-.23.264-.462.297-.858.099-.396-.198-1.672-.617-3.185-1.966-1.177-1.05-1.972-2.347-2.203-2.743-.23-.396-.025-.61.174-.807.178-.177.396-.462.594-.693.198-.23.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.892-2.15-1.222-2.944-.322-.773-.65-.668-.892-.68l-.76-.013c-.264 0-.693.099-.957.462-.264.363-1.023 1.057-1.023 2.578 0 1.52 1.056 2.99 1.188 3.188.132.198 1.99 3.186 4.961 4.343.693.281 1.234.45 1.656.577.696.208 1.33.179 1.83.108.558-.078 2.344-.957 2.675-1.88.33-.924.33-1.716.23-1.88-.099-.165-.363-.264-.76-.462z"
+                ></path></svg
+              >
               Send via WhatsApp
             </button>
             <a href="tel:+17189568400" class="btn btn-submit-call">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+                ><path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+                ></path></svg
+              >
               Call Instead
             </a>
           </div>
-          <p class="submit-note">WhatsApp will open with your details pre-filled — just hit Send!</p>
+          <p class="submit-note">
+            WhatsApp will open with your details pre-filled — just hit Send!
+          </p>
         </div>
         <!-- Success state -->
         <div id="bw-submit-success" class="bw-success" hidden>
           <div class="bw-success-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              aria-hidden="true"
+              ><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline
+                points="22 4 12 14.01 9 11.01"></polyline></svg
+            >
           </div>
           <h3 class="bw-success-title">WhatsApp Opened! 🎉</h3>
-          <p class="bw-success-msg">Your appointment details are pre-filled in WhatsApp. Just press <strong>Send</strong> and we'll confirm within 24 hours.</p>
+          <p class="bw-success-msg">
+            Your appointment details are pre-filled in WhatsApp. Just press <strong>Send</strong> and
+            we'll confirm within 24 hours.
+          </p>
           <a href="/" class="btn btn-outline" style="margin-top:1rem">Back to Home</a>
         </div>
         <!-- Error state -->
@@ -341,7 +521,19 @@ const timeSlots = [
 
       <div class="step-actions">
         <label for="step-4" class="btn btn-outline">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"
+            ></polyline></svg
+          >
           Back to Edit
         </label>
       </div>
@@ -365,7 +557,7 @@ const timeSlots = [
         weekday: 'long',
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
+        day: 'numeric',
       });
     }
 
@@ -392,7 +584,7 @@ const timeSlots = [
         phone: data.get('phone'),
         notes: data.get('notes') || '',
         isNewPatient: data.get('newPatient') === 'yes',
-        termsAccepted: document.getElementById('terms-checkbox').checked
+        termsAccepted: document.getElementById('terms-checkbox').checked,
       };
     }
 
@@ -517,7 +709,7 @@ ${data.notes}`;
       if (!validateForm()) return;
 
       const data = getFormData();
-      const idleDiv    = document.getElementById('bw-submit-idle');
+      const idleDiv = document.getElementById('bw-submit-idle');
       const successDiv = document.getElementById('bw-submit-success');
 
       // Build the pre-filled WhatsApp message
@@ -531,7 +723,7 @@ ${data.notes}`;
       window.open(waUrl, '_blank', 'noopener,noreferrer');
 
       // Show success state immediately
-      if (idleDiv)    idleDiv.hidden = true;
+      if (idleDiv) idleDiv.hidden = true;
       if (successDiv) successDiv.hidden = false;
     }
 
@@ -574,7 +766,7 @@ ${data.notes}`;
     content: '';
     position: absolute;
     top: calc(1.75rem + 16px); /* top-padding + half circle height */
-    left: calc(2rem + 16px);   /* left-padding + half circle width */
+    left: calc(2rem + 16px); /* left-padding + half circle width */
     right: calc(2rem + 16px);
     height: 2px;
     background: var(--color-border);
@@ -601,58 +793,60 @@ ${data.notes}`;
     background: var(--color-surface-elevated);
     border: 2px solid var(--color-border);
     font-weight: 700;
-    font-size: .82rem;
+    font-size: 0.82rem;
     color: var(--color-text-muted);
-    transition: all .3s ease;
+    transition: all 0.3s ease;
     position: relative;
     z-index: 2;
     box-shadow: 0 0 0 4px #fff;
   }
 
   .step-label {
-    font-size: .7rem;
+    font-size: 0.7rem;
     color: var(--color-text-muted);
     text-align: center;
     font-weight: 500;
     white-space: nowrap;
-    transition: color .3s ease;
+    transition: color 0.3s ease;
   }
 
   /* ── Completed steps (all before current) ──── */
-  #step-1:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
-  #step-2:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
-  #step-3:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
-  #step-3:checked ~ .progress-bar .progress-step[data-step="2"] .step-number,
-  #step-4:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
-  #step-4:checked ~ .progress-bar .progress-step[data-step="2"] .step-number,
-  #step-4:checked ~ .progress-bar .progress-step[data-step="3"] .step-number,
-  #step-5:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
-  #step-5:checked ~ .progress-bar .progress-step[data-step="2"] .step-number,
-  #step-5:checked ~ .progress-bar .progress-step[data-step="3"] .step-number,
-  #step-5:checked ~ .progress-bar .progress-step[data-step="4"] .step-number {
+  #step-1:checked ~ .progress-bar .progress-step[data-step='1'] .step-number,
+  #step-2:checked ~ .progress-bar .progress-step[data-step='1'] .step-number,
+  #step-3:checked ~ .progress-bar .progress-step[data-step='1'] .step-number,
+  #step-3:checked ~ .progress-bar .progress-step[data-step='2'] .step-number,
+  #step-4:checked ~ .progress-bar .progress-step[data-step='1'] .step-number,
+  #step-4:checked ~ .progress-bar .progress-step[data-step='2'] .step-number,
+  #step-4:checked ~ .progress-bar .progress-step[data-step='3'] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step='1'] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step='2'] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step='3'] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step='4'] .step-number {
     background: var(--color-secondary);
     border-color: var(--color-secondary);
     color: #fff;
   }
 
   /* ── Current active step (ring highlight) ──── */
-  #step-1:checked ~ .progress-bar .progress-step[data-step="1"] .step-number,
-  #step-2:checked ~ .progress-bar .progress-step[data-step="2"] .step-number,
-  #step-3:checked ~ .progress-bar .progress-step[data-step="3"] .step-number,
-  #step-4:checked ~ .progress-bar .progress-step[data-step="4"] .step-number,
-  #step-5:checked ~ .progress-bar .progress-step[data-step="5"] .step-number {
+  #step-1:checked ~ .progress-bar .progress-step[data-step='1'] .step-number,
+  #step-2:checked ~ .progress-bar .progress-step[data-step='2'] .step-number,
+  #step-3:checked ~ .progress-bar .progress-step[data-step='3'] .step-number,
+  #step-4:checked ~ .progress-bar .progress-step[data-step='4'] .step-number,
+  #step-5:checked ~ .progress-bar .progress-step[data-step='5'] .step-number {
     background: var(--color-primary);
     border-color: var(--color-primary);
     color: #fff;
-    box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--color-primary);
+    box-shadow:
+      0 0 0 4px #fff,
+      0 0 0 6px var(--color-primary);
   }
 
   /* ── Active step label ───────────────────────── */
-  #step-1:checked ~ .progress-bar .progress-step[data-step="1"] .step-label,
-  #step-2:checked ~ .progress-bar .progress-step[data-step="2"] .step-label,
-  #step-3:checked ~ .progress-bar .progress-step[data-step="3"] .step-label,
-  #step-4:checked ~ .progress-bar .progress-step[data-step="4"] .step-label,
-  #step-5:checked ~ .progress-bar .progress-step[data-step="5"] .step-label {
+  #step-1:checked ~ .progress-bar .progress-step[data-step='1'] .step-label,
+  #step-2:checked ~ .progress-bar .progress-step[data-step='2'] .step-label,
+  #step-3:checked ~ .progress-bar .progress-step[data-step='3'] .step-label,
+  #step-4:checked ~ .progress-bar .progress-step[data-step='4'] .step-label,
+  #step-5:checked ~ .progress-bar .progress-step[data-step='5'] .step-label {
     color: var(--color-primary);
     font-weight: 700;
   }
@@ -681,11 +875,11 @@ ${data.notes}`;
     padding: 2rem;
   }
 
-  #step-1:checked ~ .wizard-form .wizard-step[data-step="1"],
-  #step-2:checked ~ .wizard-form .wizard-step[data-step="2"],
-  #step-3:checked ~ .wizard-form .wizard-step[data-step="3"],
-  #step-4:checked ~ .wizard-form .wizard-step[data-step="4"],
-  #step-5:checked ~ .wizard-form .wizard-step[data-step="5"] {
+  #step-1:checked ~ .wizard-form .wizard-step[data-step='1'],
+  #step-2:checked ~ .wizard-form .wizard-step[data-step='2'],
+  #step-3:checked ~ .wizard-form .wizard-step[data-step='3'],
+  #step-4:checked ~ .wizard-form .wizard-step[data-step='4'],
+  #step-5:checked ~ .wizard-form .wizard-step[data-step='5'] {
     display: block;
   }
 
@@ -923,7 +1117,9 @@ ${data.notes}`;
     font-size: var(--font-size-base);
     background: var(--color-surface-elevated);
     color: var(--color-text);
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
 
     &::placeholder {
       color: var(--color-text-muted);
@@ -1095,55 +1291,131 @@ ${data.notes}`;
   }
 
   /* Submit Section Styles */
-  .submit-section { margin-bottom: 1.5rem }
+  .submit-section {
+    margin-bottom: 1.5rem;
+  }
 
   .submit-info {
-    display: flex; align-items: center; gap: .4rem;
-    font-size: var(--font-size-sm); color: var(--color-text-muted); margin: 0 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin: 0 0 1rem;
   }
-  .submit-info svg { color: var(--color-success); flex-shrink: 0 }
+  .submit-info svg {
+    color: var(--color-success);
+    flex-shrink: 0;
+  }
 
   .submit-buttons {
-    display: flex; flex-direction: column; gap: .75rem;
-    margin-bottom: .75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
   }
-  @media(min-width:480px){ .submit-buttons { flex-direction: row } }
+  @media (min-width: 480px) {
+    .submit-buttons {
+      flex-direction: row;
+    }
+  }
 
   .btn-submit-primary {
-    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-    padding: .9rem 1.5rem; background: var(--color-primary); color: #fff;
-    border: none; border-radius: .75rem;
-    font-size: var(--font-size-base); font-weight: 700; font-family: inherit;
-    cursor: pointer; flex: 1; min-height: 48px;
-    box-shadow: 0 4px 16px rgba(16,43,63,.3); transition: all .25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.5rem;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    flex: 1;
+    min-height: 48px;
+    box-shadow: 0 4px 16px rgba(16, 43, 63, 0.3);
+    transition: all 0.25s ease;
   }
-  .btn-submit-primary:hover:not(:disabled) { background: var(--color-primary-light); transform: translateY(-1px) }
-  .btn-submit-primary:disabled { opacity: .7; cursor: not-allowed; transform: none }
+  .btn-submit-primary:hover:not(:disabled) {
+    background: var(--color-primary-light);
+    transform: translateY(-1px);
+  }
+  .btn-submit-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
 
   .btn-submit-call {
-    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-    padding: .9rem 1.25rem; background: transparent; color: var(--color-primary);
-    border: 1.5px solid var(--color-border); border-radius: .75rem;
-    font-size: var(--font-size-sm); font-weight: 600; text-decoration: none;
-    transition: all .2s ease; white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.25rem;
+    background: transparent;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-border);
+    border-radius: 0.75rem;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
   }
-  .btn-submit-call:hover { border-color: var(--color-primary); background: rgba(16,43,63,.04) }
+  .btn-submit-call:hover {
+    border-color: var(--color-primary);
+    background: rgba(16, 43, 63, 0.04);
+  }
 
-  .submit-note { font-size: .78rem; color: var(--color-text-muted); margin: 0; text-align: center }
+  .submit-note {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    text-align: center;
+  }
 
   .bw-success {
-    text-align: center; padding: 2rem 1rem;
-    display: flex; flex-direction: column; align-items: center; gap: .75rem;
+    text-align: center;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
   }
   .bw-success-icon {
-    width: 4rem; height: 4rem; border-radius: 50%;
-    background: #E8F5E9; color: #2E7D32;
-    display: flex; align-items: center; justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: #e8f5e9;
+    color: #2e7d32;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .bw-success-title {
-    font-size: var(--font-size-2xl); font-family: var(--font-family-heading);
-    font-weight: 700; color: var(--color-primary); margin: 0;
+    font-size: var(--font-size-2xl);
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
   }
-  .bw-success-msg { font-size: var(--font-size-sm); color: var(--color-text-muted); max-width: 400px; line-height: 1.6; margin: 0 }
-  .bw-error { background: #FFEBEE; border: 1px solid #FFCDD2; border-radius: .75rem; padding: .875rem 1rem; font-size: var(--font-size-sm); color: #C62828; font-weight: 500 }
+  .bw-success-msg {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    max-width: 400px;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .bw-error {
+    background: #ffebee;
+    border: 1px solid #ffcdd2;
+    border-radius: 0.75rem;
+    padding: 0.875rem 1rem;
+    font-size: var(--font-size-sm);
+    color: #c62828;
+    font-weight: 500;
+  }
 </style>

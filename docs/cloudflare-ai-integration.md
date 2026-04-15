@@ -62,7 +62,7 @@ export default {
 CLINIC INFORMATION:
 - Location: 50-02 43rd Ave, Woodside, NY 11377
 - Phone: (718) 205-3333
-- Hours: Mon-Thu 9AM-6PM, Fri 9AM-4PM, Sat 9AM-2PM
+- Hours: Mon-Thu 9AM-6PM, Fri 9AM-1PM, Sat 9AM-1PM
 - Services: General Dentistry, Teeth Cleaning, Teeth Whitening, Dental Implants, Crowns, Emergency Dentistry
 - Insurance: Accepts most major insurance plans
 - Experience: 35+ years serving the community

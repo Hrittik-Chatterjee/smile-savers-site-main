@@ -58,13 +58,13 @@ export async function onRequestPost(context) {
       return json({ success: false, error: 'Invalid form data.' }, 400);
     }
 
-    const name       = (body.get('name')       || '').trim();
-    const email      = (body.get('email')       || '').trim();
-    const phone      = (body.get('phone')       || '').trim();
-    const service    = (body.get('service')     || '').trim();
-    const message    = (body.get('message')     || '').trim();
+    const name = (body.get('name') || '').trim();
+    const email = (body.get('email') || '').trim();
+    const phone = (body.get('phone') || '').trim();
+    const service = (body.get('service') || '').trim();
+    const message = (body.get('message') || '').trim();
     const newPatient = body.get('newPatient') === 'yes' ? 'Yes' : 'No';
-    const urgent     = body.get('urgency')    === 'urgent' ? '⚠️ URGENT / EMERGENCY' : 'No';
+    const urgent = body.get('urgency') === 'urgent' ? '⚠️ URGENT / EMERGENCY' : 'No';
 
     // Basic validation
     if (!name || !email || !message) {
@@ -133,7 +133,7 @@ export async function onRequestPost(context) {
       // Notify clinic
       await sendViaResend(env.RESEND_API_KEY, {
         from: 'Smile Savers Website <onboarding@resend.dev>',
-        to: 'care@smilesavers.dental',
+        to: 'dentalsmilesavers@gmail.com',
         replyTo: email,
         subject,
         text: textBody,
@@ -145,8 +145,8 @@ export async function onRequestPost(context) {
         from: 'Smile Savers Dental <onboarding@resend.dev>',
         to: email,
         subject: 'We received your message — Smile Savers Dental',
-        text: `Hi ${name},\n\nThank you for reaching out to Smile Savers Dental. We've received your message and will get back to you within 24 hours.\n\nIf this is a dental emergency, please call us directly:\n(718) 956-8400\n\nOffice Hours:\nMon–Thu: 10 AM – 6 PM\nFri: Closed\nSat: 9 AM – 1 PM\n\nWarm regards,\nSmile Savers Dental\n3202 53rd Place, Woodside, NY 11377\n(718) 956-8400`,
-      }).catch(() => {}); // silently fail — auto-reply is best-effort
+        text: `Hi ${name},\n\nThank you for reaching out to Smile Savers Dental. We've received your message and will get back to you within 24 hours.\n\nIf this is a dental emergency, please call us directly:\n(718) 956-8400\n\nOffice Hours:\nMon–Thu: 10 AM – 6 PM\nFri: 9 AM - 1 PM\nSat: 9 AM – 1 PM\n\nWarm regards,\nSmile Savers Dental\n3202 53rd Place, Woodside, NY 11377\n(718) 956-8400`,
+      }).catch(() => { }); // silently fail — auto-reply is best-effort
     } else {
       // No API key configured — log warning, still return success
       console.warn('RESEND_API_KEY not set. Submission logged but email not sent. Add key in CF Pages → Settings → Variables and Secrets.');

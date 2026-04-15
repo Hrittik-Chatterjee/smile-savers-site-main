@@ -16,7 +16,7 @@ CLINIC DETAILS:
 - Practice: Smile Savers Dental (Est. 1987 — 35+ years serving Queens)
 - Address: 3202 53rd Place, Woodside, NY 11377
 - Phone: (718) 956-8400
-- Hours: Monday–Thursday 10 AM–6 PM | Friday Closed | Saturday 9 AM–1 PM | Sunday Closed
+- Hours: Monday–Thursday 10 AM–6 PM | Friday 9 AM–1 PM | Saturday 9 AM–1 PM | Sunday Closed
 - Accepting new patients — no referral needed
 
 TEAM:

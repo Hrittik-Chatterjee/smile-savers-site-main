@@ -297,7 +297,7 @@ Schemas are validated by Zod at build time — invalid content breaks the build 
 | **Practice** | Smile Savers Dental |
 | **Address** | 3202 53rd Place, Woodside, NY 11377 |
 | **Phone** | (718) 956-8400 |
-| **Email** | care@smilesavers.dental |
+| **Email** | dentalsmilesavers@gmail.com |
 | **Hours** | Mon–Thu 10AM–6PM · Sat 9AM–1PM |
 | **Est.** | 1987 |
 | **Doctors** | Dr. Deepak Bhagat DDS · Dr. Julie Islam DDS · Dr. Lee DDS |

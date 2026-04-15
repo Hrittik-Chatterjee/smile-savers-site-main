@@ -13,7 +13,7 @@ export const siteConfig = {
 
   // Contact
   phone: '(718) 956-8400',
-  email: 'care@smilesavers.dental',
+  email: 'dentalsmilesavers@gmail.com',
 
   // Location
   address: {

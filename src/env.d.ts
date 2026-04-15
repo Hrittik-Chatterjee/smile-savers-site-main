@@ -10,7 +10,7 @@ export const env = defineEnv({
     },
     PUBLIC_PRACTICE_EMAIL: {
       type: 'string',
-      default: 'care@smilesavers.dental',
+      default: 'dentalsmilesavers@gmail.com',
     },
   },
 });
