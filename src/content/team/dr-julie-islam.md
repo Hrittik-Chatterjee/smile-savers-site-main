@@ -1,10 +1,10 @@
 ---
 name: "Dr. Julie Islam"
 slug: "dr-julie-islam"
-image: "../../assets/team/dr-julie-islam.jpg"
+image: "../../assets/team/dr.jpg"
 role: "Co-Dentist"
 credentials:
-  - "DDS"
+  - "DMD"
 shortBio: "Dedicated to providing gentle, patient-centered care with a focus on preventive dentistry and cosmetic treatments."
 specialties:
   - "General Dentistry"
@@ -13,7 +13,7 @@ specialties:
   - "Pediatric Dentistry"
 education:
   - institution: "New York University College of Dentistry"
-    degree: "Doctor of Dental Surgery (DDS)"
+    degree: "Doctor of Medicine in Dentistry (DMD)"
     year: 2015
 order: 2
 ---

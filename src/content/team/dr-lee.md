@@ -1,7 +1,7 @@
 ---
 name: "Dr. Lee"
 slug: "dr-lee"
-image: "../../assets/team/dr-lee.jpg"
+image: "../../assets/team/dr.jpg"
 role: "Associate Dentist"
 credentials:
   - "DDS"

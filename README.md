@@ -300,7 +300,7 @@ Schemas are validated by Zod at build time — invalid content breaks the build 
 | **Email** | dentalsmilesavers@gmail.com |
 | **Hours** | Mon–Thu 10AM–6PM · Sat 9AM–1PM |
 | **Est.** | 1987 |
-| **Doctors** | Dr. Deepak Bhagat DDS · Dr. Julie Islam DDS · Dr. Lee DDS |
+| **Doctors** | Dr. Deepak Bhagat DDS · Dr. Julie Islam DMD · Dr. Lee DDS |
 
 ---
 

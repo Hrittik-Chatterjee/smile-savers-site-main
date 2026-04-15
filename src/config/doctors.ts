@@ -3,6 +3,8 @@
  * Team member data for the practice
  */
 
+import drImage from '@/assets/team/dr.jpg';
+
 export interface Doctor {
   id: string;
   name: string;
@@ -33,7 +35,7 @@ export const doctors: Doctor[] = [
     title: 'Associate Dentist',
     specialty: 'General Dentistry',
     bio: 'Dedicated to providing compassionate, patient-centered dental care with a focus on preventive treatments and patient education.',
-    image: '/images/doctors/dr-islam.jpg',
+    image: drImage.src,
   },
   {
     id: 'dr-lee',
@@ -42,6 +44,6 @@ export const doctors: Doctor[] = [
     title: 'Associate Dentist',
     specialty: 'General & Digital Dentistry',
     bio: 'NYU graduate with advanced training in implant surgery, digital dentistry, and Invisalign. Completed residency at Brooklyn Methodist Hospital.',
-    image: '/images/doctors/dr-li.jpg',
+    image: drImage.src,
   },
 ];

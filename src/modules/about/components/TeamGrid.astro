@@ -3,6 +3,7 @@
  * TeamGrid — Enhanced · local images · accent colours · accessible links
  */
 import { getCollection } from "astro:content";
+import drImage from "@/assets/team/dr.jpg";
 
 const team = await getCollection("team");
 const sortedTeam = team.sort((a, b) => a.data.order - b.data.order);
@@ -10,8 +11,8 @@ const sortedTeam = team.sort((a, b) => a.data.order - b.data.order);
 // Map slug to local image & accent
 const doctorMeta: Record<string, { img: string; accent: string; badge?: string }> = {
   "dr-deepak-bhagat": { img: "/images/doctors/dr-bhagat.jpg", accent: "#2CABDF", badge: "ICOI Diplomate" },
-  "dr-julie-islam":   { img: "/images/doctors/dr-islam.jpg",  accent: "#3DBAA7" },
-  "dr-lee":           { img: "/images/doctors/dr-li.jpg",     accent: "#10B981", badge: "Emergency Specialist" },
+  "dr-julie-islam":   { img: drImage.src,  accent: "#3DBAA7" },
+  "dr-lee":           { img: drImage.src,     accent: "#10B981", badge: "Emergency Specialist" },
 };
 ---
 

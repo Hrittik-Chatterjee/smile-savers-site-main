@@ -4,6 +4,8 @@
  * Sprint 1 critical fix: Use /images/doctors/ local paths
  */
 import Button from '@/components/ui/Button.astro';
+// @ts-ignore - Ignore missing file error if dr.jpg hasn't been added yet
+import drImage from '@/assets/team/dr.jpg';
 
 const doctors = [
   {
@@ -24,12 +26,12 @@ const doctors = [
   },
   {
     name: 'Dr. Julie Islam',
-    credentials: 'DDS',
-    credentialFull: 'Doctor of Dental Surgery',
+    credentials: 'DMD',
+    credentialFull: 'Doctor of Medicine in Dentistry',
     title: 'Co-Dentist',
     specialty: 'Preventive & Cosmetic Dentistry',
     bio: 'NYU College of Dentistry graduate with a focus on gentle, patient-centred care. Dr. Islam has a unique ability to transform dental anxiety into dental confidence — patients consistently praise her calm, thorough approach.',
-    image: '/images/doctors/dr-islam.jpg',
+    image: drImage.src,
     slug: 'dr-julie-islam',
     badge: null,
     badgeBg: null,
@@ -45,7 +47,7 @@ const doctors = [
     title: 'Associate Dentist',
     specialty: 'Restorative & Emergency Dentistry',
     bio: 'Stony Brook University School of Dental Medicine graduate with advanced expertise in restorative procedures, root canal therapy, and emergency care. Known for his thorough explanations and calm chairside manner.',
-    image: '/images/doctors/dr-li.jpg',
+    image: drImage.src,
     slug: 'dr-lee',
     badge: 'Emergency Specialist',
     badgeBg: '#10B981',
