@@ -8,13 +8,13 @@
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
     "start": "astro dev",
-    "build": "tinacms build && astro check && astro build",
+    "build": "tinacms build --skip-cloud-checks && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
     "format": "prettier --write .",
     "clean": "rm -rf .astro dist",
-    "build:ci": "tinacms build && astro build --no-type-check",
+    "build:ci": "tinacms build --skip-cloud-checks && astro build --no-type-check",
     "lint": "astro check",
     "preview:cf": "wrangler pages dev dist"
   },
