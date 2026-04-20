@@ -11,8 +11,8 @@ export default defineConfig({
   branch,
 
   // TinaCloud credentials — set these in .env (local) and GitHub Secrets (CI)
-  clientId: process.env.TINA_CLIENT_ID,
-  token: process.env.TINA_TOKEN,
+  clientId: process.env.TINA_CLIENT_ID!,
+  token: process.env.TINA_TOKEN!,
 
   build: {
     outputFolder: "admin",
