@@ -48,7 +48,7 @@ export default defineConfig({
             required: true,
             options: ["preventive", "cosmetic", "restorative", "emergency"],
           },
-          { type: "boolean",  name: "featured",         label: "Featured?",         default: false },
+          { type: "boolean",  name: "featured",         label: "Featured?" },
           { type: "number",   name: "order",            label: "Display Order" },
           { type: "string",   name: "duration",         label: "Duration (e.g. 60 min)" },
           {
@@ -141,7 +141,7 @@ export default defineConfig({
             options: ["Google", "Yelp", "Zocdoc", "Healthgrades"],
           },
           { type: "datetime", name: "date",           label: "Date",            required: true },
-          { type: "boolean",  name: "featured",       label: "Featured?",       default: false },
+          { type: "boolean",  name: "featured",       label: "Featured?" },
         ],
       },
 
