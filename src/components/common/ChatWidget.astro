@@ -89,7 +89,12 @@
             fill="currentColor"/>
         </svg>
       </div>
-      <p>Hi! I'm <strong>Smile</strong>, Smile Savers' AI assistant. Ask me anything about our services, hours, or insurance. For dental emergencies, call <a href="tel:+17189568400">(718) 956-8400</a> directly.</p>
+      <div class="chat-msg-col">
+        <span class="chat-msg-label">Smile</span>
+        <div class="chat-msg-bubble">
+          <p>Hi! I'm <strong>Smile</strong>, Smile Savers' AI assistant. Ask me anything about our services, hours, or insurance. For dental emergencies, call <a href="tel:+17189568400">(718) 956-8400</a> directly.</p>
+        </div>
+      </div>
     </div>
 
     <!-- Quick replies -->
@@ -331,6 +336,20 @@
 .chat-msg a { color: var(--color-accent); font-weight: 600; text-decoration: none }
 .chat-msg a:hover { text-decoration: underline }
 
+.chat-msg-col {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+.chat-msg-label {
+  font-size: .62rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 0 .25rem;
+}
+
 .chat-msg--bot {
   align-self: flex-start;
 }
@@ -348,26 +367,22 @@
   color: rgba(255,255,255,.9);
   display: flex; align-items:center; justify-content:center;
   flex-shrink: 0;
-  margin-top: auto;
-}
-/* Direct p in bot message (first welcome) */
-.chat-msg--bot > p {
-  background: var(--color-surface);
-  color: var(--color-text);
-  border-radius: 0 1rem 1rem 1rem;
-  padding: .625rem .875rem;
-  border: 1px solid var(--color-border);
-  margin: 0;
+  margin-top: 1.1rem;
 }
 .chat-msg--user {
   align-self: flex-end;
-  flex-direction: row-reverse;
+}
+.chat-msg--user .chat-msg-col {
+  align-items: flex-end;
 }
 .chat-msg--user .chat-msg-bubble {
   background: var(--color-primary);
   color: #fff;
   border-radius: 1rem 0 1rem 1rem;
   padding: .625rem .875rem;
+}
+.chat-msg--error .chat-msg-col {
+  align-items: flex-start;
 }
 .chat-msg--error .chat-msg-bubble {
   background: #FEF2F2;
@@ -376,6 +391,15 @@
   border-radius: 0 1rem 1rem 1rem;
   padding: .625rem .875rem;
   font-size: .78rem;
+}
+.chat-msg-bubble .chat-list {
+  margin: .3rem 0 .1rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+.chat-msg-bubble .chat-list li {
+  margin: .2rem 0;
+  line-height: 1.45;
 }
 
 /* Typing indicator */
@@ -619,11 +643,43 @@
   }
 
   // ── DOM helpers ──────────────────────────────────────────────
+  function formatBotResponse(raw: string): string {
+    let t = raw
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    t = t.replace(/\(718\) 956-8400/g, '<a href="tel:+17189568400">(718) 956-8400</a>');
+    t = t.replace(
+      /\b(including|such as|like|accept|are:?)\s+([A-Z][^.!?\n]*(?:,\s+[^,.!?\n]{2,}){2,}(?:,?\s+and\s+[^.!?\n]{2,}))/gi,
+      (_: string, kw: string, list: string) => {
+        const items = list.split(/,\s*/).map((s: string) => s.replace(/^and\s+/i, '').trim()).filter((s: string) => s.length > 1);
+        if (items.length < 3) return _;
+        return `${kw}:\n${items.map((i: string) => `• ${i}`).join('\n')}`;
+      }
+    );
+    const lines = t.split('\n').map((l: string) => l.trim()).filter((l: string) => l);
+    const html: string[] = [];
+    let listItems: string[] = [];
+    for (const line of lines) {
+      if (line.startsWith('•')) {
+        listItems.push(`<li>${line.slice(1).trim()}</li>`);
+      } else {
+        if (listItems.length) {
+          html.push(`<ul class="chat-list">${listItems.join('')}</ul>`);
+          listItems = [];
+        }
+        html.push(`<p>${line}</p>`);
+      }
+    }
+    if (listItems.length) html.push(`<ul class="chat-list">${listItems.join('')}</ul>`);
+    return html.join('');
+  }
+
   function addMsg(text: string, type: string): HTMLDivElement {
     const wrap = document.createElement('div');
     wrap.className = `chat-msg chat-msg--${type}`;
 
-    if (type === 'bot') {
+    if (type === 'bot' || type === 'error') {
       const avatar = document.createElement('div');
       avatar.className = 'chat-msg-avatar';
       avatar.setAttribute('aria-hidden', 'true');
@@ -631,13 +687,26 @@
       wrap.appendChild(avatar);
     }
 
+    const col = document.createElement('div');
+    col.className = 'chat-msg-col';
+
+    if (type !== 'error') {
+      const label = document.createElement('span');
+      label.className = 'chat-msg-label';
+      label.textContent = type === 'user' ? 'You' : 'Smile';
+      col.appendChild(label);
+    }
+
     const bubble = document.createElement('div');
     bubble.className = 'chat-msg-bubble';
-    // Linkify phone numbers
-    const safe = text.replace(/</g, '&lt;').replace(/\(718\) 956-8400/g,
-      '<a href="tel:+17189568400">(718) 956-8400</a>');
-    bubble.innerHTML = `<p>${safe}</p>`;
-    wrap.appendChild(bubble);
+    if (type === 'bot') {
+      bubble.innerHTML = formatBotResponse(text);
+    } else {
+      const safe = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      bubble.innerHTML = `<p>${safe}</p>`;
+    }
+    col.appendChild(bubble);
+    wrap.appendChild(col);
 
     messagesEl!.appendChild(wrap);
     scrollBottom();
@@ -650,13 +719,16 @@
     const avatar = document.createElement('div');
     avatar.className = 'chat-msg-avatar';
     avatar.setAttribute('aria-hidden', 'true');
-    avatar.innerHTML = `<svg width="14" height="14" viewBox="0 0 32 32" fill="none"><path d="M16 3C12.5 3 10 6 10 9.5c0 2.5.6 4 .6 6.5s-1.2 5-1.2 7.5c0 2.5 1.8 5 3.6 5s2.4-1.5 3-4c.6 2.5 1.2 4 3 4s3.6-2.5 3.6-5c0-2.5-1.2-5-1.2-7.5s.6-4 .6-6.5C22 6 19.5 3 16 3z" fill="currentColor"/></svg>`;
+    avatar.innerHTML = `<svg width="14" height="14" viewBox="0 0 32 32" fill="none"><path d="M16 3C12.5 3 10 6 10 9.5c0 2.5.6 4 .6 6.5s-1.2 5-1.2 7.5c0 2.5 1.8 5 3.6 5s2.4-1.5 3-4c.6 2.5 1.2 4 3 4s3.6-2.5 3.6-5c0-2.5-1.2-7.5s.6-4 .6-6.5C22 6 19.5 3 16 3z" fill="currentColor"/></svg>`;
+    const col = document.createElement('div');
+    col.className = 'chat-msg-col';
     const dots = document.createElement('div');
     dots.className = 'chat-typing';
     dots.setAttribute('aria-label', 'Smile is typing');
     dots.innerHTML = '<span></span><span></span><span></span>';
+    col.appendChild(dots);
     wrap.appendChild(avatar);
-    wrap.appendChild(dots);
+    wrap.appendChild(col);
     messagesEl!.appendChild(wrap);
     scrollBottom();
     return wrap;
