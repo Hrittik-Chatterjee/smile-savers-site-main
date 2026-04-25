@@ -319,6 +319,7 @@
   gap: .625rem;
   scroll-behavior: smooth;
   overscroll-behavior: contain;
+  background: #F5F7FA;
 }
 /* Custom scrollbar */
 .chat-messages::-webkit-scrollbar { width: 4px }
@@ -339,26 +340,29 @@
 .chat-msg-col {
   display: flex;
   flex-direction: column;
-  gap: .15rem;
 }
-.chat-msg-label {
-  font-size: .62rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  padding: 0 .25rem;
-}
+.chat-msg-label { display: none; }
 
 .chat-msg--bot {
   align-self: flex-start;
 }
 .chat-msg--bot .chat-msg-bubble {
-  background: var(--color-surface);
+  background: #fff;
   color: var(--color-text);
-  border-radius: 0 1rem 1rem 1rem;
+  border-radius: 4px 18px 18px 18px;
   padding: .625rem .875rem;
-  border: 1px solid var(--color-border);
+  border: none;
+  box-shadow: 0 1px 3px rgba(16,43,63,.1), 0 2px 8px rgba(16,43,63,.05);
+  position: relative;
+}
+.chat-msg--bot .chat-msg-bubble::before {
+  content: '';
+  position: absolute;
+  top: 6px; left: -7px;
+  width: 0; height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid #fff;
 }
 .chat-msg-avatar {
   width: 1.75rem; height: 1.75rem;
@@ -367,7 +371,7 @@
   color: rgba(255,255,255,.9);
   display: flex; align-items:center; justify-content:center;
   flex-shrink: 0;
-  margin-top: 1.1rem;
+  margin-top: 0;
 }
 .chat-msg--user {
   align-self: flex-end;
@@ -378,8 +382,18 @@
 .chat-msg--user .chat-msg-bubble {
   background: var(--color-primary);
   color: #fff;
-  border-radius: 1rem 0 1rem 1rem;
+  border-radius: 18px 4px 18px 18px;
   padding: .625rem .875rem;
+  position: relative;
+}
+.chat-msg--user .chat-msg-bubble::after {
+  content: '';
+  position: absolute;
+  top: 6px; right: -7px;
+  width: 0; height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid var(--color-primary);
 }
 .chat-msg--error .chat-msg-col {
   align-items: flex-start;
@@ -388,7 +402,7 @@
   background: #FEF2F2;
   color: #C62828;
   border: 1px solid #FECACA;
-  border-radius: 0 1rem 1rem 1rem;
+  border-radius: 4px 18px 18px 18px;
   padding: .625rem .875rem;
   font-size: .78rem;
 }
@@ -408,7 +422,7 @@
   align-items: center;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 0 1rem 1rem 1rem;
+  border-radius: 4px 18px 18px 18px;
   padding: .625rem .875rem;
   width: fit-content;
 }
