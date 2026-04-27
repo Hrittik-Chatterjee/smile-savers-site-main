@@ -31,7 +31,6 @@ export const mainNavigation: NavItem[] = [
     ],
   },
   { label: 'About', href: '/about' },
-  { label: 'Appointments', href: '/appointments' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -55,7 +54,7 @@ export const footerNavigation = {
     { label: 'Our Team', href: '/about#team' },
     { label: 'Insurance & Payment', href: '/insurance' },
     { label: 'Contact', href: '/contact' },
-    { label: 'Book Appointment', href: '/appointments' },
+    { label: 'Call Now', href: 'tel:+17189568400' },
   ],
   resources: [
     { label: 'Learn', href: '/learn' },
@@ -74,6 +73,6 @@ export const footerNavigation = {
  * Call-to-action button config
  */
 export const ctaButton = {
-  label: 'Book Appointment',
-  href: '/appointments',
+  label: 'Call Now',
+  href: 'tel:+17189568400',
 };
