@@ -73,6 +73,6 @@ export const footerNavigation = {
  * Call-to-action button config
  */
 export const ctaButton = {
-  label: 'Call Now',
+  label: '(718) 956-8400',
   href: 'tel:+17189568400',
 };

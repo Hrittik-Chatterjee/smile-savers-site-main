@@ -13,8 +13,14 @@ const doctors = [
     credentials: 'DDS',
     credentialFull: 'Doctor of Dental Surgery',
     title: 'Lead Dentist ',
-    specialty: 'Certified Implant Specialist',
-    bio: 'Graduated from NYU College of Dentistry in 1987. Serving Woodside, Queens for over 35 years. In 2004, became a Diplomate of the International Congress of Oral Implantology (ICOI) — held by only a select group of dentists worldwide.',
+    specialties: [
+      'Certified Implant Specialist',
+      'Dental Implants',
+      'Restorative Dentistry',
+      'Full Mouth Rehabilitation',
+      'CEREC Same-Day Crowns',
+    ],
+    bio: 'Graduated from NYU (1987). Serving Woodside for 35+ years. ICOI Diplomate specialized in implant surgery.',
     image: '/images/doctors/dr-bhagat.jpg',
     slug: 'dr-deepak-bhagat',
     badge: 'ICOI Diplomate',
@@ -29,12 +35,18 @@ const doctors = [
     credentials: 'DMD',
     credentialFull: 'Doctor of Medicine in Dentistry',
     title: 'Co-Dentist',
-    specialty: 'Certified Implant Specialist',
-    bio: 'NYU College of Dentistry graduate with a focus on gentle, patient-centred care. Dr. Islam has a unique ability to transform dental anxiety into dental confidence — patients consistently praise her calm, thorough approach.',
+    specialties: [
+      'Certified Implant Specialist',
+      'General Dentistry',
+      'Preventive Care',
+      'Cosmetic Dentistry',
+      'Pediatric Dentistry',
+    ],
+    bio: 'NYU graduate focused on gentle, preventive dental care and transforming anxiety into dental confidence.',
     image: drImage.src,
     slug: 'dr-julie-islam',
-    badge: null,
-    badgeBg: null,
+    badge: 'Preventive Care',
+    badgeBg: '#3DBAA7',
     rating: '5.0',
     reviews: '80+',
     isLead: false,
@@ -45,8 +57,14 @@ const doctors = [
     credentials: 'DDS',
     credentialFull: 'Doctor of Dental Surgery',
     title: 'Associate Dentist',
-    specialty: 'Certified Implant Specialist',
-    bio: 'Stony Brook University School of Dental Medicine graduate with advanced expertise in restorative procedures, root canal therapy, and emergency care. Known for his thorough explanations and calm chairside manner.',
+    specialties: [
+      'Certified Implant Specialist',
+      'General Dentistry',
+      'Restorative Procedures',
+      'Root Canal Therapy',
+      'Extractions',
+    ],
+    bio: 'Stony Brook graduate with expertise in restorative care, endodontics, and emergency dental procedures.',
     image: drImage.src,
     slug: 'dr-dorothy-li',
     badge: 'Emergency Specialist',
@@ -61,8 +79,14 @@ const doctors = [
     credentials: 'DDS',
     credentialFull: 'Doctor of Dental Surgery',
     title: 'Associate Dentist',
-    specialty: 'Certified Implant Specialist',
-    bio: 'NYU College of Dentistry graduate and New York Presbyterian - Queens residency alumna. Dedicated to crafting personalized treatment plans tailored to every patient\'s unique needs and lifestyle.',
+    specialties: [
+      'Certified Implant Specialist',
+      'General Dentistry',
+      'Preventive Care',
+      'Restorative Procedures',
+      'Patient Education',
+    ],
+    bio: 'NYU graduate & NY Presbyterian alumna providing personalized, patient-centered dental care.',
     image: drImage.src,
     slug: 'dr-sarha-avendano',
     badge: 'Patient Centered',
@@ -114,7 +138,6 @@ const doctors = [
                 <h3 class="doc-name">{doc.name}</h3>
                 <div class="doc-cred-row">
                   <span class="doc-cred">{doc.credentials}</span>
-                  {/* {doc.isLead && <span class="doc-lead-tag">Lead</span>} */}
                 </div>
               </div>
               <div class="doc-rating" aria-label={`${doc.rating} stars, ${doc.reviews} reviews`}>
@@ -127,14 +150,21 @@ const doctors = [
             <!-- Role -->
             {/* <p class="doc-role">{doc.title}</p> */}
 
-            <!-- Specialty chip -->
-            <p class="doc-spec">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-              {doc.specialty}
-            </p>
-
             <!-- Bio -->
             <p class="doc-bio">{doc.bio}</p>
+
+            <!-- Specialties List -->
+            <div class="doc-specs-box">
+              <span class="doc-specs-heading">Specialties:</span>
+              <ul class="doc-specs-list" aria-label={`Specialties of ${doc.name}`}>
+                {doc.specialties.map((spec) => (
+                  <li class="doc-spec-item">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>{spec}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <!-- CTA -->
             <a href={`/team/${doc.slug}`} class="doc-cta" aria-label={`View ${doc.name}'s full profile`}>
@@ -333,24 +363,52 @@ const doctors = [
   margin: 0;
 }
 
-.doc-spec {
-  display: flex; align-items: center; gap: .375rem;
-  font-size: .78rem;
-  color: var(--color-text-muted);
-  margin: 0;
-  font-weight: 500;
-}
-.doc-spec svg { flex-shrink: 0; color: var(--acc) }
-
 .doc-bio {
-  font-size: .8rem;
+  font-size: .75rem;
   color: var(--color-text-muted);
-  line-height: 1.55;
-  margin: 0 0 .5rem;
+  line-height: 1.45;
+  margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.doc-specs-box {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+  margin-top: .15rem;
+  margin-bottom: .5rem;
+}
+.doc-specs-heading {
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--color-primary);
+  opacity: .85;
+}
+.doc-specs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+.doc-spec-item {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .73rem;
+  color: var(--color-text-muted);
+  line-height: 1.25;
+  font-weight: 500;
+}
+.doc-spec-item svg {
+  flex-shrink: 0;
+  color: var(--acc);
 }
 
 .doc-cta {
