@@ -16,7 +16,8 @@
     "clean": "rm -rf .astro dist",
     "build:ci": "astro build --no-type-check",
     "lint": "astro check",
-    "preview:cf": "wrangler dev"
+    "preview:cf": "wrangler dev",
+    "test": "node --test functions/api/__tests__/*.test.mjs"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",

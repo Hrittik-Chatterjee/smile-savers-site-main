@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-19T13:35:21.695Z",
+  "generatedAt": "2026-08-19T14:55:00Z",
   "count": 20,
   "items": [
     {
@@ -351,7 +351,7 @@
       "domain": "reliability",
       "severity": "P0",
       "confidence": 0.95,
-      "status": "OPEN",
+      "status": "RESOLVED",
       "title": "src/entrypoint.js applies zero security headers to any response",
       "description": "functions/_middleware.js (CSP/CORS/security headers) is a Pages-Functions-only convention, never invoked by the hand-rolled Worker entrypoint. Confirmed live: /api/contact and /api/chat return zero CSP/X-Frame-Options/etc headers in production.",
       "evidence": [
@@ -379,7 +379,10 @@
       "recommended_wave": "WAVE-2 (per implementation-contract.md, requires explicit authorization -- not done this pass, per Cloudflare decision's \"no implementation without approval\" boundary)",
       "spec_required": true,
       "tdd_required": false,
-      "verification": [],
+      "verification": [
+        "commit 191d299: applySecurityHeaders() exported from functions/_middleware.js, called on all 3 response paths in src/entrypoint.js; verified locally by invoking entrypoint.js's fetch handler directly and confirming CSP/X-Frame-Options/etc. now present on an /api/contact OPTIONS response (previously absent)",
+        "Live re-confirmed 2026-08-19T14:52Z: curl -X OPTIONS against the deployed branch preview (claude-init-yi57kn-smile-savers-site-main.lablaunchpad.workers.dev/api/contact) now returns the full CSP/X-Frame-Options/Referrer-Policy/Permissions-Policy/X-XSS-Protection set plus exact-origin CORS -- previously confirmed absent on this exact endpoint pre-fix (repo-vs-live.md)."
+      ],
       "rollback": "n/a -- not yet implemented"
     },
     {
@@ -390,7 +393,7 @@
       "confidence": 0.999,
       "status": "OPEN",
       "title": "Zero automated test files in the repository",
-      "description": "No test/spec files of any kind exist. CI (quality/build jobs) validates type-checking and build success only -- no behavioral regression proof for contact API, chat API, booking flow, or any business logic.",
+      "description": "No test/spec files of any kind exist. CI (quality/build jobs) validates type-checking and build success only -- no behavioral regression proof for contact API, chat API, booking flow, or any business logic. PARTIAL PROGRESS (commit <pending>): 11 tests now cover the two riskiest Wave-1-changed behaviors (contact API fail-closed, chat rate limiting), proven to catch regressions by reverting the original bug and confirming the suite fails. Booking flow, content schemas, and everything else remain untested.",
       "evidence": [
         "file inventory, confirmed via find . -iname \"*.test.*\" -o -iname \"*.spec.*\" returning nothing"
       ],
@@ -610,7 +613,7 @@
       "domain": "architecture",
       "severity": "P1",
       "confidence": 0.9,
-      "status": "OPEN",
+      "status": "RESOLVED",
       "title": "CLAUDE.md documents Pages as the architecture; live evidence says Workers",
       "description": "CLAUDE.md's Overview/Cloudflare-specifics sections were not updated after the Cloudflare decision research concluded Workers is what's actually live.",
       "evidence": [
@@ -632,7 +635,9 @@
       "recommended_wave": "WAVE-1-or-2 (small, no code risk)",
       "spec_required": false,
       "tdd_required": false,
-      "verification": [],
+      "verification": [
+        "commit 191d299: CLAUDE.md corrected throughout (Workers not Pages, Resend not MailChannels, applySecurityHeaders() mechanism documented); also fixed npm run preview:cf from `wrangler pages dev` (Pages-only, would not have exercised entrypoint.js) to `wrangler dev`, found while verifying this fix"
+      ],
       "rollback": "n/a"
     },
     {

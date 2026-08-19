@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-08-19T14:57:00Z",
+  "note": "Per the EAIS boot prompt's learning-loop requirement: what worked, what failed, why, and what became a reusable prevention mechanism, for the M1+M2 work this session.",
+  "lessons": [
+    {
+      "task": "DEBT-0011: wire security headers into src/entrypoint.js",
+      "whatWorked": "Implementation-contract.md (written during the Cloudflare decision research) specified the exact fix in advance -- exporting applySecurityHeaders() and calling it on entrypoint.js's 3 response branches took one edit pass, verified immediately by invoking the fetch handler directly in Node with a mocked env.",
+      "whatFailed": "Nothing failed in the fix itself, but a related claim in this session's own earlier Wave-1 commit message (cd7d6d7) was wrong: it stated \"functions/_middleware.js is the one that actually reaches the browser\" -- later live curl evidence (repo-vs-live.md) proved the opposite. The lesson was already captured then; this task closed the gap it identified.",
+      "rootCause": "n/a -- this was closing a previously-identified, previously-specified gap, not discovering a new one.",
+      "evidence": ["commit 191d299", "local Node invocation of src/entrypoint.js's fetch handler"],
+      "assumptionThatWasWrong": null,
+      "recurrencePrevention": "None added yet -- the correct long-term prevention is the M2 test suite covering this path (a live-header assertion test would catch a future regression here); not yet written as of this task, tracked as a gap in DEBT-0012's remaining scope."
+    },
+    {
+      "task": "DEBT-0019 + package.json preview:cf fix",
+      "whatWorked": "While verifying the CLAUDE.md correction, ran `npm run preview:cf` to sanity-check the documented dev workflow rather than just trusting the existing description -- this is what caught the second, independent bug (wrangler pages dev instead of wrangler dev).",
+      "whatFailed": "Attempting full end-to-end local verification of `wrangler dev` failed in this sandbox: the AI binding defaults to \"remote\" mode, which requires a CLOUDFLARE_API_TOKEN not available here. This was a genuine environment limitation, not a code defect -- correctly documented as such (not glossed over as \"verified working\") in both the CLAUDE.md note and this lessons file.",
+      "rootCause": "The package.json script was authored assuming Pages, never updated when the project's actual architecture diverged.",
+      "evidence": ["commit 191d299", "/tmp/wrangler-dev.log (this session, not persisted -- the ERROR message about CLOUDFLARE_API_TOKEN is quoted directly in the commit message and CLAUDE.md instead)"],
+      "assumptionThatWasWrong": "That documentation describing a command was equivalent to the command being correct -- checking CLAUDE.md's prose wasn't enough; running the actual command was what surfaced the bug.",
+      "recurrencePrevention": "General principle reinforced, not yet a specific automated gate: verify documented commands by running them, not by reading them. Could become a CI check (\"does every npm script in package.json execute without immediate error\") in a future M2 iteration."
+    },
+    {
+      "task": "M2: first automated test suite (contact API + chat rate limiting)",
+      "whatWorked": "Writing tests against the ALREADY-FIXED Wave-1 code, then deliberately reverting one specific line of the fix and re-running the suite, proved the tests have real teeth (1/5 failed exactly as expected) rather than trusting that green tests mean the tests are meaningful. `node --test` with zero new dependencies matched this repo's 'minimal dependencies' preference and the EAIS pack's own eais-template/tests/smoke.test.mjs pattern.",
+      "whatFailed": "`node --test functions/api/__tests__/` (directory argument, no glob) failed with a confusing 'Cannot find module' CJS-resolution error on Node 22.22.2 -- not what the error message suggests (it looks like a missing-file error, not a test-runner argument-parsing issue). Cost a few minutes of investigation before discovering the fix: pass an explicit glob (`*.test.mjs`) instead of a bare directory path.",
+      "rootCause": "Node's built-in test runner directory-argument auto-discovery apparently doesn't behave the way a plain directory path suggests it should on this Node version/invocation style; not deeply investigated further since the workaround was simple and sufficient.",
+      "evidence": ["local terminal output this session (not persisted as a file -- reproduced directly in this lessons entry since the failure is short and the fix is a one-line package.json change)"],
+      "assumptionThatWasWrong": "That `node --test <directory>/` would behave identically to `node --test <directory>/*.test.mjs`. It did not, in this environment.",
+      "recurrencePrevention": "package.json's \"test\" script now uses the explicit glob form. New test file naming (`*.test.mjs`) documented in the file-level comment of each test file so a future contributor adding a test knows the pattern the glob expects."
+    }
+  ]
+}

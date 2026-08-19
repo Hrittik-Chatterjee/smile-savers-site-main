@@ -1,28 +1,52 @@
 {
-  "updatedAt": "2026-08-19T13:35:00Z",
-  "currentMilestone": "Phase 0 (Evidence Kernel) + Phase 1 (Trust Kernel) — Phase 1 substantially complete, Phase 0 kernel just created",
+  "updatedAt": "2026-08-19T14:52:00Z",
+  "currentMilestone": "M1 runtime-proof-pass DONE, M2 release-gates-pass (initial slice) DONE \u2014 see EAIS pack roadmap/MILESTONES.json for M-numbering",
   "completedGates": [
     "Wave 1 remediation (10 findings, commit cd7d6d7)",
     "Cloudflare Pages vs Workers decision (ADR-0001, audit/cloudflare-decision/)",
     "Broken CI deploy jobs removed (ADR-0002, commit 296f6a3)",
     "OKF knowledge bundle (knowledge/)",
-    "This EAOS Phase-0 evidence/debt/root-cause kernel (audit/eais/20260819T133000Z/, .ai/)"
+    "This EAOS Phase-0 evidence/debt/root-cause kernel (audit/eais/20260819T133000Z/, .ai/)",
+    "DEBT-0011: security headers wired into src/entrypoint.js via functions/_middleware.js's applySecurityHeaders() (commit 191d299)",
+    "DEBT-0019: CLAUDE.md architecture description corrected (Workers not Pages, Resend not MailChannels) (commit 191d299)",
+    "First automated test suite: 11 tests across functions/api/__tests__/{contact,chat}.test.mjs, covering the fail-closed contact-API behavior and the chat rate limiter \u2014 both proven to actually catch regressions by reverting the original bug and confirming the suite fails",
+    "npm test wired as a blocking CI step in the quality job (.github/workflows/deploy.yml)"
   ],
   "openBlockers": [
-    { "id": "DEBT-0011", "severity": "P0", "summary": "src/entrypoint.js applies zero security headers to live API responses — fix specified in audit/cloudflare-decision/implementation-contract.md, not yet authorized/implemented" },
-    { "id": "DEBT-0012", "severity": "P1", "summary": "Zero automated tests exist anywhere in the repo" },
-    { "id": "DEBT-0013", "severity": "P1", "summary": "Security/perf CI checks are non-blocking (continue-on-error)" },
-    { "id": "DEBT-0015", "severity": "P1", "summary": "Appointment flow needs a product decision (real booking vs. WhatsApp-request framing)" },
-    { "id": "DEBT-0016", "severity": "P1", "summary": "Medical content claims need a clinical-review decision, not an engineering one" },
-    { "id": "DEBT-0017", "severity": "P2", "summary": "6 known WCAG violations from design-intelligence Stage 16, not yet remediated" }
+    {
+      "id": "DEBT-0012",
+      "severity": "P1",
+      "summary": "Zero automated tests existed anywhere in the repo -- PARTIALLY RESOLVED: 11 tests now cover contact API + chat rate limiting (the two riskiest Wave-1-changed behaviors). Still 0% coverage for booking flow, content schemas, and everything else."
+    },
+    {
+      "id": "DEBT-0013",
+      "severity": "P1",
+      "summary": "Security/perf CI checks are non-blocking (continue-on-error)"
+    },
+    {
+      "id": "DEBT-0015",
+      "severity": "P1",
+      "summary": "Appointment flow needs a product decision (real booking vs. WhatsApp-request framing)"
+    },
+    {
+      "id": "DEBT-0016",
+      "severity": "P1",
+      "summary": "Medical content claims need a clinical-review decision, not an engineering one"
+    },
+    {
+      "id": "DEBT-0017",
+      "severity": "P2",
+      "summary": "6 known WCAG violations from design-intelligence Stage 16, not yet remediated"
+    }
   ],
   "knownUnknowns": [
-    "npm audit not run this session in a network-enabled environment — dependency vulnerability status is UNVERIFIED (DEBT-0020)",
-    "No field/RUM Core Web Vitals data available — performance not measured against LCP/INP/CLS targets this pass",
+    "npm audit not run this session in a network-enabled environment \u2014 dependency vulnerability status is UNVERIFIED (DEBT-0020)",
+    "No field/RUM Core Web Vitals data available \u2014 performance not measured against LCP/INP/CLS targets this pass",
     "No telemetry/observability implementation exists to evaluate against OpenTelemetry semantic conventions",
-    "OWASP ASVS 5.0 control-by-control verification not performed — only the specific findings from the uploaded audit were checked, not a full ASVS pass",
-    "SLSA provenance level not assessed for the build/deploy pipeline"
+    "OWASP ASVS 5.0 control-by-control verification not performed \u2014 only the specific findings from the uploaded audit were checked, not a full ASVS pass",
+    "SLSA provenance level not assessed for the build/deploy pipeline",
+    "SmileSaversEAISKnowledgePack20260819.zip's eais-template/ (TypeScript 7 CLI scaffold) not yet built into tools/eais/ -- correctly deferred per the pack's own MILESTONES.json dependency graph (M3 EAOS Kernel depends on M1+M2)"
   ],
-  "stackBaseline": "FROZEN — no dependency version has been compatibility-checked this session; treat package.json/package-lock.json as locked until a dedicated compatibility pass is run (see .ai/constitution.md invariant 5)",
-  "nextRequiredAction": "User decision needed: authorize DEBT-0011's implementation (small, specified fix) and/or prioritize which Phase 2+ item (testing, CI gates, accessibility, product decisions) to take on next. See ENGINEERING-ROADMAP.md in audit/eais/20260819T133000Z/ for the full phase ordering."
+  "stackBaseline": "FROZEN \u2014 no dependency version has been compatibility-checked this session; treat package.json/package-lock.json as locked until a dedicated compatibility pass is run (see .ai/constitution.md invariant 5)",
+  "nextRequiredAction": "M2 is only partially proven (2 of many risky behaviors covered). Continue M2 (more test coverage) or move to M3 (scaffold tools/eais/ from the EAIS pack's eais-template/, adapted not copied) -- both are unblocked; M3 per the pack's dependency graph should wait until M2 covers at least the release-gate-relevant behaviors, not literally 100% of the app."
 }

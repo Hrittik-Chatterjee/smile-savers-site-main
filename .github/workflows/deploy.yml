@@ -37,7 +37,7 @@ concurrency:
 # ── Job: Quality Gate ─────────────────────────────────────────────────────────
 jobs:
   quality:
-    name: 🔍 Type-check & Format
+    name: 🔍 Type-check, Test & Format
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -55,6 +55,13 @@ jobs:
 
       - name: Type check
         run: npm run check
+
+      # Blocking (audit CI-001: security/perf checks were non-blocking by
+      # design; this is the first automated test this repo has had --
+      # M2/release-gates-pass, DEBT-0012 — it stays blocking rather than
+      # repeating that pattern).
+      - name: Test
+        run: npm test
 
       - name: Format check
         run: npx prettier --check "src/**/*.{astro,ts,css}" --log-level warn
