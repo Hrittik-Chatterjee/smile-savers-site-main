@@ -11,12 +11,26 @@
     "disableAnimationsForScreenshots": true
   },
   "motionModes": [
-    { "name": "A-canonical", "reducedMotion": "no-preference", "purpose": "canonical motion extraction" },
+    {
+      "name": "A-canonical",
+      "reducedMotion": "no-preference",
+      "purpose": "canonical motion extraction"
+    },
     { "name": "B-a11y", "reducedMotion": "reduce", "purpose": "verify reduced-motion behaviour" }
   ],
   "diff": {
-    "fixtureParity": { "maxDifferentPixels": 0, "maxDifferentRatio": 0, "threshold": 0, "includeAA": true },
-    "siteRegression": { "maxDifferentPixels": 0, "maxDifferentRatio": 0, "threshold": 0, "includeAA": true }
+    "fixtureParity": {
+      "maxDifferentPixels": 0,
+      "maxDifferentRatio": 0,
+      "threshold": 0,
+      "includeAA": true
+    },
+    "siteRegression": {
+      "maxDifferentPixels": 0,
+      "maxDifferentRatio": 0,
+      "threshold": 0,
+      "includeAA": true
+    }
   },
   "scopeBoundary": {
     "note": "Full-page parity against labs.google is NOT a gate and must never be claimed. Only admitted fixtures use strict 0-pixel parity."

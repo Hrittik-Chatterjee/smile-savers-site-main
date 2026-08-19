@@ -27,9 +27,7 @@ export function resolveChromium() {
   if (cached) return cached;
   const executablePath = CANDIDATES.find((candidate) => fs.existsSync(candidate));
   if (!executablePath) {
-    throw new Error(
-      `No chromium executable found. Looked in:\n  ${CANDIDATES.join('\n  ')}`
-    );
+    throw new Error(`No chromium executable found. Looked in:\n  ${CANDIDATES.join('\n  ')}`);
   }
   let version = 'unknown';
   try {

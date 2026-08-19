@@ -34,9 +34,7 @@ export const EVIDENCE_CLASSES = Object.freeze([
 
 export function assertEvidenceClass(cls) {
   if (!EVIDENCE_CLASSES.includes(cls)) {
-    throw new Error(
-      `Illegal evidence class "${cls}". Permitted: ${EVIDENCE_CLASSES.join(', ')}`
-    );
+    throw new Error(`Illegal evidence class "${cls}". Permitted: ${EVIDENCE_CLASSES.join(', ')}`);
   }
   return cls;
 }
@@ -48,8 +46,16 @@ export const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('h
  * stripped, so re-running the pipeline yields an identical digest.
  */
 const VOLATILE_KEYS = new Set([
-  'retrievedAt', 'timestamp', 'capturedAt', 'executionId', 'durationMs',
-  'userAgent', 'ua', 'environment', 'generatedAt', 'elapsedMs',
+  'retrievedAt',
+  'timestamp',
+  'capturedAt',
+  'executionId',
+  'durationMs',
+  'userAgent',
+  'ua',
+  'environment',
+  'generatedAt',
+  'elapsedMs',
 ]);
 
 export function canonicalize(value) {
@@ -93,10 +99,15 @@ export async function readConfig(name) {
 export async function fetchAsset(url, { timeoutSeconds = 45 } = {}) {
   const marker = '\n===CURL-META===\n';
   const args = [
-    '-sS', '--compressed', '--location',
-    '--max-time', String(timeoutSeconds),
-    '--write-out', `${marker}%{http_code}\t%{content_type}\t%{size_download}\t%{url_effective}`,
-    '--output', '-',
+    '-sS',
+    '--compressed',
+    '--location',
+    '--max-time',
+    String(timeoutSeconds),
+    '--write-out',
+    `${marker}%{http_code}\t%{content_type}\t%{size_download}\t%{url_effective}`,
+    '--output',
+    '-',
     url,
   ];
   try {

@@ -18,8 +18,15 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import {
-  ARTIFACTS, ensureDir, writeJson, readConfig, fetchAsset,
-  sha256, canonicalHash, runMetadata, log,
+  ARTIFACTS,
+  ensureDir,
+  writeJson,
+  readConfig,
+  fetchAsset,
+  sha256,
+  canonicalHash,
+  runMetadata,
+  log,
 } from '../lib/core.mjs';
 
 const STAGE = 'mirror';
@@ -31,7 +38,16 @@ const TEXTUAL = new Set(['text/html', 'text/css', 'application/javascript', 'tex
  * downloaded: a single gallery video exceeds 10MB and contributes nothing to
  * design-token evidence.
  */
-const SKIP_BODY_EXTENSIONS = new Set(['.mp4', '.webm', '.mov', '.m4v', '.ogv', '.mp3', '.wav', '.m4a']);
+const SKIP_BODY_EXTENSIONS = new Set([
+  '.mp4',
+  '.webm',
+  '.mov',
+  '.m4v',
+  '.ogv',
+  '.mp3',
+  '.wav',
+  '.m4a',
+]);
 
 /** Resolve a possibly-relative URL; return null if unusable. */
 function resolve(ref, base) {
@@ -62,7 +78,8 @@ function fromSrcset(value, base) {
  * /fx Next.js app, multi-megabyte gallery videos) instead of mirroring the
  * dependencies of the page under study.
  */
-const SUBRESOURCE_TAGS = /<(link|script|img|source|video|audio|iframe|embed|track|object)\b([^>]*)>/gi;
+const SUBRESOURCE_TAGS =
+  /<(link|script|img|source|video|audio|iframe|embed|track|object)\b([^>]*)>/gi;
 
 function attrValue(attrs, name) {
   const match = attrs.match(new RegExp(`\\b${name}\\s*=\\s*["']([^"']+)["']`, 'i'));
@@ -144,7 +161,8 @@ async function main() {
         parent,
         mirrored: false,
         evidenceClass: 'VERIFY-BLOCKED',
-        reason: 'cross-origin resource; not mirrored and not reachable by the browser in this environment',
+        reason:
+          'cross-origin resource; not mirrored and not reachable by the browser in this environment',
       });
       continue;
     }
@@ -228,7 +246,10 @@ async function main() {
 
   await writeJson(path.join(ARTIFACTS, 'mirror', 'mirror-manifest.json'), manifest);
 
-  log(STAGE, `mirrored=${manifest.counts.mirrored} failed=${manifest.counts.failed} external=${manifest.counts.external}`);
+  log(
+    STAGE,
+    `mirrored=${manifest.counts.mirrored} failed=${manifest.counts.failed} external=${manifest.counts.external}`
+  );
   log(STAGE, `canonicalHash=${manifest.canonicalHash}`);
 }
 

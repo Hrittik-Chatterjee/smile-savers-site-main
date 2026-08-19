@@ -13,9 +13,7 @@
 
 import path from 'node:path';
 import { launchBrowser, CAPTURE_ENVIRONMENT, environmentManifest } from '../lib/browser.mjs';
-import {
-  ARTIFACTS, writeJson, readConfig, canonicalHash, runMetadata, log,
-} from '../lib/core.mjs';
+import { ARTIFACTS, writeJson, readConfig, canonicalHash, runMetadata, log } from '../lib/core.mjs';
 import { startMirrorServer } from '../lib/mirror-server.mjs';
 
 const STAGE = 'parse';
@@ -36,9 +34,20 @@ function extractCssom() {
   };
 
   const STATE_PSEUDOS = [
-    ':hover', ':focus-visible', ':focus-within', ':focus', ':active',
-    ':disabled', ':checked', ':target', ':visited',
-    '[aria-selected', '[aria-expanded', '[aria-current', '[aria-disabled', '[data-state',
+    ':hover',
+    ':focus-visible',
+    ':focus-within',
+    ':focus',
+    ':active',
+    ':disabled',
+    ':checked',
+    ':target',
+    ':visited',
+    '[aria-selected',
+    '[aria-expanded',
+    '[aria-current',
+    '[aria-disabled',
+    '[data-state',
   ];
 
   const walk = (rules, context) => {
@@ -70,7 +79,10 @@ function extractCssom() {
           steps: Array.from(rule.cssRules || []).map((step) => ({
             offset: step.keyText,
             declarations: Object.fromEntries(
-              Array.from(step.style || []).map((prop) => [prop, step.style.getPropertyValue(prop).trim()])
+              Array.from(step.style || []).map((prop) => [
+                prop,
+                step.style.getPropertyValue(prop).trim(),
+              ])
             ),
           })),
         });
@@ -174,8 +186,14 @@ function deriveBreakpoints(mediaConditions) {
     const key = `${bound}:${axis}:${px}`;
     if (!found.has(key)) {
       found.set(key, {
-        bound, axis, px, basis,
-        raws: [], evidenceClass: cls, occurrences: 0, conditions: [],
+        bound,
+        axis,
+        px,
+        basis,
+        raws: [],
+        evidenceClass: cls,
+        occurrences: 0,
+        conditions: [],
       });
     }
     const entry = found.get(key);
@@ -291,10 +309,22 @@ async function main() {
 
     await writeJson(path.join(ARTIFACTS, 'evidence', 'source', 'cssom.json'), result);
 
-    log(STAGE, `sheets=${result.counts.sheets} rules=${result.counts.rules} media=${result.counts.media}`);
-    log(STAGE, `customProps=${result.counts.distinctCustomProperties} distinct (${result.counts.customProperties} declarations)`);
-    log(STAGE, `stateRules=${result.counts.stateRules} transitions=${result.counts.transitions} keyframes=${result.counts.keyframes}`);
-    log(STAGE, `breakpoints=${result.counts.breakpoints} remBasis=${remBasis.computed}px agree=${remBasis.agree}`);
+    log(
+      STAGE,
+      `sheets=${result.counts.sheets} rules=${result.counts.rules} media=${result.counts.media}`
+    );
+    log(
+      STAGE,
+      `customProps=${result.counts.distinctCustomProperties} distinct (${result.counts.customProperties} declarations)`
+    );
+    log(
+      STAGE,
+      `stateRules=${result.counts.stateRules} transitions=${result.counts.transitions} keyframes=${result.counts.keyframes}`
+    );
+    log(
+      STAGE,
+      `breakpoints=${result.counts.breakpoints} remBasis=${remBasis.computed}px agree=${remBasis.agree}`
+    );
     log(STAGE, `blockedSheets=${result.counts.blockedSheets} (VERIFY-BLOCKED)`);
     log(STAGE, `canonicalHash=${result.canonicalHash}`);
 
