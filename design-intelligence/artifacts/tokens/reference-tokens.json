@@ -1,0 +1,1336 @@
+{
+  "stage": "tokens",
+  "generatedAt": "2026-08-19T08:55:51.245Z",
+  "executionId": "c9056bb8-b429-4652-a103-65346f579f14",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "note": "All tokens here are namespaced reference.labs.* — reference evidence, never production authority. brand.*/semantic.*/component.* are owned exclusively by Stage 12 (Smile Savers integration) and this stage writes none of them.",
+  "layers": {
+    "atomic": {
+      "radius": [
+        {
+          "value": 4,
+          "unit": "px",
+          "occurrences": 4,
+          "evidenceIds": []
+        },
+        {
+          "value": 16.41,
+          "unit": "px",
+          "occurrences": 44,
+          "evidenceIds": []
+        },
+        {
+          "value": 26,
+          "unit": "px",
+          "occurrences": 44,
+          "evidenceIds": []
+        },
+        {
+          "value": 42.86,
+          "unit": "px",
+          "occurrences": 20,
+          "evidenceIds": []
+        },
+        {
+          "value": 45.86,
+          "unit": "px",
+          "occurrences": 40,
+          "evidenceIds": []
+        },
+        {
+          "value": 50,
+          "unit": "px",
+          "occurrences": 24,
+          "evidenceIds": []
+        },
+        {
+          "value": 100,
+          "unit": "px",
+          "occurrences": 16,
+          "evidenceIds": []
+        },
+        {
+          "value": 1000,
+          "unit": "px",
+          "occurrences": 16,
+          "evidenceIds": []
+        },
+        {
+          "value": 9990,
+          "unit": "px",
+          "occurrences": 52,
+          "evidenceIds": []
+        }
+      ],
+      "spacing": [
+        {
+          "value": 4,
+          "unit": "px",
+          "occurrences": 33,
+          "evidenceIds": []
+        },
+        {
+          "value": 6,
+          "unit": "px",
+          "occurrences": 30,
+          "evidenceIds": []
+        },
+        {
+          "value": 7.5,
+          "unit": "px",
+          "occurrences": 3,
+          "evidenceIds": []
+        },
+        {
+          "value": 8,
+          "unit": "px",
+          "occurrences": 4,
+          "evidenceIds": []
+        },
+        {
+          "value": 10,
+          "unit": "px",
+          "occurrences": 24,
+          "evidenceIds": []
+        },
+        {
+          "value": 11.3,
+          "unit": "px",
+          "occurrences": 3,
+          "evidenceIds": []
+        },
+        {
+          "value": 12,
+          "unit": "px",
+          "occurrences": 29,
+          "evidenceIds": []
+        },
+        {
+          "value": 13.9,
+          "unit": "px",
+          "occurrences": 3,
+          "evidenceIds": []
+        },
+        {
+          "value": 16,
+          "unit": "px",
+          "occurrences": 30,
+          "evidenceIds": []
+        },
+        {
+          "value": 18,
+          "unit": "px",
+          "occurrences": 2,
+          "evidenceIds": []
+        },
+        {
+          "value": 18.4,
+          "unit": "px",
+          "occurrences": 4,
+          "evidenceIds": []
+        },
+        {
+          "value": 20,
+          "unit": "px",
+          "occurrences": 3,
+          "evidenceIds": []
+        },
+        {
+          "value": 21,
+          "unit": "px",
+          "occurrences": 8,
+          "evidenceIds": []
+        },
+        {
+          "value": 24,
+          "unit": "px",
+          "occurrences": 23,
+          "evidenceIds": []
+        },
+        {
+          "value": 25,
+          "unit": "px",
+          "occurrences": 2,
+          "evidenceIds": []
+        },
+        {
+          "value": 28.82,
+          "unit": "px",
+          "occurrences": 1,
+          "evidenceIds": []
+        },
+        {
+          "value": 30,
+          "unit": "px",
+          "occurrences": 25,
+          "evidenceIds": []
+        },
+        {
+          "value": 32,
+          "unit": "px",
+          "occurrences": 10,
+          "evidenceIds": []
+        },
+        {
+          "value": 36.8,
+          "unit": "px",
+          "occurrences": 4,
+          "evidenceIds": []
+        },
+        {
+          "value": 40,
+          "unit": "px",
+          "occurrences": 9,
+          "evidenceIds": []
+        },
+        {
+          "value": 43,
+          "unit": "px",
+          "occurrences": 8,
+          "evidenceIds": []
+        },
+        {
+          "value": 46,
+          "unit": "px",
+          "occurrences": 1,
+          "evidenceIds": []
+        },
+        {
+          "value": 50,
+          "unit": "px",
+          "occurrences": 3,
+          "evidenceIds": []
+        },
+        {
+          "value": 57,
+          "unit": "px",
+          "occurrences": 1,
+          "evidenceIds": []
+        },
+        {
+          "value": 145,
+          "unit": "px",
+          "occurrences": 1,
+          "evidenceIds": []
+        },
+        {
+          "value": 150,
+          "unit": "px",
+          "occurrences": 1,
+          "evidenceIds": []
+        },
+        {
+          "value": 180,
+          "unit": "px",
+          "occurrences": 1,
+          "evidenceIds": []
+        },
+        {
+          "value": 182,
+          "unit": "px",
+          "occurrences": 3,
+          "evidenceIds": []
+        },
+        {
+          "value": 200,
+          "unit": "px",
+          "occurrences": 1,
+          "evidenceIds": []
+        },
+        {
+          "value": 322,
+          "unit": "px",
+          "occurrences": 11,
+          "evidenceIds": []
+        }
+      ],
+      "fontSize": [
+        {
+          "value": 10,
+          "unit": "px",
+          "occurrences": 216,
+          "evidenceIds": []
+        },
+        {
+          "value": 12,
+          "unit": "px",
+          "occurrences": 19,
+          "evidenceIds": []
+        },
+        {
+          "value": 13.33,
+          "unit": "px",
+          "occurrences": 24,
+          "evidenceIds": []
+        },
+        {
+          "value": 13.72,
+          "unit": "px",
+          "occurrences": 30,
+          "evidenceIds": []
+        },
+        {
+          "value": 14,
+          "unit": "px",
+          "occurrences": 56,
+          "evidenceIds": []
+        },
+        {
+          "value": 16,
+          "unit": "px",
+          "occurrences": 22,
+          "evidenceIds": []
+        },
+        {
+          "value": 18,
+          "unit": "px",
+          "occurrences": 81,
+          "evidenceIds": []
+        },
+        {
+          "value": 18.75,
+          "unit": "px",
+          "occurrences": 7,
+          "evidenceIds": []
+        },
+        {
+          "value": 21,
+          "unit": "px",
+          "occurrences": 16,
+          "evidenceIds": []
+        },
+        {
+          "value": 24,
+          "unit": "px",
+          "occurrences": 5,
+          "evidenceIds": []
+        },
+        {
+          "value": 26,
+          "unit": "px",
+          "occurrences": 11,
+          "evidenceIds": []
+        },
+        {
+          "value": 42,
+          "unit": "px",
+          "occurrences": 5,
+          "evidenceIds": []
+        },
+        {
+          "value": 60,
+          "unit": "px",
+          "occurrences": 3,
+          "evidenceIds": []
+        },
+        {
+          "value": 100,
+          "unit": "px",
+          "occurrences": 1,
+          "evidenceIds": []
+        },
+        {
+          "value": 120,
+          "unit": "px",
+          "occurrences": 4,
+          "evidenceIds": []
+        }
+      ]
+    },
+    "primitive": {
+      "radius": [
+        {
+          "name": "reference.labs.primitive.radius.0",
+          "value": 4,
+          "unit": "px",
+          "occurrences": 4
+        },
+        {
+          "name": "reference.labs.primitive.radius.1",
+          "value": 16.41,
+          "unit": "px",
+          "occurrences": 44
+        },
+        {
+          "name": "reference.labs.primitive.radius.2",
+          "value": 26,
+          "unit": "px",
+          "occurrences": 44
+        },
+        {
+          "name": "reference.labs.primitive.radius.3",
+          "value": 42.86,
+          "unit": "px",
+          "occurrences": 20
+        },
+        {
+          "name": "reference.labs.primitive.radius.4",
+          "value": 45.86,
+          "unit": "px",
+          "occurrences": 40
+        },
+        {
+          "name": "reference.labs.primitive.radius.5",
+          "value": 50,
+          "unit": "px",
+          "occurrences": 24
+        },
+        {
+          "name": "reference.labs.primitive.radius.6",
+          "value": 100,
+          "unit": "px",
+          "occurrences": 16
+        },
+        {
+          "name": "reference.labs.primitive.radius.7",
+          "value": 1000,
+          "unit": "px",
+          "occurrences": 16
+        },
+        {
+          "name": "reference.labs.primitive.radius.8",
+          "value": 9990,
+          "unit": "px",
+          "occurrences": 52
+        }
+      ],
+      "spacing": [
+        {
+          "name": "reference.labs.primitive.spacing.0",
+          "value": 4,
+          "unit": "px",
+          "occurrences": 33
+        },
+        {
+          "name": "reference.labs.primitive.spacing.1",
+          "value": 6,
+          "unit": "px",
+          "occurrences": 30
+        },
+        {
+          "name": "reference.labs.primitive.spacing.2",
+          "value": 7.5,
+          "unit": "px",
+          "occurrences": 3
+        },
+        {
+          "name": "reference.labs.primitive.spacing.3",
+          "value": 8,
+          "unit": "px",
+          "occurrences": 4
+        },
+        {
+          "name": "reference.labs.primitive.spacing.4",
+          "value": 10,
+          "unit": "px",
+          "occurrences": 24
+        },
+        {
+          "name": "reference.labs.primitive.spacing.5",
+          "value": 11.3,
+          "unit": "px",
+          "occurrences": 3
+        },
+        {
+          "name": "reference.labs.primitive.spacing.6",
+          "value": 12,
+          "unit": "px",
+          "occurrences": 29
+        },
+        {
+          "name": "reference.labs.primitive.spacing.7",
+          "value": 13.9,
+          "unit": "px",
+          "occurrences": 3
+        },
+        {
+          "name": "reference.labs.primitive.spacing.8",
+          "value": 16,
+          "unit": "px",
+          "occurrences": 30
+        },
+        {
+          "name": "reference.labs.primitive.spacing.9",
+          "value": 18,
+          "unit": "px",
+          "occurrences": 2
+        },
+        {
+          "name": "reference.labs.primitive.spacing.10",
+          "value": 18.4,
+          "unit": "px",
+          "occurrences": 4
+        },
+        {
+          "name": "reference.labs.primitive.spacing.11",
+          "value": 20,
+          "unit": "px",
+          "occurrences": 3
+        },
+        {
+          "name": "reference.labs.primitive.spacing.12",
+          "value": 21,
+          "unit": "px",
+          "occurrences": 8
+        },
+        {
+          "name": "reference.labs.primitive.spacing.13",
+          "value": 24,
+          "unit": "px",
+          "occurrences": 23
+        },
+        {
+          "name": "reference.labs.primitive.spacing.14",
+          "value": 25,
+          "unit": "px",
+          "occurrences": 2
+        },
+        {
+          "name": "reference.labs.primitive.spacing.15",
+          "value": 28.82,
+          "unit": "px",
+          "occurrences": 1
+        },
+        {
+          "name": "reference.labs.primitive.spacing.16",
+          "value": 30,
+          "unit": "px",
+          "occurrences": 25
+        },
+        {
+          "name": "reference.labs.primitive.spacing.17",
+          "value": 32,
+          "unit": "px",
+          "occurrences": 10
+        },
+        {
+          "name": "reference.labs.primitive.spacing.18",
+          "value": 36.8,
+          "unit": "px",
+          "occurrences": 4
+        },
+        {
+          "name": "reference.labs.primitive.spacing.19",
+          "value": 40,
+          "unit": "px",
+          "occurrences": 9
+        },
+        {
+          "name": "reference.labs.primitive.spacing.20",
+          "value": 43,
+          "unit": "px",
+          "occurrences": 8
+        },
+        {
+          "name": "reference.labs.primitive.spacing.21",
+          "value": 46,
+          "unit": "px",
+          "occurrences": 1
+        },
+        {
+          "name": "reference.labs.primitive.spacing.22",
+          "value": 50,
+          "unit": "px",
+          "occurrences": 3
+        },
+        {
+          "name": "reference.labs.primitive.spacing.23",
+          "value": 57,
+          "unit": "px",
+          "occurrences": 1
+        },
+        {
+          "name": "reference.labs.primitive.spacing.24",
+          "value": 145,
+          "unit": "px",
+          "occurrences": 1
+        },
+        {
+          "name": "reference.labs.primitive.spacing.25",
+          "value": 150,
+          "unit": "px",
+          "occurrences": 1
+        },
+        {
+          "name": "reference.labs.primitive.spacing.26",
+          "value": 180,
+          "unit": "px",
+          "occurrences": 1
+        },
+        {
+          "name": "reference.labs.primitive.spacing.27",
+          "value": 182,
+          "unit": "px",
+          "occurrences": 3
+        },
+        {
+          "name": "reference.labs.primitive.spacing.28",
+          "value": 200,
+          "unit": "px",
+          "occurrences": 1
+        },
+        {
+          "name": "reference.labs.primitive.spacing.29",
+          "value": 322,
+          "unit": "px",
+          "occurrences": 11
+        }
+      ],
+      "fontSize": [
+        {
+          "name": "reference.labs.primitive.font-size.0",
+          "value": 10,
+          "unit": "px",
+          "occurrences": 216
+        },
+        {
+          "name": "reference.labs.primitive.font-size.1",
+          "value": 12,
+          "unit": "px",
+          "occurrences": 19
+        },
+        {
+          "name": "reference.labs.primitive.font-size.2",
+          "value": 13.33,
+          "unit": "px",
+          "occurrences": 24
+        },
+        {
+          "name": "reference.labs.primitive.font-size.3",
+          "value": 13.72,
+          "unit": "px",
+          "occurrences": 30
+        },
+        {
+          "name": "reference.labs.primitive.font-size.4",
+          "value": 14,
+          "unit": "px",
+          "occurrences": 56
+        },
+        {
+          "name": "reference.labs.primitive.font-size.5",
+          "value": 16,
+          "unit": "px",
+          "occurrences": 22
+        },
+        {
+          "name": "reference.labs.primitive.font-size.6",
+          "value": 18,
+          "unit": "px",
+          "occurrences": 81
+        },
+        {
+          "name": "reference.labs.primitive.font-size.7",
+          "value": 18.75,
+          "unit": "px",
+          "occurrences": 7
+        },
+        {
+          "name": "reference.labs.primitive.font-size.8",
+          "value": 21,
+          "unit": "px",
+          "occurrences": 16
+        },
+        {
+          "name": "reference.labs.primitive.font-size.9",
+          "value": 24,
+          "unit": "px",
+          "occurrences": 5
+        },
+        {
+          "name": "reference.labs.primitive.font-size.10",
+          "value": 26,
+          "unit": "px",
+          "occurrences": 11
+        },
+        {
+          "name": "reference.labs.primitive.font-size.11",
+          "value": 42,
+          "unit": "px",
+          "occurrences": 5
+        },
+        {
+          "name": "reference.labs.primitive.font-size.12",
+          "value": 60,
+          "unit": "px",
+          "occurrences": 3
+        },
+        {
+          "name": "reference.labs.primitive.font-size.13",
+          "value": 100,
+          "unit": "px",
+          "occurrences": 1
+        },
+        {
+          "name": "reference.labs.primitive.font-size.14",
+          "value": 120,
+          "unit": "px",
+          "occurrences": 4
+        }
+      ]
+    },
+    "semantic": {
+      "radius": [
+        {
+          "name": "reference.labs.primitive.radius.0",
+          "value": 4,
+          "unit": "px",
+          "occurrences": 4,
+          "semanticRole": "none",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.radius.1",
+          "value": 16.41,
+          "unit": "px",
+          "occurrences": 44,
+          "semanticRole": "none",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.radius.2",
+          "value": 26,
+          "unit": "px",
+          "occurrences": 44,
+          "semanticRole": "sm",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.radius.3",
+          "value": 42.86,
+          "unit": "px",
+          "occurrences": 20,
+          "semanticRole": "sm",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.radius.4",
+          "value": 45.86,
+          "unit": "px",
+          "occurrences": 40,
+          "semanticRole": "md",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.radius.5",
+          "value": 50,
+          "unit": "px",
+          "occurrences": 24,
+          "semanticRole": "lg",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.radius.6",
+          "value": 100,
+          "unit": "px",
+          "occurrences": 16,
+          "semanticRole": "lg",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.radius.7",
+          "value": 1000,
+          "unit": "px",
+          "occurrences": 16,
+          "semanticRole": "xl",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.radius.8",
+          "value": 9990,
+          "unit": "px",
+          "occurrences": 52,
+          "semanticRole": "full",
+          "evidenceClass": "INFERRED"
+        }
+      ],
+      "spacing": [
+        {
+          "name": "reference.labs.primitive.spacing.0",
+          "value": 4,
+          "unit": "px",
+          "occurrences": 33,
+          "semanticRole": "3xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.1",
+          "value": 6,
+          "unit": "px",
+          "occurrences": 30,
+          "semanticRole": "3xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.2",
+          "value": 7.5,
+          "unit": "px",
+          "occurrences": 3,
+          "semanticRole": "3xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.3",
+          "value": 8,
+          "unit": "px",
+          "occurrences": 4,
+          "semanticRole": "3xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.4",
+          "value": 10,
+          "unit": "px",
+          "occurrences": 24,
+          "semanticRole": "2xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.5",
+          "value": 11.3,
+          "unit": "px",
+          "occurrences": 3,
+          "semanticRole": "2xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.6",
+          "value": 12,
+          "unit": "px",
+          "occurrences": 29,
+          "semanticRole": "2xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.7",
+          "value": 13.9,
+          "unit": "px",
+          "occurrences": 3,
+          "semanticRole": "2xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.8",
+          "value": 16,
+          "unit": "px",
+          "occurrences": 30,
+          "semanticRole": "xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.9",
+          "value": 18,
+          "unit": "px",
+          "occurrences": 2,
+          "semanticRole": "xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.10",
+          "value": 18.4,
+          "unit": "px",
+          "occurrences": 4,
+          "semanticRole": "xs",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.11",
+          "value": 20,
+          "unit": "px",
+          "occurrences": 3,
+          "semanticRole": "sm",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.12",
+          "value": 21,
+          "unit": "px",
+          "occurrences": 8,
+          "semanticRole": "sm",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.13",
+          "value": 24,
+          "unit": "px",
+          "occurrences": 23,
+          "semanticRole": "sm",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.14",
+          "value": 25,
+          "unit": "px",
+          "occurrences": 2,
+          "semanticRole": "sm",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.15",
+          "value": 28.82,
+          "unit": "px",
+          "occurrences": 1,
+          "semanticRole": "md",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.16",
+          "value": 30,
+          "unit": "px",
+          "occurrences": 25,
+          "semanticRole": "md",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.17",
+          "value": 32,
+          "unit": "px",
+          "occurrences": 10,
+          "semanticRole": "md",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.18",
+          "value": 36.8,
+          "unit": "px",
+          "occurrences": 4,
+          "semanticRole": "md",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.19",
+          "value": 40,
+          "unit": "px",
+          "occurrences": 9,
+          "semanticRole": "lg",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.20",
+          "value": 43,
+          "unit": "px",
+          "occurrences": 8,
+          "semanticRole": "lg",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.21",
+          "value": 46,
+          "unit": "px",
+          "occurrences": 1,
+          "semanticRole": "lg",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.22",
+          "value": 50,
+          "unit": "px",
+          "occurrences": 3,
+          "semanticRole": "xl",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.23",
+          "value": 57,
+          "unit": "px",
+          "occurrences": 1,
+          "semanticRole": "xl",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.24",
+          "value": 145,
+          "unit": "px",
+          "occurrences": 1,
+          "semanticRole": "xl",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.25",
+          "value": 150,
+          "unit": "px",
+          "occurrences": 1,
+          "semanticRole": "xl",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.26",
+          "value": 180,
+          "unit": "px",
+          "occurrences": 1,
+          "semanticRole": "2xl",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.27",
+          "value": 182,
+          "unit": "px",
+          "occurrences": 3,
+          "semanticRole": "2xl",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.28",
+          "value": 200,
+          "unit": "px",
+          "occurrences": 1,
+          "semanticRole": "2xl",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.spacing.29",
+          "value": 322,
+          "unit": "px",
+          "occurrences": 11,
+          "semanticRole": "3xl",
+          "evidenceClass": "INFERRED"
+        }
+      ],
+      "fontSize": [
+        {
+          "name": "reference.labs.primitive.font-size.0",
+          "value": 10,
+          "unit": "px",
+          "occurrences": 216,
+          "semanticRole": "caption",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.1",
+          "value": 12,
+          "unit": "px",
+          "occurrences": 19,
+          "semanticRole": "caption",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.2",
+          "value": 13.33,
+          "unit": "px",
+          "occurrences": 24,
+          "semanticRole": "caption",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.3",
+          "value": 13.72,
+          "unit": "px",
+          "occurrences": 30,
+          "semanticRole": "body",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.4",
+          "value": 14,
+          "unit": "px",
+          "occurrences": 56,
+          "semanticRole": "body",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.5",
+          "value": 16,
+          "unit": "px",
+          "occurrences": 22,
+          "semanticRole": "body-lg",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.6",
+          "value": 18,
+          "unit": "px",
+          "occurrences": 81,
+          "semanticRole": "body-lg",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.7",
+          "value": 18.75,
+          "unit": "px",
+          "occurrences": 7,
+          "semanticRole": "heading-sm",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.8",
+          "value": 21,
+          "unit": "px",
+          "occurrences": 16,
+          "semanticRole": "heading-sm",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.9",
+          "value": 24,
+          "unit": "px",
+          "occurrences": 5,
+          "semanticRole": "heading-sm",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.10",
+          "value": 26,
+          "unit": "px",
+          "occurrences": 11,
+          "semanticRole": "heading-md",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.11",
+          "value": 42,
+          "unit": "px",
+          "occurrences": 5,
+          "semanticRole": "heading-md",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.12",
+          "value": 60,
+          "unit": "px",
+          "occurrences": 3,
+          "semanticRole": "heading-lg",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.13",
+          "value": 100,
+          "unit": "px",
+          "occurrences": 1,
+          "semanticRole": "heading-lg",
+          "evidenceClass": "INFERRED"
+        },
+        {
+          "name": "reference.labs.primitive.font-size.14",
+          "value": 120,
+          "unit": "px",
+          "occurrences": 4,
+          "semanticRole": "display",
+          "evidenceClass": "INFERRED"
+        }
+      ]
+    },
+    "component": [
+      {
+        "name": "reference.labs.component.card.radius",
+        "resolvesTo": "reference.labs.primitive.radius.5",
+        "evidenceClass": "INFERRED",
+        "note": "Largest-frequency radius value observed on repeated card-like containers (Stage 4 elements[] with role~=card/list-item classes) — not a Google-declared \"card\" token."
+      }
+    ],
+    "composition": []
+  },
+  "breakpointTokens": [
+    {
+      "id": "NODE-TOKEN-000835",
+      "tokenId": "reference.labs.breakpoint.min-400",
+      "group": "breakpoint",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000834", "NODE-TOKEN-000835"]
+    },
+    {
+      "id": "NODE-TOKEN-000837",
+      "tokenId": "reference.labs.breakpoint.max-600",
+      "group": "breakpoint",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000836", "NODE-TOKEN-000837"]
+    },
+    {
+      "id": "NODE-TOKEN-000839",
+      "tokenId": "reference.labs.breakpoint.max-768",
+      "group": "breakpoint",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000838", "NODE-TOKEN-000839"]
+    },
+    {
+      "id": "NODE-TOKEN-000841",
+      "tokenId": "reference.labs.breakpoint.min-768",
+      "group": "breakpoint",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000840", "NODE-TOKEN-000841"]
+    },
+    {
+      "id": "NODE-TOKEN-000843",
+      "tokenId": "reference.labs.breakpoint.max-1024",
+      "group": "breakpoint",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000842", "NODE-TOKEN-000843"]
+    },
+    {
+      "id": "NODE-TOKEN-000845",
+      "tokenId": "reference.labs.breakpoint.min-1024",
+      "group": "breakpoint",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000844", "NODE-TOKEN-000845"]
+    },
+    {
+      "id": "NODE-TOKEN-000847",
+      "tokenId": "reference.labs.breakpoint.max-1366",
+      "group": "breakpoint",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000846", "NODE-TOKEN-000847"]
+    },
+    {
+      "id": "NODE-TOKEN-000849",
+      "tokenId": "reference.labs.breakpoint.min-1920",
+      "group": "breakpoint",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000848", "NODE-TOKEN-000849"]
+    },
+    {
+      "id": "NODE-TOKEN-000851",
+      "tokenId": "reference.labs.breakpoint.min-2000",
+      "group": "breakpoint",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000850", "NODE-TOKEN-000851"]
+    }
+  ],
+  "motionTokens": [
+    {
+      "id": "NODE-TOKEN-000853",
+      "tokenId": "reference.labs.motion.keyframe.gl-float-x",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000852", "NODE-TOKEN-000853"]
+    },
+    {
+      "id": "NODE-TOKEN-000855",
+      "tokenId": "reference.labs.motion.keyframe.gl-float-x",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000854", "NODE-TOKEN-000855"]
+    },
+    {
+      "id": "NODE-TOKEN-000857",
+      "tokenId": "reference.labs.motion.keyframe.gl-float-y",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000856", "NODE-TOKEN-000857"]
+    },
+    {
+      "id": "NODE-TOKEN-000859",
+      "tokenId": "reference.labs.motion.keyframe.gl-float-r",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000858", "NODE-TOKEN-000859"]
+    },
+    {
+      "id": "NODE-TOKEN-000861",
+      "tokenId": "reference.labs.motion.keyframe.bg-shape-enter",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000860", "NODE-TOKEN-000861"]
+    },
+    {
+      "id": "NODE-TOKEN-000863",
+      "tokenId": "reference.labs.motion.keyframe.shape-morph",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000862", "NODE-TOKEN-000863"]
+    },
+    {
+      "id": "NODE-TOKEN-000865",
+      "tokenId": "reference.labs.motion.keyframe.svg-shape-enter",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000864", "NODE-TOKEN-000865"]
+    },
+    {
+      "id": "NODE-TOKEN-000867",
+      "tokenId": "reference.labs.motion.keyframe.gl-float-x",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000866", "NODE-TOKEN-000867"]
+    },
+    {
+      "id": "NODE-TOKEN-000869",
+      "tokenId": "reference.labs.motion.keyframe.gl-float-y",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000868", "NODE-TOKEN-000869"]
+    },
+    {
+      "id": "NODE-TOKEN-000871",
+      "tokenId": "reference.labs.motion.keyframe.gl-float-r",
+      "group": "motion",
+      "sourceChain": ["NODE-SOURCE-000001", "NODE-SELECTOR-000870", "NODE-TOKEN-000871"]
+    }
+  ],
+  "conflicts": [
+    {
+      "conflictId": "CONF-0001",
+      "classification": "cross-group-value-collision",
+      "value": "4px",
+      "groups": ["radius", "spacing"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    },
+    {
+      "conflictId": "CONF-0002",
+      "classification": "cross-group-value-collision",
+      "value": "26px",
+      "groups": ["radius", "font-size"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    },
+    {
+      "conflictId": "CONF-0003",
+      "classification": "cross-group-value-collision",
+      "value": "50px",
+      "groups": ["radius", "spacing"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    },
+    {
+      "conflictId": "CONF-0004",
+      "classification": "cross-group-value-collision",
+      "value": "100px",
+      "groups": ["radius", "font-size"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    },
+    {
+      "conflictId": "CONF-0005",
+      "classification": "cross-group-value-collision",
+      "value": "10px",
+      "groups": ["spacing", "font-size"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    },
+    {
+      "conflictId": "CONF-0006",
+      "classification": "cross-group-value-collision",
+      "value": "12px",
+      "groups": ["spacing", "font-size"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    },
+    {
+      "conflictId": "CONF-0007",
+      "classification": "cross-group-value-collision",
+      "value": "16px",
+      "groups": ["spacing", "font-size"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    },
+    {
+      "conflictId": "CONF-0008",
+      "classification": "cross-group-value-collision",
+      "value": "18px",
+      "groups": ["spacing", "font-size"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    },
+    {
+      "conflictId": "CONF-0009",
+      "classification": "cross-group-value-collision",
+      "value": "21px",
+      "groups": ["spacing", "font-size"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    },
+    {
+      "conflictId": "CONF-0010",
+      "classification": "cross-group-value-collision",
+      "value": "24px",
+      "groups": ["spacing", "font-size"],
+      "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+      "evidenceIds": []
+    }
+  ],
+  "counts": {
+    "atomic": 54,
+    "semantic": 54,
+    "component": 1,
+    "breakpoint": 9,
+    "motion": 10,
+    "conflicts": 10,
+    "namespaceViolations": 0
+  },
+  "canonicalHash": "0822446ffc2a99353552f852eb5a61b6327692f5476846fd128f097a0a0a4efe"
+}

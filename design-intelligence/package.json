@@ -23,7 +23,9 @@
     "validate": "node scripts/validate.mjs",
     "reproduce": "node scripts/reproduce.mjs",
     "report": "node scripts/report.mjs",
-    "gate": "node scripts/gate.mjs"
+    "migration": "node scripts/migration-assessment.mjs",
+    "gate": "node scripts/gate.mjs",
+    "closure": "node scripts/closure-4-5.mjs"
   },
   "devDependencies": {
     "pixelmatch": "7.2.0",

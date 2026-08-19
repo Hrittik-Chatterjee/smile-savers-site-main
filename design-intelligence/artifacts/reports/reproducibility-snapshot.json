@@ -1,0 +1,40 @@
+{
+  "stage": "reproduce",
+  "generatedAt": "2026-08-19T08:56:41.336Z",
+  "executionId": "f0a28788-07f3-4c18-bd10-010bf926b69d",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "note": "Comparing current canonical hashes against the previously saved snapshot.",
+  "hashes": {
+    "mirror": "9b3e65074c0e0f172c17f747b2a6ff994944652fb5e39e87b5395b9869323a9e",
+    "parse": "fcd7b8fc2ab04c8e41ff56b27c011dcdd3d2ffa7f9ec942374b056e81a1b3b99",
+    "capture": "f37f790278a2967015f1f3bd0b00bfdfc9f3e1901d747134d8926f9798942c55",
+    "states": "3828a7291d5a568e4aabbd8ce59e08584c27fb31d9b4e6df367135c1e6b9fb38",
+    "responsive": "fda028c35c04dceca89f425da3ad6838958bc56bf0b645f4e14945b3c6e1f7ef",
+    "normalize": "6a0bfc8ad96c4c406553a1a89796be80da2a320561a8b394f76900aa186cf8ff",
+    "graph": "6483c8c2ecdc980c02440d3dcf035e05bfe32adfae9b7752332618c25d1653d7",
+    "tokens": "0822446ffc2a99353552f852eb5a61b6327692f5476846fd128f097a0a0a4efe",
+    "material": "e6c4ed09dff59770ed061d9cb6ce34f12374df2ad043309e5256e89cb26015c3",
+    "grammar": "f35c38ac7c0fe899828ea1e475a7576abb36d1acf9041fb15e45eb6c7aa655c8"
+  },
+  "missingHashes": [],
+  "hasPreviousSnapshot": true,
+  "unexpectedDeltas": [],
+  "expectedDeltas": [],
+  "reproducedWithUnchangedCode": [
+    "mirror",
+    "parse",
+    "capture",
+    "states",
+    "responsive",
+    "normalize",
+    "graph",
+    "tokens",
+    "material",
+    "grammar"
+  ],
+  "status": "REPRODUCIBLE"
+}

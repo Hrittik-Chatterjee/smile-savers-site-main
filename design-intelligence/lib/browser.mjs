@@ -52,6 +52,33 @@ export const CAPTURE_ENVIRONMENT = Object.freeze({
   timezoneId: 'UTC',
 });
 
+/**
+ * Freeze CSS animations/transitions for screenshot determinism ONLY.
+ *
+ * Never call this before Stage 4's motion extraction — that would zero out
+ * exactly the transition-duration/animation-duration values it needs to
+ * record (see capture.mjs docstring). It exists for fixture/parity screenshots
+ * (Stages 13-14), where Labs' looping decorative animations (gl-float-x/y/r —
+ * see Stage 3 keyframes) otherwise make two sequential captures of the SAME
+ * element diverge almost completely, since each catches a different animation
+ * frame. Freezing here measures GEOMETRY reproducibility, not motion.
+ */
+export async function installScreenshotStability(page) {
+  await page.addStyleTag({
+    content: `
+      *, *::before, *::after {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-delay: 0s !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+        caret-color: transparent !important;
+      }
+    `,
+  });
+}
+
 export function environmentManifest() {
   const { executablePath, version } = resolveChromium();
   return {

@@ -1,0 +1,102 @@
+{
+  "stage": "integrate",
+  "generatedAt": "2026-08-19T08:57:31.206Z",
+  "executionId": "c0ad6c1c-10b1-4ebd-a9d2-777a6b827487",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "note": "Additive integration only. No production token replaced, no component rewired, no page restyled.",
+  "repoAuthority": {
+    "source": "src/styles/global.css (read live, not from any planning document)",
+    "sampleTokens": {
+      "--color-bg-clinical": {
+        "value": "#EFF6EE",
+        "line": 63,
+        "file": "src/styles/global.css"
+      },
+      "--color-surface": {
+        "value": "#EFF6EE",
+        "line": 89,
+        "file": "src/styles/global.css"
+      },
+      "--color-bg-human": {
+        "value": "#F4EBD9",
+        "line": 65,
+        "file": "src/styles/global.css"
+      }
+    },
+    "existingRadiusSteps": [
+      {
+        "name": "--radius-sm",
+        "value": "0.25rem",
+        "line": 249,
+        "file": "src/styles/global.css"
+      },
+      {
+        "name": "--radius-md",
+        "value": "0.5rem",
+        "line": 250,
+        "file": "src/styles/global.css"
+      },
+      {
+        "name": "--radius-lg",
+        "value": "0.75rem",
+        "line": 251,
+        "file": "src/styles/global.css"
+      },
+      {
+        "name": "--radius-xl",
+        "value": "1rem",
+        "line": 252,
+        "file": "src/styles/global.css"
+      },
+      {
+        "name": "--radius-2xl",
+        "value": "1.5rem",
+        "line": 253,
+        "file": "src/styles/global.css"
+      },
+      {
+        "name": "--radius-full",
+        "value": "9999px",
+        "line": 254,
+        "file": "src/styles/global.css"
+      }
+    ],
+    "existingSpacingSteps": [
+      {
+        "name": "--spacing-section",
+        "value": "clamp(4rem, 3rem + 4vw, 6rem)",
+        "line": 227,
+        "file": "src/styles/global.css"
+      },
+      {
+        "name": "--spacing-block",
+        "value": "clamp(2rem, 1.5rem + 2vw, 3rem)",
+        "line": 228,
+        "file": "src/styles/global.css"
+      },
+      {
+        "name": "--spacing-element",
+        "value": "clamp(1rem, 0.75rem + 1vw, 1.5rem)",
+        "line": 229,
+        "file": "src/styles/global.css"
+      }
+    ],
+    "daisyUiOverridesRespected": "src/styles/global.css:24-33 (!important block) untouched by this stage"
+  },
+  "generatedFile": {
+    "path": "src/styles/design-intelligence-grammar.css",
+    "importedByProduction": false,
+    "namespaceCollisions": []
+  },
+  "productionSafety": {
+    "ranBuild": true,
+    "command": "npm run check",
+    "errors": 0,
+    "warnings": 0
+  },
+  "canonicalHash": "a0a61842b4fa1efa69dcfcdb9b8376150a481a7e48f4b47ab5ab93fe31da03a4"
+}

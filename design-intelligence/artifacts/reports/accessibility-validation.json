@@ -1,0 +1,173 @@
+{
+  "stage": "validate",
+  "generatedAt": "2026-08-19T08:54:34.833Z",
+  "executionId": "6fedd4f2-5c6b-4d37-aacc-e2787df5c031",
+  "environment": {
+    "browser": {
+      "executablePath": "/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
+      "version": "Chromium 141.0.7390.37"
+    },
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64",
+    "capture": {
+      "deviceScaleFactor": 1,
+      "colorScheme": "light",
+      "locale": "en-US",
+      "timezoneId": "UTC"
+    }
+  },
+  "note": "labsObservations is informational evidence ABOUT Labs (Labs is not shipped by this project — its accessibility posture is not this project's responsibility). smileSaversNormative is the actual pass/fail gate, run against production dist/.",
+  "labsObservations": {
+    "evidenceClass": "OBSERVED-MIRROR",
+    "axe": {
+      "violations": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious",
+          "description": "Ensure ARIA attributes are not prohibited for an element's role",
+          "help": "Elements must only use permitted ARIA attributes",
+          "nodeCount": 4,
+          "targets": [
+            ["div[aria-label=\"Go to experiment 1\"]"],
+            ["div[aria-label=\"Go to experiment 2\"]"],
+            ["div[data-active=\"true\"]"],
+            ["div[aria-label=\"Go to experiment 4\"]"]
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodeCount": 3,
+          "targets": [["#experiments"], [".home-carousel__about-eyebrow"], ["#stay-connected"]]
+        }
+      ],
+      "passes": 26,
+      "incomplete": 3
+    },
+    "reducedMotionMediaQueryRespected": true,
+    "crossReference": "EV-UI-MOTION-00002 (closure) — reduced-motion changes rendered visibility, which is exactly the kind of thing an a11y audit should catch; this record confirms the media query itself IS correctly honored by the mirror render."
+  },
+  "smileSaversNormative": {
+    "target": "WCAG 2.2 AA",
+    "routesChecked": ["/", "/services/", "/appointments/", "/contact/"],
+    "results": [
+      {
+        "route": "/",
+        "violations": [
+          {
+            "id": "aria-prohibited-attr",
+            "impact": "serious",
+            "description": "Ensure ARIA attributes are not prohibited for an element's role",
+            "help": "Elements must only use permitted ARIA attributes",
+            "nodeCount": 3,
+            "targets": [
+              [
+                "article[aria-label=\"Review from John Doe\"] > .tsl-stars-sm[aria-label=\"5 out of 5 stars\"][data-astro-cid-msyxxbbi=\"\"]"
+              ],
+              [
+                "article[aria-label=\"Review from James K.\"] > .tsl-stars-sm[aria-label=\"5 out of 5 stars\"][data-astro-cid-msyxxbbi=\"\"]"
+              ],
+              [
+                "article[aria-label=\"Review from Sofia R.\"] > .tsl-stars-sm[aria-label=\"5 out of 5 stars\"][data-astro-cid-msyxxbbi=\"\"]"
+              ]
+            ]
+          },
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodeCount": 35,
+            "targets": [
+              [".hdr-cta"],
+              [".cta-primary > span[data-astro-cid-ygtpsrww=\"\"]"],
+              [".sp-eyebrow"],
+              [".eyebrow"],
+              ["a[href$=\"dr-deepak-bhagat\"]"]
+            ]
+          }
+        ],
+        "passes": 29,
+        "incomplete": 2
+      },
+      {
+        "route": "/services/",
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodeCount": 19,
+            "targets": [
+              [".hdr-cta"],
+              [".btn-primary"],
+              [".ft-ins-label"],
+              [".ft-ins-more"],
+              [".footer-links:nth-child(1) > .footer-heading"]
+            ]
+          }
+        ],
+        "passes": 24,
+        "incomplete": 1
+      },
+      {
+        "route": "/appointments/",
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodeCount": 24,
+            "targets": [
+              [".hdr-cta"],
+              [".btn-primary.btn[for=\"step-2\"]"],
+              [".hc-hours-highlight > span[data-astro-cid-kdc7bxkt=\"\"]:nth-child(1)"],
+              [".hc-hours-highlight > span[data-astro-cid-kdc7bxkt=\"\"]:nth-child(2)"],
+              [".hc-hours-muted > span[data-astro-cid-kdc7bxkt=\"\"]:nth-child(1)"]
+            ]
+          },
+          {
+            "id": "label",
+            "impact": "critical",
+            "description": "Ensure every form element has a label",
+            "help": "Form elements must have labels",
+            "nodeCount": 4,
+            "targets": [["#step-1"], ["#step-3"], ["#step-4"], ["#step-5"]]
+          }
+        ],
+        "passes": 25,
+        "incomplete": 1
+      },
+      {
+        "route": "/contact/",
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+            "help": "Elements must meet minimum color contrast ratio thresholds",
+            "nodeCount": 18,
+            "targets": [
+              [".hdr-cta"],
+              [".ft-ins-label"],
+              [".ft-ins-more"],
+              [".footer-links:nth-child(1) > .footer-heading"],
+              [".footer-links:nth-child(2) > .footer-heading"]
+            ]
+          }
+        ],
+        "passes": 26,
+        "incomplete": 1
+      }
+    ],
+    "totalViolations": 6,
+    "criticalOrSeriousViolations": 6,
+    "status": "FAIL"
+  },
+  "canonicalHash": "6fad636bb417fba708bef56844db9ff82bddd3314128a03e4dfaa5971d6122f3"
+}

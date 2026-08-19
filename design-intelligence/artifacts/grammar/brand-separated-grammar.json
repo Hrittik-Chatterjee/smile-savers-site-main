@@ -1,0 +1,108 @@
+{
+  "stage": "grammar",
+  "generatedAt": "2026-08-19T08:55:51.392Z",
+  "executionId": "162a5230-6a85-406c-97df-46a9068cb81c",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "note": "Extracts RELATIONSHIPS (ratios, rhythm, structural patterns) only. Contains zero Google colors, zero Google Sans references, zero Labs imagery/copy — enforced by the contamination scan below, which fails the stage if violated.",
+  "grammar": {
+    "spacingRhythm": {
+      "description": "Ratio of each observed spacing step to the smallest observed non-zero spacing step, ordered smallest-first. A relationship (e.g. 1 / 2 / 3 / 4x the base unit), not a copy of Labs' literal px scale.",
+      "baseUnitRatio": 1,
+      "steps": [
+        {
+          "stepRatio": 1,
+          "occurrences": 33
+        },
+        {
+          "stepRatio": 1.5,
+          "occurrences": 30
+        },
+        {
+          "stepRatio": 1.875,
+          "occurrences": 3
+        },
+        {
+          "stepRatio": 2,
+          "occurrences": 4
+        },
+        {
+          "stepRatio": 2.5,
+          "occurrences": 24
+        },
+        {
+          "stepRatio": 2.825,
+          "occurrences": 3
+        },
+        {
+          "stepRatio": 3,
+          "occurrences": 29
+        },
+        {
+          "stepRatio": 3.475,
+          "occurrences": 3
+        },
+        {
+          "stepRatio": 4,
+          "occurrences": 30
+        },
+        {
+          "stepRatio": 4.5,
+          "occurrences": 2
+        },
+        {
+          "stepRatio": 4.6,
+          "occurrences": 4
+        },
+        {
+          "stepRatio": 5,
+          "occurrences": 3
+        }
+      ],
+      "evidenceClass": "DERIVED"
+    },
+    "radiusScale": {
+      "description": "Ratio of each observed radius step to the smallest non-zero radius step.",
+      "stepRatios": [1, 4.103, 6.5, 10.715, 11.465, 12.5, 25, 250, 2497.5],
+      "stepCount": 9,
+      "evidenceClass": "DERIVED"
+    },
+    "typographyHierarchy": {
+      "description": "Consecutive step ratios across the observed font-size scale (a modular-scale-style relationship), not the literal sizes.",
+      "consecutiveStepRatios": [
+        1.2, 1.111, 1.029, 1.02, 1.143, 1.125, 1.042, 1.12, 1.143, 1.083, 1.615, 1.429, 1.667, 1.2
+      ],
+      "evidenceClass": "DERIVED"
+    },
+    "responsiveRhythm": {
+      "description": "Ratio between consecutive real breakpoints (Stage 3/6 evidence), describing HOW breakpoints space out, not their literal px values.",
+      "consecutiveRatios": [1.5, 1.28, 1, 1.333, 1, 1.334, 1.406, 1.042],
+      "breakpointCount": 9,
+      "evidenceClass": "DERIVED"
+    },
+    "compositionPatterns": {
+      "description": "Structural layout patterns observed, described without literal values.",
+      "usesContentMaxWidthConstraint": true,
+      "evidenceClass": "INFERRED"
+    },
+    "interactionStatePatterns": {
+      "description": "Structural pattern: does every interactive element carry a distinct visible focus-visible treatment? (see closure EV-UI-STATE-00001: 28/28 resolved rules showed a measurable delta)",
+      "focusVisibleAppliedSystematically": true,
+      "evidenceClass": "DERIVED"
+    },
+    "motionRelationships": {
+      "description": "Structural pattern: motion state (suppressed vs not) changes which elements are considered \"visible\" at all, not merely how they transition (see closure EV-UI-MOTION-00002).",
+      "motionAffectsInitialVisibility": true,
+      "evidenceClass": "DERIVED"
+    }
+  },
+  "contaminationScan": {
+    "forbiddenPatternCount": 5,
+    "hits": [],
+    "clean": true
+  },
+  "canonicalHash": "f35c38ac7c0fe899828ea1e475a7576abb36d1acf9041fb15e45eb6c7aa655c8"
+}

@@ -1,0 +1,138 @@
+{
+  "stage": "migration-assessment",
+  "generatedAt": "2026-08-19T08:40:19.402Z",
+  "executionId": "9783fcfc-8f01-43dc-904d-ce7aa887e6ed",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "note": "NO MIGRATION WAS PERFORMED. This is an assessment only, per the hard-locked stack decision.",
+  "currentRepoVersions": {
+    "astro": "^6.0.0-beta.3",
+    "typescript": "^5.4.0",
+    "vite": "^7.3.1",
+    "wrangler": "^4.80.0",
+    "node": ">=22.0.0"
+  },
+  "assessments": [
+    {
+      "subject": "Astro",
+      "current": "^6.0.0-beta.3",
+      "target": "7.2.3",
+      "officialEvidence": {
+        "source": "https://registry.npmjs.org/astro (dist-tags.latest), https://raw.githubusercontent.com/withastro/astro/main/packages/astro/CHANGELOG.md",
+        "method": "curl fetch this session",
+        "resolvedAt": "2026-08-19"
+      },
+      "compatibility": "Astro 6 already requires Node >=22.12.0 (confirmed in CHANGELOG.md, PR #14427) — so this repo's current Node 22 engine requirement is unaffected by the 6->7 jump specifically.",
+      "breakingChanges": [
+        "HTML whitespace stripping now follows JSX rules by default (removes insignificant whitespace/line breaks around elements). Could subtly change rendered spacing in any component relying on incidental whitespace-as-a-space between inline elements.",
+        "@astrojs/db package removed entirely (was deprecated in 6.4.5). Repo does not use it (grep confirmed no @astrojs/db reference in package.json/astro.config.mjs) — not applicable.",
+        "Go-based compiler and experimental.rustCompiler flag removed. Repo's astro.config.mjs does not set this flag — not applicable."
+      ],
+      "workRequired": "Upgrade astro dependency; re-run full visual regression (Stage 15 baselines) to catch any whitespace-stripping-induced spacing change; re-run npm run check and npm run build.",
+      "risk": "LOW-MEDIUM — no removed feature this repo uses, but the whitespace-stripping change is a real behavioral change that visual regression, not type-checking, would catch.",
+      "validation": "npm run check && npm run build; Stage 15 site-baselines.json diff against a pre-migration snapshot on all 4 sampled routes x 6 viewports.",
+      "status": "VERIFY-BLOCKED for GO/NO-GO — requires actually running the upgrade in an isolated branch to observe real whitespace diffs, which is out of this project's scope."
+    },
+    {
+      "subject": "TypeScript",
+      "current": "^5.4.0",
+      "target": "7.0.2 (published under @typescript/native-preview during preview; `tsc` binary name reserved for \"7.0 RC and later\" per upstream README)",
+      "officialEvidence": {
+        "source": "https://registry.npmjs.org/typescript (dist-tags.latest), https://raw.githubusercontent.com/microsoft/typescript-go/main/README.md",
+        "method": "curl fetch this session",
+        "resolvedAt": "2026-08-19"
+      },
+      "compatibility": "TypeScript 7 (\"tsgo\") is NOT an incremental tsc release — it is a from-scratch native Go port of the compiler. The official README confirms the preview is currently distributed under a DIFFERENT package name (@typescript/native-preview), with `tsc` itself reserved for a later RC.",
+      "breakingChanges": [
+        "Entirely different compiler implementation. Plugin/tooling ecosystem compatibility (astro-check, editor integration, prettier-plugin-astro type-aware rules if any) is unproven for a native-Go compiler.",
+        "@astrojs/check (this repo's astro check tool) compatibility with a Go-based tsc is unverified — this repo's primary correctness gate depends on it."
+      ],
+      "workRequired": "Wait for a stable, non-preview release under the `typescript` package name and verify @astrojs/check compatibility before considering this upgrade at all.",
+      "risk": "HIGH — this is the single highest-risk item in the target stack. The project's entire correctness gate (npm run check) is astro check, which wraps tsc; an incompatible or behaviorally-different compiler could silently change what passes and what fails.",
+      "validation": "Full npm run check pass/fail comparison against the current 143-hint baseline (established this session) BEFORE and AFTER, on an isolated branch, before any consideration of merging.",
+      "status": "NO-GO for now — the preview status and package-name mismatch alone are sufficient reason to defer this upgrade independent of any other factor."
+    },
+    {
+      "subject": "Vite",
+      "current": "^7.3.1",
+      "target": "8.2.1",
+      "officialEvidence": {
+        "source": "https://registry.npmjs.org/vite (dist-tags.latest)",
+        "method": "curl fetch this session",
+        "resolvedAt": "2026-08-19"
+      },
+      "compatibility": "VERIFY-BLOCKED — Vite's own changelog was not fetched this session (time-constrained); Astro 7's own Vite version requirement was also not independently confirmed. Astro typically pins a specific Vite major internally via @astrojs/* peer deps.",
+      "breakingChanges": ["VERIFY-BLOCKED — not independently confirmed this session."],
+      "workRequired": "Fetch and review the actual Vite 8 changelog before any migration attempt; confirm Astro 7's actual Vite peer-dependency requirement (this repo currently uses Vite 7 with Astro 6-beta, which may already be ahead of what Astro 6 strictly requires).",
+      "risk": "UNKNOWN — insufficient evidence gathered this session to assess.",
+      "validation": "N/A — assessment incomplete.",
+      "status": "VERIFY-BLOCKED"
+    },
+    {
+      "subject": "Node.js",
+      "current": ">=22.0.0",
+      "target": "24.19.0 (Krypton, latest LTS)",
+      "officialEvidence": {
+        "source": "https://nodejs.org/dist/index.json",
+        "method": "curl fetch this session",
+        "resolvedAt": "2026-08-19"
+      },
+      "compatibility": "Astro 6 and 7 both already require only Node >=22.12.0 (confirmed live in Astro's changelog) — Node 24 is NOT required by anything in the target stack examined this session. This repo's current Node 22 engine requirement is not a blocker for Astro 7.",
+      "breakingChanges": [
+        "N/A — this is an optional upgrade, not a requirement of any other item in this assessment."
+      ],
+      "workRequired": "None required. Could be deferred indefinitely without blocking any other item here.",
+      "risk": "LOW if pursued, but pursuing it is UNMOTIVATED — nothing else in this stack currently requires it.",
+      "validation": "CI runner Node version bump + npm ci + full test/build gate.",
+      "status": "NO ACTION NEEDED — not a dependency of the Astro 7 upgrade."
+    },
+    {
+      "subject": "Cloudflare Pages -> Workers (@astrojs/cloudflare)",
+      "current": "Cloudflare Pages Functions (functions/ directory, wrangler.jsonc assets binding)",
+      "target": "@astrojs/cloudflare 14.2.2 + Cloudflare Workers",
+      "officialEvidence": {
+        "source": "https://registry.npmjs.org/@astrojs/cloudflare (dist-tags.latest)",
+        "method": "curl fetch this session",
+        "resolvedAt": "2026-08-19"
+      },
+      "compatibility": "VERIFY-BLOCKED — the actual @astrojs/cloudflare adapter changelog/migration guide was not fetched this session. This is a full deployment-model change (Pages Functions to Workers is a different runtime/routing model, not a version bump), independent of the Astro version.",
+      "breakingChanges": [
+        "functions/api/chat.js and functions/api/contact.js (Cloudflare Pages Functions) would need to become Worker route handlers — a structural rewrite, not a config change.",
+        "wrangler.jsonc's assets binding and preview/production env split would need reworking for Workers deployment semantics.",
+        "The existing CI workflow (.github/workflows/deploy.yml, cloudflare/pages-action@v1) targets Pages specifically and would need replacement."
+      ],
+      "workRequired": "A dedicated migration project: rewrite functions/, reconfigure wrangler.jsonc, replace the CI deploy job, re-verify the AI chat endpoint (Workers AI binding) and MailChannels contact form end-to-end against a live Workers deployment.",
+      "risk": "HIGH — this is infrastructure, not code. A failed migration here means a broken production chat widget or broken contact form on a live dental practice site.",
+      "validation": "Full functional test of /api/chat and /api/contact against a Workers preview deployment before any production cutover; this cannot be validated from within this harness.",
+      "status": "NO-GO for this project — explicitly out of scope per the hard-locked stack decision, and the evidence above shows why it would need to be its own dedicated project regardless."
+    },
+    {
+      "subject": "TinaCMS introduction",
+      "current": "none (site content is Astro content collections + static TS config modules)",
+      "target": "tinacms 3.12.0",
+      "officialEvidence": {
+        "source": "https://registry.npmjs.org/tinacms (dist-tags.latest)",
+        "method": "curl fetch this session",
+        "resolvedAt": "2026-08-19"
+      },
+      "compatibility": "VERIFY-BLOCKED — TinaCMS's own Astro integration guide was not fetched this session.",
+      "breakingChanges": [
+        "N/A — this is a net-new addition, not a version migration; the \"breaking change\" is architectural: introducing a CMS content-editing layer where none exists today."
+      ],
+      "workRequired": "Define a content schema mapping to the 8 existing content collections (src/content.config.ts), stand up Tina's admin route (which per its own docs needs SSR/Workers per the original kit's STACK.md), migrate authoring workflow, train content editors.",
+      "risk": "MEDIUM-HIGH — introduces a new runtime dependency, a new admin surface, and (per the kit's own note) implies the Workers migration above as a prerequisite for the visual-editing route.",
+      "validation": "N/A — assessment incomplete; would require its own dedicated scoping.",
+      "status": "NO-GO for this project — out of scope per the hard-locked stack decision, and evidently dependent on the also-out-of-scope Workers migration."
+    }
+  ],
+  "overallRecommendation": "Stay on the current stack. Of the 6 items assessed, only the Astro 6->7 bump has no other blocking factor (low-medium risk, real but boundable via visual regression); every other item is either explicitly out of scope, has insufficient live evidence gathered this session, or is actively NO-GO (TypeScript 7 preview status, Workers/TinaCMS architectural scope).",
+  "counts": {
+    "assessed": 6,
+    "verifyBlocked": 1,
+    "noGo": 4
+  },
+  "canonicalHash": "f889e57936c4eb680baa66446b5ffcc6bf8c69649eb5d133e90063a04f84c42e"
+}
