@@ -1,0 +1,32 @@
+{
+  "name": "design-intelligence",
+  "private": true,
+  "type": "module",
+  "description": "Google Labs design-intelligence extraction harness. Isolated from the Smile Savers production build.",
+  "scripts": {
+    "audit": "node scripts/audit.mjs",
+    "baseline": "node scripts/baseline.mjs",
+    "mirror": "node scripts/mirror.mjs",
+    "parse": "node scripts/parse.mjs",
+    "capture": "node scripts/capture.mjs",
+    "states": "node scripts/states.mjs",
+    "responsive": "node scripts/responsive.mjs",
+    "normalize": "node scripts/normalize.mjs",
+    "graph": "node scripts/graph.mjs",
+    "tokens": "node scripts/tokens.mjs",
+    "material": "node scripts/material.mjs",
+    "grammar": "node scripts/grammar.mjs",
+    "integrate": "node scripts/integrate.mjs",
+    "fixtures": "node scripts/fixtures.mjs",
+    "parity": "node scripts/parity.mjs",
+    "regression": "node scripts/regression.mjs",
+    "validate": "node scripts/validate.mjs",
+    "reproduce": "node scripts/reproduce.mjs",
+    "report": "node scripts/report.mjs",
+    "gate": "node scripts/gate.mjs"
+  },
+  "devDependencies": {
+    "pixelmatch": "7.2.0",
+    "pngjs": "7.0.0"
+  }
+}

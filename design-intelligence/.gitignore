@@ -1,0 +1,16 @@
+# Mirrored Google-owned bytes are NEVER committed.
+#
+# The mirror exists only as a local, reproducible capture surface for extracting
+# design evidence. Committing Google's HTML, CSS, JS, or imagery would
+# redistribute assets we have no licence to redistribute, and would violate the
+# project's brand-separation boundary.
+#
+# What IS committed: mirror-manifest.json (URLs, hashes, sizes, content types,
+# provenance). That is evidence about the source, not a copy of it. The mirror
+# is fully rebuildable from the manifest via `npm run mirror`.
+artifacts/mirror/files/
+
+# Derived capture artifacts: large, regenerable, and may embed Google imagery.
+artifacts/evidence/
+artifacts/visual/
+node_modules/
