@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-19T14:52:00Z",
+  "updatedAt": "2026-08-19T15:00:00Z",
   "currentMilestone": "M1 runtime-proof-pass DONE, M2 release-gates-pass (initial slice) DONE \u2014 see EAIS pack roadmap/MILESTONES.json for M-numbering",
   "completedGates": [
     "Wave 1 remediation (10 findings, commit cd7d6d7)",
@@ -10,7 +10,8 @@
     "DEBT-0011: security headers wired into src/entrypoint.js via functions/_middleware.js's applySecurityHeaders() (commit 191d299)",
     "DEBT-0019: CLAUDE.md architecture description corrected (Workers not Pages, Resend not MailChannels) (commit 191d299)",
     "First automated test suite: 11 tests across functions/api/__tests__/{contact,chat}.test.mjs, covering the fail-closed contact-API behavior and the chat rate limiter \u2014 both proven to actually catch regressions by reverting the original bug and confirming the suite fails",
-    "npm test wired as a blocking CI step in the quality job (.github/workflows/deploy.yml)"
+    "npm test wired as a blocking CI step in the quality job (.github/workflows/deploy.yml)",
+    "Domain-canonicalization regression gate (functions/api/__tests__/domain-canonicalization.test.mjs, 4 tests, ROOT-DOMAIN-001 recurrence prevention) -- proven via revert/restore cycle"
   ],
   "openBlockers": [
     {
