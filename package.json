@@ -16,7 +16,7 @@
     "clean": "rm -rf .astro dist",
     "build:ci": "astro build --no-type-check",
     "lint": "astro check",
-    "preview:cf": "wrangler pages dev dist"
+    "preview:cf": "wrangler dev"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.4",

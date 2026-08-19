@@ -20,7 +20,7 @@ import { corsHeadersFor } from './_lib/cors.js';
 // in this codebase — removing them without a nonce/hash strategy would
 // break the site. 'unsafe-eval' is removed: no eval()/new Function() usage
 // exists anywhere in src/ or functions/ (grep-verified).
-const securityHeaders = {
+export const securityHeaders = {
   'X-Frame-Options': 'DENY',
   'X-Content-Type-Options': 'nosniff',
   'X-XSS-Protection': '1; mode=block',
@@ -28,6 +28,25 @@ const securityHeaders = {
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
   'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://maps.openstreetmap.org https://tile.openstreetmap.org; connect-src 'self'; frame-src https://www.openstreetmap.org; upgrade-insecure-requests",
 };
+
+// Exported so src/entrypoint.js's Worker fetch handler can apply the same
+// headers it would get "for free" under Pages' auto-invoked _middleware.js
+// convention. entrypoint.js never triggers onRequest below (it's a
+// Pages-Functions-only invocation convention), so without this explicit
+// call every /api/* response and the static-asset fallback would ship with
+// zero security headers — confirmed live via curl against production
+// before this fix (audit/cloudflare-decision/repo-vs-live.md, DEBT-0011).
+export function applySecurityHeaders(response) {
+  const newHeaders = new Headers(response.headers);
+  Object.entries(securityHeaders).forEach(([key, value]) => {
+    newHeaders.set(key, value);
+  });
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: newHeaders,
+  });
+}
 
 export async function onRequest(context) {
   const { request, next } = context;
@@ -44,12 +63,8 @@ export async function onRequest(context) {
 
   // Continue to the next middleware or route handler
   const response = await next();
-
-  // Add security headers to all responses
-  const newHeaders = new Headers(response.headers);
-  Object.entries(securityHeaders).forEach(([key, value]) => {
-    newHeaders.set(key, value);
-  });
+  const withSecurityHeaders = applySecurityHeaders(response);
+  const newHeaders = new Headers(withSecurityHeaders.headers);
 
   // Add CORS headers to API routes
   if (url.pathname.startsWith('/api/')) {
@@ -68,9 +83,9 @@ export async function onRequest(context) {
     newHeaders.set('Cache-Control', 'public, max-age=0, must-revalidate');
   }
 
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
+  return new Response(withSecurityHeaders.body, {
+    status: withSecurityHeaders.status,
+    statusText: withSecurityHeaders.statusText,
     headers: newHeaders,
   });
 }
