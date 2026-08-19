@@ -1,0 +1,28 @@
+{
+  "updatedAt": "2026-08-19T13:35:00Z",
+  "currentMilestone": "Phase 0 (Evidence Kernel) + Phase 1 (Trust Kernel) — Phase 1 substantially complete, Phase 0 kernel just created",
+  "completedGates": [
+    "Wave 1 remediation (10 findings, commit cd7d6d7)",
+    "Cloudflare Pages vs Workers decision (ADR-0001, audit/cloudflare-decision/)",
+    "Broken CI deploy jobs removed (ADR-0002, commit 296f6a3)",
+    "OKF knowledge bundle (knowledge/)",
+    "This EAOS Phase-0 evidence/debt/root-cause kernel (audit/eais/20260819T133000Z/, .ai/)"
+  ],
+  "openBlockers": [
+    { "id": "DEBT-0011", "severity": "P0", "summary": "src/entrypoint.js applies zero security headers to live API responses — fix specified in audit/cloudflare-decision/implementation-contract.md, not yet authorized/implemented" },
+    { "id": "DEBT-0012", "severity": "P1", "summary": "Zero automated tests exist anywhere in the repo" },
+    { "id": "DEBT-0013", "severity": "P1", "summary": "Security/perf CI checks are non-blocking (continue-on-error)" },
+    { "id": "DEBT-0015", "severity": "P1", "summary": "Appointment flow needs a product decision (real booking vs. WhatsApp-request framing)" },
+    { "id": "DEBT-0016", "severity": "P1", "summary": "Medical content claims need a clinical-review decision, not an engineering one" },
+    { "id": "DEBT-0017", "severity": "P2", "summary": "6 known WCAG violations from design-intelligence Stage 16, not yet remediated" }
+  ],
+  "knownUnknowns": [
+    "npm audit not run this session in a network-enabled environment — dependency vulnerability status is UNVERIFIED (DEBT-0020)",
+    "No field/RUM Core Web Vitals data available — performance not measured against LCP/INP/CLS targets this pass",
+    "No telemetry/observability implementation exists to evaluate against OpenTelemetry semantic conventions",
+    "OWASP ASVS 5.0 control-by-control verification not performed — only the specific findings from the uploaded audit were checked, not a full ASVS pass",
+    "SLSA provenance level not assessed for the build/deploy pipeline"
+  ],
+  "stackBaseline": "FROZEN — no dependency version has been compatibility-checked this session; treat package.json/package-lock.json as locked until a dedicated compatibility pass is run (see .ai/constitution.md invariant 5)",
+  "nextRequiredAction": "User decision needed: authorize DEBT-0011's implementation (small, specified fix) and/or prioritize which Phase 2+ item (testing, CI gates, accessibility, product decisions) to take on next. See ENGINEERING-ROADMAP.md in audit/eais/20260819T133000Z/ for the full phase ordering."
+}

@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-08-19T13:35:21.695Z",
+  "count": 2,
+  "decisions": [
+    {
+      "id": "ADR-0001",
+      "decision": "Standardize Cloudflare deployment on Workers + Workers Static Assets, not Pages + Pages Functions",
+      "status": "ACCEPTED (decision only -- implementation not yet authorized)",
+      "context": "Two deployment architectures were configured simultaneously; live production evidence showed Workers was already what served traffic.",
+      "alternatives": [
+        "Stay on Pages (would require migrating OFF what already works)",
+        "Defer (rejected -- the CI job was actively failing every run, needed a decision)"
+      ],
+      "evidence": [
+        "CF-A1 through CF-A10 (audit/cloudflare-decision/evidence-index.json)",
+        "CF-C1 through CF-C4 (live production curl evidence)"
+      ],
+      "counterevidence": [
+        "audit/cloudflare-decision/counterevidence.md -- all 4 stress-test counterarguments evaluated, 3 failed to reverse, 1 partially survived (operational-simplicity cost of the hand-rolled entrypoint bypass)"
+      ],
+      "tradeoffs": [
+        "Workers requires manually maintaining functions/_middleware.js wiring instead of getting it free from the official wrangler pages functions build path"
+      ],
+      "confidence": 0.8,
+      "reversal_conditions": [
+        "If Smile Savers' API surface grows beyond 2-3 flat endpoints, the hand-rolled routing in entrypoint.js becomes a real maintenance liability and the official compile-based path should be reconsidered"
+      ],
+      "verification_plan": [
+        "Implement implementation-contract.md's 3 required changes, then re-run the live curl checks from repo-vs-live.md and confirm headers now match"
+      ]
+    },
+    {
+      "id": "ADR-0002",
+      "decision": "Remove cloudflare/pages-action deploy jobs from GitHub Actions CI",
+      "status": "ACCEPTED (implemented, commit 296f6a3)",
+      "context": "The jobs failed on every single run this session (missing CLOUDFLARE_API_TOKEN), and targeted a deployment mechanism (Pages) that live evidence showed was not what was actually serving production.",
+      "alternatives": [
+        "Fix the missing secret and keep the Pages deploy job (rejected -- would deploy to the wrong architecture per ADR-0001)",
+        "Convert to `wrangler deploy` (deferred -- Cloudflare's own Git integration already deploys automatically, confirmed via repeated successful bot comments on this PR; adding a redundant wrangler deploy step was judged unnecessary, not proven necessary)"
+      ],
+      "evidence": [
+        "job log confirming \"Input required and not supplied: apiToken\"",
+        "repeated successful \"Deploying with Cloudflare Workers\" bot comments on this PR after every push this session",
+        "Cloudflare Git integration docs (live-fetched): \"will automatically deploy your code every time you push a change\""
+      ],
+      "counterevidence": [],
+      "tradeoffs": [
+        "CI no longer has an explicit, GitHub-Actions-visible deploy step or gate -- deployment success is now only observable via Cloudflare's own bot comment/dashboard, not a GitHub Actions check"
+      ],
+      "confidence": 0.9,
+      "reversal_conditions": [
+        "If Cloudflare's automatic Git integration is ever disabled or misconfigured for this repo, a manual `wrangler deploy` CI step would need to be reinstated"
+      ],
+      "verification_plan": [
+        "Confirmed: next push after commit 296f6a3 produced a successful Cloudflare bot deploy comment with no corresponding pages-action CI failure"
+      ]
+    }
+  ]
+}

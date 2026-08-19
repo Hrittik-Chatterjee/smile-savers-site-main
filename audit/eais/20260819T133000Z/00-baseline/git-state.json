@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-08-19T13:35:21.695Z",
+  "headSha": "296f6a3e2cecc281d90fd323e11b4de03b533c93",
+  "branch": "claude/init-yi57kn",
+  "recentCommits": [
+    "296f6a3 Remove the broken Cloudflare Pages deploy jobs from CI",
+    "9a883b6 Deepen Cloudflare decision with live-verified evidence; add OKF knowledge bundle",
+    "83a588c Cloudflare Pages vs Workers decision research (no implementation)",
+    "cd7d6d7 Wave 1 (Trust): domain canonicalization, data truth, contact API safety, privacy policy, SEO, CORS/CSP, chat rate limiting",
+    "6c4d7f2 P1: Smile Savers semantic token model + change-impact engine + agent-context contract"
+  ],
+  "npmRunCheck": {
+    "errors": 0,
+    "warnings": 0,
+    "hints": 143,
+    "filesChecked": 89
+  },
+  "npmRunBuild": {
+    "pagesBuilt": 32,
+    "status": "PASS"
+  }
+}

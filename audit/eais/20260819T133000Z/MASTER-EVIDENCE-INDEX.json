@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-08-19T13:35:21.695Z",
+  "note": "This EAOS pass does not re-derive evidence already captured elsewhere in this repo -- it indexes it. See the cited paths for full detail.",
+  "sources": [
+    {
+      "id": "EV-AUDIT-EXTERNAL",
+      "path": "uploaded ZIP SmileSaversAudit20260819T122703Z (archived in this session's conversation, not committed to the repo)",
+      "description": "21 findings across 15 domains, 3 P0, spot-verified this session against real source before any fix was applied"
+    },
+    {
+      "id": "EV-WAVE1-COMMIT",
+      "path": "git commit cd7d6d7",
+      "description": "10 findings remediated: domain, coordinates, hours, dentist count, contact API fail-closed + PII logging + HTML escaping, CORS/CSP reconciliation, chat rate limiting"
+    },
+    {
+      "id": "EV-CLOUDFLARE-DECISION",
+      "path": "audit/cloudflare-decision/",
+      "description": "Full evidence-gated Pages-vs-Workers decision: repo-runtime-map.md, repo-vs-live.md, evidence-index.json, ai-stress-test.json, COST-MODEL.json, migration-risk.json, counterevidence.md, decision.md, CLOUDFLARE-DECISION.{md,json}, implementation-contract.md"
+    },
+    {
+      "id": "EV-CI-FIX-COMMIT",
+      "path": "git commit 296f6a3",
+      "description": "Removed broken cloudflare/pages-action CI jobs"
+    },
+    {
+      "id": "EV-OKF-KNOWLEDGE",
+      "path": "knowledge/",
+      "description": "OKF v0.2 knowledge bundle distilling Wave 1 + Cloudflare decision findings, verified spec-conformant"
+    },
+    {
+      "id": "EV-DESIGN-INTELLIGENCE-STAGE16",
+      "path": "design-intelligence/artifacts/reports/ (Stage 16 axe-core validation)",
+      "description": "6 pre-existing accessibility violations found and evidenced, not yet remediated"
+    },
+    {
+      "id": "EV-DESIGN-INTELLIGENCE-P1",
+      "path": "design-intelligence/reports/ (token-inventory.json, token-lineage.json, cascade-map.json, change-impact-report.json, semantic-validation.json)",
+      "description": "Semantic token model + change-impact engine, 136 tokens, all evidence-linked"
+    }
+  ]
+}
