@@ -34,8 +34,17 @@
       "id": "REPO-B2",
       "class": "B",
       "source": "src/entrypoint.js (read in full)",
-      "claim": "A working Worker fetch handler that imports functions/api/chat.js and functions/api/contact.js directly as ES modules and invokes their onRequestPost/onRequestOptions exports with a hand-shimmed Pages-Functions-shaped context object. No compilation step exists between functions/ and this entrypoint — it's a direct import.",
-      "relevance": "Directly answers the spec's Phase 12 question: functions/ does NOT need to be compiled into a Worker script to work under Workers — this repo already solved that with plain imports, and it is provably working (see CF-C1-C4 below).",
+      "claim": "A working Worker fetch handler that imports functions/api/chat.js and functions/api/contact.js directly as ES modules and invokes their onRequestPost/onRequestOptions exports with a hand-shimmed Pages-Functions-shaped context object.",
+      "relevance": "Answers the spec's Phase 12 question in a repo-specific (not general) way: Cloudflare's official migration path (CF-A10) DOES require compiling functions/ via `wrangler pages functions build`, but Smile Savers uses a hand-rolled bypass instead. This is a correction of this evidence entry's original wording (see migration-risk.json) — the direct-import approach works here (proven live, CF-C1-C4) only because functions/ is trivially simple (2 flat files, no nesting), and it is also the confirmed root cause of the security-header gap in repo-vs-live.md, since the hand-rolled entrypoint never imports functions/_middleware.js the way the official compile step would have.",
+      "confidence": 1.0,
+      "correctedThisSession": true
+    },
+    {
+      "id": "REPO-B4",
+      "class": "B",
+      "source": "repository-wide search this session (find . -iname _routes.json)",
+      "claim": "No _routes.json file exists anywhere in this repository.",
+      "relevance": "Per CF-A9, a Pages project with Functions and no _routes.json invokes a Function on EVERY request, including static assets — meaning a live Pages deployment of this exact repo as-configured would not get free/unlimited static requests at all. This is new, decision-relevant economic evidence not present in the first-pass decision.",
       "confidence": 1.0
     },
     {
@@ -79,6 +88,36 @@
       "source": "curl https://dentalsmilesavers.com/robots.txt",
       "claim": "Sitemap line still points at https://smilesavers.dental/sitemap-index.xml — the pre-Wave-1 domain, confirming live is running an older commit than what's now pushed.",
       "relevance": "Dates the live deployment as older than commit cd7d6d7; not itself an architecture finding",
+      "confidence": 1.0,
+      "fetchedThisSession": true
+    },
+    {
+      "id": "CF-A3",
+      "class": "A",
+      "source": "Cloudflare Workers Platform Limits (developers.cloudflare.com/workers/platform/limits/)",
+      "url": "https://developers.cloudflare.com/workers/platform/limits/",
+      "claim": "Free: 100,000 req/day, 10ms CPU/HTTP request, 128MB memory, 50 subrequests/request, 6 simultaneous connections, 64 env vars/Worker, 3MB gzipped Worker size, 20,000 static asset files, 25MiB individual asset. Paid: no request limit, 5min CPU ceiling, 128MB memory, 10,000 subrequests/request, 128 env vars, 10MB Worker size, 100,000 static asset files, 25MiB individual asset (unchanged).",
+      "relevance": "None of these limits realistically constrain a single dental-practice site: Smile Savers' functions/ handlers are tiny (well under 3MB), issue at most 1-2 subrequests each (Resend/Workers AI calls), and dist/ has nowhere near 20,000 files (32 pages + assets, confirmed by npm run build output this session).",
+      "confidence": 1.0,
+      "fetchedThisSession": true
+    },
+    {
+      "id": "CF-A9",
+      "class": "A",
+      "source": "Cloudflare Pages Functions Routing (developers.cloudflare.com/pages/functions/routing/)",
+      "url": "https://developers.cloudflare.com/pages/functions/routing/",
+      "claim": "\"On a purely static project, Pages offers unlimited free requests. However, once you add Functions on a Pages project, all requests by default will invoke your Function.\" A _routes.json with at least one include rule is required to exclude static paths from Function invocation and keep them free; exclude rules take priority over include rules; max 100 combined rules.",
+      "relevance": "Directly falsifies an implicit assumption in the first-pass decision that Pages' static-asset economics are automatically as good as Workers'. They are NOT, once Functions exist, without an explicit _routes.json — which this repo does not have (REPO-B4).",
+      "confidence": 1.0,
+      "fetchedThisSession": true
+    },
+    {
+      "id": "CF-A10",
+      "class": "A",
+      "source": "Cloudflare Migrate from Pages to Workers (developers.cloudflare.com/workers/static-assets/migrate-from-pages/)",
+      "url": "https://developers.cloudflare.com/workers/static-assets/migrate-from-pages/",
+      "claim": "\"If you use Pages Functions with a folder of functions/, you must first compile these functions into a single Worker script with the wrangler pages functions build command\" (npx wrangler pages functions build --outdir=./dist/worker/). Workers Static Assets serves matching static files BEFORE the Worker script by default, unless assets.run_worker_first is set. Both _headers and _redirects are natively supported under Workers Static Assets, same as Pages.",
+      "relevance": "Corrects the first-pass decision's claim that no compilation step is needed in general (see REPO-B2's correction) — Cloudflare's own recommended path does require it; confirms _headers/_redirects portability (explains CF-C1's finding); confirms run_worker_first is a non-issue for Smile Savers' current two flat API routes (neither matches a static file path).",
       "confidence": 1.0,
       "fetchedThisSession": true
     },

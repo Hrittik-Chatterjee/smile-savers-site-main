@@ -1,5 +1,7 @@
 # Cloudflare Decision — Smile Savers
 
+> **Updated with additional live-verified evidence.** The decision direction is unchanged, but one claim below was wrong and is corrected: Cloudflare's official Pages→Workers migration path *does* require compiling `functions/` via `wrangler pages functions build` — Smile Savers instead uses a working hand-rolled bypass (`src/entrypoint.js`), not "no compilation needed" in general. A new finding (no `_routes.json` exists in this repo) strengthens the Economics/Architecture-fit case for Workers independently. See `migration-risk.json`, `counterevidence.md`, and `CLOUDFLARE-DECISION.json` for the full detail; this file's narrative sections below are updated to match.
+
 ## Decision
 
 **WORKERS — CONDITIONAL GO**
@@ -12,25 +14,25 @@ Conditional because: (1) the security-header gap (`_middleware.js` never invoked
 
 ## Evidence
 
-- Class A: 2 (Workers pricing, Workers AI pricing — both re-fetched live this session)
-- Class B: 3 (`wrangler.jsonc`, `src/entrypoint.js`, `.github/workflows/deploy.yml` — all read in full)
+- Class A: 5 (Workers pricing, Workers AI pricing, Workers platform limits, Pages Functions routing/`_routes.json`, Pages→Workers migration guide — all re-fetched live)
+- Class B: 4 (`wrangler.jsonc`, `src/entrypoint.js`, `.github/workflows/deploy.yml`, and a repo-wide search confirming no `_routes.json` exists)
 - Class C: 4 (live homepage headers, live `/api/contact` OPTIONS, live `/api/chat` POST, live `robots.txt`)
 - Class D: 1 (this session's own PR-comment history)
-- Unresolved/not independently re-verified: the user-supplied research packet's Pages Functions `_routes.json` routing caveat and the exact Pages→Workers migration-guidance wording — used as background context (Class D within `decision.md`'s Growth category) but not re-fetched to Class A this pass.
+- Unresolved: the Growth/future-capability category (Durable Objects/Cron/observability breadth) still rests on the user-supplied research packet's paraphrase rather than an independently re-fetched exact quote — see `CLOUDFLARE-DECISION.json`'s `unresolvedItems`.
 
 ## Quantified result
 
-- Workers Free request capacity: 100,000/day (static assets don't count against this at all, under either architecture — CF-A1).
-- Peak-day safety margin: effectively unbounded for this site's realistic API-call volume (dozens–hundreds/day vs. 100,000/day quota) — no scenario modeled this pass gets within an order of magnitude of the limit.
+- Workers Free request capacity: 100,000/day (static assets don't count against this at all, under Workers — CF-A1; under Pages **only if** `_routes.json` correctly excludes them, which this repo's Pages config does not have — CF-A9, REPO-B4).
+- Peak-day safety margin: effectively unbounded for this site's realistic API-call volume (dozens–hundreds/day vs. 100,000/day quota) — see `COST-MODEL.json`'s `peakDayStressCase`.
 - AI free-neuron capacity: 10,000 neurons/day.
-- Typical AI requests/day before exhausting free tier: ~1,172 (DERIVED from the real `functions/api/chat.js` system prompt — see `ai-capacity-model.json`).
-- Heavy AI requests/day before exhausting free tier: ~839.
-- Estimated paid overage scenarios: none modeled as *likely* for this site's realistic traffic; if it ever occurred, overage is $0.011/1,000 neurons (CF-A2) — negligible even at 2-3x the heavy scenario's volume.
-- Migration effort/risk: **low** — the "migration" is fixing one gap (wire `_middleware.js`'s header logic into `entrypoint.js`) and deleting one now-redundant CI job, not building a new architecture from scratch. The hard part (functions/ → Worker routing) is already done and already live.
+- Typical (1200-in/150-out) AI requests/day before exhausting free tier: **~983** (DERIVED, matches the correction supplied this pass — see `ai-stress-test.json`; the first-pass figure of ~1,172 used a lighter 800/150 profile and is superseded).
+- Heavy (1500-in/200-out) AI requests/day before exhausting free tier: **~760** (supersedes the first pass's ~839, same reason).
+- Estimated paid overage: negligible even at high volume — $0.06/month at 1,000 typical requests/day, ~$40/month even at a 10,000/day heavy-profile scenario far beyond this practice's plausible traffic (full table in `ai-stress-test.json`).
+- Migration effort/risk: **low-medium** (revised from "low" — see `migration-risk.json`). The security-header fix and CI-job retirement are still small, well-scoped changes, but the first pass understated how much of the current working state is a hand-rolled bypass of Cloudflare's own recommended compile step, which is real (if currently manageable) technical debt at this API surface's size.
 
 ## Counterevidence
 
-All four stress-test counterarguments in `decision.md` were tested; none survived for this specific site at its realistic scale. The one open question that could still reverse this (see Limitations) is whether the observed live-production behavior (Workers path serving traffic, Pages path failing) reflects a deliberate, already-made architectural choice that simply hasn't been documented/cleaned up yet — in which case this decision is really just **making the existing, undocumented reality official** rather than choosing between two live options.
+Full detail in `counterevidence.md`. Summary: three of four stress-test counterarguments do not survive (staying on Pages, hitting the Workers Free request limit, AI free tier being too small all fail for this site at realistic scale — and the `_routes.json` finding this pass makes the "mostly static" argument actually favor Workers). The "Workers is unnecessary complexity" counterargument **partially survives**: the first pass understated that Smile Savers' working setup is a hand-rolled bypass of Cloudflare's own recommended `wrangler pages functions build` compile step, which is real (if currently small) technical debt.
 
 ## Required changes before implementation
 

@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-08-19T13:25:00Z",
+  "decision": "WORKERS — CONDITIONAL GO",
+  "confidence": 0.80,
+  "evidenceCounts": { "classA": 5, "classB": 4, "classC": 4, "classD": 1, "unresolved": 1 },
+  "unresolvedItems": [
+    "Growth/future-capability category (Durable Objects/Cron/observability breadth) rests on the user-supplied research packet's paraphrase of Cloudflare's migration guidance, not an independently re-fetched exact quote this pass."
+  ],
+  "quantified": {
+    "workersFreeRequestCapacityPerDay": 100000,
+    "peakDaySafetyMargin": "effectively unbounded at Smile Savers' realistic dynamic-request volume (dozens-hundreds/day vs 100,000/day quota)",
+    "aiFreeNeuronCapacityPerDay": 10000,
+    "typicalProfileAiRequestsPerDayBeforeExhaustion": 983,
+    "heavyProfileAiRequestsPerDayBeforeExhaustion": 760,
+    "estimatedPaidOverageAt1000TypicalRequestsPerDay": "$0.06/month",
+    "estimatedPaidOverageAt10000HeavyRequestsPerDay": "$40.10/month",
+    "migrationEffortRisk": "LOW-MEDIUM — see migration-risk.json; the one real gap (security headers not wired into entrypoint.js) is a small, well-scoped fix, not a rebuild"
+  },
+  "weightedScores": {
+    "architectureFit": { "weight": 0.20, "pages": 2, "workers": 9 },
+    "reliability": { "weight": 0.15, "pages": 1, "workers": 8 },
+    "securityPrivacy": { "weight": 0.15, "pages": 4, "workers": 5 },
+    "economics": { "weight": 0.15, "pages": 5, "workers": 7 },
+    "aiSuitability": { "weight": 0.10, "pages": 5, "workers": 5 },
+    "operationalSimplicity": { "weight": 0.10, "pages": 3, "workers": 6 },
+    "growthFutureCapability": { "weight": 0.10, "pages": 4, "workers": 7 },
+    "migrationRisk": { "weight": 0.05, "pages": 2, "workers": 3 }
+  },
+  "weightedTotals": { "pages": 3.15, "workers": 6.85 },
+  "counterargumentsSurvived": {
+    "stayOnPagesBecauseStatic": false,
+    "workersUnnecessaryComplexity": "partial",
+    "willHitWorkersFreeLimit": false,
+    "aiFreeTierTooSmall": false
+  },
+  "requiredChangesBeforeImplementation": [
+    "Wire functions/_middleware.js's security-header logic into src/entrypoint.js (currently applied to nothing, live)",
+    "Retire or convert the failing cloudflare/pages-action CI job",
+    "Fix wrangler.jsonc's stale preview SITE_URL"
+  ],
+  "finalGate": "CONDITIONAL-GO",
+  "supersedes": "audit/cloudflare-decision/CLOUDFLARE-DECISION.md and decision.md from commit 83a588c, which understated the compilation-step requirement and did not have the _routes.json finding"
+}

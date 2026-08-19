@@ -1,0 +1,36 @@
+{
+  "generatedAt": "2026-08-19T13:20:00Z",
+  "note": "Supersedes/corrects a claim in the first-pass decision.md and CLOUDFLARE-DECISION.md (commit 83a588c): those docs said 'no compilation step exists or is needed' for functions/ under Workers. That was wrong on the general Cloudflare-recommended path -- Cloudflare's current official migration docs (re-fetched this pass) explicitly require compiling a Pages functions/ directory with `npx wrangler pages functions build --outdir=./dist/worker/` before it can run as a Worker's main entrypoint. What IS true, and is the actual reason Smile Savers works today, is narrower: src/entrypoint.js is a HAND-ROLLED alternative to that official compile step -- it manually imports the two flat function files (functions/api/chat.js, functions/api/contact.js) and routes to them itself, bypassing the official build tool entirely. This works only because Smile Savers' functions/ directory is trivially simple (2 flat files, no nested/dynamic segments, no _routes.json). It is also the confirmed root cause of the security-header gap found in repo-vs-live.md: the official `wrangler pages functions build` step understands and bundles functions/_middleware.js automatically; the hand-rolled entrypoint.js does not, and never imports it.",
+  "items": [
+    {
+      "item": "functions/ -> Worker script compilation",
+      "cloudflareRecommendedApproach": "npx wrangler pages functions build --outdir=./dist/worker/, then main points at the compiled output",
+      "smileSaversActualApproach": "Hand-rolled: src/entrypoint.js directly imports functions/api/chat.js and functions/api/contact.js as ES modules, manually routes by url.pathname, and manually shims a Pages-Functions-shaped context object",
+      "risk": "LOW for the current 2-endpoint API surface (both endpoints work, confirmed live). MEDIUM if the API surface grows: adding a third endpoint, nested routes, or dynamic path segments (e.g. functions/api/[id].js) means manually extending entrypoint.js's routing logic correctly, rather than getting Pages' file-based routing conventions for free.",
+      "recommendedAction": "Either (a) keep the hand-rolled approach but also manually wire in functions/_middleware.js's security-header logic (the concrete missing piece), or (b) switch to the official `wrangler pages functions build` step, which would handle both routing AND middleware bundling automatically, at the cost of an extra build step in the pipeline.",
+      "evidence": "CF-A10 (Pages->Workers migration guide, re-fetched), REPO-B2 (src/entrypoint.js read in full)"
+    },
+    {
+      "item": "_routes.json absence",
+      "finding": "No _routes.json exists anywhere in this repository (confirmed via find this pass).",
+      "consequenceUnderPages": "Per Cloudflare's Pages Functions routing docs (CF-A9, re-fetched): 'once you add Functions on a Pages project, all requests by default will invoke your Function' -- with no _routes.json exclude rule, EVERY static asset request (images, CSS, HTML) would also invoke a Pages Function and consume the Workers request quota, not just the two real API routes. This is a real, previously-unquantified economic risk specific to staying on/returning to Pages exactly as currently configured.",
+      "consequenceUnderWorkers": "None -- Workers Static Assets serves any request matching a real file in dist/ directly, without invoking the Worker script at all, with zero extra configuration required (CF-A1, re-fetched).",
+      "risk": "This is now scored as a real point in favor of Workers in decision.md's Architecture fit / Economics categories, not just a theoretical migration nicety.",
+      "evidence": "CF-A9 (Pages Functions routing, re-fetched), direct repo search this pass"
+    },
+    {
+      "item": "assets.run_worker_first",
+      "finding": "Cloudflare's Workers Static Assets defaults to serving a matching static file BEFORE the Worker script runs, unless assets.run_worker_first is set. Smile Savers' wrangler.jsonc does not set this.",
+      "consequence": "For Smile Savers this is safe: /api/chat and /api/contact do not correspond to any file in dist/, so they always fall through to the Worker's fetch handler regardless of this setting. No change needed unless a future requirement needs the Worker to intercept a request that WOULD otherwise match a static file (e.g. auth-gating a static page).",
+      "risk": "NONE at current scope; NOTED for future awareness only.",
+      "evidence": "CF-A10 (re-fetched)"
+    },
+    {
+      "item": "_headers / _redirects support under Workers Static Assets",
+      "finding": "Cloudflare's current docs confirm both files are natively supported under Workers Static Assets, placed in the asset directory exactly as under Pages.",
+      "consequence": "No migration work needed for public/_headers or public/_redirects specifically -- directly corroborates the live evidence in repo-vs-live.md (the homepage's headers matching public/_headers exactly is expected, documented behavior, not a coincidence or a bug).",
+      "risk": "NONE",
+      "evidence": "CF-A10 (re-fetched)"
+    }
+  ]
+}
