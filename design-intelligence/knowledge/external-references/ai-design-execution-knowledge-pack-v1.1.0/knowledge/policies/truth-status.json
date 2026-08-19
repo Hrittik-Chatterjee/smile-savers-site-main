@@ -1,0 +1,16 @@
+{
+  "statuses": {
+    "OBSERVED": "directly observed",
+    "OBSERVED-SOURCE": "parsed from served source bytes",
+    "OBSERVED-MIRROR": "computed from local replay mirror",
+    "VERIFIED": "independently confirmed",
+    "DERIVED": "deterministically transformed",
+    "MAPPED": "correspondence only; not provenance",
+    "INFERRED": "interpretation",
+    "UNKNOWN": "insufficient evidence",
+    "VERIFY-BLOCKED": "required verification unavailable",
+    "SUPERSEDED": "replaced",
+    "DEPRECATED": "not for active use"
+  },
+  "promotionRule": "Unknown, blocked, inferred, or mapped claims cannot silently promote to verified provenance."
+}

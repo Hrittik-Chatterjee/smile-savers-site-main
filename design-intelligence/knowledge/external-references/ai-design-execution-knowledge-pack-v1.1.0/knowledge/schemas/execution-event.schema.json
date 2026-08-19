@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schemaVersion", "eventId", "capturedAt", "eventType", "sessionId", "payloadHash"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "eventId": { "type": "string" },
+    "capturedAt": { "type": "string" },
+    "eventType": { "type": "string" },
+    "sessionId": { "type": "string" },
+    "turnId": { "type": "string" },
+    "toolUseId": { "type": "string" },
+    "payloadHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "payloadRef": { "type": "string" },
+    "classification": { "type": "string" }
+  }
+}

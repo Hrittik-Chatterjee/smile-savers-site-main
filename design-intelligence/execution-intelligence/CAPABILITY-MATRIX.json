@@ -15,7 +15,9 @@
       "status": "SUPPORTED",
       "evidence": "Fetched https://code.claude.com/docs/en/hooks live via WebFetch this session (corrects the prior UNKNOWN entry). Documents 31 hook event types (SessionStart, Setup, UserPromptSubmit, UserPromptExpansion, PreToolUse, PermissionRequest, PermissionDenied, PostToolUse, PostToolUseFailure, PostToolBatch, Stop, StopFailure, SubagentStart, SubagentStop, TaskCreated, TaskCompleted, TeammateIdle, Notification, MessageDisplay, InstructionsLoaded, ConfigChange, CwdChanged, DirectoryAdded, FileChanged, WorktreeCreate, WorktreeRemove, PreCompact, PostCompact, Elicitation, ElicitationResult, SessionEnd), common fields (session_id, transcript_path, cwd, hook_event_name, permission_mode, effort, agent_id/agent_type), and event-specific fields per type (e.g. tool_name/tool_input/tool_use_id for tool events).",
       "captureMechanism": "WebFetch of primary documentation",
-      "limitations": ["Prompted by an uploaded third-party 'knowledge pack' citing this same URL for a similar claim; independently re-verified via a fresh live fetch rather than trusted on the pack's citation alone."]
+      "limitations": [
+        "Prompted by an uploaded third-party 'knowledge pack' citing this same URL for a similar claim; independently re-verified via a fresh live fetch rather than trusted on the pack's citation alone."
+      ]
     },
     {
       "capability": "Project-level .claude/settings.json hooks activate mid-session via a file watcher",

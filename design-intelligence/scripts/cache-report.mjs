@@ -8,7 +8,7 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { ARTIFACTS, writeJson, readJson, log } from '../lib/core.mjs';
-import { stats, garbageCollect, verifyObject, INDEXES_DIR } from '../lib/cache.mjs';
+import { stats, garbageCollect, verifyObject, INDEXES_DIR, OBJECTS_DIR } from '../lib/cache.mjs';
 
 const STAGE = 'cache-report';
 const mode = process.argv[2] || 'stats';
@@ -31,20 +31,51 @@ async function runStats() {
 async function runVerify() {
   const urlIndex = await readJson(path.join(INDEXES_DIR, 'url-to-hash.json')).catch(() => ({}));
   const results = [];
+  const indexedHashes = new Set();
   for (const [url, hashes] of Object.entries(urlIndex)) {
     for (const hash of hashes) {
+      indexedHashes.add(hash);
       const v = await verifyObject(hash);
       results.push({ url, hash, exists: v.exists, valid: v.valid });
     }
   }
-  const corrupt = results.filter((r) => r.exists && !r.valid);
+
+  // Also walk the raw objects directory directly. Index-only verification
+  // (above) cannot see an object that exists on disk but was never recorded
+  // in the URL index (e.g. a partially-completed index write, or an object
+  // written by a path that bypassed resolve()) — that object would silently
+  // never be checked. Directory-walk verification catches it as an orphan.
+  const orphans = [];
+  const shards = await fs.readdir(OBJECTS_DIR).catch(() => []);
+  for (const shard of shards) {
+    const shardDir = path.join(OBJECTS_DIR, shard);
+    const files = await fs.readdir(shardDir).catch(() => []);
+    for (const hash of files) {
+      if (indexedHashes.has(hash)) continue;
+      const v = await verifyObject(hash);
+      orphans.push({
+        hash,
+        exists: v.exists,
+        valid: v.valid,
+        note: 'present on disk but not referenced by any URL in the index',
+      });
+    }
+  }
+
+  const corrupt = [...results, ...orphans].filter((r) => r.exists && !r.valid);
   const missing = results.filter((r) => !r.exists);
-  log(STAGE, `verified=${results.length} corrupt=${corrupt.length} missing=${missing.length}`);
-  for (const c of corrupt) log(STAGE, `  CACHE_CORRUPTION: ${c.url} (${c.hash})`);
+  log(
+    STAGE,
+    `verified=${results.length} orphansFound=${orphans.length} corrupt=${corrupt.length} missing=${missing.length}`
+  );
+  for (const c of corrupt) log(STAGE, `  CACHE_CORRUPTION: ${c.url || '(orphan)'} (${c.hash})`);
   for (const m of missing) log(STAGE, `  MISSING: ${m.url} (${m.hash})`);
+  for (const o of orphans) log(STAGE, `  ORPHAN: ${o.hash} valid=${o.valid}`);
   await writeJson(path.join(ARTIFACTS, 'reports', 'CACHE-INTEGRITY.json'), {
     generatedAt: new Date().toISOString(),
     totalChecked: results.length,
+    orphansFound: orphans.length,
+    orphans,
     corrupt,
     missing,
     status: corrupt.length === 0 && missing.length === 0 ? 'CLEAN' : 'ISSUES_FOUND',

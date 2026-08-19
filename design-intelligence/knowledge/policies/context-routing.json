@@ -1,0 +1,22 @@
+{
+  "note": "A documented policy for how a future session or agent working in this repository should load context. This is NOT enforced by any runtime 'context compiler' -- no such system exists in this repo, and building one was explicitly declined as disproportionate to this project's actual scope (a dental practice marketing site's design-extraction side project). This file exists so the intended behavior is written down and reviewable, not to claim it is mechanically enforced.",
+  "loadOrder": [
+    "CLAUDE.md (repo-wide instructions)",
+    "design-intelligence locked decisions (see design-intelligence/README.md and the plan file referenced in commit messages)",
+    "task-specific constraints stated in the current request",
+    "relevant existing scripts/lib code for the stage or capability being touched",
+    "evidence on demand (artifacts/evidence/*, artifacts/graph/evidence-graph.json) rather than loading the entire evidence set",
+    "external research only when a claim cannot be resolved from the above"
+  ],
+  "defaultDoNotLoad": [
+    "the full raw mirror (design-intelligence/cache/objects/, design-intelligence/artifacts/mirror/files/) unless a specific asset is under investigation",
+    "the full execution-intelligence ledger, if one exists, unless investigating a specific session's behavior",
+    "external documentation already captured in evidence/sources or a prior grounding record, unless it may have changed"
+  ],
+  "freshnessGuidance": {
+    "lockedDecisions": "valid until explicitly superseded by the user",
+    "packageVersions": "revalidate live before any version-sensitive claim -- see design-intelligence/scripts/migration-assessment.mjs for the pattern",
+    "externalDocumentation": "revalidate live before relying on a specific claimed capability, especially anything affecting a release gate",
+    "cacheObjects": "governed by design-intelligence/lib/cache.mjs FRESHNESS_MODES, not by this file"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Design-intelligence evidence record",
+  "description": "Declarative counterpart to lib/evidence.mjs's record(). That function already enforces required fields at write time by throwing; this schema exists so the shape is also checkable by external tooling without executing the code.",
+  "type": "object",
+  "required": ["id", "evidenceClass", "domain", "summary", "source", "observed", "artifactRef"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^EV-UI-[A-Z]+-[0-9]{5}$" },
+    "evidenceClass": {
+      "type": "string",
+      "enum": [
+        "OBSERVED-SOURCE",
+        "OBSERVED-MIRROR",
+        "DERIVED",
+        "MAPPED",
+        "INFERRED",
+        "UNKNOWN",
+        "VERIFY-BLOCKED"
+      ]
+    },
+    "domain": { "type": "string" },
+    "summary": { "type": "string" },
+    "source": { "type": "object" },
+    "viewport": { "type": ["string", "null"] },
+    "state": { "type": ["string", "null"] },
+    "selector": { "type": ["string", "null"] },
+    "observed": {},
+    "interpretation": { "type": ["string", "null"] },
+    "confidence": { "type": ["string", "null"] },
+    "provenance": { "type": ["string", "null"] },
+    "artifactRef": { "type": "string" },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

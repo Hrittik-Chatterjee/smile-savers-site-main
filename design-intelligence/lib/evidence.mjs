@@ -47,6 +47,7 @@ export function record({
 
   return {
     id: nextId(domain),
+    domain,
     evidenceClass,
     summary,
     source,

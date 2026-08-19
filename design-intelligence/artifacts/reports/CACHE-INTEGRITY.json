@@ -1,6 +1,8 @@
 {
-  "generatedAt": "2026-08-19T09:17:02.570Z",
+  "generatedAt": "2026-08-19T09:28:48.869Z",
   "totalChecked": 34,
+  "orphansFound": 0,
+  "orphans": [],
   "corrupt": [],
   "missing": [],
   "status": "CLEAN"

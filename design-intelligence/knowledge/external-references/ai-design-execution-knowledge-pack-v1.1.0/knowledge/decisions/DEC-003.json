@@ -1,0 +1,11 @@
+{
+  "id": "DEC-003",
+  "status": "LOCKED",
+  "title": "Smile Savers scope",
+  "rules": [
+    "Evidence + tokens + brand-separated grammar layer.",
+    "Grammar integration is additive.",
+    "No automatic production page redesign.",
+    "Keep Astro 6 / TypeScript 5.4 / Vite 7 / Node 22 / Cloudflare Pages Functions baseline; no stack migration in this work."
+  ]
+}

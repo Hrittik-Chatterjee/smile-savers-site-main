@@ -88,13 +88,21 @@ async function main() {
     }
   }
 
+  // payloadHash covers ONLY the raw bytes received on stdin — independent of
+  // how this script structures the event around it. Adopted from an external
+  // reference pack's record-hook.mjs: a useful property that script lacked
+  // elsewhere (hash-chaining), so it's worth taking on its own merits rather
+  // than dismissed because the rest of that script was weaker.
+  const payloadHash = sha256(raw);
+
   const event = {
     eventId: crypto.randomUUID(),
-    schemaVersion: '1.0.0-provisional',
+    schemaVersion: '1.1.0',
     sessionId,
     hookEventName,
     timestamp: new Date().toISOString(),
     previousEventHash,
+    payloadHash,
     rawPayload: payload,
     note: 'rawPayload schema is NOT independently verified against current Claude Code documentation this session — stored verbatim, not parsed into typed fields.',
   };

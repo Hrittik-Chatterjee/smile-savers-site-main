@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.1.0",
+  "sources": [
+    {
+      "id": "SRC-ANTHROPIC-HOOKS",
+      "authority": "Anthropic",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "purpose": "Claude Code lifecycle/event capture"
+    },
+    {
+      "id": "SRC-ANTHROPIC-SESSIONS",
+      "authority": "Anthropic",
+      "url": "https://code.claude.com/docs/en/sessions",
+      "purpose": "session persistence/resume/export grounding"
+    },
+    {
+      "id": "SRC-PLAYWRIGHT-TRACE",
+      "authority": "Playwright",
+      "url": "https://playwright.dev/docs/api/class-tracing",
+      "purpose": "browser/network/DOM trace grounding"
+    },
+    {
+      "id": "SRC-W3C-WCAG22",
+      "authority": "W3C",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "purpose": "accessibility conformance grounding"
+    },
+    {
+      "id": "SRC-GOOGLE-M3",
+      "authority": "Google",
+      "url": "https://developer.android.com/develop/ui/compose/designsystems/material3",
+      "purpose": "Material 3 and M3 Expressive grounding"
+    },
+    {
+      "id": "SRC-GOOGLE-M3-API",
+      "authority": "Google",
+      "url": "https://developer.android.com/reference/kotlin/androidx/compose/material3/MaterialTheme",
+      "purpose": "M3 theme and motion API grounding"
+    },
+    {
+      "id": "SRC-SLSA12",
+      "authority": "SLSA",
+      "url": "https://slsa.dev/spec/v1.2/",
+      "purpose": "artifact provenance grounding"
+    },
+    {
+      "id": "SRC-SLSA-PROVENANCE",
+      "authority": "SLSA",
+      "url": "https://slsa.dev/spec/v1.2/provenance",
+      "purpose": "provenance semantics"
+    }
+  ]
+}
