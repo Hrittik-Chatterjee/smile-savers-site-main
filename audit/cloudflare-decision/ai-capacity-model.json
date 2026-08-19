@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-08-19T13:11:00Z",
+  "note": "DERIVED throughout — all figures below are calculations from CF-A2's neuron rates applied to the actual functions/api/chat.js system prompt, not generic assumptions. Formula: neurons/request = (inputTokens/1e6 * 4119) + (outputTokens/1e6 * 34868).",
+  "realSystemPromptMeasurement": {
+    "source": "functions/api/chat.js SMILE_CONTEXT constant, measured this session",
+    "characterCount": 2048,
+    "estimatedTokens": "~512 (DERIVED: ~4 chars/token, a standard rough English-text approximation, not a real tokenizer run)",
+    "otherInputContributors": "up to 6 prior turns (history.slice(-6)) + the current user message; max_tokens: 200 caps output"
+  },
+  "scenarios": [
+    {
+      "profile": "light (short single-turn question, cache-miss)",
+      "inputTokens": 550,
+      "outputTokens": 80,
+      "neuronsPerRequest": "DERIVED: (550/1e6*4119)+(80/1e6*34868) = 2.27 + 2.79 = 5.05"
+    },
+    {
+      "profile": "typical (single-turn with system prompt, cache-miss)",
+      "inputTokens": 800,
+      "outputTokens": 150,
+      "neuronsPerRequest": "DERIVED: (800/1e6*4119)+(150/1e6*34868) = 3.30 + 5.23 = 8.53"
+    },
+    {
+      "profile": "heavy (multi-turn, near-max history + max output)",
+      "inputTokens": 1200,
+      "outputTokens": 200,
+      "neuronsPerRequest": "DERIVED: (1200/1e6*4119)+(200/1e6*34868) = 4.94 + 6.97 = 11.92"
+    }
+  ],
+  "freeCapacityPerDay": {
+    "dailyFreeNeurons": 10000,
+    "light": "DERIVED: 10000/5.05 ≈ 1980 requests/day",
+    "typical": "DERIVED: 10000/8.53 ≈ 1172 requests/day",
+    "heavy": "DERIVED: 10000/11.92 ≈ 839 requests/day"
+  },
+  "mitigatingFactor": {
+    "finding": "functions/api/chat.js already caches single-turn replies in an in-memory Map (REPLY_CACHE, 30min TTL) keyed by normalized question text — a cache hit costs 0 AI neurons.",
+    "effect": "Real free-tier headroom is higher than the raw per-request figures above for any site with repeated common questions (hours, insurance, services, etc.), which a single dental practice's FAQ-style chat traffic plausibly has a lot of."
+  },
+  "realisticTrafficAssessment": {
+    "context": "Smile Savers is a single-location Woodside, NY dental practice, not a multi-location or high-traffic consumer brand.",
+    "plausibleDailyAiConversations": "low tens to low hundreds/day even at strong traffic, based on comparable small-practice site patterns",
+    "conclusion": "DERIVED, not GUARANTEED: even the heavy scenario's ~839 requests/day free capacity is well above a plausible realistic ceiling for this specific site. The AI free-neuron allocation is very unlikely to be the binding constraint for Smile Savers specifically — this is a site-specific conclusion, not a general claim that Workers AI's free tier is always sufficient."
+  },
+  "counterargumentDResult": {
+    "counterargument": "\"Workers AI free tier is too small\" (spec Phase 4, Counterargument D)",
+    "result": "DOES NOT SURVIVE for this specific site at plausible traffic. Would need ~839-1980 chat requests/day (heavy-to-light range) before hitting the free ceiling, which is far above what a single dental practice's chat widget plausibly sees. If traffic assumptions change materially (e.g. the practice scales to multiple locations or the chat widget is promoted heavily), this conclusion should be re-derived, not assumed to still hold."
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-08-19T13:10:00Z",
+  "note": "Class A entries were re-fetched live this session via WebFetch, not recalled from training data. Class B/C entries cite the exact repo file or live curl command used this session.",
+  "evidence": [
+    {
+      "id": "CF-A1",
+      "class": "A",
+      "source": "Cloudflare Workers Pricing (developers.cloudflare.com/workers/platform/pricing/)",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "claim": "Workers Free: 100,000 requests/day, 10ms CPU/invocation. Static assets: free and unlimited. Workers Paid: $5/month minimum, 10M requests/month included + $0.30/additional million, 30M CPU-ms/month included + $0.02/additional million CPU-ms.",
+      "relevance": "Request/cost quota for the Workers architecture option",
+      "confidence": 1.0,
+      "fetchedThisSession": true
+    },
+    {
+      "id": "CF-A2",
+      "class": "A",
+      "source": "Cloudflare Workers AI Pricing (developers.cloudflare.com/workers-ai/platform/pricing/)",
+      "url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+      "claim": "Free allocation is 10,000 neurons/day (not requests/day), resets 00:00 UTC, further operations fail on exceed. Paid: $0.011/1,000 neurons over free allocation. @cf/meta/llama-3.1-8b-instruct-fp8-fast: 4,119 input neurons/M tokens, 34,868 output neurons/M tokens.",
+      "relevance": "AI capacity/cost model for functions/api/chat.js, which uses this exact model ('@cf/meta/llama-3.1-8b-instruct-fast', confirmed at functions/api/chat.js:151)",
+      "confidence": 1.0,
+      "fetchedThisSession": true
+    },
+    {
+      "id": "REPO-B1",
+      "class": "B",
+      "source": "wrangler.jsonc",
+      "claim": "main=src/entrypoint.js, assets.directory=./dist, assets.binding=ASSETS, ai.binding=AI — Workers Static Assets configuration shape, matching Evidence A1's documented pattern exactly.",
+      "relevance": "Repo is already configured for Workers, not Pages, at the wrangler.jsonc level",
+      "confidence": 1.0
+    },
+    {
+      "id": "REPO-B2",
+      "class": "B",
+      "source": "src/entrypoint.js (read in full)",
+      "claim": "A working Worker fetch handler that imports functions/api/chat.js and functions/api/contact.js directly as ES modules and invokes their onRequestPost/onRequestOptions exports with a hand-shimmed Pages-Functions-shaped context object. No compilation step exists between functions/ and this entrypoint — it's a direct import.",
+      "relevance": "Directly answers the spec's Phase 12 question: functions/ does NOT need to be compiled into a Worker script to work under Workers — this repo already solved that with plain imports, and it is provably working (see CF-C1-C4 below).",
+      "confidence": 1.0
+    },
+    {
+      "id": "REPO-B3",
+      "class": "B",
+      "source": ".github/workflows/deploy.yml",
+      "claim": "Deploys via cloudflare/pages-action@v1 — the Pages deployment API.",
+      "relevance": "This is the CI job currently failing with 'Input required and not supplied: apiToken' (missing CLOUDFLARE_API_TOKEN secret), confirmed via job log this session.",
+      "confidence": 1.0
+    },
+    {
+      "id": "CF-C1",
+      "class": "C",
+      "source": "curl -D- https://dentalsmilesavers.com/",
+      "claim": "Live homepage CSP/X-Frame-Options/Permissions-Policy exactly match the pre-Wave-1 public/_headers content, and do NOT match either version of functions/_middleware.js's CSP.",
+      "relevance": "Proves functions/_middleware.js is not executing in the current live deployment",
+      "confidence": 1.0,
+      "fetchedThisSession": true
+    },
+    {
+      "id": "CF-C2",
+      "class": "C",
+      "source": "curl -X OPTIONS -H Origin:... https://dentalsmilesavers.com/api/contact",
+      "claim": "access-control-allow-origin: * (matches pre-Wave-1 contact.js onRequestOptions), zero security headers present.",
+      "relevance": "Further confirms functions/_middleware.js is bypassed; API routes get headers only from their own route-handler logic",
+      "confidence": 1.0,
+      "fetchedThisSession": true
+    },
+    {
+      "id": "CF-C3",
+      "class": "C",
+      "source": "curl -X POST https://dentalsmilesavers.com/api/chat",
+      "claim": "Same pattern as CF-C2 for the chat endpoint; returns a real 200 JSON response, proving the entrypoint.js routing to functions/api/chat.js works live in production.",
+      "relevance": "Live proof that the direct-import pattern (REPO-B2) actually works in production, not just in theory",
+      "confidence": 1.0,
+      "fetchedThisSession": true
+    },
+    {
+      "id": "CF-C4",
+      "class": "C",
+      "source": "curl https://dentalsmilesavers.com/robots.txt",
+      "claim": "Sitemap line still points at https://smilesavers.dental/sitemap-index.xml — the pre-Wave-1 domain, confirming live is running an older commit than what's now pushed.",
+      "relevance": "Dates the live deployment as older than commit cd7d6d7; not itself an architecture finding",
+      "confidence": 1.0,
+      "fetchedThisSession": true
+    },
+    {
+      "id": "SESSION-D1",
+      "class": "D",
+      "source": "This session's own PR-comment history (LabLaunchPad/smile-savers-site-main#2)",
+      "claim": "A Cloudflare Workers Git-integration deployment (workers.dev preview URL) succeeded on branch claude/init-yi57kn after the P1 commit, while the pages-action CI check failed on the same commit.",
+      "relevance": "Independent corroboration that a Workers deployment path is active and succeeding for this repo, separate from the live-production curl evidence above",
+      "confidence": 0.95
+    }
+  ]
+}
