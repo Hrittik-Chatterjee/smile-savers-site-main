@@ -55,7 +55,7 @@ Production website for **Smile Savers Dental**, a 35+ year dental practice in Wo
 smile-savers-site/
 ├── .github/
 │   ├── workflows/
-│   │   ├── deploy.yml          # CI/CD: quality → build → preview/prod → lighthouse
+│   │   ├── deploy.yml          # CI: quality → build → lighthouse (deployment is Cloudflare's own Git integration, not GitHub Actions)
 │   │   └── security.yml        # Weekly npm audit
 │   ├── ISSUE_TEMPLATE/
 │   │   └── bug.yml

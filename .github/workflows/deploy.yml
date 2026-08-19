@@ -1,27 +1,34 @@
 # ═══════════════════════════════════════════════════════════════════════════════
-# Smile Savers Dental — CI/CD Pipeline
+# Smile Savers Dental — CI Pipeline
 # ─────────────────────────────────────────────────────────────────────────────
+# Deployment is NOT done here. Cloudflare's own Git integration (Workers
+# Builds) watches this repo directly and deploys automatically on every
+# push — no CLOUDFLARE_API_TOKEN, no cloudflare/pages-action, no GitHub
+# Actions step required. It posts its own PR comment with commit/branch
+# preview URLs (see the "Deploying with Cloudflare Workers" bot comments on
+# any PR) and its own commit status check, independent of this workflow.
+# The cloudflare/pages-action-based jobs that used to live here targeted a
+# different deployment mechanism (Cloudflare Pages) than what's actually
+# configured for this project (Cloudflare Workers + Workers Static Assets,
+# per wrangler.jsonc's main/assets shape) and were failing on every run
+# with "Input required and not supplied: apiToken" — see
+# audit/cloudflare-decision/ for the full evidence trail on why Workers,
+# not Pages, is this project's real deployment target.
+#
 # Triggers:
-#   push main   → type-check → build → deploy production → lighthouse audit
-#   pull_request → type-check → build → deploy preview → comment URL on PR
+#   push main    → type-check → build (validation only; Cloudflare deploys separately)
+#   pull_request → type-check → build (validation only; Cloudflare deploys its own preview)
 #   workflow_dispatch → manual trigger for any branch
 # ═══════════════════════════════════════════════════════════════════════════════
 
-name: CI / CD
+name: CI
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Target environment'
-        required: false
-        default: 'production'
-        type: choice
-        options: [production, staging]
+  workflow_dispatch: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -95,120 +102,36 @@ jobs:
           path: dist
           retention-days: 7
 
-# ── Job: Deploy Preview (Pull Requests) ──────────────────────────────────────
-  deploy-preview:
-    name: 🔮 Deploy Preview
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.event_name == 'pull_request'
-    permissions:
-      contents: read
-      pull-requests: write
-      deployments: write
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-${{ github.sha }}
-          path: dist
-
-      - name: Deploy preview to Cloudflare Pages
-        id: cf-deploy
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: smile-savers
-          directory: dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Comment preview URL on PR
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const url = '${{ steps.cf-deploy.outputs.url }}';
-            const body = [
-              '## 🔮 Preview Deployment',
-              '',
-              `**URL:** ${url}`,
-              '',
-              '| Page | Link |',
-              '|------|------|',
-              `| Home | [Visit](${url}/) |`,
-              `| Services | [Visit](${url}/services) |`,
-              `| Appointments | [Visit](${url}/appointments) |`,
-              `| Contact | [Visit](${url}/contact) |`,
-              '',
-              '*Preview auto-expires 24h after PR closes.*',
-            ].join('\n');
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body
-            });
-
-# ── Job: Deploy Production (main branch) ──────────────────────────────────────
-  deploy-production:
-    name: 🚀 Deploy Production
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    permissions:
-      contents: read
-      deployments: write
-    environment:
-      name: production
-      url: https://smilesavers.dental
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-${{ github.sha }}
-          path: dist
-
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: smile-savers
-          directory: dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Production deployment summary
-        run: |
-          echo "## 🚀 Production Deployed" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**URL:** https://smilesavers.dental" >> $GITHUB_STEP_SUMMARY
-          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Time:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
-
-# ── Job: Lighthouse Audit (after production deploy) ───────────────────────────
+# ── Job: Lighthouse Audit (main branch only) ──────────────────────────────────
+# Runs against the live domain, decoupled from any deploy step in this
+# workflow — Cloudflare's own Git integration deploys on the same push
+# this job triggers on, so by the time this job's wait completes,
+# production should already reflect this commit. This audits production
+# as it actually is; it does not gate or perform the deployment itself.
   lighthouse:
     name: 🏠 Lighthouse Audit
     runs-on: ubuntu-latest
-    needs: deploy-production
-    if: github.ref == 'refs/heads/main'
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Wait for Cloudflare propagation
-        run: sleep 30
+      - name: Wait for Cloudflare deployment
+        run: sleep 60
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v11
         with:
           urls: |
-            https://smilesavers.dental/
-            https://smilesavers.dental/services
-            https://smilesavers.dental/appointments
-            https://smilesavers.dental/contact
+            https://dentalsmilesavers.com/
+            https://dentalsmilesavers.com/services
+            https://dentalsmilesavers.com/appointments
+            https://dentalsmilesavers.com/contact
           budgetPath: ./lighthouse-budget.json
           uploadArtifacts: true
           temporaryPublicStorage: true
-        continue-on-error: true   # Don't block deploys on lighthouse
+        continue-on-error: true   # informational only, never blocks
 
       - name: Lighthouse score summary
         run: echo "Lighthouse results uploaded to temporary public storage. Check Actions artifacts."
