@@ -7,11 +7,11 @@
 **Top-rated dental care in Woodside, Queens, NYC — Est. 1987**
 
 [![Deploy](https://img.shields.io/github/actions/workflow/status/rahulpaul3696/smile-savers-site/deploy.yml?label=Deploy&logo=cloudflare&logoColor=white&style=flat-square)](https://github.com/rahulpaul3696/smile-savers-site/actions)
-[![Pages](https://img.shields.io/badge/Cloudflare_Pages-Free-F38020?style=flat-square&logo=cloudflare)](https://smilesavers.dental)
-[![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?style=flat-square&logo=pwa)](https://smilesavers.dental/manifest.json)
+[![Pages](https://img.shields.io/badge/Cloudflare_Pages-Free-F38020?style=flat-square&logo=cloudflare)](https://dentalsmilesavers.com)
+[![PWA](https://img.shields.io/badge/PWA-Ready-5A0FC8?style=flat-square&logo=pwa)](https://dentalsmilesavers.com/manifest.json)
 [![License](https://img.shields.io/badge/License-Private-red?style=flat-square)](LICENSE)
 
-[**Live Site**](https://smilesavers.dental) · [**Book Appointment**](https://smilesavers.dental/appointments) · [**CI/CD**](https://github.com/rahulpaul3696/smile-savers-site/actions)
+[**Live Site**](https://dentalsmilesavers.com) · [**Book Appointment**](https://dentalsmilesavers.com/appointments) · [**CI/CD**](https://github.com/rahulpaul3696/smile-savers-site/actions)
 
 </div>
 
@@ -224,7 +224,7 @@ The site includes **Smile**, an AI dental assistant powered by Cloudflare Worker
 | Free quota | 100,000 requests/day |
 | Cache | In-memory LRU (200 entries, 30min TTL) |
 | KV cache | Cross-request (requires KV namespace) |
-| CORS | Restricted to `smilesavers.dental` |
+| CORS | Restricted to `dentalsmilesavers.com` |
 | Input limit | 500 chars, sanitised |
 | Context | Full clinic info, doctors, services, insurance, hours |
 

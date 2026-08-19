@@ -22,7 +22,7 @@
   // ── Environment variables (non-secret, static config) ─────────────────────
   "vars": {
     "ENVIRONMENT": "production",
-    "SITE_URL": "https://smilesavers.dental",
+    "SITE_URL": "https://dentalsmilesavers.com",
     "NODE_VERSION": "22"
   },
 
@@ -31,7 +31,11 @@
     "binding": "AI"
   },
 
-  // ── KV Namespace — Chat cache (optional, only needed for rate-limiting) ────
+  // ── KV Namespace — Chat rate limiting (audit SEC-003) ──────────────────────
+  // functions/api/chat.js now has real per-IP rate-limiting code that reads
+  // this binding — it fails OPEN (no limiting enforced, request allowed)
+  // when CHAT_CACHE isn't bound, so the endpoint keeps working either way,
+  // but rate limiting is only actually enforced once this is provisioned.
   // To enable: run `npx wrangler kv namespace create CHAT_CACHE`
   // then uncomment and replace "your-kv-namespace-id" with the returned ID.
   // "kv_namespaces": [

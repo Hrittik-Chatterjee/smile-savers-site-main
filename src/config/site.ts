@@ -9,7 +9,7 @@ export const siteConfig = {
   tagline: 'Your trusted neighborhood dental practice',
   description:
     'Smile Savers Dental provides comprehensive dental care in Queens, NY. From routine cleanings to dental implants, we offer gentle, personalized care for the whole family.',
-  url: 'https://smilesavers.dental',
+  url: 'https://dentalsmilesavers.com',
 
   // Contact
   phone: '(718) 956-8400',
@@ -21,8 +21,11 @@ export const siteConfig = {
     city: 'Woodside',
     state: 'NY',
     zip: '11377',
-    latitude: 40.7549,
-    longitude: -73.9059,
+    // Corroborated by BaseLayout.astro's GeoCoordinates and LocationMap.astro's
+    // OSM embed marker (both independently geocoded for this street address) —
+    // this file previously had a third, uncorroborated value; audit DATA-001.
+    latitude: 40.7457,
+    longitude: -73.9025,
   },
 
   // Business Hours
@@ -54,7 +57,11 @@ export const siteConfig = {
   },
 
   // SEO Defaults
-  defaultOgImage: '/images/og-image.jpg',
+  // Points at an image that actually exists in public/images/ — the
+  // previous value (og-image.jpg) referenced a file that was never added
+  // (audit SEO-002). BaseLayout.astro's own ogImage prop already defaults
+  // to this same real image independently; this keeps the two consistent.
+  defaultOgImage: '/images/hero-dental-office.jpg',
   twitterHandle: '@smilesavers',
 
   // Service Areas (for local SEO)

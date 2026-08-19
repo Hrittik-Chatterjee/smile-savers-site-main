@@ -2,7 +2,14 @@
 /**
  * Hero - Enhanced — crisp, conversion-first, all breakpoints
  */
+import { getCollection } from "astro:content";
 import { siteConfig } from "@/config/site";
+
+// Dentist count derived from the team collection rather than hardcoded, so
+// hero copy can't drift out of sync with the actual roster (audit CONTENT-002).
+const dentistCount = (await getCollection("team")).length;
+const NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+const dentistCountWord = NUMBER_WORDS[dentistCount] ?? String(dentistCount);
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
@@ -38,7 +45,7 @@ import { siteConfig } from "@/config/site";
     </h1>
 
     <p class="hero-sub">
-      Compassionate, pain-free dentistry from our expert team of three specialist dentists.
+      Compassionate, pain-free dentistry from our expert team of {dentistCountWord} specialist dentists.
       <strong class="hero-sub-em">Same-day emergency appointments available.</strong>
     </p>
 

@@ -3,11 +3,15 @@
  * ─────────────────────────────────────────────────────────────────────────────
  * Model:   @cf/meta/llama-3-8b-instruct (faster, smarter than llama-2-7b)
  * Cache:   In-memory Map for identical questions (resets per Worker isolate)
- * Rate:    Max 20 requests/IP/minute via KV (if bound), else graceful fallback
+ * Rate:    Max 20 requests/IP/minute via CHAT_CACHE KV (enforced only once
+ *          that binding is provisioned in wrangler.jsonc — fails open
+ *          otherwise, i.e. requests are allowed, not blocked, if unbound)
  * Safety:  Input sanitised, no medical diagnoses, emergency call-first
  * Branding: "Smile" — the Smile Savers dental assistant
  * ─────────────────────────────────────────────────────────────────────────────
  */
+
+import { corsHeadersFor } from '../_lib/cors.js';
 
 const SMILE_CONTEXT = `You are Smile, the friendly AI assistant for Smile Savers Dental in Woodside, Queens, NY.
 You help patients with questions about appointments, services, insurance, and general dental guidance.
@@ -86,16 +90,33 @@ function sanitise(input) {
     .slice(0, 500);                    // max 500 chars
 }
 
-// CORS headers — restrict to production domain in prod
+// CORS headers — shared exact-origin allowlist (audit SEC-004: this file
+// previously used origin.startsWith(allowed) instead of exact equality,
+// which would match an attacker-controlled origin like
+// "https://dentalsmilesavers.com.evil.example").
 function corsHeaders(origin) {
-  const allowed = ['https://smilesavers.dental', 'http://localhost:4321'];
-  const isAllowed = !origin || allowed.some(a => origin.startsWith(a));
-  return {
-    'Access-Control-Allow-Origin': isAllowed ? (origin || '*') : 'https://smilesavers.dental',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Max-Age': '86400',
-  };
+  return corsHeadersFor(origin, 'POST, OPTIONS');
+}
+
+// Per-IP rate limiting via the CHAT_CACHE KV namespace (audit SEC-003: this
+// file documented KV/IP rate limiting in its header comment, but the KV
+// binding was commented out in wrangler.jsonc and no limiter code existed
+// — only the in-memory reply cache above, which doesn't bound request
+// volume at all). Fails open (allows the request) if CHAT_CACHE isn't
+// bound, so the endpoint still works in environments without the KV
+// namespace provisioned — but that also means rate limiting is only
+// actually enforced once CHAT_CACHE is bound in wrangler.jsonc.
+const RATE_LIMIT_MAX = 20; // requests per IP per window
+const RATE_LIMIT_WINDOW_SECONDS = 60;
+
+async function checkRateLimit(env, ip) {
+  if (!env.CHAT_CACHE || !ip) return { limited: false };
+  const key = `ratelimit:${ip}`;
+  const current = await env.CHAT_CACHE.get(key);
+  const count = current ? parseInt(current, 10) : 0;
+  if (count >= RATE_LIMIT_MAX) return { limited: true };
+  await env.CHAT_CACHE.put(key, String(count + 1), { expirationTtl: RATE_LIMIT_WINDOW_SECONDS });
+  return { limited: false };
 }
 
 export async function onRequestPost(context) {
@@ -103,6 +124,14 @@ export async function onRequestPost(context) {
   const origin = request.headers.get('Origin') || '';
 
   try {
+    const ip = request.headers.get('CF-Connecting-IP');
+    const { limited } = await checkRateLimit(env, ip);
+    if (limited) {
+      return json({
+        reply: "You've sent a lot of messages in a short time — please wait a minute, or call us directly at (718) 956-8400.",
+      }, 429, origin);
+    }
+
     // Parse and validate body
     let body;
     try { body = await request.json(); }

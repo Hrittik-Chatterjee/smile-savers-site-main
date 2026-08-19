@@ -40,11 +40,11 @@ const fullTitle =
 const schemaOrg = {
   '@context': 'https://schema.org',
   '@type': 'Dentist',
-  '@id': 'https://smilesavers.dental/#organization',
+  '@id': 'https://dentalsmilesavers.com/#organization',
   name: 'Smile Savers Dental',
-  url: 'https://smilesavers.dental',
-  logo: 'https://smilesavers.dental/logo.svg',
-  image: `https://smilesavers.dental${ogImage}`,
+  url: 'https://dentalsmilesavers.com',
+  logo: 'https://dentalsmilesavers.com/logo.svg',
+  image: `https://dentalsmilesavers.com${ogImage}`,
   telephone: '+17189568400',
   email: 'dentalsmilesavers@gmail.com',
   foundingDate: '1987',
@@ -71,12 +71,12 @@ const schemaOrg = {
       closes: h.close,
     })),
   sameAs: ['https://share.google/Giw216ZBKaD1h2nrM', 'https://www.facebook.com/smilesavers32'],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5.0',
-    reviewCount: '200',
-    bestRating: '5',
-  },
+  // No aggregateRating here: the repository has no authoritative source for
+  // a review count/rating (only 6 testimonial entries, no aggregation
+  // mechanism) — emitting unsupported AggregateRating structured data is a
+  // real compliance/trust risk (audit SEO-001). Add it back only once a
+  // real, reviewable rating source exists (e.g. Google Business Profile
+  // data pulled at build time), not as a static placeholder.
 };
 ---
 
@@ -99,7 +99,7 @@ const schemaOrg = {
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`https://smilesavers.dental${ogImage}`} />
+    <meta property="og:image" content={`https://dentalsmilesavers.com${ogImage}`} />
     <meta property="og:image:width" content="1400" />
     <meta property="og:image:height" content="900" />
     <meta property="og:locale" content="en_US" />
@@ -108,7 +108,7 @@ const schemaOrg = {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`https://smilesavers.dental${ogImage}`} />
+    <meta name="twitter:image" content={`https://dentalsmilesavers.com${ogImage}`} />
 
     <!-- Favicon + PWA -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
