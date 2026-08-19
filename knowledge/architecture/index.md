@@ -13,3 +13,4 @@ status: stable
 
 - [cloudflare-workers-decision.md](/knowledge/architecture/cloudflare-workers-decision.md) — the evidence-gated Pages-vs-Workers decision and why
 - [entrypoint-routing.md](/knowledge/architecture/entrypoint-routing.md) — how `src/entrypoint.js` actually routes requests today, and its one known gap
+- [typescript-7-astro-compatibility.md](/knowledge/architecture/typescript-7-astro-compatibility.md) — why the root project cannot adopt TypeScript 7 yet, and what that means for any new TS7 tooling in this repo
