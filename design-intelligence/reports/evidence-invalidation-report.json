@@ -1,0 +1,1244 @@
+{
+  "generatedAt": "2026-08-19T11:59:05.157Z",
+  "note": "Mechanism: every token-inventory.mjs run stamps the source file SHA-256 it was computed against. This report compares that stamp to the current file hash. STALE records are never auto-deleted (superseded records remain queryable for lineage); a re-run of token-inventory.mjs is required to produce a new VALID generation. This is the first run of the P1 phase, so the only realistic outcome is all-VALID — no synthetic STALE case has been injected to pad this report.",
+  "states": [
+    "VALID",
+    "STALE",
+    "INVALIDATED",
+    "UNKNOWN"
+  ],
+  "invalidatedNote": "INVALIDATED (a stronger state than STALE — evidence actively contradicted, not just possibly outdated) has no mechanism to be set in this phase; it would require a future capability (e.g. detecting that a re-run produces a contradictory value for the same token) not built here.",
+  "summary": {
+    "total": 136,
+    "VALID": 136,
+    "STALE": 0,
+    "INVALIDATED": 0,
+    "UNKNOWN": 0
+  },
+  "records": [
+    {
+      "tokenId": "smile-savers.semantic.color-primary",
+      "tokenName": "--color-primary",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-primary-light",
+      "tokenName": "--color-primary-light",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-primary-dark",
+      "tokenName": "--color-primary-dark",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-secondary",
+      "tokenName": "--color-secondary",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-secondary-light",
+      "tokenName": "--color-secondary-light",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-secondary-dark",
+      "tokenName": "--color-secondary-dark",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-accent",
+      "tokenName": "--color-accent",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-accent-dark",
+      "tokenName": "--color-accent-dark",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-primary-content",
+      "tokenName": "--color-primary-content",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-bg-clinical",
+      "tokenName": "--color-bg-clinical",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-bg-human",
+      "tokenName": "--color-bg-human",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-success",
+      "tokenName": "--color-success",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-warning",
+      "tokenName": "--color-warning",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-error",
+      "tokenName": "--color-error",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-info",
+      "tokenName": "--color-info",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-50",
+      "tokenName": "--color-neutral-50",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-100",
+      "tokenName": "--color-neutral-100",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-200",
+      "tokenName": "--color-neutral-200",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-300",
+      "tokenName": "--color-neutral-300",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-400",
+      "tokenName": "--color-neutral-400",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-500",
+      "tokenName": "--color-neutral-500",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-600",
+      "tokenName": "--color-neutral-600",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-700",
+      "tokenName": "--color-neutral-700",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-800",
+      "tokenName": "--color-neutral-800",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-900",
+      "tokenName": "--color-neutral-900",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-neutral-950",
+      "tokenName": "--color-neutral-950",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-surface",
+      "tokenName": "--color-surface",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-surface-elevated",
+      "tokenName": "--color-surface-elevated",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-surface-sunken",
+      "tokenName": "--color-surface-sunken",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-text",
+      "tokenName": "--color-text",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-text-muted",
+      "tokenName": "--color-text-muted",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-text-inverted",
+      "tokenName": "--color-text-inverted",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-border",
+      "tokenName": "--color-border",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-border-strong",
+      "tokenName": "--color-border-strong",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gold",
+      "tokenName": "--color-gold",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gold-light",
+      "tokenName": "--color-gold-light",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-purple",
+      "tokenName": "--color-purple",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-purple-light",
+      "tokenName": "--color-purple-light",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-brown",
+      "tokenName": "--color-brown",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gradient-blue-start",
+      "tokenName": "--color-gradient-blue-start",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gradient-blue-end",
+      "tokenName": "--color-gradient-blue-end",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gradient-gold-start",
+      "tokenName": "--color-gradient-gold-start",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gradient-gold-end",
+      "tokenName": "--color-gradient-gold-end",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.gradient-preventive",
+      "tokenName": "--gradient-preventive",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.gradient-cosmetic",
+      "tokenName": "--gradient-cosmetic",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.gradient-restorative",
+      "tokenName": "--gradient-restorative",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.gradient-emergency",
+      "tokenName": "--gradient-emergency",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gradient-teal-start",
+      "tokenName": "--color-gradient-teal-start",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gradient-teal-end",
+      "tokenName": "--color-gradient-teal-end",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gradient-purple-start",
+      "tokenName": "--color-gradient-purple-start",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-gradient-purple-end",
+      "tokenName": "--color-gradient-purple-end",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-success-light",
+      "tokenName": "--color-success-light",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-success-dark",
+      "tokenName": "--color-success-dark",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-warning-light",
+      "tokenName": "--color-warning-light",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-warning-dark",
+      "tokenName": "--color-warning-dark",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-info-light",
+      "tokenName": "--color-info-light",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-info-dark",
+      "tokenName": "--color-info-dark",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-error-light",
+      "tokenName": "--color-error-light",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-error-dark",
+      "tokenName": "--color-error-dark",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-whatsapp",
+      "tokenName": "--color-whatsapp",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-whatsapp-hover",
+      "tokenName": "--color-whatsapp-hover",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.color-overlay-dark",
+      "tokenName": "--color-overlay-dark",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-family-sans",
+      "tokenName": "--font-family-sans",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-family-heading",
+      "tokenName": "--font-family-heading",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-family-mono",
+      "tokenName": "--font-family-mono",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-size-xs",
+      "tokenName": "--font-size-xs",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-size-sm",
+      "tokenName": "--font-size-sm",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-size-base",
+      "tokenName": "--font-size-base",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-size-lg",
+      "tokenName": "--font-size-lg",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-size-xl",
+      "tokenName": "--font-size-xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-size-2xl",
+      "tokenName": "--font-size-2xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-size-3xl",
+      "tokenName": "--font-size-3xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-size-4xl",
+      "tokenName": "--font-size-4xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-size-5xl",
+      "tokenName": "--font-size-5xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.line-height-tight",
+      "tokenName": "--line-height-tight",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.line-height-snug",
+      "tokenName": "--line-height-snug",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.line-height-normal",
+      "tokenName": "--line-height-normal",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.line-height-relaxed",
+      "tokenName": "--line-height-relaxed",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.line-height-loose",
+      "tokenName": "--line-height-loose",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-weight-normal",
+      "tokenName": "--font-weight-normal",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-weight-medium",
+      "tokenName": "--font-weight-medium",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-weight-semibold",
+      "tokenName": "--font-weight-semibold",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.font-weight-bold",
+      "tokenName": "--font-weight-bold",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.spacing-section",
+      "tokenName": "--spacing-section",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.spacing-block",
+      "tokenName": "--spacing-block",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.spacing-element",
+      "tokenName": "--spacing-element",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.container-sm",
+      "tokenName": "--container-sm",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.container-md",
+      "tokenName": "--container-md",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.container-lg",
+      "tokenName": "--container-lg",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.container-xl",
+      "tokenName": "--container-xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.container-prose",
+      "tokenName": "--container-prose",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.radius-sm",
+      "tokenName": "--radius-sm",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.radius-md",
+      "tokenName": "--radius-md",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.radius-lg",
+      "tokenName": "--radius-lg",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.radius-xl",
+      "tokenName": "--radius-xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.radius-2xl",
+      "tokenName": "--radius-2xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.radius-full",
+      "tokenName": "--radius-full",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.shadow-sm",
+      "tokenName": "--shadow-sm",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.shadow-md",
+      "tokenName": "--shadow-md",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.shadow-lg",
+      "tokenName": "--shadow-lg",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.shadow-xl",
+      "tokenName": "--shadow-xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.duration-instant",
+      "tokenName": "--duration-instant",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.duration-fast",
+      "tokenName": "--duration-fast",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.duration-normal",
+      "tokenName": "--duration-normal",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.duration-slow",
+      "tokenName": "--duration-slow",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.duration-entrance",
+      "tokenName": "--duration-entrance",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.ease-out-expo",
+      "tokenName": "--ease-out-expo",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.ease-out-quart",
+      "tokenName": "--ease-out-quart",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.ease-out-quint",
+      "tokenName": "--ease-out-quint",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.ease-in-out",
+      "tokenName": "--ease-in-out",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.transition-fast",
+      "tokenName": "--transition-fast",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.transition-normal",
+      "tokenName": "--transition-normal",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.transition-slow",
+      "tokenName": "--transition-slow",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.z-base",
+      "tokenName": "--z-base",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.z-above",
+      "tokenName": "--z-above",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.z-dropdown",
+      "tokenName": "--z-dropdown",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.z-sticky",
+      "tokenName": "--z-sticky",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.z-overlay",
+      "tokenName": "--z-overlay",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.z-modal",
+      "tokenName": "--z-modal",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.z-popover",
+      "tokenName": "--z-popover",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.z-tooltip",
+      "tokenName": "--z-tooltip",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.breakpoint-sm",
+      "tokenName": "--breakpoint-sm",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.breakpoint-md",
+      "tokenName": "--breakpoint-md",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.breakpoint-lg",
+      "tokenName": "--breakpoint-lg",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.breakpoint-xl",
+      "tokenName": "--breakpoint-xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.breakpoint-2xl",
+      "tokenName": "--breakpoint-2xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-gap-xs",
+      "tokenName": "--grid-gap-xs",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-gap-sm",
+      "tokenName": "--grid-gap-sm",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-gap-md",
+      "tokenName": "--grid-gap-md",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-gap-lg",
+      "tokenName": "--grid-gap-lg",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-gap-xl",
+      "tokenName": "--grid-gap-xl",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-min-xs",
+      "tokenName": "--grid-min-xs",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-min-sm",
+      "tokenName": "--grid-min-sm",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-min-md",
+      "tokenName": "--grid-min-md",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-min-lg",
+      "tokenName": "--grid-min-lg",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    },
+    {
+      "tokenId": "smile-savers.semantic.grid-min",
+      "tokenName": "--grid-min",
+      "capturedAt": "2026-08-19T11:57:05.283Z",
+      "capturedAgainstSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "currentSourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+      "status": "VALID",
+      "reason": "src/styles/global.css unchanged since capture — evidence still reflects current source."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "note": "Machine-readable restatement of already-locked project boundaries (established across this session's prior phases, not new decisions). Consumed by agent-context.mjs's CONSTRAINTS field. Nothing here overrides src/CLAUDE.md or explicit user instruction; this is a summary for automated context assembly, not a new source of authority.",
+  "constraints": [
+    {
+      "id": "CON-brand-authority",
+      "statement": "Production token authority is src/styles/global.css only (brand.* / semantic.* / component.* in Labs-pipeline terms). design-intelligence/artifacts/grammar/* (reference.labs.*, reference.m3.*, reference.m3e.*) is inert reference material and must never control production UI.",
+      "evidence": "design-intelligence/artifacts/grammar/integration-report.json (0 namespace collisions, not imported by production)"
+    },
+    {
+      "id": "CON-no-google-identity",
+      "statement": "No Google Labs visual identity, Google Sans, Google imagery, or Google copy may enter brand.*/semantic.*/component.* tokens or production files.",
+      "evidence": "design-intelligence/scripts/grammar.mjs contamination scan (0 hits in shipped grammar)"
+    },
+    {
+      "id": "CON-no-auto-redesign",
+      "statement": "This project does not perform automatic production redesign. Any visual change to src/ requires explicit human direction outside the design-intelligence tooling.",
+      "evidence": "design-intelligence/README.md; repeated explicit user instruction across this session"
+    },
+    {
+      "id": "CON-additive-grammar",
+      "statement": "src/styles/design-intelligence-grammar.css is additive only, never imported by production.",
+      "evidence": "grep confirms no @import/link reference to this file anywhere in src/"
+    },
+    {
+      "id": "CON-stack-lock",
+      "statement": "No Astro/TypeScript/Vite/Node upgrade, no Cloudflare Pages->Workers migration, no CMS change is performed by this tooling. design-intelligence/scripts/migration-assessment.mjs only assesses, never executes, a migration.",
+      "evidence": "design-intelligence/artifacts/reports/migration-assessment.json"
+    },
+    {
+      "id": "CON-no-silent-evidence-promotion",
+      "statement": "Evidence classes (OBSERVED-SOURCE, OBSERVED-MIRROR, DERIVED, MAPPED, INFERRED, UNKNOWN, VERIFY-BLOCKED) are never silently upgraded. A DERIVED finding (e.g. Tailwind-utility-class consumer detection) stays DERIVED until independently re-verified against primary source.",
+      "evidence": "design-intelligence/lib/core.mjs EVIDENCE_CLASSES enum, hard-enforced via assertEvidenceClass()"
+    },
+    {
+      "id": "CON-no-fabricated-design-knowledge",
+      "statement": "Component anatomy, patterns, anti-patterns, and design intent are not fabricated for the 42/47 components with no typed contract. UNKNOWN/VERIFY-BLOCKED is used instead of invented content.",
+      "evidence": "design-intelligence/audit/semantic-model-gap.md"
+    },
+    {
+      "id": "CON-p1-ordering",
+      "statement": "Explicit user ordering: (1) P1 semantic token model/change-impact/agent-context, (2) fix the 6 known accessibility defects, (3) re-validate, (4) merge PR #2. Steps 2-4 are not performed during P1.",
+      "evidence": "user instruction, this session"
+    }
+  ]
+}

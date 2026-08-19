@@ -44,3 +44,9 @@ Two things are genuinely justified by evidence and worth building next, both **P
 2. **A change-impact engine** built on top of (1) — "what consumes `--color-accent`" is a real, answerable grep-and-graph question today.
 
 Everything else in the 33-section request — component anatomy, patterns, anti-patterns, design intent, multi-agent adapters — requires either fabricating content this repository has never recorded, or building infrastructure for agents that have never touched this repository. Per this project's evidence-first discipline (already tested across 20+ stages this session), that is not implemented here without further direction, per the request's own instruction to stop at the implementation boundary.
+
+## P1 close-out addendum
+
+Both items this audit flagged as P1 are now built — see `design-intelligence/scripts/token-inventory.mjs`, `token-lineage.json`, `cascade-map.json`, `change-impact.mjs`, `evidence-invalidation.mjs`, `agent-context.mjs`, `semantic-validate.mjs`, and `design-intelligence/reports/release-gate.json` for the P1-scoped gate. Real evidence produced: 136 tokens inventoried from `src/styles/global.css` (line-cited), 55 confirmed orphans (checked against both literal `var()` usage and Tailwind v4 utility-class usage — not just the former), 2 genuine media-scoped token redeclarations (`--font-size-5xl`@1440px, `--container-xl`@1920px) captured as `VARIES_BY` edges, the DaisyUI `!important` brand-lock block captured as 8 `OVERRIDDEN_BY` edges, 5 `ALIASES` edges, 880 `CONSUMED_BY` edges. `semantic-validate.mjs` ran all 13 §T checks against this real data: 12 PASS, 1 correctly `NOT_APPLICABLE` (no semantic-promotion mechanism exists to test).
+
+The "not buildable / declined" rows in the table above are unchanged by P1 — component anatomy, patterns, anti-patterns, design intent, and multi-agent adapters still have zero source evidence to build from and remain out of scope.
