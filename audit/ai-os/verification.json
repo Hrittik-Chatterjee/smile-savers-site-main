@@ -1,0 +1,10 @@
+{
+  "generatedAt": "2026-08-19T15:40:00Z",
+  "rootProjectUnaffected": {
+    "npmRunCheck": "0 errors, 143 hints (unchanged from pre-tools/eais baseline)",
+    "npmRunBuild": "32 pages (unchanged)",
+    "npmTest": "15/15 (unchanged, tools/eais has its own separate test runner)"
+  },
+  "toolsEaisOwnTests": "9/9 passing (audit/ai-os/test-run-output.txt)",
+  "independentProverCheck": "AC10 demonstrated: dogfooding eais context surfaced a real defect (stopword false-positive) that the author's own first-pass implementation did not anticipate -- the test suite + live CLI run acted as an independent check catching what the implementation alone did not."
+}

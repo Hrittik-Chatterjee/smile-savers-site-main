@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-08-19T15:00:00Z",
-  "currentMilestone": "M1 runtime-proof-pass DONE, M2 release-gates-pass (initial slice) DONE \u2014 see EAIS pack roadmap/MILESTONES.json for M-numbering",
+  "updatedAt": "2026-08-19T15:41:00Z",
+  "currentMilestone": "M3 EAOS Kernel DONE (tools/eais/, TypeScript 7.0.2) -- M0/M1/M2(initial)/M3 all proven",
   "completedGates": [
     "Wave 1 remediation (10 findings, commit cd7d6d7)",
     "Cloudflare Pages vs Workers decision (ADR-0001, audit/cloudflare-decision/)",
@@ -11,7 +11,8 @@
     "DEBT-0019: CLAUDE.md architecture description corrected (Workers not Pages, Resend not MailChannels) (commit 191d299)",
     "First automated test suite: 11 tests across functions/api/__tests__/{contact,chat}.test.mjs, covering the fail-closed contact-API behavior and the chat rate limiter \u2014 both proven to actually catch regressions by reverting the original bug and confirming the suite fails",
     "npm test wired as a blocking CI step in the quality job (.github/workflows/deploy.yml)",
-    "Domain-canonicalization regression gate (functions/api/__tests__/domain-canonicalization.test.mjs, 4 tests, ROOT-DOMAIN-001 recurrence prevention) -- proven via revert/restore cycle"
+    "Domain-canonicalization regression gate (functions/api/__tests__/domain-canonicalization.test.mjs, 4 tests, ROOT-DOMAIN-001 recurrence prevention) -- proven via revert/restore cycle",
+    "M3 EAOS Kernel: tools/eais/ (TypeScript 7.0.2, isolated from root tsconfig), 9/9 own tests passing against REAL .ai/ and audit/eais/ state, context compiler proven deterministic (AC2) with measured 76-94% token reduction depending on task scope (AC3), gate/debt/context CLI commands all verified against live repo data -- audit/ai-os/ holds the full proof trail (execution-trace, evidence, decisions, context-report, verification, lessons)"
   ],
   "openBlockers": [
     {
@@ -45,9 +46,8 @@
     "No field/RUM Core Web Vitals data available \u2014 performance not measured against LCP/INP/CLS targets this pass",
     "No telemetry/observability implementation exists to evaluate against OpenTelemetry semantic conventions",
     "OWASP ASVS 5.0 control-by-control verification not performed \u2014 only the specific findings from the uploaded audit were checked, not a full ASVS pass",
-    "SLSA provenance level not assessed for the build/deploy pipeline",
-    "SmileSaversEAISKnowledgePack20260819.zip's eais-template/ (TypeScript 7 CLI scaffold) not yet built into tools/eais/ -- correctly deferred per the pack's own MILESTONES.json dependency graph (M3 EAOS Kernel depends on M1+M2)"
+    "SLSA provenance level not assessed for the build/deploy pipeline"
   ],
   "stackBaseline": "FROZEN \u2014 no dependency version has been compatibility-checked this session; treat package.json/package-lock.json as locked until a dedicated compatibility pass is run (see .ai/constitution.md invariant 5)",
-  "nextRequiredAction": "M2 is only partially proven (2 of many risky behaviors covered). Continue M2 (more test coverage) or move to M3 (scaffold tools/eais/ from the EAIS pack's eais-template/, adapted not copied) -- both are unblocked; M3 per the pack's dependency graph should wait until M2 covers at least the release-gate-relevant behaviors, not literally 100% of the app."
+  "nextRequiredAction": "M0-M3 all proven. Remaining open items per MASTER-DEBT-REGISTER.json: DEBT-0012 (broader test coverage beyond the 3 files currently tested), DEBT-0013/0014 (CI gate hardening), DEBT-0015/0016 (product/clinical decisions, blocked on user), DEBT-0017/0018 (accessibility, explicitly deferred). M4 (AI Efficiency Kernel) and beyond per roadmap/MILESTONES.json are the next EAOS-kernel-scoped work if the user wants to continue that track; otherwise the next highest-value item is DEBT-0012/0013 (more tests, blocking CI gates) or the deferred accessibility/product items."
 }

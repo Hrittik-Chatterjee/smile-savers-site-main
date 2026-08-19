@@ -1,0 +1,197 @@
+=== eais state ===
+{
+  "updatedAt": "2026-08-19T15:00:00Z",
+  "currentMilestone": "M1 runtime-proof-pass DONE, M2 release-gates-pass (initial slice) DONE — see EAIS pack roadmap/MILESTONES.json for M-numbering",
+  "completedGates": [
+    "Wave 1 remediation (10 findings, commit cd7d6d7)",
+    "Cloudflare Pages vs Workers decision (ADR-0001, audit/cloudflare-decision/)",
+    "Broken CI deploy jobs removed (ADR-0002, commit 296f6a3)",
+    "OKF knowledge bundle (knowledge/)",
+    "This EAOS Phase-0 evidence/debt/root-cause kernel (audit/eais/20260819T133000Z/, .ai/)",
+    "DEBT-0011: security headers wired into src/entrypoint.js via functions/_middleware.js's applySecurityHeaders() (commit 191d299)",
+    "DEBT-0019: CLAUDE.md architecture description corrected (Workers not Pages, Resend not MailChannels) (commit 191d299)",
+    "First automated test suite: 11 tests across functions/api/__tests__/{contact,chat}.test.mjs, covering the fail-closed contact-API behavior and the chat rate limiter — both proven to actually catch regressions by reverting the original bug and confirming the suite fails",
+    "npm test wired as a blocking CI step in the quality job (.github/workflows/deploy.yml)",
+    "Domain-canonicalization regression gate (functions/api/__tests__/domain-canonicalization.test.mjs, 4 tests, ROOT-DOMAIN-001 recurrence prevention) -- proven via revert/restore cycle"
+  ],
+  "openBlockers": [
+    {
+      "id": "DEBT-0012",
+      "severity": "P1",
+      "summary": "Zero automated tests existed anywhere in the repo -- PARTIALLY RESOLVED: 11 tests now cover contact API + chat rate limiting (the two riskiest Wave-1-changed behaviors). Still 0% coverage for booking flow, content schemas, and everything else."
+    },
+    {
+      "id": "DEBT-0013",
+      "severity": "P1",
+      "summary": "Security/perf CI checks are non-blocking (continue-on-error)"
+    },
+    {
+      "id": "DEBT-0015",
+      "severity": "P1",
+      "summary": "Appointment flow needs a product decision (real booking vs. WhatsApp-request framing)"
+    },
+    {
+      "id": "DEBT-0016",
+      "severity": "P1",
+      "summary": "Medical content claims need a clinical-review decision, not an engineering one"
+    },
+    {
+      "id": "DEBT-0017",
+      "severity": "P2",
+      "summary": "6 known WCAG violations from design-intelligence Stage 16, not yet remediated"
+    }
+  ],
+  "knownUnknowns": [
+    "npm audit not run this session in a network-enabled environment — dependency vulnerability status is UNVERIFIED (DEBT-0020)",
+    "No field/RUM Core Web Vitals data available — performance not measured against LCP/INP/CLS targets this pass",
+    "No telemetry/observability implementation exists to evaluate against OpenTelemetry semantic conventions",
+    "OWASP ASVS 5.0 control-by-control verification not performed — only the specific findings from the uploaded audit were checked, not a full ASVS pass",
+    "SLSA provenance level not assessed for the build/deploy pipeline",
+    "SmileSaversEAISKnowledgePack20260819.zip's eais-template/ (TypeScript 7 CLI scaffold) not yet built into tools/eais/ -- correctly deferred per the pack's own MILESTONES.json dependency graph (M3 EAOS Kernel depends on M1+M2)"
+  ],
+  "stackBaseline": "FROZEN — no dependency version has been compatibility-checked this session; treat package.json/package-lock.json as locked until a dedicated compatibility pass is run (see .ai/constitution.md invariant 5)",
+  "nextRequiredAction": "M2 is only partially proven (2 of many risky behaviors covered). Continue M2 (more test coverage) or move to M3 (scaffold tools/eais/ from the EAIS pack's eais-template/, adapted not copied) -- both are unblocked; M3 per the pack's dependency graph should wait until M2 covers at least the release-gate-relevant behaviors, not literally 100% of the app."
+}
+=== eais truth ===
+[
+  {
+    "id": "clinic.domain",
+    "value": "https://dentalsmilesavers.com",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "clinic.coordinates",
+    "value": "40.7457, -73.9025",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "clinic.hours.friday",
+    "value": "9:00 AM - 5:00 PM",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "clinic.dentist_count",
+    "value": "derived from src/content/team/ (4 as of 2026-08-19)",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "runtime.architecture",
+    "value": "Workers + Workers Static Assets (de facto live; not yet formalized in CI)",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "ai.model",
+    "value": "@cf/meta/llama-3.1-8b-instruct-fast",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "ai.free_neuron_budget",
+    "value": "10,000 neurons/day, resets 00:00 UTC",
+    "status": "VERIFIED"
+  },
+  {
+    "id": "content.medical_claims_provenance",
+    "value": "UNKNOWN — no structured provenance/review metadata exists in src/content/",
+    "status": "UNVERIFIED"
+  }
+]
+=== eais decisions ===
+[
+  {
+    "id": "ADR-0001",
+    "decision": "Standardize Cloudflare deployment on Workers + Workers Static Assets, not Pages + Pages Functions",
+    "status": "ACCEPTED (decision only -- implementation not yet authorized)",
+    "confidence": 0.8
+  },
+  {
+    "id": "ADR-0002",
+    "decision": "Remove cloudflare/pages-action deploy jobs from GitHub Actions CI",
+    "status": "ACCEPTED (implemented, commit 296f6a3)",
+    "confidence": 0.9
+  }
+]
+=== eais gate ===
+overall: NO-GO
+blocking: ACCESSIBILITY
+=== eais debt ===
+7/20 debt items OPEN
+  [P1] DEBT-0012: Zero automated test files in the repository
+  [P1] DEBT-0013: Security and performance checks are non-blocking by design
+  [P2] DEBT-0014: CI Node version mismatch between workflows
+  [P1] DEBT-0015: Appointment flow presents a WhatsApp message draft as a completed booking
+  [P1] DEBT-0016: Medical/clinical claims have no structured provenance or review metadata
+  [P2] DEBT-0017: Pre-existing WCAG violations found by axe-core against the built site (Stage 16, design-intelligence pipeline)
+  [P2] DEBT-0018: TypeScript checking bypassed in 2 interactive/accessibility-relevant files
+=== eais context (task 1: domain) ===
+{
+  "task": "investigate the domain canonicalization issue without changing anything",
+  "taskClass": "DOMAIN_TRUTH",
+  "requiredTruth": [
+    "clinic.domain"
+  ],
+  "requiredDecisions": [],
+  "requiredDebt": [
+    "DEBT-0001"
+  ],
+  "files": [
+    "README.md",
+    "functions/api/chat.js",
+    "functions/api/contact.js",
+    "public/_headers",
+    "src/config/site.ts",
+    "src/layouts/BaseLayout.astro",
+    "src/modules/programmatic-seo/layouts/GlossaryPageLayout.astro",
+    "wrangler.jsonc"
+  ],
+  "tests": [
+    "grep -rn \"smilesavers\\.dental\" src/ functions/ public/ wrangler.jsonc README.md CLAUDE.md returns 0 matches (verified 2026-08-19)"
+  ],
+  "tokenEstimate": {
+    "fullRepoBaselineBytes": 30268,
+    "compiledContextBytes": 1873,
+    "reductionPct": 93.8
+  }
+}
+=== eais context (task 2: cloudflare) ===
+{
+  "task": "should we migrate to cloudflare workers or pages",
+  "taskClass": "RUNTIME_MIGRATION",
+  "requiredTruth": [
+    "runtime.architecture",
+    "ai.model",
+    "ai.free_neuron_budget"
+  ],
+  "requiredDecisions": [
+    "ADR-0001",
+    "ADR-0002"
+  ],
+  "requiredDebt": [
+    "DEBT-0019"
+  ],
+  "files": [
+    "CLAUDE.md"
+  ],
+  "tests": [
+    "commit 191d299: CLAUDE.md corrected throughout (Workers not Pages, Resend not MailChannels, applySecurityHeaders() mechanism documented); also fixed npm run preview:cf from `wrangler pages dev` (Pages-only, would not have exercised entrypoint.js) to `wrangler dev`, found while verifying this fix"
+  ],
+  "tokenEstimate": {
+    "fullRepoBaselineBytes": 30268,
+    "compiledContextBytes": 5757,
+    "reductionPct": 81
+  }
+}
+=== eais context (task 3: unrelated/UNKNOWN) ===
+{
+  "task": "xyzzy plugh completely unrelated nonsense words",
+  "taskClass": "UNKNOWN",
+  "requiredTruth": [],
+  "requiredDecisions": [],
+  "requiredDebt": [],
+  "files": [],
+  "tests": [],
+  "tokenEstimate": {
+    "fullRepoBaselineBytes": 30268,
+    "compiledContextBytes": 6,
+    "reductionPct": 100
+  }
+}
