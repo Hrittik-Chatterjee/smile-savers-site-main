@@ -145,6 +145,26 @@ async function main() {
   await ensureDir(mirrorDir);
 
   const queue = [{ url: cfg.targetUrl, parent: null, depth: 0 }];
+
+  // Seed with assets Stage 4 saw the running page request. A static crawl
+  // cannot see what a JS bundle fetches at runtime (e.g. shape masks), so
+  // runtime discovery feeds back here to complete the dependency graph.
+  const discoveredFile = path.join(ARTIFACTS, 'evidence', 'runtime', 'discovered-assets.json');
+  let seeded = 0;
+  try {
+    const discovered = JSON.parse(await fs.readFile(discoveredFile, 'utf8'));
+    for (const assetPath of discovered.paths || []) {
+      queue.push({
+        url: new URL(assetPath, cfg.origin).href,
+        parent: 'runtime-discovery',
+        depth: 1,
+      });
+      seeded += 1;
+    }
+  } catch {
+    // No prior capture yet. The first mirror run is static-only by design.
+  }
+  if (seeded) log(STAGE, `seeded ${seeded} runtime-discovered asset(s)`);
   const seen = new Set();
   const records = [];
   const external = [];
