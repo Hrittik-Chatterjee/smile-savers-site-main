@@ -65,13 +65,11 @@ async function main() {
     .sort((a, b) => a - b);
   const smallestSpacing = spacingValues[0] ?? null;
   const spacingRhythm = smallestSpacing
-    ? spacingValues
-        .slice(0, 12)
-        .map((v) => ({
-          stepRatio: ratio(v, smallestSpacing),
-          occurrences:
-            referenceTokens.layers.atomic.spacing.find((s) => s.value === v)?.occurrences ?? null,
-        }))
+    ? spacingValues.slice(0, 12).map((v) => ({
+        stepRatio: ratio(v, smallestSpacing),
+        occurrences:
+          referenceTokens.layers.atomic.spacing.find((s) => s.value === v)?.occurrences ?? null,
+      }))
     : [];
 
   // Radius scale relationships: ratio of each step to the smallest non-zero step.

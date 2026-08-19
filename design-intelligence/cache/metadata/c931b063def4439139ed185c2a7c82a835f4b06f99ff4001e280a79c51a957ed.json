@@ -1,0 +1,14 @@
+{
+  "sha256": "c931b063def4439139ed185c2a7c82a835f4b06f99ff4001e280a79c51a957ed",
+  "size": 37050,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:25.443Z",
+  "sourceURL": "https://labs.google/assets/images/tools/stax.webp",
+  "finalURL": "https://labs.google/assets/images/tools/stax.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.414Z"
+}

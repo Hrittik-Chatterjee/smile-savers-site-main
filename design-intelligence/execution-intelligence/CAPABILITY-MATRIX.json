@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2026-08-19T09:16:00Z",
+  "claudeCodeVersion": "2.1.235",
+  "note": "Every entry below is either directly evidenced this session (method stated) or explicitly marked UNKNOWN/UNVERIFIED. Nothing here is asserted from training-data memory of Claude Code's feature set without a live check.",
+  "capabilities": [
+    {
+      "capability": "Hooks system exists and executes external commands",
+      "status": "SUPPORTED",
+      "evidence": "/root/.claude/launcher-settings.json wires SessionStart -> session-start-git-identity.sh and Stop -> stop-hook-git-check.sh. Both are real, running hooks that shaped this exact session (git identity setup, and the stop-hook-git-check.sh that prompted PR pushes earlier in this conversation).",
+      "captureMechanism": "external command hook, JSON on stdin",
+      "limitations": []
+    },
+    {
+      "capability": "Hook event types beyond SessionStart/Stop (PreToolUse, PostToolUse, UserPromptSubmit, Notification, SessionEnd, PermissionDecision)",
+      "status": "UNKNOWN",
+      "evidence": "Not independently confirmed against current docs.claude.com this session. These names come from training-data familiarity with Claude Code's hook system, not a live check.",
+      "captureMechanism": null,
+      "limitations": [
+        "Should be reconfirmed via docs.claude.com or `claude --help` before being relied upon."
+      ]
+    },
+    {
+      "capability": "Project-level .claude/settings.json hooks activate mid-session (without a session restart)",
+      "status": "UNSUPPORTED (this session)",
+      "evidence": "Wrote .claude/settings.json with PreToolUse/PostToolUse/UserPromptSubmit hooks pointing at record-event.mjs, then ran a Bash command. The expected ledger directory (design-intelligence/execution-intelligence/ledger/) was NOT created — the hooks did not fire. Directly tested, not assumed.",
+      "captureMechanism": "empirical negative test",
+      "limitations": [
+        "Hook configuration is very likely read once at session start (matching how launcher-settings.json's hooks were already active before this session's first turn, rather than being added during it).",
+        "This means NO events from the current session are captured by these hooks, regardless of how long the session continues. Only a FRESH session started after this settings.json exists could exercise them, and that has not been tested either (would require ending this session)."
+      ]
+    },
+    {
+      "capability": "record-event.mjs itself (schema, hash-chaining, non-blocking exit)",
+      "status": "SUPPORTED",
+      "evidence": "Directly invoked with synthetic stdin payloads (two sequential events). Verified: exit code 0, valid JSONL written, second event's previousEventHash equals first event's eventHash. Test ledger deleted after verification so it isn't mistaken for real session data.",
+      "captureMechanism": "direct script invocation with synthetic input",
+      "limitations": [
+        "Logic is proven; live triggering by Claude Code hooks is not (see prior entry)."
+      ]
+    },
+    {
+      "capability": "Session transcript file as an execution-intelligence data source",
+      "status": "UNSUPPORTED (by design choice, not technical impossibility)",
+      "evidence": "/root/.claude/projects/.../<session-id>.jsonl exists, 1928 lines, and DOES contain assistant message entries with a 'thinking' content block. In the sampled entry the thinking string was empty with only an opaque 'signature' field populated — confirming no readable hidden reasoning is exposed even if this file were parsed.",
+      "captureMechanism": "file inspection",
+      "limitations": [
+        "This is Claude Code's internal, undocumented, versioned transcript format, not a stable public API. Building durable tooling on top of it would be fragile across Claude Code versions.",
+        "The file lives on the container's local ephemeral disk (/dev/vda) and does NOT survive session/container teardown — confirmed via `df -h`.",
+        "Per the project's own non-negotiable rule (never reconstruct hidden reasoning), this file is not used as an evidence source by any script in this project."
+      ]
+    },
+    {
+      "capability": "Durable, cross-session execution ledger",
+      "status": "PARTIALLY_SUPPORTED",
+      "evidence": "The recorder + hook config exist and are committed to git, so they will exist in any FUTURE session that checks out this branch/commit with hooks enabled. They cannot retroactively cover this session or any prior one.",
+      "captureMechanism": "n/a - forward-looking only",
+      "limitations": [
+        "Untested in an actual fresh session end-to-end; only the recorder's internal logic and the mid-session-negative-result are proven."
+      ]
+    }
+  ],
+  "summary": "The content-addressed cache (design-intelligence/lib/cache.mjs) is fully built, tested, and proven this session with real network calls (drift detection, CACHE_ONLY blocking, cache-hit reuse all directly verified). The execution-intelligence recorder exists and its internal logic is proven, but it captures NOTHING from this session -- hooks configured mid-session do not activate mid-session, confirmed empirically rather than assumed. Honest completion state, not full completion of the original 66-section request."
+}

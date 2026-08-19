@@ -1,0 +1,14 @@
+{
+  "sha256": "557a97940fac72f6c7e073b0ab6785ad078151113cc6f622442f7cb5e460b7eb",
+  "size": 33126,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:24.151Z",
+  "sourceURL": "https://labs.google/assets/images/tools/computational-discovery.webp",
+  "finalURL": "https://labs.google/assets/images/tools/computational-discovery.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.399Z"
+}

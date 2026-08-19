@@ -25,7 +25,12 @@
     "report": "node scripts/report.mjs",
     "migration": "node scripts/migration-assessment.mjs",
     "gate": "node scripts/gate.mjs",
-    "closure": "node scripts/closure-4-5.mjs"
+    "closure": "node scripts/closure-4-5.mjs",
+    "cache:migrate": "node scripts/cache-migrate.mjs",
+    "cache:stats": "node scripts/cache-report.mjs stats",
+    "cache:verify": "node scripts/cache-report.mjs verify",
+    "cache:gc": "node scripts/cache-report.mjs gc",
+    "cache:gc-dry-run": "node scripts/cache-report.mjs gc-dry-run"
   },
   "devDependencies": {
     "pixelmatch": "7.2.0",

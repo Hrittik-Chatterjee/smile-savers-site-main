@@ -1,0 +1,14 @@
+{
+  "sha256": "728c11a5132d08371bf393d3b2b8ea33a1785a7362f58521340abb359e2fdb0e",
+  "size": 23958,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:25.282Z",
+  "sourceURL": "https://labs.google/assets/images/tools/opal.webp",
+  "finalURL": "https://labs.google/assets/images/tools/opal.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.412Z"
+}

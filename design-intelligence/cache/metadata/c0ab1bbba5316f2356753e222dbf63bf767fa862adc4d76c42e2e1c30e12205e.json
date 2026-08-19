@@ -1,0 +1,14 @@
+{
+  "sha256": "c0ab1bbba5316f2356753e222dbf63bf767fa862adc4d76c42e2e1c30e12205e",
+  "size": 327864,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:23.447Z",
+  "sourceURL": "https://labs.google/assets/images/tools/stitch-poster.webp",
+  "finalURL": "https://labs.google/assets/images/tools/stitch-poster.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.391Z"
+}

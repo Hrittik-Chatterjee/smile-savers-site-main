@@ -1,0 +1,14 @@
+{
+  "sha256": "9dd8909715f9d922dac06827cbd52acf16a2f4d69e1e885373b5f7de3cf8c5c0",
+  "size": 4033,
+  "mimeType": "image/png",
+  "retrievedAt": "2026-08-19T08:01:21.685Z",
+  "sourceURL": "https://labs.google/assets/icons/favicon-32x32.png",
+  "finalURL": "https://labs.google/assets/icons/favicon-32x32.png",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.376Z"
+}

@@ -1,0 +1,14 @@
+{
+  "sha256": "9716ae4258e8248c08514ee8b067e101633f497c3457972d7ba2062f95411d29",
+  "size": 4865,
+  "mimeType": "text/css",
+  "retrievedAt": "2026-08-19T08:01:22.472Z",
+  "sourceURL": "https://labs.google/styles-3NEYF3LM.css",
+  "finalURL": "https://labs.google/styles-3NEYF3LM.css",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.380Z"
+}

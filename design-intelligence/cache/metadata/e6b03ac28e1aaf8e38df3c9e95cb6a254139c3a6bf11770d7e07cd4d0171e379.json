@@ -1,0 +1,14 @@
+{
+  "sha256": "e6b03ac28e1aaf8e38df3c9e95cb6a254139c3a6bf11770d7e07cd4d0171e379",
+  "size": 480502,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:24.743Z",
+  "sourceURL": "https://labs.google/assets/images/tools/flow-music.webp",
+  "finalURL": "https://labs.google/assets/images/tools/flow-music.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.407Z"
+}

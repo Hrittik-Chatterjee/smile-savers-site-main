@@ -1,0 +1,14 @@
+{
+  "sha256": "23393a45dbf1bc22a11f8eed85657107fefad25258e991f8cbe44b88dad29734",
+  "size": 111100,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:25.780Z",
+  "sourceURL": "https://labs.google/assets/images/tools/learn-your-way.webp",
+  "finalURL": "https://labs.google/assets/images/tools/learn-your-way.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.417Z"
+}

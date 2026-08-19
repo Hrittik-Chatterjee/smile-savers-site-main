@@ -1,0 +1,14 @@
+{
+  "sha256": "74da46e877e68f9771f9e644b870a000faafb42d2b0cb5ec7be3ba8682f2ed82",
+  "size": 194842,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:26.525Z",
+  "sourceURL": "https://labs.google/assets/images/graduation/flow_bg_ed_1.webp",
+  "finalURL": "https://labs.google/assets/images/graduation/flow_bg_ed_1.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.424Z"
+}
