@@ -11,22 +11,21 @@
       "limitations": []
     },
     {
-      "capability": "Hook event types beyond SessionStart/Stop (PreToolUse, PostToolUse, UserPromptSubmit, Notification, SessionEnd, PermissionDecision)",
-      "status": "UNKNOWN",
-      "evidence": "Not independently confirmed against current docs.claude.com this session. These names come from training-data familiarity with Claude Code's hook system, not a live check.",
-      "captureMechanism": null,
-      "limitations": [
-        "Should be reconfirmed via docs.claude.com or `claude --help` before being relied upon."
-      ]
+      "capability": "Hook event types beyond SessionStart/Stop",
+      "status": "SUPPORTED",
+      "evidence": "Fetched https://code.claude.com/docs/en/hooks live via WebFetch this session (corrects the prior UNKNOWN entry). Documents 31 hook event types (SessionStart, Setup, UserPromptSubmit, UserPromptExpansion, PreToolUse, PermissionRequest, PermissionDenied, PostToolUse, PostToolUseFailure, PostToolBatch, Stop, StopFailure, SubagentStart, SubagentStop, TaskCreated, TaskCompleted, TeammateIdle, Notification, MessageDisplay, InstructionsLoaded, ConfigChange, CwdChanged, DirectoryAdded, FileChanged, WorktreeCreate, WorktreeRemove, PreCompact, PostCompact, Elicitation, ElicitationResult, SessionEnd), common fields (session_id, transcript_path, cwd, hook_event_name, permission_mode, effort, agent_id/agent_type), and event-specific fields per type (e.g. tool_name/tool_input/tool_use_id for tool events).",
+      "captureMechanism": "WebFetch of primary documentation",
+      "limitations": ["Prompted by an uploaded third-party 'knowledge pack' citing this same URL for a similar claim; independently re-verified via a fresh live fetch rather than trusted on the pack's citation alone."]
     },
     {
-      "capability": "Project-level .claude/settings.json hooks activate mid-session (without a session restart)",
-      "status": "UNSUPPORTED (this session)",
-      "evidence": "Wrote .claude/settings.json with PreToolUse/PostToolUse/UserPromptSubmit hooks pointing at record-event.mjs, then ran a Bash command. The expected ledger directory (design-intelligence/execution-intelligence/ledger/) was NOT created — the hooks did not fire. Directly tested, not assumed.",
-      "captureMechanism": "empirical negative test",
+      "capability": "Project-level .claude/settings.json hooks activate mid-session via a file watcher",
+      "status": "PARTIALLY_SUPPORTED — documented behavior contradicts this environment's empirical behavior",
+      "evidence": "The same live doc fetch states: 'Direct edits to hooks in settings files are normally picked up automatically by the file watcher' — i.e. dynamic mid-session reload IS the documented default for the general Claude Code CLI product. Empirically, however, two separate tests in THIS session — immediately after writing .claude/settings.json, and again ~2 minutes and several tool calls later — both found the expected ledger directory was never created. Re-tested specifically because the new documentation contradicted the earlier empirical result, rather than accepting either claim alone.",
+      "captureMechanism": "live doc fetch + two independent empirical negative tests, deliberately spaced apart in time",
       "limitations": [
-        "Hook configuration is very likely read once at session start (matching how launcher-settings.json's hooks were already active before this session's first turn, rather than being added during it).",
-        "This means NO events from the current session are captured by these hooks, regardless of how long the session continues. Only a FRESH session started after this settings.json exists could exercise them, and that has not been tested either (would require ending this session)."
+        "The most likely explanation is that this session runs in a managed remote/CCR execution environment (stated explicitly in this session's own system context), which may not run the same file-watcher process the interactive CLI docs describe — not that hooks are unsupported generally.",
+        "Not confirmed which of several possibilities applies: no file watcher in this harness, a watcher with a much longer debounce, or a permission gate silently blocking the hook's command execution. Recorded as PARTIALLY_SUPPORTED with an open root cause, not resolved to a single explanation without further evidence.",
+        "Only a fresh session (or an environment capability this session cannot test) could confirm whether SessionStart-time hook loading (proven working via launcher-settings.json) succeeds where mid-session file-watcher reload does not."
       ]
     },
     {
@@ -59,5 +58,5 @@
       ]
     }
   ],
-  "summary": "The content-addressed cache (design-intelligence/lib/cache.mjs) is fully built, tested, and proven this session with real network calls (drift detection, CACHE_ONLY blocking, cache-hit reuse all directly verified). The execution-intelligence recorder exists and its internal logic is proven, but it captures NOTHING from this session -- hooks configured mid-session do not activate mid-session, confirmed empirically rather than assumed. Honest completion state, not full completion of the original 66-section request."
+  "summary": "The content-addressed cache (design-intelligence/lib/cache.mjs) is fully built, tested, and proven this session with real network calls (drift detection, CACHE_ONLY blocking, cache-hit reuse all directly verified). The execution-intelligence recorder exists and its internal logic is proven, but it captures NOTHING from this session: hook configuration IS documented to support mid-session file-watcher reload in the general Claude Code product (verified live), yet this specific remote/CCR-managed session does not exhibit that behavior across two independent, time-separated tests. That gap is recorded as PARTIALLY_SUPPORTED with an open root cause, not silently resolved either direction. Honest completion state, not full completion of the original 66-section request."
 }
