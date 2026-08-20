@@ -29,7 +29,7 @@ const initials = (n: string) => n.split(' ').map(x => x[0]).join('');
       <span class="tsl-eye">Patient Stories</span>
       <h2 id="tsl-heading" class="tsl-h2">Real Stories From Your Neighbors</h2>
       <p class="tsl-sub">Families across Queens trust Smile Savers. Here's what they say.</p>
-      <div class="tsl-agg" aria-label="5 stars from 200 plus reviews">
+      <div class="tsl-agg">
         <div class="tsl-stars" aria-hidden="true">{"★★★★★"}</div>
         <span class="tsl-agg-txt"><strong>5.0</strong> out of 5 &middot; 200+ verified reviews</span>
       </div>
@@ -42,7 +42,7 @@ const initials = (n: string) => n.split(' ').map(x => x[0]).join('');
 
             <div class="tsl-qmark" aria-hidden="true">&ldquo;</div>
 
-            <div class="tsl-stars-sm" aria-label={`${t.rating} out of 5 stars`}>
+            <div class="tsl-stars-sm" role="img" aria-label={`${t.rating} out of 5 stars`}>
               {[1,2,3,4,5].map((i) => (
                 <svg width="15" height="15" viewBox="0 0 24 24" fill={i<=t.rating?"#FBBC05":"#E5E7EB"} aria-hidden="true">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
