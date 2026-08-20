@@ -69,7 +69,7 @@ When adding content, copy an existing Markdown file in the target collection dir
 ```css
 --color-primary:   #102B3F   /* Deep Navy */
 --color-secondary: #3DBAA7   /* Mint Teal */
---color-accent:    #2CABDF   /* Bright Cyan — CTAs */
+--color-accent:    #1D6F91   /* Darkened Cyan — CTAs (darkened from #2CABDF for WCAG AA; 5.62:1 vs white, was 2.63:1) */
 --color-surface:   #EFF6EE   /* Mint Whisper background */
 ```
 

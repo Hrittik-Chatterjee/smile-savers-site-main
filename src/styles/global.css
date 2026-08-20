@@ -27,8 +27,8 @@
   --color-secondary: #3DBAA7 !important;
   --color-secondary-light: #A8E0D6 !important;
   --color-secondary-dark: #1A8A78 !important;
-  --color-accent: #2CABDF !important;
-  --color-accent-dark: #1A95C9 !important;
+  --color-accent: #1D6F91 !important;
+  --color-accent-dark: #185E7B !important;
   /* Prevent DaisyUI from setting btn-primary to purple */
   --color-primary-content: #FFFFFF !important;
 }
@@ -56,8 +56,8 @@
   --color-secondary-light: #A8E0D6;
   --color-secondary-dark: #1A8A78;
 
-  --color-accent: #2CABDF;
-  /* Bright Cyan - CTAs ONLY (icons, buttons) */
+  --color-accent: #1D6F91;
+  /* Darkened Cyan (was #2CABDF) - CTAs ONLY; darkened for WCAG AA (5.62:1 vs white, was 2.63:1) */
 
   /* Section Background Colors */
   --color-bg-clinical: #EFF6EE;
@@ -102,8 +102,8 @@
   --color-border-strong: var(--color-neutral-300);
 
   /* Extended Color Palette */
-  --color-accent-dark: #1A95C9;
-  /* Darker cyan for hover states */
+  --color-accent-dark: #185E7B;
+  /* Darker cyan for hover states (was #1A95C9; now 7.18:1 vs white, was 3.39:1) */
   --color-gold: #D4A574;
   /* Warm gold accent */
   --color-gold-light: #FFF9F0;
