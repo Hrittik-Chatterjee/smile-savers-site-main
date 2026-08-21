@@ -30,7 +30,12 @@ export const siteConfig = {
 
   // Business Hours
   hours: [
-    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], open: '10:00', close: '18:00', display: '10:00 AM – 6:00 PM' },
+    {
+      days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+      open: '10:00',
+      close: '18:00',
+      display: '10:00 AM – 6:00 PM',
+    },
     { days: ['Friday'], open: '09:00', close: '17:00', display: '9:00 AM – 5:00 PM' },
     { days: ['Saturday'], open: '09:00', close: '13:00', display: '9:00 AM – 1:00 PM' },
     { days: ['Sunday'], open: 'Closed', close: 'Closed', display: 'Closed' },
@@ -77,14 +82,7 @@ export const siteConfig = {
   ],
 
   // Insurance (example list)
-  acceptedInsurance: [
-    'Delta Dental',
-    'Cigna',
-    'Aetna',
-    'MetLife',
-    'Guardian',
-    'United Healthcare',
-  ],
+  acceptedInsurance: ['Delta Dental', 'Cigna', 'Aetna', 'MetLife', 'Guardian', 'United Healthcare'],
 } as const;
 
 export type SiteConfig = typeof siteConfig;

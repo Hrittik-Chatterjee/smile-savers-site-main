@@ -4,7 +4,7 @@
  * Provides consistent structure and styling for legal content
  */
 
-import PageLayout from "./PageLayout.astro";
+import PageLayout from './PageLayout.astro';
 
 interface Props {
   /** Page title */
@@ -73,7 +73,7 @@ const { title, description, lastUpdated, breadcrumbLabel } = Astro.props;
     gap: 0.5rem;
 
     &:not(:last-child)::after {
-      content: "/";
+      content: '/';
       color: var(--color-text-muted);
     }
   }
@@ -88,7 +88,7 @@ const { title, description, lastUpdated, breadcrumbLabel } = Astro.props;
     }
   }
 
-  .breadcrumb [aria-current="page"] {
+  .breadcrumb [aria-current='page'] {
     color: var(--color-text);
     font-weight: var(--font-weight-medium);
   }

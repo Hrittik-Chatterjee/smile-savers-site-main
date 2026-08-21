@@ -13,10 +13,7 @@ import Breadcrumbs from '../../modules/programmatic-seo/components/Breadcrumbs.a
 
 const glossaryEntries = await getCollection('glossary');
 
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Learn' },
-];
+const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Learn' }];
 ---
 
 <PageLayout
@@ -35,20 +32,35 @@ const breadcrumbs = [
       </p>
     </header>
 
-    <section class="glossary-grid grid-auto" style="--grid-min: var(--grid-min-lg);" aria-label="Dental terms">
-      {glossaryEntries.map((entry) => (
-        <a href={`/learn/${entry.data.term}/`} class="glossary-card">
-          <h2 class="term-title">{entry.data.termDisplay}</h2>
-          <p class="term-definition">{entry.data.definition}</p>
-          <span class="learn-more">
-            Learn more
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </span>
-        </a>
-      ))}
+    <section
+      class="glossary-grid grid-auto"
+      style="--grid-min: var(--grid-min-lg);"
+      aria-label="Dental terms"
+    >
+      {
+        glossaryEntries.map((entry) => (
+          <a href={`/learn/${entry.data.term}/`} class="glossary-card">
+            <h2 class="term-title">{entry.data.termDisplay}</h2>
+            <p class="term-definition">{entry.data.definition}</p>
+            <span class="learn-more">
+              Learn more
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        ))
+      }
     </section>
   </div>
 </PageLayout>
@@ -67,7 +79,6 @@ const breadcrumbs = [
     max-width: var(--container-md);
     margin-inline: auto;
   }
-
 
   .page-title {
     font-size: var(--font-size-4xl);
@@ -91,7 +102,9 @@ const breadcrumbs = [
     border-radius: var(--radius-xl);
     text-decoration: none;
     color: inherit;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
   }
 
   .glossary-card:hover {

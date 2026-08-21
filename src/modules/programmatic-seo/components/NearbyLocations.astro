@@ -10,13 +10,18 @@ interface LocationLink {
 }
 
 interface Props {
-  service: string;        // Current service slug
-  currentNeighborhood: string;  // Current neighborhood (to exclude)
-  locations?: LocationLink[];   // Optional custom list, otherwise uses defaults
+  service: string; // Current service slug
+  currentNeighborhood: string; // Current neighborhood (to exclude)
+  locations?: LocationLink[]; // Optional custom list, otherwise uses defaults
   title?: string;
 }
 
-const { service, currentNeighborhood, locations, title = "Also Serving Nearby Areas" } = Astro.props;
+const {
+  service,
+  currentNeighborhood,
+  locations,
+  title = 'Also Serving Nearby Areas',
+} = Astro.props;
 
 // Default Queens neighborhoods served by Smile Savers
 const defaultLocations: LocationLink[] = [
@@ -31,25 +36,40 @@ const defaultLocations: LocationLink[] = [
 ];
 
 const allLocations = locations || defaultLocations;
-const displayLocations = allLocations.filter(loc => loc.slug !== currentNeighborhood);
+const displayLocations = allLocations.filter((loc) => loc.slug !== currentNeighborhood);
 ---
 
-{displayLocations.length > 0 && (
-  <section class="nearby-locations" aria-labelledby="nearby-heading">
-    <h2 id="nearby-heading" class="nearby-title">{title}</h2>
-    <nav class="locations-grid" aria-label="Nearby service areas">
-      {displayLocations.map((loc) => (
-        <a href={`/${service}/${loc.slug}/`} class="location-link">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          <span>{loc.neighborhood}</span>
-        </a>
-      ))}
-    </nav>
-  </section>
-)}
+{
+  displayLocations.length > 0 && (
+    <section class="nearby-locations" aria-labelledby="nearby-heading">
+      <h2 id="nearby-heading" class="nearby-title">
+        {title}
+      </h2>
+      <nav class="locations-grid" aria-label="Nearby service areas">
+        {displayLocations.map((loc) => (
+          <a href={`/${service}/${loc.slug}/`} class="location-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <span>{loc.neighborhood}</span>
+          </a>
+        ))}
+      </nav>
+    </section>
+  )
+}
 
 <style>
   .nearby-locations {
@@ -80,7 +100,9 @@ const displayLocations = allLocations.filter(loc => loc.slug !== currentNeighbor
     font-size: var(--font-size-sm);
     color: var(--color-text);
     text-decoration: none;
-    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast);
 
     /* --color-primary-light bg + --color-primary-dark text measured 1.80:1 --
        same bug found repeatedly in the programmatic-seo layouts. */

@@ -4,14 +4,14 @@
  * Displays all dental services in a filterable grid
  */
 
-import PageLayout from "@/layouts/PageLayout.astro";
-import PageHeader from "@/components/common/PageHeader.astro";
-import CTASection from "@/components/common/CTASection.astro";
-import ServiceGrid from "@/modules/services/components/ServiceGrid.astro";
+import PageLayout from '@/layouts/PageLayout.astro';
+import PageHeader from '@/components/common/PageHeader.astro';
+import CTASection from '@/components/common/CTASection.astro';
+import ServiceGrid from '@/modules/services/components/ServiceGrid.astro';
 
-const title = "Our Services";
+const title = 'Our Services';
 const description =
-  "Comprehensive dental services from preventive care to advanced restorative procedures. Smile Savers offers expert care for the whole family.";
+  'Comprehensive dental services from preventive care to advanced restorative procedures. Smile Savers offers expert care for the whole family.';
 ---
 
 <PageLayout title={title} description={description}>
@@ -19,10 +19,7 @@ const description =
     <PageHeader
       title={title}
       description="From routine checkups to advanced restorative procedures, we provide comprehensive dental care for patients of all ages."
-      breadcrumbs={[
-        { label: "Home", href: "/" },
-        { label: "Services" }
-      ]}
+      breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Services' }]}
     />
 
     <!-- Services Grid -->
@@ -37,8 +34,8 @@ const description =
       title="Not Sure Which Service You Need?"
       description="Schedule a consultation and our team will help you find the right treatment plan for your needs."
       buttons={[
-        { label: "Call Now", href: "tel:+17189568400", variant: "primary" },
-        { label: "Contact Us", href: "/contact", variant: "outline" }
+        { label: 'Call Now', href: 'tel:+17189568400', variant: 'primary' },
+        { label: 'Contact Us', href: '/contact', variant: 'outline' },
       ]}
     />
   </main>

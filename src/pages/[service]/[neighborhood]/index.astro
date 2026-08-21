@@ -23,7 +23,16 @@ export async function getStaticPaths() {
 }
 
 const { location } = Astro.props;
-const { service, serviceTitle, neighborhood, neighborhoodDisplay, intro, sections, faqs, relatedServices } = location.data;
+const {
+  service,
+  serviceTitle,
+  neighborhood,
+  neighborhoodDisplay,
+  intro,
+  sections,
+  faqs,
+  relatedServices,
+} = location.data;
 ---
 
 <LocationPageLayout

@@ -4,11 +4,11 @@
  * Comprehensive privacy information including HIPAA, cookies, and SMS opt-in
  */
 
-import LegalLayout from "@/layouts/LegalLayout.astro";
-import { siteConfig } from "@/config/site";
+import LegalLayout from '@/layouts/LegalLayout.astro';
+import { siteConfig } from '@/config/site';
 
-const title = "Privacy Policy";
-const description = "How we protect your personal health information at Smile Savers.";
+const title = 'Privacy Policy';
+const description = 'How we protect your personal health information at Smile Savers.';
 ---
 
 <LegalLayout
@@ -19,39 +19,77 @@ const description = "How we protect your personal health information at Smile Sa
 >
   <section class="policy-section">
     <h2>Who We Are</h2>
-    <p>Our website address is: <a href={siteConfig.url}>{siteConfig.url}</a>. This policy describes how {siteConfig.name} collects, uses, and protects information through this website.</p>
+    <p>
+      Our website address is: <a href={siteConfig.url}>{siteConfig.url}</a>. This policy describes
+      how {siteConfig.name} collects, uses, and protects information through this website.
+    </p>
   </section>
 
   <section class="policy-section">
     <h2>Contact Form & Appointment Requests</h2>
-    <p>When you submit the contact or appointment request form, we collect the information you provide: name, email address, phone number (optional), requested service, whether you are a new patient, whether your request is urgent, and your message. This information is sent by email to our clinic staff using our email provider (Resend) so we can respond to you; it is not stored in a database by this website.</p>
-    <p>Operational logs may briefly record that a submission was received (a random reference ID and non-identifying details such as whether a phone number was provided) to help us diagnose delivery problems — these logs do not contain your name, email, phone number, or message text.</p>
+    <p>
+      When you submit the contact or appointment request form, we collect the information you
+      provide: name, email address, phone number (optional), requested service, whether you are a
+      new patient, whether your request is urgent, and your message. This information is sent by
+      email to our clinic staff using our email provider (Resend) so we can respond to you; it is
+      not stored in a database by this website.
+    </p>
+    <p>
+      Operational logs may briefly record that a submission was received (a random reference ID and
+      non-identifying details such as whether a phone number was provided) to help us diagnose
+      delivery problems — these logs do not contain your name, email, phone number, or message text.
+    </p>
   </section>
 
   <section class="policy-section">
     <h2>AI Chat Assistant</h2>
-    <p>If you use the chat widget on this site, your messages are sent to Cloudflare Workers AI to generate a response about our services, hours, and location. Conversations are not stored in a persistent database; a short-lived, in-memory cache may be used to avoid repeating identical AI responses, and is not linked to your identity.</p>
+    <p>
+      If you use the chat widget on this site, your messages are sent to Cloudflare Workers AI to
+      generate a response about our services, hours, and location. Conversations are not stored in a
+      persistent database; a short-lived, in-memory cache may be used to avoid repeating identical
+      AI responses, and is not linked to your identity.
+    </p>
   </section>
 
   <section class="policy-section">
     <h2>Cookies & Offline Support</h2>
-    <p>This site uses a service worker to cache pages and assets on your device so the site loads faster and can work offline. This caching is technical (page/image/script files) and does not include any personal information you submit through the contact form or chat. We do not use tracking or advertising cookies.</p>
+    <p>
+      This site uses a service worker to cache pages and assets on your device so the site loads
+      faster and can work offline. This caching is technical (page/image/script files) and does not
+      include any personal information you submit through the contact form or chat. We do not use
+      tracking or advertising cookies.
+    </p>
   </section>
 
   <section class="policy-section">
     <h2>Who We Share Your Data With</h2>
-    <p>We share contact-form and appointment-request content with our email delivery provider (Resend) solely to deliver your message to our clinic staff. If you use the "Book via WhatsApp" flow, your message is sent through WhatsApp to our clinic's number, subject to WhatsApp's own privacy policy.</p>
-    <p class="highlight-note">We do not sell or share your information with third parties for marketing purposes.</p>
+    <p>
+      We share contact-form and appointment-request content with our email delivery provider
+      (Resend) solely to deliver your message to our clinic staff. If you use the "Book via
+      WhatsApp" flow, your message is sent through WhatsApp to our clinic's number, subject to
+      WhatsApp's own privacy policy.
+    </p>
+    <p class="highlight-note">
+      We do not sell or share your information with third parties for marketing purposes.
+    </p>
   </section>
 
   <section class="policy-section">
     <h2>How Long We Retain Your Data</h2>
-    <p>Contact and appointment-request emails are retained in our clinic email inbox per our normal business record-keeping practices. This website itself does not maintain a database of visitor submissions.</p>
+    <p>
+      Contact and appointment-request emails are retained in our clinic email inbox per our normal
+      business record-keeping practices. This website itself does not maintain a database of visitor
+      submissions.
+    </p>
   </section>
 
   <section class="policy-section">
     <h2>What Rights You Have Over Your Data</h2>
-    <p>You can request a copy of, or the deletion of, any information you've sent us by contacting us using the details below. This does not include information we are obliged to keep for administrative, legal, or security purposes.</p>
+    <p>
+      You can request a copy of, or the deletion of, any information you've sent us by contacting us
+      using the details below. This does not include information we are obliged to keep for
+      administrative, legal, or security purposes.
+    </p>
   </section>
 
   <section class="policy-section contact-section">
@@ -59,7 +97,11 @@ const description = "How we protect your personal health information at Smile Sa
     <p>If you have questions or concerns about our privacy practices, contact us at:</p>
     <address class="contact-info">
       <p><strong>Phone:</strong> <a href="tel:+17189568400">(718) 956-8400</a></p>
-      <p><strong>Address:</strong> {siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.state} {siteConfig.address.zip}</p>
+      <p>
+        <strong>Address:</strong>
+        {siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.state}
+        {siteConfig.address.zip}
+      </p>
     </address>
   </section>
 </LegalLayout>

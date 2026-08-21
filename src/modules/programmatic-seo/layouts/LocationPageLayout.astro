@@ -92,12 +92,14 @@ const breadcrumbs = [
       <div class="content-wrapper">
         <!-- Main content sections -->
         <div class="content-sections">
-          {sections.map((section) => (
-            <section class="content-section">
-              <h2 class="section-title">{section.title}</h2>
-              <div class="section-content" set:html={section.content} />
-            </section>
-          ))}
+          {
+            sections.map((section) => (
+              <section class="content-section">
+                <h2 class="section-title">{section.title}</h2>
+                <div class="section-content" set:html={section.content} />
+              </section>
+            ))
+          }
         </div>
 
         <!-- Sidebar -->
@@ -106,19 +108,55 @@ const breadcrumbs = [
             <h3 class="sidebar-title">Why Choose Smile Savers?</h3>
             <ul class="benefits-list">
               <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg
+                >
                 35+ years serving Queens
               </li>
               <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg
+                >
                 Board certified dentists
               </li>
               <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg
+                >
                 Easy access from {neighborhoodDisplay}
               </li>
               <li>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg
+                >
                 Same-day appointments available
               </li>
             </ul>
@@ -130,9 +168,10 @@ const breadcrumbs = [
             <dl class="hours-list">
               {
                 siteConfig.hours.map((h) => {
-                  const daysLabel = h.days.length > 1
-                    ? `${h.days[0].slice(0, 3)} - ${h.days[h.days.length - 1].slice(0, 3)}`
-                    : h.days[0];
+                  const daysLabel =
+                    h.days.length > 1
+                      ? `${h.days[0].slice(0, 3)} - ${h.days[h.days.length - 1].slice(0, 3)}`
+                      : h.days[0];
                   return (
                     <div class="hours-row">
                       <dt>{daysLabel}</dt>
@@ -147,12 +186,11 @@ const breadcrumbs = [
       </div>
 
       <!-- FAQ Section -->
-      {faqs.length > 0 && (
-        <FAQSection
-          items={faqs}
-          title={`${serviceTitle} in ${neighborhoodDisplay}: FAQ`}
-        />
-      )}
+      {
+        faqs.length > 0 && (
+          <FAQSection items={faqs} title={`${serviceTitle} in ${neighborhoodDisplay}: FAQ`} />
+        )
+      }
 
       <!-- CTA Banner -->
       <CTABanner
@@ -168,10 +206,7 @@ const breadcrumbs = [
       />
 
       <!-- Nearby Locations -->
-      <NearbyLocations
-        service={service}
-        currentNeighborhood={neighborhood}
-      />
+      <NearbyLocations service={service} currentNeighborhood={neighborhood} />
     </div>
   </article>
 </PageLayout>

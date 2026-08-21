@@ -13,10 +13,7 @@ import Breadcrumbs from '../../modules/programmatic-seo/components/Breadcrumbs.a
 
 const comparisons = await getCollection('comparisons');
 
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'Compare' },
-];
+const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Compare' }];
 ---
 
 <PageLayout
@@ -36,31 +33,42 @@ const breadcrumbs = [
     </header>
 
     <section class="comparisons-grid" aria-label="Treatment comparisons">
-      {comparisons.map((comparison) => (
-        <a href={`/compare/${comparison.data.slug}/`} class="comparison-card">
-          <div class="vs-badge">VS</div>
-          <h2 class="comparison-title">
-            {comparison.data.optionA.name} vs {comparison.data.optionB.name}
-          </h2>
-          <div class="options-preview">
-            <div class="option">
-              <span class="option-name">{comparison.data.optionA.name}</span>
-              <span class="option-cost">{comparison.data.optionA.cost}</span>
+      {
+        comparisons.map((comparison) => (
+          <a href={`/compare/${comparison.data.slug}/`} class="comparison-card">
+            <div class="vs-badge">VS</div>
+            <h2 class="comparison-title">
+              {comparison.data.optionA.name} vs {comparison.data.optionB.name}
+            </h2>
+            <div class="options-preview">
+              <div class="option">
+                <span class="option-name">{comparison.data.optionA.name}</span>
+                <span class="option-cost">{comparison.data.optionA.cost}</span>
+              </div>
+              <div class="option">
+                <span class="option-name">{comparison.data.optionB.name}</span>
+                <span class="option-cost">{comparison.data.optionB.cost}</span>
+              </div>
             </div>
-            <div class="option">
-              <span class="option-name">{comparison.data.optionB.name}</span>
-              <span class="option-cost">{comparison.data.optionB.cost}</span>
-            </div>
-          </div>
-          <span class="read-comparison">
-            Read comparison
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </span>
-        </a>
-      ))}
+            <span class="read-comparison">
+              Read comparison
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        ))
+      }
     </section>
   </div>
 </PageLayout>
@@ -79,7 +87,6 @@ const breadcrumbs = [
     max-width: var(--container-md);
     margin-inline: auto;
   }
-
 
   .page-title {
     font-size: var(--font-size-4xl);
@@ -112,7 +119,9 @@ const breadcrumbs = [
     border-radius: var(--radius-xl);
     text-decoration: none;
     color: inherit;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
   }
 
   .comparison-card:hover {

@@ -13,13 +13,11 @@ import Breadcrumbs from '../../modules/programmatic-seo/components/Breadcrumbs.a
 
 const personas = await getCollection('personas');
 
-const breadcrumbs = [
-  { label: 'Home', href: '/' },
-  { label: 'For You' },
-];
+const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'For You' }];
 
 const iconPaths: Record<string, string> = {
-  family: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+  family:
+    'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
   senior: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
   professional: 'M20 7h-4V3H8v4H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z',
 };
@@ -41,25 +39,49 @@ const iconPaths: Record<string, string> = {
       </p>
     </header>
 
-    <section class="personas-grid grid-auto" style="--grid-min: var(--grid-min-lg);" aria-label="Patient types">
-      {personas.map((persona) => (
-        <a href={`/for/${persona.data.slug}/`} class="persona-card">
-          <div class="persona-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d={iconPaths[persona.data.slug] || iconPaths.family} />
-            </svg>
-          </div>
-          <h2 class="persona-title">For {persona.data.personaDisplay}</h2>
-          <p class="persona-tagline">{persona.data.tagline}</p>
-          <span class="explore-link">
-            Explore
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"/>
-              <polyline points="12 5 19 12 12 19"/>
-            </svg>
-          </span>
-        </a>
-      ))}
+    <section
+      class="personas-grid grid-auto"
+      style="--grid-min: var(--grid-min-lg);"
+      aria-label="Patient types"
+    >
+      {
+        personas.map((persona) => (
+          <a href={`/for/${persona.data.slug}/`} class="persona-card">
+            <div class="persona-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d={iconPaths[persona.data.slug] || iconPaths.family} />
+              </svg>
+            </div>
+            <h2 class="persona-title">For {persona.data.personaDisplay}</h2>
+            <p class="persona-tagline">{persona.data.tagline}</p>
+            <span class="explore-link">
+              Explore
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </span>
+          </a>
+        ))
+      }
     </section>
   </div>
 </PageLayout>
@@ -78,7 +100,6 @@ const iconPaths: Record<string, string> = {
     max-width: var(--container-md);
     margin-inline: auto;
   }
-
 
   .page-title {
     font-size: var(--font-size-4xl);
@@ -104,7 +125,10 @@ const iconPaths: Record<string, string> = {
     border-radius: var(--radius-xl);
     text-decoration: none;
     color: inherit;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast);
   }
 
   .persona-card:hover {

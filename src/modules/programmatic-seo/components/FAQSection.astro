@@ -16,18 +16,18 @@ interface Props {
   id?: string;
 }
 
-const { items, title = "Frequently Asked Questions", id = "faq" } = Astro.props;
+const { items, title = 'Frequently Asked Questions', id = 'faq' } = Astro.props;
 
 // Generate Schema.org FAQPage
 const schemaData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": items.map((item) => ({
-    "@type": "Question",
-    "name": item.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.answer,
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
     },
   })),
 };
@@ -37,21 +37,33 @@ const schemaData = {
   <h2 id={`${id}-heading`} class="faq-title">{title}</h2>
 
   <div class="faq-list">
-    {items.map((item) => (
-      <details class="faq-item" name={`${id}-accordion`}>
-        <summary class="faq-question">
-          <span class="question-text">{item.question}</span>
-          <span class="faq-icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </span>
-        </summary>
-        <div class="faq-answer">
-          <p>{item.answer}</p>
-        </div>
-      </details>
-    ))}
+    {
+      items.map((item) => (
+        <details class="faq-item" name={`${id}-accordion`}>
+          <summary class="faq-question">
+            <span class="question-text">{item.question}</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </span>
+          </summary>
+          <div class="faq-answer">
+            <p>{item.answer}</p>
+          </div>
+        </details>
+      ))
+    }
   </div>
 </section>
 
@@ -125,7 +137,9 @@ const schemaData = {
     border-radius: var(--radius-full);
     background: var(--color-surface-sunken);
     color: var(--color-text-muted);
-    transition: transform var(--transition-fast), background-color var(--transition-fast);
+    transition:
+      transform var(--transition-fast),
+      background-color var(--transition-fast);
   }
 
   details[open] .faq-icon {

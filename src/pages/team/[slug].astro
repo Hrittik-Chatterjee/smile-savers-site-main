@@ -1,10 +1,10 @@
 ---
-import PageLayout from "@/layouts/PageLayout.astro";
-import { getCollection, render } from "astro:content";
-import { Image } from "astro:assets";
+import PageLayout from '@/layouts/PageLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
-  const teamMembers = await getCollection("team");
+  const teamMembers = await getCollection('team');
   return teamMembers.map((member) => ({
     params: { slug: member.data.slug },
     props: { member },
@@ -18,7 +18,7 @@ const { name, credentials, specialties, education, image } = member.data;
 
 <PageLayout
   title={name}
-  description={`${name}, ${credentials.join(", ")} at Smile Savers. Expert in ${specialties.slice(0, 3).join(", ")}.`}
+  description={`${name}, ${credentials.join(', ')} at Smile Savers. Expert in ${specialties.slice(0, 3).join(', ')}.`}
 >
   <div class="min-h-screen bg-gray-50 py-12 md:py-20">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,7 +26,7 @@ const { name, credentials, specialties, education, image } = member.data;
       <div class="mb-8">
         <a
           href="/#team"
-          class="inline-flex items-center text-sm font-medium text-primary hover:text-primary-focus transition-colors"
+          class="text-primary hover:text-primary-focus inline-flex items-center text-sm font-medium transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -48,107 +48,147 @@ const { name, credentials, specialties, education, image } = member.data;
       <div class="grid gap-8 lg:grid-cols-12 lg:gap-12">
         {/* Sidebar / Info Card */}
         <aside class="lg:col-span-4">
-          <div class="sticky top-24 overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-gray-900/5">
-            <div class="aspect-[4/5] w-full bg-gradient-to-br from-primary/10 to-secondary/10 relative flex items-center justify-center overflow-hidden">
-                {image ? (
-                  <Image 
-                    src={image} 
-                    alt={name} 
+          <div
+            class="sticky top-24 overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-gray-900/5"
+          >
+            <div
+              class="from-primary/10 to-secondary/10 relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden bg-gradient-to-br"
+            >
+              {
+                image ? (
+                  <Image
+                    src={image}
+                    alt={name}
                     width={400}
                     height={500}
                     class="h-full w-full object-cover"
                   />
                 ) : (
-                  <div class="text-9xl font-bold text-primary/20 select-none">
-                      {name.split(' ').pop()?.charAt(0)}
+                  <div class="text-primary/20 select-none text-9xl font-bold">
+                    {name.split(' ').pop()?.charAt(0)}
                   </div>
-                )}
+                )
+              }
             </div>
-            
+
             <div class="p-8">
               <h1 class="font-display text-3xl font-bold tracking-tight text-gray-900">
                 {name}
-              
-              {credentials && credentials.length > 0 && (
-                <div class="mt-4 flex flex-wrap gap-2">
-                  {credentials.map((cred) => (
-                    <span class="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-                      {cred}
-                    </span>
-                  ))}
-                </div>
-              )}
 
-              <div class="mt-8 border-t border-gray-100 pt-8">
-                 <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-900">
+                {
+                  credentials && credentials.length > 0 && (
+                    <div class="mt-4 flex flex-wrap gap-2">
+                      {credentials.map((cred) => (
+                        <span class="bg-primary/10 text-primary inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">
+                          {cred}
+                        </span>
+                      ))}
+                    </div>
+                  )
+                }
+
+                <div class="mt-8 border-t border-gray-100 pt-8">
+                  <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-900">
                     Specialties
                   </h3>
                   <ul class="mt-4 space-y-2">
-                    {specialties.map((specialty) => (
-                      <li class="flex items-start">
-                        <svg class="mr-3 h-5 w-5 flex-shrink-0 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span class="text-gray-600 text-sm">{specialty}</span>
-                      </li>
-                    ))}
+                    {
+                      specialties.map((specialty) => (
+                        <li class="flex items-start">
+                          <svg
+                            class="text-secondary mr-3 h-5 w-5 flex-shrink-0"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                          <span class="text-sm text-gray-600">{specialty}</span>
+                        </li>
+                      ))
+                    }
                   </ul>
-              </div>
-              
-              <div class="mt-8">
-                <a href="tel:+17189568400" class="btn btn-primary w-full shadow-lg hover:shadow-primary/25">
+                </div>
+
+                <div class="mt-8">
+                  <a
+                    href="tel:+17189568400"
+                    class="btn btn-primary hover:shadow-primary/25 w-full shadow-lg"
+                  >
                     Call Now
-                </a>
-              </div>
+                  </a>
+                </div>
+              </h1>
             </div>
           </div>
-        </aside>
 
-        {/* Main Content */}
-        <div class="lg:col-span-8">
-           <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-gray-900/5 sm:p-12">
-            
-            <article class="prose prose-lg prose-slate max-w-none 
-                prose-headings:font-display prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6
-                prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary-focus
-                prose-img:rounded-xl prose-img:shadow-lg">
-              <Content />
-            </article>
+          {/* Main Content */}
+          <div class="lg:col-span-8">
+            <div class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-gray-900/5 sm:p-12">
+              <article
+                class="prose prose-lg prose-slate prose-headings:font-display
+                prose-headings:font-bold prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-p:leading-relaxed
+                prose-a:text-primary hover:prose-a:text-primary-focus prose-img:rounded-xl
+                prose-img:shadow-lg max-w-none"
+              >
+                <Content />
+              </article>
 
-            {/* Education Section - Rendered manually to ensure consistent styling separate from markdown prose */}
-            {education && education.length > 0 && (
-                <div class="mt-16 border-t border-gray-100 pt-10">
-                    <h2 class="font-display text-2xl font-bold text-gray-900 mb-6">
-                        Education & Certifications
+              {
+                /* Education Section - Rendered manually to ensure consistent styling separate from markdown prose */
+              }
+              {
+                education && education.length > 0 && (
+                  <div class="mt-16 border-t border-gray-100 pt-10">
+                    <h2 class="font-display mb-6 text-2xl font-bold text-gray-900">
+                      Education & Certifications
                     </h2>
                     <div class="grid gap-6 sm:grid-cols-2">
-                        {education.map((edu) => (
-                            <div class="relative rounded-xl border border-gray-200 bg-gray-50 p-6">
-                                {/* Plain divs, not dt/dd: this is a repeated
+                      {education.map((edu) => (
+                        <div class="relative rounded-xl border border-gray-200 bg-gray-50 p-6">
+                          {/* Plain divs, not dt/dd: this is a repeated
                                     icon+year+institution card, not term/definition
                                     data -- dt/dd without a dl parent was also
                                     invalid HTML (axe: dlitem). */}
-                                <div>
-                                    <div class="absolute flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                          <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                                          <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-                                       </svg>
-                                    </div>
-                                    <p class="ml-14 text-sm font-medium text-gray-500">{edu.year}</p>
-                                </div>
-                                <div class="ml-14">
-                                    <p class="text-base font-semibold text-gray-900">{edu.institution}</p>
-                                    <p class="mt-1 text-sm text-gray-600">{edu.degree}</p>
-                                </div>
+                          <div>
+                            <div class="bg-primary/10 text-primary absolute flex h-10 w-10 items-center justify-center rounded-lg">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                                />
+                              </svg>
                             </div>
-                        ))}
+                            <p class="ml-14 text-sm font-medium text-gray-500">{edu.year}</p>
+                          </div>
+                          <div class="ml-14">
+                            <p class="text-base font-semibold text-gray-900">{edu.institution}</p>
+                            <p class="mt-1 text-sm text-gray-600">{edu.degree}</p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                </div>
-            )}
-           </div>
-        </div>
+                  </div>
+                )
+              }
+            </div>
+          </div>
+        </aside>
       </div>
     </div>
   </div>

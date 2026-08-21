@@ -4,11 +4,11 @@
  * Website terms of use and SMS opt-in terms
  */
 
-import LegalLayout from "@/layouts/LegalLayout.astro";
-import { siteConfig } from "@/config/site";
+import LegalLayout from '@/layouts/LegalLayout.astro';
+import { siteConfig } from '@/config/site';
 
-const title = "Terms & Conditions";
-const description = "Terms and conditions for using the Smile Savers website and SMS services.";
+const title = 'Terms & Conditions';
+const description = 'Terms and conditions for using the Smile Savers website and SMS services.';
 ---
 
 <LegalLayout
@@ -18,12 +18,20 @@ const description = "Terms and conditions for using the Smile Savers website and
   breadcrumbLabel="Terms & Conditions"
 >
   <section class="policy-section">
-    <p class="intro">By opting in to receive SMS messages from Smile Savers Creating Smiles ("we," "us," "our"), you agree to the following terms:</p>
+    <p class="intro">
+      By opting in to receive SMS messages from Smile Savers Creating Smiles ("we," "us," "our"),
+      you agree to the following terms:
+    </p>
   </section>
 
   <section class="policy-section highlighted-section">
     <h2>1. SMS Messaging Service</h2>
-    <p>By providing my phone number, I consent to receive SMS text messages from Smile Savers Creating Smiles for appointment reminders, marketing messages, and general two-way communication. Msg frequency varies. Msg&data rates may apply. Reply HELP for support. Reply STOP to opt out.</p>
+    <p>
+      By providing my phone number, I consent to receive SMS text messages from Smile Savers
+      Creating Smiles for appointment reminders, marketing messages, and general two-way
+      communication. Msg frequency varies. Msg&data rates may apply. Reply HELP for support. Reply
+      STOP to opt out.
+    </p>
   </section>
 
   <section class="policy-section">
@@ -38,21 +46,34 @@ const description = "Terms and conditions for using the Smile Savers website and
 
   <section class="policy-section">
     <h2>4. Privacy Policy</h2>
-    <p>Your information will be handled in accordance with our Privacy Policy, which can be viewed <a href="/privacy">here</a>.</p>
+    <p>
+      Your information will be handled in accordance with our Privacy Policy, which can be viewed <a
+        href="/privacy">here</a
+      >.
+    </p>
   </section>
 
   <section class="policy-section">
     <h2>5. Opt-Out Instructions</h2>
-    <p>You can opt out at any time by replying "STOP" to any SMS message. Reply HELP for support. You may also contact us directly at <a href="tel:+17189568400">(718) 956-8400</a>.</p>
+    <p>
+      You can opt out at any time by replying "STOP" to any SMS message. Reply HELP for support. You
+      may also contact us directly at <a href="tel:+17189568400">(718) 956-8400</a>.
+    </p>
   </section>
 
   <section class="policy-section">
     <h2>6. Liability</h2>
-    <p>We are not responsible for any charges, errors, or delays in SMS delivery caused by your carrier or third-party service providers.</p>
+    <p>
+      We are not responsible for any charges, errors, or delays in SMS delivery caused by your
+      carrier or third-party service providers.
+    </p>
   </section>
 
   <section class="policy-section">
-    <p class="highlight-note">By opting in, you confirm that you are the owner or authorized user of the phone number provided and that you are at least 18 years old.</p>
+    <p class="highlight-note">
+      By opting in, you confirm that you are the owner or authorized user of the phone number
+      provided and that you are at least 18 years old.
+    </p>
   </section>
 
   <section class="policy-section contact-section">
@@ -60,7 +81,11 @@ const description = "Terms and conditions for using the Smile Savers website and
     <p>If you have questions about these terms, please contact us at:</p>
     <address class="contact-info">
       <p><strong>Phone:</strong> <a href="tel:+17189568400">(718) 956-8400</a></p>
-      <p><strong>Address:</strong> {siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.state} {siteConfig.address.zip}</p>
+      <p>
+        <strong>Address:</strong>
+        {siteConfig.address.street}, {siteConfig.address.city}, {siteConfig.address.state}
+        {siteConfig.address.zip}
+      </p>
     </address>
   </section>
 </LegalLayout>
