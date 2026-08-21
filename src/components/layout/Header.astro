@@ -92,7 +92,7 @@ import { formatPhoneLink } from '@/lib/utils';
   display:inline-flex;align-items:center;gap:.4rem;
   padding:.6rem 1.25rem;
   border-radius:.65rem;
-  background:var(--color-accent);
+  background:var(--color-interactive-primary);
   color:#fff;
   font-weight:700;font-size:.85rem;
   text-decoration:none;
@@ -100,7 +100,8 @@ import { formatPhoneLink } from '@/lib/utils';
   transition:all .25s ease;
   white-space:nowrap;
 }
-.hdr-cta:hover{background:var(--color-accent-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(44,171,223,.45)}
+.hdr-cta:hover{background:var(--color-interactive-primary-hover);transform:translateY(-1px);box-shadow:0 6px 20px rgba(44,171,223,.45)}
+.hdr-cta:focus-visible{outline:2.5px solid var(--focus-ring);outline-offset:3px}
 
 /* Mobile actions */
 .mobile-actions{display:none;align-items:center;gap:.25rem}

@@ -189,6 +189,40 @@
   /* Dark overlay base (rgba: 26, 32, 44) */
 
   /* ----------------------------------------
+     INTERACTIVE / FOCUS SEMANTIC TOKENS
+     Added to give CTA/focus states a single source of truth instead
+     of each component hardcoding its own treatment (design-system
+     audit finding #2 — the reason finding #1's accent-contrast fix
+     needed a many-node sweep instead of a one-line change). Every
+     value below aliases an existing, already-in-production value —
+     no new colors were invented, this only names what already exists.
+     ---------------------------------------- */
+  --color-interactive-primary: var(--color-accent);
+  --color-interactive-primary-hover: var(--color-accent-dark);
+  /* No distinct :active/pressed treatment exists anywhere in the
+     codebase today (verified: no :active rule found alongside any
+     :hover/:focus-visible CTA rule) — aliased to -hover rather than
+     inventing a third shade. */
+  --color-interactive-primary-active: var(--color-accent-dark);
+  /* Disabled state in this codebase is opacity-based (.btn[disabled]
+     { opacity: .45 }), not a color swap — --opacity-disabled documents
+     that real convention. --color-interactive-disabled is provided for
+     any future component that needs a disabled *color* rather than
+     opacity, aliased to the existing neutral-400 token; it has zero
+     consumers today and that's honest, not a defect. */
+  --opacity-disabled: .45;
+  --color-interactive-disabled: var(--color-neutral-400);
+  --focus-ring: var(--color-accent);
+  /* Canonical default focus-ring color, matching the dominant existing
+     convention (Button.astro, Header.astro logo/CTA). Navigation.astro's
+     two focus-visible rules intentionally use --color-primary instead,
+     matching that same element's own active-state background color —
+     contextually correct, left as-is rather than forced onto this token. */
+  --color-surface-container: var(--color-surface-sunken);
+  --color-surface-raised: var(--color-surface-elevated);
+  --color-text-secondary: var(--color-text-muted);
+
+  /* ----------------------------------------
      TYPOGRAPHY
      ---------------------------------------- */
 
