@@ -81,7 +81,9 @@ const iconPaths: Record<string, string> = {
   .content-type {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: var(--color-primary-light);
+    /* --color-primary-light bg + --color-primary-dark text measured 1.80:1 --
+       both dark navy shades. Swapped for the proven brand-surface pair. */
+    background: var(--color-brand-surface-subtle);
     color: var(--color-primary-dark);
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);

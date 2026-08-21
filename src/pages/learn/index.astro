@@ -70,8 +70,13 @@ const breadcrumbs = [
   .content-type {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: var(--color-secondary-light);
-    color: var(--color-secondary);
+    /* --color-secondary-light bg + --color-secondary text measured 1.63:1.
+       --color-secondary-dark text on THIS specific tint (#A8E0D6) only reaches
+       4.35:1 -- close but short, and not worth a second bespoke derivation.
+       Swapped for the same proven brand-surface pair used by the other
+       programmatic-seo badges (15.79:1). */
+    background: var(--color-brand-surface-subtle);
+    color: var(--color-primary-dark);
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);

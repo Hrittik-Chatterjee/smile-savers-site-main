@@ -124,7 +124,11 @@ const { name, credentials, specialties, education, image } = member.data;
                     <div class="grid gap-6 sm:grid-cols-2">
                         {education.map((edu) => (
                             <div class="relative rounded-xl border border-gray-200 bg-gray-50 p-6">
-                                <dt>
+                                {/* Plain divs, not dt/dd: this is a repeated
+                                    icon+year+institution card, not term/definition
+                                    data -- dt/dd without a dl parent was also
+                                    invalid HTML (axe: dlitem). */}
+                                <div>
                                     <div class="absolute flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                           <path d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -133,11 +137,11 @@ const { name, credentials, specialties, education, image } = member.data;
                                        </svg>
                                     </div>
                                     <p class="ml-14 text-sm font-medium text-gray-500">{edu.year}</p>
-                                </dt>
-                                <dd class="ml-14">
+                                </div>
+                                <div class="ml-14">
                                     <p class="text-base font-semibold text-gray-900">{edu.institution}</p>
                                     <p class="mt-1 text-sm text-gray-600">{edu.degree}</p>
-                                </dd>
+                                </div>
                             </div>
                         ))}
                     </div>

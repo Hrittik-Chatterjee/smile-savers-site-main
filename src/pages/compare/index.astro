@@ -82,8 +82,10 @@ const breadcrumbs = [
   .content-type {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: var(--color-accent);
-    color: #5D4037;
+    /* var(--color-accent) bg + #5D4037 text measured 1.46:1. Swapped for the
+       proven brand-surface pair. */
+    background: var(--color-brand-surface-subtle);
+    color: var(--color-primary-dark);
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);

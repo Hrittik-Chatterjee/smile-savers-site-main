@@ -186,7 +186,10 @@ const iconPaths: Record<string, string> = {
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: var(--color-primary-light);
+    /* --color-primary-light on --color-primary-dark measured 1.79:1 -- both
+       are dark navy shades with too little lightness difference. Swapped for
+       the proven brand-surface pair (15.79:1). */
+    background: var(--color-brand-surface-subtle);
     color: var(--color-primary-dark);
     border-radius: var(--radius-full);
     font-size: var(--font-size-sm);

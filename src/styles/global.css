@@ -69,6 +69,19 @@
   --color-accent-dark: #02526A !important;
   /* Prevent DaisyUI from setting btn-primary to purple */
   --color-primary-content: #FFFFFF !important;
+  /* Same DaisyUI-override bug as the brand colors above, found independently
+     via axe on /compare/implants-vs-dentures/: DaisyUI's light theme silently
+     replaced ALL FOUR semantic status colors with its own oklch() values
+     (measured live: success oklch(76% .177 163.223) = #00D390 at only 1.95:1
+     on white). These were never in this override block, so the @theme
+     declarations below were dead on arrival for any component using them.
+     Values also updated to clear AA -- the ORIGINAL @theme values
+     (#4CAF50/#FFC107/#E53935/#2196F3) failed as text on white too
+     (2.78/1.63/4.23/3.12:1). */
+  --color-success: #1B8727 !important;
+  --color-warning: #956F06 !important;
+  --color-error: #DD2F2E !important;
+  --color-info: #0278C9 !important;
 }
 
 /* ============================================
@@ -110,10 +123,15 @@
   /* Warm Sand - Hero, Testimonials, Team, Contact */
 
   /* Semantic Colors */
-  --color-success: #4CAF50;
-  --color-warning: #FFC107;
-  --color-error: #E53935;
-  --color-info: #2196F3;
+  /* Darkened from #4CAF50/#FFC107/#E53935/#2196F3 -- originals failed AA as
+     text on white (2.78/1.63/4.23/3.12:1). Also added to the !important
+     brand-lock block above: DaisyUI was silently overriding all four with
+     its own oklch() theme colors, the same bug already fixed for the brand
+     colors but never extended to these. See docs/design/decisions.md DDR-010. */
+  --color-success: #1B8727;
+  --color-warning: #956F06;
+  --color-error: #DD2F2E;
+  --color-info: #0278C9;
 
   /* Neutral Palette */
   --color-neutral-50: #FAFAFA;

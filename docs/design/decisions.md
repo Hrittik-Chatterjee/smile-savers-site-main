@@ -174,3 +174,61 @@ named role).
 document that found the drift is the same kind of audit this whole session has
 been doing to the rest of the codebase. Applying it to itself, and recording the
 result the same way, is the point.
+
+---
+
+## DDR-010 — DaisyUI was silently overriding all four status colours, not just brand colours
+
+**Status:** Accepted
+
+**Evidence (FACT).** `global.css` already carried a documented `!important`
+brand-lock block for `--color-primary/-secondary/-accent`, with a comment
+explaining DaisyUI's light theme overrides them with its own `oklch()` values.
+That block never covered `--color-success/-warning/-error/-info`. Found via axe
+on `/compare/implants-vs-dentures/`: a checkmark rendering at 1.95:1 instead of
+the token's declared value. Direct measurement of computed styles confirmed all
+four status tokens resolved to DaisyUI's oklch colours
+(`oklch(76% .177 163.223)` ≈ `#00D390` for success, etc.) — the `@theme`
+declarations were dead on arrival for any component using them, across all 10
+real consumers site-wide.
+
+**Compounding defect.** The original `@theme` values themselves
+(`#4CAF50`/`#FFC107`/`#E53935`/`#2196F3`) also failed AA as text on white
+(2.78/1.63/4.23/3.12:1) — fixing only the override would not have been enough.
+
+**Decision.** Derived AA-clearing replacements by the same OKLCH method as the
+brand and category palettes (`#1B8727`/`#956F06`/`#DD2F2E`/`#0278C9`, all ≥4.6:1
+on white), and added all four to the `!important` brand-lock block alongside the
+brand colours.
+
+---
+
+## DDR-011 — Six copy-pasted "content-type" badges, three different broken colour pairs
+
+**Status:** Accepted
+
+**Evidence (FACT).** The programmatic-SEO route family (`/compare/`, `/for/`,
+`/learn/`, plus their layouts) each carry a near-identical `.content-type` or
+`*-badge` rule, evidently copy-pasted and then hand-varied per section. All
+measured contrast failures, three distinct broken pairs:
+
+| Pairing | Contrast | Where |
+|---|---|---|
+| `--color-accent` bg + `#5D4037` text | 1.46:1 | compare (index + layout) |
+| `--color-primary-light` bg + `--color-primary-dark` text | 1.79–1.80:1 | for, location hero badge, nearby-locations hover, persona badge |
+| `--color-secondary-light` bg + `--color-secondary` text | 1.62–1.63:1 | learn (index + layout) |
+
+**Decision.** Standardised all of them on the one pairing already proven
+repeatedly this session: `--color-brand-surface-subtle` background with
+`--color-primary-dark` text (15.79:1). One attempted fix used
+`--color-secondary-dark` on a specific secondary tint and only reached 4.35:1 —
+recorded as a near-miss rather than silently re-fixed without comment: a token
+that passes against one tint is not guaranteed to pass against a different one
+in the same family, so each pairing needs its own check rather than a rule of
+thumb.
+
+**Why six copies, not one shared component.** Out of scope for this pass —
+consolidating them into one `Badge` component would be a real improvement but is
+a structural change beyond a colour-contrast fix, and is noted as a candidate
+for the "component discovery" work this session's naming-conventions document
+already flagged as unstarted.
