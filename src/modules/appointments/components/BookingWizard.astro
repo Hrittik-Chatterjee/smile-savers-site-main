@@ -449,6 +449,7 @@ const timeSlots = [
       <!-- Submit Section -->
       <div class="submit-section">
         <div id="bw-submit-idle">
+          <div id="bw-validation-error" class="bw-validation-error" role="alert" hidden></div>
           <p class="submit-info">
             <svg
               width="16"
@@ -633,10 +634,20 @@ const timeSlots = [
       if (!data.phone) errors.push('Please enter your phone number');
       if (!data.termsAccepted) errors.push('Please accept the terms and conditions');
 
+      const errorBox = document.getElementById('bw-validation-error');
+
       if (errors.length > 0) {
-        alert('Please complete all required fields:\n\n• ' + errors.join('\n• '));
+        if (errorBox) {
+          errorBox.innerHTML =
+            '<strong>Please complete the following:</strong><ul>' +
+            errors.map((e) => `<li>${e}</li>`).join('') +
+            '</ul>';
+          errorBox.hidden = false;
+          errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
         return false;
       }
+      if (errorBox) errorBox.hidden = true;
       return true;
     }
 
@@ -1293,6 +1304,25 @@ ${data.notes}`;
   /* Submit Section Styles */
   .submit-section {
     margin-bottom: 1.5rem;
+  }
+
+  /* Replaces a browser alert() dialog (jarring, not screen-reader-friendly)
+     with the inline-message pattern already proven in ContactForm.astro. */
+  .bw-validation-error {
+    background: var(--color-error-light);
+    color: var(--color-error-dark);
+    border: 1px solid var(--color-error);
+    border-radius: var(--radius-md);
+    padding: 0.875rem 1rem;
+    margin: 0 0 1rem;
+    font-size: var(--font-size-sm);
+  }
+  .bw-validation-error ul {
+    margin: 0.4rem 0 0;
+    padding-left: 1.25rem;
+  }
+  .bw-validation-error li {
+    margin: 0.15rem 0;
   }
 
   .submit-info {

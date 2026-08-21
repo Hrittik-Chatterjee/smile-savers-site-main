@@ -259,3 +259,29 @@ confirmed by grep before wrapping slot content in `.btn-label`. Rendered check
 confirmed the spinner is `display:none` by default (existing buttons
 unaffected) and `display:block` when `aria-busy="true"` is set, whether via the
 prop or via a script mutating the live DOM.
+
+---
+
+## DDR-014 — Replace BookingWizard's alert() validation with an inline region
+
+**Status:** Accepted
+
+**Evidence (FACT).** `component-state-matrix.md` flagged `BookingWizard.astro`
+as having no inline validation states — confirmed: `validateForm()` collected
+missing-field errors into an array and displayed them via a native browser
+`alert()` dialog. `ContactForm.astro` in the same codebase already solves the
+identical problem (multi-field validation before submit) with an inline
+`role="alert"` region — a real inconsistency in how the same problem is solved
+twice in one app, not just an accessibility gap.
+
+**Decision.** Added `#bw-validation-error` (`role="alert"`) inside the existing
+submit section, styled with the same `--color-error-light`/`--color-error-dark`
+pairing already proven at 4.92:1 elsewhere in this session. `validateForm()`
+now populates and reveals it instead of calling `alert()`, and scrolls it into
+view.
+
+**Verified, not assumed.** Rendered the real `/appointments/` page, jumped to
+step 5, submitted with every field empty, and confirmed via Playwright's
+`dialog` event listener that no native `alert()` fired, that the inline region
+populated with the correct list of missing fields, and visually via screenshot
+that it renders legibly as an error region.
