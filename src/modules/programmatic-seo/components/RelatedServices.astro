@@ -99,6 +99,12 @@ const iconPaths: Record<string, string> = {
     text-decoration: none;
     color: inherit;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    /* .service-info already has min-width:0 for its own flex shrink, but
+       .service-link-card is itself a grid item in .services-grid with the
+       usual implicit min-width:auto -- measured sizing the grid track to
+       this card's max-content width instead of the available column,
+       causing horizontal overflow on every viewport. */
+    min-width: 0;
 
     &:hover {
       border-color: var(--color-primary);

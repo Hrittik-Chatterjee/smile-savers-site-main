@@ -23,7 +23,7 @@ const currentYear = new Date().getFullYear();
 
 <section class="local-hero">
   <div class="hero-container">
-    <div class="hero-content">
+    <div class="local-hero-content">
       <Badge variant="pill">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
@@ -85,6 +85,14 @@ const currentYear = new Date().getFullYear();
     display: grid;
     gap: 2rem;
     align-items: center;
+  }
+
+  /* Grid items default to min-width: auto, so without this the single
+     mobile column sizes to .local-hero-content's max-content width instead of
+     the viewport -- a real, measured 638px-wide track on a 320px screen,
+     causing horizontal scroll on every viewport below 1024px. */
+  .local-hero-content {
+    min-width: 0;
   }
 
   @media (min-width: 1024px) {
@@ -159,6 +167,10 @@ const currentYear = new Date().getFullYear();
 
   .hero-map {
     display: none;
+    /* Same min-width:auto grid-item issue as .local-hero-content, on the second
+       column once it activates at 1024px -- measured 1213px wide on a
+       1024px viewport. */
+    min-width: 0;
   }
 
   @media (min-width: 1024px) {
