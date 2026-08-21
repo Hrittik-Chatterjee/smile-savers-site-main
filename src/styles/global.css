@@ -64,7 +64,7 @@
   --color-primary-dark: #0A1D2B !important;
   --color-secondary: #3DBAA7 !important;
   --color-secondary-light: #A8E0D6 !important;
-  --color-secondary-dark: #1A8A78 !important;
+  --color-secondary-dark: #146B5C !important;
   --color-accent: #016785 !important;
   --color-accent-dark: #02526A !important;
   /* Prevent DaisyUI from setting btn-primary to purple */
@@ -92,7 +92,11 @@
   --color-secondary: #3DBAA7;
   /* Fresh mint/teal */
   --color-secondary-light: #A8E0D6;
-  --color-secondary-dark: #1A8A78;
+  --color-secondary-dark: #146B5C;
+  /* Darkened from #1A8A78. All 16 consumers use it as TEXT on light tints
+     (eyebrow pills, links). At #1A8A78 it measured 3.28-4.24:1 across those
+     tints -- failing AA for small bold text on every one. #146B5C clears the
+     worst of them at 4.94:1 while staying recognisably teal. */
 
   --color-accent: #016785;
   /* Cyan 700, derived from the logo hue in OKLCH. CTAs ONLY. 6.40:1 on white.

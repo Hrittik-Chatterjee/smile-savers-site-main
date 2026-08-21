@@ -136,9 +136,12 @@ const description = "Schedule your dental visit in a few simple steps. We'll con
 .hc-hours li span:first-child { color: var(--color-text-muted) }
 .hc-hours li span:last-child { font-weight: 600; color: var(--color-text) }
 .hc-hours-highlight span { color: var(--color-secondary-dark) !important; font-weight: 700 !important }
-.hc-hours-muted span { opacity: .45 }
+/* opacity .45 rendered #9C9A9B = 2.80:1. --color-text-muted is 7.53:1 and
+   already reads as de-emphasised against the 16.3:1 body text. */
+.hc-hours-muted span { color: var(--color-text-muted) }
 
-.hc-emg-link { font-size: var(--font-size-sm); font-weight: 700; color: #EF4444; text-decoration: none }
+/* #EF4444 measured 3.76:1 on white, failing AA. --cat-red-ink is 5.17:1. */
+.hc-emg-link { font-size: var(--font-size-sm); font-weight: 700; color: var(--cat-red-ink); text-decoration: none }
 .hc-emg-link:hover { text-decoration: underline; text-underline-offset: 3px }
 @media(prefers-reduced-motion:reduce){ .help-card { transition: none; transform: none } }
 </style>

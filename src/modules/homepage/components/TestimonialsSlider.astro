@@ -15,7 +15,11 @@ const testimonials = allTestimonials
     location:  t.data.location ?? "Queens, NY",
     rating:    t.data.rating ?? 5,
     source:    t.data.source ?? "Google",
-    sourceDot: t.data.source === "Yelp" ? "#C0392B" : t.data.source === "Zocdoc" ? "#00B5AD" : "#4285F4",
+    // Accessible stand-ins for the platform brand colours: Google blue (3.56:1)
+    // and Zocdoc teal (2.56:1) both fail AA as small bold text on white. Yelp red
+    // already passes at 5.44:1 and is kept. These label text, not logos, so brand
+    // exactness is not required -- legibility is.
+    sourceDot: t.data.source === "Yelp" ? "#C0392B" : t.data.source === "Zocdoc" ? "var(--cat-teal-ink)" : "var(--cat-blue-ink)",
     verified:  true,
   }));
 

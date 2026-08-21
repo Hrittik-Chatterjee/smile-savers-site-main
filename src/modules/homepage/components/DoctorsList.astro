@@ -29,6 +29,7 @@ const doctors = [
     reviews: '120+',
     isLead: true,
     accentColor: 'var(--cat-cyan-ink)',
+    accentTint: 'var(--cat-cyan-tint)',
   },
   {
     name: 'Dr. Julie Islam',
@@ -51,6 +52,7 @@ const doctors = [
     reviews: '80+',
     isLead: false,
     accentColor: 'var(--cat-teal-ink)',
+    accentTint: 'var(--cat-teal-tint)',
   },
   {
     name: 'Dr Dorothy Li',
@@ -73,6 +75,7 @@ const doctors = [
     reviews: '60+',
     isLead: false,
     accentColor: 'var(--cat-green-ink)',
+    accentTint: 'var(--cat-green-tint)',
   },
   {
     name: 'Dr. Sarha Avendaño',
@@ -95,6 +98,7 @@ const doctors = [
     reviews: '45+',
     isLead: false,
     accentColor: 'var(--cat-purple-ink)',
+    accentTint: 'var(--cat-purple-tint)',
   },
 ];
 ---
@@ -114,7 +118,7 @@ const doctors = [
 
     <div class="doc-grid">
       {doctors.map((doc) => (
-        <article class={`doc-card${doc.isLead ? ' doc-card--lead' : ''}`} style={`--acc:${doc.accentColor}`}>
+        <article class={`doc-card${doc.isLead ? ' doc-card--lead' : ''}`} style={`--acc:${doc.accentColor};--acc-tint:${doc.accentTint}`}>
 
           <!-- Image -->
           <div class="doc-photo">
@@ -331,7 +335,7 @@ const doctors = [
 .doc-cred {
   font-size: .7rem; font-weight: 600;
   color: var(--acc);
-  background: color-mix(in srgb, var(--acc) 12%, transparent);
+  background: var(--acc-tint);
   padding: .15rem .5rem;
   border-radius: 9999px;
 }
@@ -423,7 +427,7 @@ const doctors = [
   padding: .5rem 1rem;
   border-radius: .6rem;
   width: fit-content;
-  background: color-mix(in srgb, var(--acc) 5%, transparent);
+  background: var(--acc-tint);
   position: relative;
 }
 .doc-cta::after {
@@ -435,7 +439,7 @@ const doctors = [
 .doc-cta:hover {
   gap: .625rem;
   border-color: var(--acc);
-  background: color-mix(in srgb, var(--acc) 10%, transparent);
+  background: var(--acc-tint);
 }
 
 /* ── Footer CTA ──────────────────────────────── */

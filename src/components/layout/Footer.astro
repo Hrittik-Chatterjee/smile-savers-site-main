@@ -168,13 +168,17 @@ const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "Unit
 .ft-ins-more { font-size: .68rem; color: rgba(255,255,255,.55); align-self: center }
 
 /* Main footer */
+/* Footer text alpha floor: on #0D2233, white at alpha .50 is the first step
+   reaching 4.5:1 (measured). Every TEXT colour below therefore sits at .55+.
+   Borders and dividers stay lower deliberately -- they are non-text and fall
+   under the 3:1 rule, or are purely decorative. */
 .site-footer { background-color: #0D2233; color: rgba(255,255,255,.75) }
 .footer-container { max-width: var(--container-xl); margin-inline: auto; padding: clamp(2.5rem,4vw,4rem) clamp(.75rem,3vw,var(--spacing-element)) clamp(1.5rem,2vw,2rem) }
 .footer-grid { gap: clamp(2rem,3vw,2.5rem) }
 .footer-brand {}
 .footer-logo { display: inline-flex; text-decoration: none; margin-bottom: 1rem; opacity: .85; transition: opacity .2s }
 .footer-logo:hover { opacity: 1 }
-.footer-description { font-size: var(--font-size-sm); line-height: 1.75; color: rgba(255,255,255,.5); margin: 0 0 1.25rem }
+.footer-description { font-size: var(--font-size-sm); line-height: 1.75; color: rgba(255,255,255,.6); margin: 0 0 1.25rem }
 .footer-contact { display: flex; flex-direction: column; gap: .625rem; font-style: normal }
 .contact-link {
   display: flex; align-items: center; gap: .5rem;
@@ -205,10 +209,10 @@ const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "Unit
 
 .hours-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: .375rem }
 .hours-item { display: flex; justify-content: space-between; font-size: var(--font-size-sm) }
-.hours-item dt { color: rgba(255,255,255,.45) }
+.hours-item dt { color: rgba(255,255,255,.6) }
 .hours-item dd { margin: 0; font-weight: 600; color: rgba(255,255,255,.7) }
 .hours-item--highlight dd { color: #3DBAA7 }
-.hours-closed { color: rgba(255,255,255,.25) !important }
+.hours-closed { color: rgba(255,255,255,.55) !important }
 .footer-book-cta {
   display: inline-block; margin-top: 1.25rem;
   font-size: .8rem; font-weight: 700;
@@ -226,9 +230,9 @@ const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "Unit
   margin-top: 1.75rem;
   border-top: 1px solid rgba(255,255,255,.08);
 }
-.copyright { font-size: .78rem; color: rgba(255,255,255,.3); margin: 0 }
+.copyright { font-size: .78rem; color: rgba(255,255,255,.6); margin: 0 }
 .footer-legal { display: flex; gap: 1rem; flex-wrap: wrap }
-.footer-legal a { font-size: .78rem; color: rgba(255,255,255,.3); text-decoration: none; transition: color .2s }
+.footer-legal a { font-size: .78rem; color: rgba(255,255,255,.6); text-decoration: none; transition: color .2s }
 .footer-legal a:hover { color: rgba(255,255,255,.65) }
 
 @media(max-width:639px){
@@ -239,7 +243,7 @@ const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "Unit
 .footer-credit {
   text-align: center;
   font-size: .72rem;
-  color: rgba(255,255,255,.2);
+  color: rgba(255,255,255,.6);
   margin: 1rem 0 0;
   padding-bottom: .5rem;
 }
@@ -248,7 +252,7 @@ const insurers = ["Delta Dental", "Cigna", "Aetna", "MetLife", "Guardian", "Unit
   font-size: .8rem;
 }
 .footer-credit-link {
-  color: rgba(255,255,255,.35);
+  color: rgba(255,255,255,.7);
   text-decoration: none;
   transition: color .2s;
 }

@@ -9,11 +9,11 @@ const team = await getCollection("team");
 const sortedTeam = team.sort((a, b) => a.data.order - b.data.order);
 
 // Map slug to local image & accent
-const doctorMeta: Record<string, { img: string; accent: string; badge?: string }> = {
-  "dr-deepak-bhagat": { img: "/images/doctors/dr-bhagat.jpg", accent: "var(--cat-cyan-ink)", badge: "ICOI Diplomate" },
-  "dr-julie-islam":   { img: drImage.src,  accent: "var(--cat-teal-ink)", badge: "Preventive Care" },
-  "dr-dorothy-li":    { img: drImage.src,     accent: "var(--cat-green-ink)", badge: "Emergency Specialist" },
-  "dr-sarha-avendano": { img: drImage.src,     accent: "var(--cat-purple-ink)", badge: "Patient-Centered Care" },
+const doctorMeta: Record<string, { img: string; accent: string; tint: string; badge?: string }> = {
+  "dr-deepak-bhagat": { img: "/images/doctors/dr-bhagat.jpg", accent: "var(--cat-cyan-ink)", tint: "var(--cat-cyan-tint)", badge: "ICOI Diplomate" },
+  "dr-julie-islam":   { img: drImage.src,  accent: "var(--cat-teal-ink)", tint: "var(--cat-teal-tint)", badge: "Preventive Care" },
+  "dr-dorothy-li":    { img: drImage.src,     accent: "var(--cat-green-ink)", tint: "var(--cat-green-tint)", badge: "Emergency Specialist" },
+  "dr-sarha-avendano": { img: drImage.src,     accent: "var(--cat-purple-ink)", tint: "var(--cat-purple-tint)", badge: "Patient-Centered Care" },
 };
 ---
 
@@ -28,10 +28,10 @@ const doctorMeta: Record<string, { img: string; accent: string; badge?: string }
 
     <div class="tg-grid">
       {sortedTeam.map((member) => {
-        const meta = doctorMeta[member.data.slug] ?? { img: "/images/doctors/dr-bhagat.jpg", accent: "var(--cat-cyan-ink)" };
+        const meta = doctorMeta[member.data.slug] ?? { img: "/images/doctors/dr-bhagat.jpg", accent: "var(--cat-cyan-ink)", tint: "var(--cat-cyan-tint)" };
         const cred = member.data.credentials?.[0] ?? "DDS";
         return (
-          <article class="tg-card" style={`--ta:${meta.accent}`}>
+          <article class="tg-card" style={`--ta:${meta.accent};--ta-tint:${meta.tint}`}>
 
             <div class="tg-photo">
               <img
@@ -115,7 +115,7 @@ const doctorMeta: Record<string, { img: string; accent: string; badge?: string }
 .tg-info { padding: 1.125rem; display:flex; flex-direction:column; gap:.5rem; flex:1 }
 .tg-name-row { display:flex; justify-content:space-between; align-items:flex-start }
 .tg-name { font-size:clamp(1rem,1.2vw,1.15rem); font-family:var(--font-family-heading); font-weight:700; color:var(--color-primary); margin:0 0 .2rem; line-height:1.2 }
-.tg-cred { font-size:.7rem; font-weight:600; color:var(--ta); background:color-mix(in srgb,var(--ta) 12%,transparent); padding:.15rem .5rem; border-radius:9999px }
+.tg-cred { font-size:.7rem; font-weight:600; color:var(--ta); background:var(--ta-tint); padding:.15rem .5rem; border-radius:9999px }
 .tg-role { font-size:var(--font-size-sm); font-weight:600; color:var(--ta); margin:0 }
 .tg-spec { display:flex; align-items:center; gap:.35rem; font-size:.78rem; color:var(--color-text-muted); margin:0; font-weight:500 }
 .tg-spec svg { flex-shrink:0; color:var(--ta) }
@@ -136,7 +136,7 @@ const doctorMeta: Record<string, { img: string; accent: string; badge?: string }
   margin-top:auto; padding:.5rem 1rem;
   border:1.5px solid color-mix(in srgb,var(--ta) 30%,transparent);
   border-radius:.6rem; width:fit-content;
-  background:color-mix(in srgb,var(--ta) 5%,transparent);
+  background:var(--ta-tint);
   position: relative;
 }
 .tg-cta::after {
@@ -145,6 +145,6 @@ const doctorMeta: Record<string, { img: string; accent: string; badge?: string }
   inset: 0;
   z-index: 1;
 }
-.tg-cta:hover { gap:.625rem; border-color:var(--ta); background:color-mix(in srgb,var(--ta) 10%,transparent) }
+.tg-cta:hover { gap:.625rem; border-color:var(--ta); background:var(--ta-tint) }
 @media(prefers-reduced-motion:reduce){ .tg-card,.tg-img { transition:none } }
 </style>
