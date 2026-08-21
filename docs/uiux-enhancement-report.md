@@ -49,7 +49,7 @@ Focus Options:
 
 **Storage:** `localStorage` (persists across sessions)  
 **Scope:** All pages inherit preferences  
-**Standards:** WCAG 2.1 AA compliant
+**Standards:** Targets WCAG 2.2 AA. **Correction (2026-08-21):** this line previously claimed full "WCAG 2.1 AA compliant" status; that was inaccurate. The axe-core accessibility scan in `design-intelligence/artifacts/reports/accessibility-validation.json` recorded real serious/critical violations across all 4 sampled routes (`/`, `/services/`, `/appointments/`, `/contact/`) as of this repo's own evidence. The `--color-accent` contrast failure driving most of those violations was fixed 2026-08-20/21 (see `src/styles/global.css` commit `18b6c6a`); the remaining known violations are tracked as DEBT-0017 in `.ai/state/current.json` and are not yet all closed, so this page should not claim full compliance until they are.
 
 #### Screenshots
 
