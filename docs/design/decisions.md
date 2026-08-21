@@ -364,3 +364,39 @@ correct text content, and identical background color
 every site. Re-ran axe against all 8 routes touched by this change (including
 the 2 sunnyside/woodside location pages that also render `LocalHero`) — 0
 violations, confirming the markup swap didn't reintroduce anything.
+
+---
+
+## DDR-018 — Typography audit: fix the real gap, leave the fluid system alone
+
+**Status:** Accepted
+
+**Evidence (FACT).** Measured every literal `font-size`/`font-weight`/
+`line-height` declaration across `src/**/*.astro`: 109 literal font-sizes
+across ~28 distinct values, 63 literal line-heights across ~25 distinct
+values, and 143 literal font-weights across only 5 distinct values (300, 500,
+600, 700, 800).
+
+**Decision, font-size/line-height: report, do not rewrite.** Unlike the card-
+radius drift (DDR-006's shape finding — three values for ONE visual role),
+the font-size/line-height spread is mostly fine-grained, page-specific tuning
+(`.7rem` vs `.72rem` vs `.73rem` for genuinely different adjacent labels), not
+one role rendered inconsistently. Collapsing 28 values into 9 buckets would be
+a real, unrequested visual change to dozens of components for a cosmetic
+consistency win, with no legibility defect driving it. Confirms
+`visual-ui-principles.md` §C's earlier recommendation, now with the actual
+measurement behind it instead of an assumption.
+
+**Decision, font-weight: real gap, fixed.** `800` had 10 genuine literal uses
+(extra-bold display numbers/headings across `ContactInfo`, `Hero`,
+`TrustSignals`, `ClinicStory`, `ValuesList`, `ChatWidget`, `BeforeAfter`,
+`insurance.astro`, `appointments.astro`, `offline.astro`) with no
+corresponding token — the same shape of gap `--spacing-scale-*` closed for
+spacing. Added `--font-weight-extrabold: 800` and migrated all 10 uses to it;
+pure value substitution, zero visual change. Left the single `font-weight:300`
+use alone — one occurrence isn't a pattern yet.
+
+**Verified.** `npm run check`/`build`/`test` green (93 files, unchanged file
+count — no new component this time). Confirmed the token resolves to `800` in
+the built CSS and `grep` confirms zero literal `font-weight: 800` remain.
+Full findings and rationale in `docs/design/typography.md`.

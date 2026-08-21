@@ -357,6 +357,10 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  /* 10 real literal font-weight:800 uses found across src/ during the
+     typography audit -- a real weight in real use with no token, the same
+     class of gap --spacing-scale-* closed for spacing (DDR-006). */
+  --font-weight-extrabold: 800;
 
   /* ----------------------------------------
      SPACING
