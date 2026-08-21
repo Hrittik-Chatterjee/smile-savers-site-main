@@ -129,6 +129,23 @@ async function main() {
       waitUntil: 'networkidle',
       timeout: 60000,
     });
+    // Entrance animations (e.g. Hero.astro's `fade-up`, delay up to .4s + .6s
+    // duration) leave text mid-fade -- transiently below AA contrast -- if
+    // axe runs immediately on load. Wait for in-flight animations to finish
+    // so the scan reflects the settled UI a real user reads, not a fade
+    // frame; found by re-investigating a false-positive .cta-primary
+    // contrast failure (DEBT-0017) that a manual settle wait made disappear.
+    await page.evaluate(() =>
+      Promise.race([
+        Promise.all(
+          document
+            .getAnimations()
+            .filter((a) => a.effect?.getTiming().iterations !== Infinity)
+            .map((a) => a.finished)
+        ),
+        new Promise((resolve) => setTimeout(resolve, 2000)),
+      ]).catch(() => {})
+    );
     const axeResult = await runAxe(page);
     smileSaversResults.push({ route, ...axeResult });
     await ctx.close();
