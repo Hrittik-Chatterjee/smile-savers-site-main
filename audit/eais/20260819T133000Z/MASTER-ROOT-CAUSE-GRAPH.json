@@ -155,12 +155,12 @@
     {
       "id": "ROOT-A11Y-001",
       "title": "Pre-existing accessibility work never completed",
-      "status": "OPEN (explicitly deferred per user's own ordering)",
-      "why_it_matters": "Design-intelligence Stage 16 already found and evidenced these; they were deliberately sequenced after the P1 token-model work per explicit user instruction, then superseded in priority by the third-party audit's Wave 1. Not forgotten -- sequenced.",
+      "status": "PARTIALLY RESOLVED -- A11Y-001 and DEBT-0017 closed 2026-08-21; DEBT-0018 (A11Y-002, TS-check bypass) still OPEN",
+      "why_it_matters": "Design-intelligence Stage 16 already found and evidenced these; they were deliberately sequenced after the P1 token-model work per explicit user instruction, then superseded in priority by the third-party audit's Wave 1, then closed for the two items that had a code-level fix. A11Y-001 (BookingWizard's alert()-based validation) was replaced with inline field-level messaging (commit 65204d6, Part 25 item 4). DEBT-0017's 6 axe-core violations are confirmed at 0 by a fresh validate.mjs re-run (see DEBT-0017 verification[] in MASTER-DEBT-REGISTER.json). DEBT-0018's @ts-nocheck bypass remains a genuinely separate, unaddressed item -- not touched by any of the above fixes.",
       "manifestations": [
-        "A11Y-001 (alert-based validation, no field-level errors)",
-        "A11Y-002 (2 files with @ts-nocheck)",
-        "the same 6 axe-core violations from design-intelligence Stage 16 (color-contrast x4 routes, missing label, invalid ARIA)"
+        "A11Y-001 (alert-based validation, no field-level errors) -- RESOLVED, commit 65204d6",
+        "A11Y-002 (2 files with @ts-nocheck) -- still open, see DEBT-0018",
+        "the same 6 axe-core violations from design-intelligence Stage 16 (color-contrast x4 routes, missing label, invalid ARIA) -- RESOLVED, see DEBT-0017"
       ],
       "dependent_debt": [
         "DEBT-0017",
@@ -171,7 +171,7 @@
         "appointments-form"
       ],
       "downstream_finding_count": 2,
-      "recommended_wave": "WAVE-5, or sooner if the user re-prioritizes"
+      "recommended_wave": "WAVE-5 for the remaining DEBT-0018 item, or sooner if the user re-prioritizes"
     },
     {
       "id": "ROOT-APPOINTMENT-001",

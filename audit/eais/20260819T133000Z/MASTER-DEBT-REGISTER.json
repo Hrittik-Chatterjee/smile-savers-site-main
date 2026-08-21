@@ -551,7 +551,7 @@
       "domain": "accessibility",
       "severity": "P2",
       "confidence": 0.9,
-      "status": "OPEN",
+      "status": "RESOLVED",
       "title": "Pre-existing WCAG violations found by axe-core against the built site (Stage 16, design-intelligence pipeline)",
       "description": "Color-contrast failures on all 4 sampled routes; a missing form <label> on /appointments/ (likely BookingWizard); an invalid ARIA attribute on /. 6 total critical/serious violations.",
       "evidence": [
@@ -568,12 +568,17 @@
       "user_impact": "Screen-reader/low-vision/keyboard users encounter real barriers on the booking form specifically",
       "business_impact": "Legal/ADA exposure risk for a healthcare business",
       "security_impact": "None",
-      "recurrence_risk": "MEDIUM -- these are the same 6 findings this session has deferred since P1, per the user's own explicit ordering (P1 tokens -> accessibility -> re-validate -> merge)",
+      "recurrence_risk": "LOW -- closed with a re-run of the same validate.mjs tool that found it, not by inspection",
       "remediation_class": "MODERATE",
       "recommended_wave": "WAVE-5 (experience kernel) or sooner per original ordering",
       "spec_required": true,
       "tdd_required": false,
-      "verification": [],
+      "verification": [
+        "commit 18b6c6a -- darkened --color-accent to #016785 (6.40:1 vs white, was 2.63:1), closing the contrast failures on all 4 routes",
+        "commit 603821f -- added missing radio aria-labels in BookingWizard.astro and fixed the invalid ARIA attribute + TestimonialsSlider/Footer contrast",
+        "commit c3b88be -- fixed a genuine test-methodology gap in validate.mjs itself: axe was scanning before Hero.astro's `fade-up` entrance animation (opacity 0->1, up to .4s delay + .6s duration) settled, transiently reporting a false-positive color-contrast failure on `.cta-primary`. validate.mjs now waits for finite in-page animations to finish (2s cap, infinite-iteration animations excluded) before running axe, matching the capture-before-stability discipline already established in this pipeline's own motion-capture stages.",
+        "2026-08-21 re-run of design-intelligence/scripts/validate.mjs (post c3b88be) against the current dist/ build over the same 4 routes: totalViolations=0, criticalOrSeriousViolations=0, status=PASS (was 6 critical/serious)"
+      ],
       "rollback": "n/a"
     },
     {

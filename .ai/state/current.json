@@ -34,11 +34,13 @@
       "id": "DEBT-0016",
       "severity": "P1",
       "summary": "Medical content claims need a clinical-review decision, not an engineering one"
-    },
+    }
+  ],
+  "resolvedBlockers": [
     {
       "id": "DEBT-0017",
       "severity": "P2",
-      "summary": "6 known WCAG violations from design-intelligence Stage 16, not yet remediated"
+      "summary": "6 known WCAG violations from design-intelligence Stage 16 -- RESOLVED 2026-08-21. Contrast fixed via --color-accent darkening (commit 18b6c6a) and BookingWizard label/ARIA fixes (commit 603821f); re-run of design-intelligence/scripts/validate.mjs against current dist/ confirms 0 critical/serious violations across the same 4 routes (was 6). That re-run also found and fixed a false-positive in validate.mjs itself: axe was scanning before Hero.astro's entrance animation settled, transiently flagging .cta-primary's contrast. See audit/eais/20260819T133000Z/MASTER-DEBT-REGISTER.json for full verification detail."
     }
   ],
   "knownUnknowns": [
@@ -49,5 +51,5 @@
     "SLSA provenance level not assessed for the build/deploy pipeline"
   ],
   "stackBaseline": "FROZEN \u2014 no dependency version has been compatibility-checked this session; treat package.json/package-lock.json as locked until a dedicated compatibility pass is run (see .ai/constitution.md invariant 5)",
-  "nextRequiredAction": "M0-M3 all proven. Remaining open items per MASTER-DEBT-REGISTER.json: DEBT-0012 (broader test coverage beyond the 3 files currently tested), DEBT-0013/0014 (CI gate hardening), DEBT-0015/0016 (product/clinical decisions, blocked on user), DEBT-0017/0018 (accessibility, explicitly deferred). M4 (AI Efficiency Kernel) and beyond per roadmap/MILESTONES.json are the next EAOS-kernel-scoped work if the user wants to continue that track; otherwise the next highest-value item is DEBT-0012/0013 (more tests, blocking CI gates) or the deferred accessibility/product items."
+  "nextRequiredAction": "M0-M3 all proven. DEBT-0017 (Stage 16 WCAG violations) RESOLVED 2026-08-21 -- see resolvedBlockers. Remaining open items per MASTER-DEBT-REGISTER.json: DEBT-0012 (broader test coverage beyond the 3 files currently tested), DEBT-0013/0014 (CI gate hardening), DEBT-0015/0016 (product/clinical decisions, blocked on user), DEBT-0018 (TS-check bypass in 2 accessibility-relevant files, unrelated to DEBT-0017, still open). M4 (AI Efficiency Kernel) and beyond per roadmap/MILESTONES.json are the next EAOS-kernel-scoped work if the user wants to continue that track; otherwise the next highest-value item is DEBT-0012/0013 (more tests, blocking CI gates) or the deferred product/clinical items."
 }
