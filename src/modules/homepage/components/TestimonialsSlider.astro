@@ -116,7 +116,7 @@ const initials = (n: string) => n.split(' ').map(x => x[0]).join('');
 
 .tsl-card {
   flex: 0 0 min(360px,82vw); scroll-snap-align: start;
-  background: #fff; border-radius: 1.25rem; border: 1.5px solid var(--color-border);
+  background: #fff; border-radius: var(--radius-card); border: 1.5px solid var(--color-border);
   padding: 1.625rem; display: flex; flex-direction: column; gap: .875rem;
   position: relative; overflow: hidden;
   box-shadow: 0 2px 12px rgba(16,43,63,.05);

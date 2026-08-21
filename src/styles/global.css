@@ -287,6 +287,17 @@
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
 
+  /* Component-layer shape token: the site's dominant "card" radius
+     (white bg + 1.5px border) had drifted to three near-identical
+     ad hoc values (1.125rem / 1.25rem / 1.375rem) across 12+ components
+     with no visual reason for the difference — normalized to the most
+     common value, informed by the Labs radius-scale extraction's own
+     pattern of using a small number of discrete shape tiers rather than
+     a continuous spread (design-intelligence/artifacts/grammar/
+     brand-separated-grammar.json, radiusScale, evidenceClass DERIVED —
+     ratios only, no literal Labs pixel value was copied). */
+  --radius-card: 1.25rem;
+
   /* ----------------------------------------
      SHADOWS (using rgba for browser consistency)
      ---------------------------------------- */
