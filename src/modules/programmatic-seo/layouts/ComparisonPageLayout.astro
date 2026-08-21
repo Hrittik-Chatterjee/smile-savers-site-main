@@ -1,4 +1,5 @@
 ---
+import Badge from '../../../components/ui/Badge.astro';
 /**
  * ComparisonPageLayout - Template for "[X] vs [Y]" comparison pages
  *
@@ -78,7 +79,7 @@ const breadcrumbs = [
 
       <!-- Hero Section -->
       <header class="comparison-hero">
-        <span class="content-type">Comparison Guide</span>
+        <Badge>Comparison Guide</Badge>
         <h1 class="page-title">
           {optionA.name} vs {optionB.name}
         </h1>
@@ -179,20 +180,6 @@ const breadcrumbs = [
     margin-inline: auto;
   }
 
-  .content-type {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    /* var(--color-accent) bg + #5D4037 text measured 1.46:1. Swapped for the
-       proven brand-surface pair. */
-    background: var(--color-brand-surface-subtle);
-    color: var(--color-primary-dark);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
-  }
 
   .page-title {
     font-size: var(--font-size-4xl);

@@ -1,4 +1,5 @@
 ---
+import Badge from '../../../components/ui/Badge.astro';
 /**
  * GlossaryPageLayout - Template for "what is [term]" educational pages
  *
@@ -86,7 +87,7 @@ const articleSchema = {
 
       <!-- Hero Section -->
       <header class="glossary-hero">
-        <span class="content-type">Dental Term</span>
+        <Badge>Dental Term</Badge>
         <h1 class="page-title">What is {termDisplay}?</h1>
 
         <div class="definition-box">
@@ -189,23 +190,6 @@ const articleSchema = {
     max-width: var(--container-lg);
   }
 
-  .content-type {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    /* --color-secondary-light bg + --color-secondary text measured 1.63:1.
-       --color-secondary-dark text on THIS specific tint (#A8E0D6) only reaches
-       4.35:1 -- close but short, and not worth a second bespoke derivation.
-       Swapped for the same proven brand-surface pair used by the other
-       programmatic-seo badges (15.79:1). */
-    background: var(--color-brand-surface-subtle);
-    color: var(--color-primary-dark);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
-  }
 
   .page-title {
     font-size: var(--font-size-4xl);

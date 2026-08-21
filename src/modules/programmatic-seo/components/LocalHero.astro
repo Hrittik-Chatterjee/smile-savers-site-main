@@ -5,6 +5,7 @@
  */
 
 import TrustBadges from './TrustBadges.astro';
+import Badge from '../../../components/ui/Badge.astro';
 
 interface Props {
   service: string;
@@ -23,13 +24,13 @@ const currentYear = new Date().getFullYear();
 <section class="local-hero">
   <div class="hero-container">
     <div class="hero-content">
-      <span class="hero-badge">
+      <Badge variant="pill">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
           <circle cx="12" cy="10" r="3"/>
         </svg>
         Serving {neighborhoodDisplay}, Queens
-      </span>
+      </Badge>
 
       <h1 class="hero-title">
         {serviceTitle} in {neighborhoodDisplay}: {currentYear} Guide
@@ -93,20 +94,6 @@ const currentYear = new Date().getFullYear();
     }
   }
 
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    /* --color-primary-light bg + --color-primary-dark text measured 1.80:1.
-       Swapped for the proven brand-surface pair. */
-    background: var(--color-brand-surface-subtle);
-    color: var(--color-primary-dark);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    margin-bottom: 1rem;
-  }
 
   .hero-title {
     font-size: var(--font-size-4xl);

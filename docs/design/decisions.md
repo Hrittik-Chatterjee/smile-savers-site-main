@@ -331,3 +331,36 @@ confirming `legal.astro` was never a route), `npm test` (15/15). Grepped for
 any other reference to the `legal` collection afterward; the only hit was an
 unrelated `PageLayout` TypeScript union type (`'legal'` as a layout-variant
 string, used by the real `LegalLayout.astro`), not the deleted collection.
+
+---
+
+## DDR-017 — Extract Badge.astro from 7 copy-pasted call sites
+
+**Status:** Accepted
+
+**Evidence (FACT).** DDR-011 found the same pill-badge pattern copy-pasted
+across 7 files, independently broken three different ways because each copy
+could drift on its own after each fix. Re-inspecting the CSS after DDR-011's
+fix confirmed all 5 "eyebrow" (text-only) copies had converged to
+byte-identical CSS, and both "pill" (icon+text) copies were also identical —
+i.e. this was genuinely one component wearing seven costumes, not seven
+components that happen to look similar.
+
+**Decision.** Extracted `src/components/ui/Badge.astro` with two variants
+(`eyebrow`, `pill`), rolled out to all 7 sites: `ComparisonPageLayout.astro`,
+`GlossaryPageLayout.astro`, `PersonaPageLayout.astro`, `LocalHero.astro`, and
+`src/pages/{compare,for,learn}/index.astro`. Each site's dead per-file CSS
+block was removed, not just its markup swapped.
+
+**Deliberately excluded.** `NearbyLocations.astro`'s hover-state fix (also
+from DDR-011) is a link hover treatment on a rounded card, not the same pill
+shape or icon-slot pattern — forcing it into `Badge` would be an awkward
+abstraction over a genuinely different UI element. Left as its own rule.
+
+**Verified.** `npm run check`/`build`/`test` all green (93 files now, +1 for
+the new component). Rendered all 7 sites and confirmed: correct variant class,
+correct text content, and identical background color
+(`rgb(233,248,254)` = `#E9F8FE`, the proven brand-surface-subtle token) at
+every site. Re-ran axe against all 8 routes touched by this change (including
+the 2 sunnyside/woodside location pages that also render `LocalHero`) — 0
+violations, confirming the markup swap didn't reintroduce anything.
