@@ -112,8 +112,10 @@ not CTA competition. *Left as-is.*
 
 ## P. Information architecture
 Eight content collections, four programmatic-SEO route families. **FACT:** a second, orphaned
-content root exists at `content/posts/` (TinaCMS residue) that competes with the real
-`src/content/`. *Flagged; removal pending confirmation.*
+content root existed at `content/posts/` (TinaCMS residue) that competed with the real
+`src/content/`. *Confirmed abandoned and removed 2026-08-21, along with `public/admin/`
+and the dead `TINA_CLIENT_ID`/`TINA_TOKEN` secret injection in
+`.github/workflows/deploy.yml`.*
 
 ## Q. Conversion UX
 **RECOMMENDATION** — One primary conversion (book appointment), secondary (call, directions).

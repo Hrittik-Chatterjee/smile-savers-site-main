@@ -23,7 +23,8 @@ which has zero entries in `src/content/legal/`. The real `/privacy` and `/terms`
 routes are separate, hardcoded pages that don't use this module at all. This one
 file breaking convention is a symptom of being unintegrated, not a naming bug to
 fix in isolation — flagged here rather than silently renamed or deleted, the same
-way the earlier TinaCMS residue was flagged pending confirmation it's abandoned.
+way the earlier TinaCMS residue was flagged pending confirmation before being
+removed (2026-08-21, once confirmed abandoned).
 
 ## 2. Component-scoped CSS class prefixes
 
@@ -187,6 +188,6 @@ Consistent.
    plausible prefixes (an outer-wrapper stem and an inner-element stem) — worth a
    documented sub-convention (e.g. wrapper always matches the file, inner elements
    may abbreviate further) rather than leaving it ad hoc.
-3. The `legal.astro` orphan needs a decision: wire it up as the real `/legal`
-   route, or delete it along with the empty `legal` content collection. Not
-   actioned without confirmation, same as the TinaCMS residue.
+3. The `legal.astro` orphan was deleted (Part 25) once confirmed to have zero
+   consumers, the same disposition the TinaCMS residue got once confirmed
+   abandoned (2026-08-21).
