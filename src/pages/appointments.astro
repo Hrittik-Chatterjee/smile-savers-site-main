@@ -114,9 +114,12 @@ const description = "Schedule your dental visit in a few simple steps. We'll con
   width: 2.75rem; height: 2.75rem; border-radius: .75rem;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
-.help-card--call .hc-icon { background: #E0F5FF; color: #2CABDF }
-.help-card--hours .hc-icon { background: #E8F5E9; color: #10B981 }
-.help-card--emergency .hc-icon { background: #FEF2F2; color: #EF4444 }
+/* Icon colours must clear 3:1 against their chip background (WCAG 1.4.11,
+   non-text contrast). The previous values failed: #2CABDF on #E0F5FF was
+   2.33:1 and #10B981 on #E8F5E9 was 2.26:1. Now token-driven. */
+.help-card--call .hc-icon { background: var(--color-brand-surface-subtle); color: var(--color-accent) }
+.help-card--hours .hc-icon { background: var(--color-success-light); color: var(--color-success-dark) }
+.help-card--emergency .hc-icon { background: var(--color-error-light); color: var(--color-error-dark) }
 .help-card--emergency { border-color: #FECACA }
 
 .hc-title { font-size: var(--font-size-base); font-weight: 700; color: var(--color-primary); margin: 0 0 .375rem }

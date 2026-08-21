@@ -17,7 +17,7 @@ const stats = [
     label: "Board Certified Implantologist",
     icon: "shield",
     bg: "#2CABDF",
-    bgLight: "rgba(44,171,223,.12)",
+    bgLight: "rgb(var(--color-accent-rgb) / .12)",
   },
   {
     value: "NYU",
@@ -111,7 +111,7 @@ const icons: Record<string, string> = {
   position: absolute; inset: 0;
   background:
     radial-gradient(ellipse at 15% 50%, rgba(61,186,167,.14) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 20%, rgba(44,171,223,.1) 0%, transparent 50%);
+    radial-gradient(ellipse at 85% 20%, rgb(var(--color-accent-rgb) / .1) 0%, transparent 50%);
   pointer-events: none;
 }
 .trust::after {

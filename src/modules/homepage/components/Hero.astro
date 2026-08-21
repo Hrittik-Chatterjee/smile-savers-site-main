@@ -146,8 +146,8 @@ const dentistCountWord = NUMBER_WORDS[dentistCount] ?? String(dentistCount);
 .hero-ctas{display:flex;flex-direction:column;gap:.75rem;width:100%;margin-bottom:2rem;animation:fade-up .6s ease-out .3s both}
 @media(min-width:480px){.hero-ctas{flex-direction:row;width:auto;gap:1rem}}
 
-.cta-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.9rem 1.75rem;border-radius:.75rem;background:var(--color-accent);color:#fff;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 8px 28px rgba(44,171,223,.42);transition:all .25s ease;white-space:nowrap}
-.cta-primary:hover{background:var(--color-accent-dark);transform:translateY(-2px);box-shadow:0 14px 38px rgba(44,171,223,.55)}
+.cta-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.9rem 1.75rem;border-radius:.75rem;background:var(--color-accent);color:#fff;font-weight:700;font-size:1rem;text-decoration:none;box-shadow:0 8px 28px rgb(var(--color-accent-rgb) / .42);transition:all .25s ease;white-space:nowrap}
+.cta-primary:hover{background:var(--color-accent-dark);transform:translateY(-2px);box-shadow:0 14px 38px rgb(var(--color-accent-rgb) / .55)}
 .cta-primary svg{transition:transform .25s ease}
 .cta-primary:hover svg{transform:translateX(4px)}
 

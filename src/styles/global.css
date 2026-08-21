@@ -27,8 +27,8 @@
   --color-secondary: #3DBAA7 !important;
   --color-secondary-light: #A8E0D6 !important;
   --color-secondary-dark: #1A8A78 !important;
-  --color-accent: #1D6F91 !important;
-  --color-accent-dark: #185E7B !important;
+  --color-accent: #016785 !important;
+  --color-accent-dark: #02526A !important;
   /* Prevent DaisyUI from setting btn-primary to purple */
   --color-primary-content: #FFFFFF !important;
 }
@@ -56,8 +56,10 @@
   --color-secondary-light: #A8E0D6;
   --color-secondary-dark: #1A8A78;
 
-  --color-accent: #1D6F91;
-  /* Darkened Cyan (was #2CABDF) - CTAs ONLY; darkened for WCAG AA (5.62:1 vs white, was 2.63:1) */
+  --color-accent: #016785;
+  /* Cyan 700, derived from the logo hue in OKLCH. CTAs ONLY. 6.40:1 on white.
+     See docs/design/colour.md -- the bright brand cyan is a SURFACE colour
+     (--color-brand-surface below), not a white-text button colour. */
 
   /* Section Background Colors */
   --color-bg-clinical: #EFF6EE;
@@ -102,8 +104,8 @@
   --color-border-strong: var(--color-neutral-300);
 
   /* Extended Color Palette */
-  --color-accent-dark: #185E7B;
-  /* Darker cyan for hover states (was #1A95C9; now 7.18:1 vs white, was 3.39:1) */
+  --color-accent-dark: #02526A;
+  /* Cyan 800 - hover/active. 8.69:1 on white. */
   --color-gold: #D4A574;
   /* Warm gold accent */
   --color-gold-light: #FFF9F0;
@@ -157,7 +159,7 @@
   --card-gradient-accent: linear-gradient(135deg,
     rgba(61, 186, 167, 0.03) 0%,
     transparent 50%,
-    rgba(44, 171, 223, 0.03) 100%
+    rgb(var(--color-accent-rgb) / .03) 100%
   );
   
   /* Category Gradients */
@@ -197,6 +199,22 @@
      value below aliases an existing, already-in-production value —
      no new colors were invented, this only names what already exists.
      ---------------------------------------- */
+  /* Brand-surface family. The bright logo cyan (#11bcee) is where brand identity
+     actually lives, but it can only carry NAVY text — 2.27:1 with white, 6.44:1
+     with navy. So it is a surface/fill colour, never a white-text button colour.
+     Derived in design-intelligence/scripts/palette.mjs; rationale in
+     docs/design/colour.md. Pair ONLY with --color-brand-surface-text. */
+  --color-brand-surface: #02AEDD;        /* cyan 400 — 5.63:1 with navy text */
+  --color-brand-surface-subtle: #E9F8FE; /* cyan 50  — 13.42:1 with navy text */
+  --color-brand-surface-text: var(--color-primary);
+
+  /* Accent as raw channels, so glows/shadows can compose their own alpha via
+     rgb(var(--color-accent-rgb) / .35) instead of hardcoding a literal rgba().
+     Ten call sites previously hardcoded rgba(44,171,223,...) — the OLD accent —
+     and silently became the wrong hue the moment the accent changed. Keep this
+     in sync with --color-accent above. */
+  --color-accent-rgb: 1 103 133;
+
   --color-interactive-primary: var(--color-accent);
   --color-interactive-primary-hover: var(--color-accent-dark);
   /* No distinct :active/pressed treatment exists anywhere in the

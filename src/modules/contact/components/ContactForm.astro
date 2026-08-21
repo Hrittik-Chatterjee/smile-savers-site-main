@@ -147,7 +147,7 @@ const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
 .cf-input:focus, .cf-select:focus, .cf-textarea:focus {
   outline: none;
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(44,171,223,.15);
+  box-shadow: 0 0 0 3px rgb(var(--color-accent-rgb) / .15);
   background: #fff;
 }
 .cf-input:invalid:not(:placeholder-shown) { border-color: var(--color-error) }
@@ -205,7 +205,7 @@ const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
   border: 2px solid #fff; border-top: none; border-left: none;
   transform: rotate(45deg) translateY(-1px);
 }
-.cf-check:focus + .cf-check-box { box-shadow: 0 0 0 3px rgba(44,171,223,.2) }
+.cf-check:focus + .cf-check-box { box-shadow: 0 0 0 3px rgb(var(--color-accent-rgb) / .2) }
 
 /* Submit */
 .cf-submit {
@@ -215,11 +215,11 @@ const sortedServices = services.sort((a, b) => a.data.order - b.data.order);
   border: none; border-radius: .75rem;
   font-size: var(--font-size-base); font-weight: 700; font-family: inherit;
   cursor: pointer; min-height: 48px;
-  box-shadow: 0 4px 16px rgba(44,171,223,.35);
+  box-shadow: 0 4px 16px rgb(var(--color-accent-rgb) / .35);
   transition: all .25s ease;
 }
-.cf-submit:hover { background: var(--color-accent-dark); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(44,171,223,.45) }
-.cf-submit:active { transform: none; box-shadow: 0 2px 8px rgba(44,171,223,.3) }
+.cf-submit:hover { background: var(--color-accent-dark); transform: translateY(-1px); box-shadow: 0 8px 24px rgb(var(--color-accent-rgb) / .45) }
+.cf-submit:active { transform: none; box-shadow: 0 2px 8px rgb(var(--color-accent-rgb) / .3) }
 
 .cf-privacy {
   display: flex; align-items: center; gap: .375rem;

@@ -109,7 +109,7 @@ import { siteConfig } from '@/config/site';
 .hcta-bg{position:absolute;inset:0;pointer-events:none}
 .hcta-glow{position:absolute;border-radius:50%;filter:blur(80px)}
 .hcta-glow-1{width:40rem;height:40rem;top:-10rem;left:-8rem;background:radial-gradient(circle,rgba(61,186,167,.15),transparent 70%)}
-.hcta-glow-2{width:32rem;height:32rem;bottom:-8rem;right:-4rem;background:radial-gradient(circle,rgba(44,171,223,.12),transparent 70%)}
+.hcta-glow-2{width:32rem;height:32rem;bottom:-8rem;right:-4rem;background:radial-gradient(circle,rgb(var(--color-accent-rgb) / .12),transparent 70%)}
 .hcta-grid{
   position:absolute;inset:0;
   background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
@@ -173,11 +173,11 @@ import { siteConfig } from '@/config/site';
   color:#fff;
   font-weight:700;font-size:1rem;
   text-decoration:none;
-  box-shadow:0 8px 28px rgba(44,171,223,.4);
+  box-shadow:0 8px 28px rgb(var(--color-accent-rgb) / .4);
   transition:all .25s ease;
   white-space:nowrap;
 }
-.hcta-btn-primary:hover{background:var(--color-accent-dark);transform:translateY(-2px);box-shadow:0 14px 38px rgba(44,171,223,.55)}
+.hcta-btn-primary:hover{background:var(--color-accent-dark);transform:translateY(-2px);box-shadow:0 14px 38px rgb(var(--color-accent-rgb) / .55)}
 
 .hcta-phone-wrap{
   display:flex;flex-direction:column;gap:.125rem;

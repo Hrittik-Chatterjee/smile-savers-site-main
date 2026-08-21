@@ -69,8 +69,23 @@ When adding content, copy an existing Markdown file in the target collection dir
 ```css
 --color-primary:   #102B3F   /* Deep Navy */
 --color-secondary: #3DBAA7   /* Mint Teal */
---color-accent:    #1D6F91   /* Darkened Cyan — CTAs (darkened from #2CABDF for WCAG AA; 5.62:1 vs white, was 2.63:1) */
+--color-accent:    #016785   /* Cyan 700 — CTAs ONLY, white text. 6.40:1 */
 --color-surface:   #EFF6EE   /* Mint Whisper background */
+
+--color-brand-surface: #02AEDD  /* Cyan 400 — brand fills/badges, NAVY text only. 5.63:1 */
+```
+
+The accent and brand-surface values are **derived, not chosen**: `design-intelligence/scripts/palette.mjs`
+builds an OKLCH tonal ramp from the real logo cyan in `public/logoold.svg` and assigns roles by
+measured WCAG contrast. The key rule is that the bright brand cyan is a **surface** colour (navy text)
+while CTAs use the dark end of the ramp (white text) — mid-ramp fails both. Full method and the
+full ramp: [`docs/design/colour.md`](docs/design/colour.md).
+
+To change any brand colour, edit the primitive in `design-intelligence/scripts/brand-tokens.mjs`,
+re-run it, and copy the emitted values — never hand-edit a hex in a component. Verify with:
+
+```bash
+node design-intelligence/scripts/brand-tokens.mjs --check   # drift + contrast gate
 ```
 
 ## Conventions
