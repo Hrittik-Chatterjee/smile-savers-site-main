@@ -232,3 +232,30 @@ consolidating them into one `Badge` component would be a real improvement but is
 a structural change beyond a colour-contrast fix, and is noted as a candidate
 for the "component discovery" work this session's naming-conventions document
 already flagged as unstarted.
+
+---
+
+## DDR-013 — Button.astro gets a reusable loading state, not a per-consumer one
+
+**Status:** Accepted
+
+**Evidence (FACT).** `component-state-matrix.md` correctly flagged that the
+canonical `Button.astro` had no loading state, only a static `disabled` prop.
+`ContactForm.astro` had already solved this problem for itself by hand-rolling
+an inline spinner via direct `innerHTML` swaps in its own submit handler —
+correct, but not reusable, and duplicated logic any future form would have to
+reinvent.
+
+**Decision.** Added a `loading` prop to `Button.astro` plus an always-present
+(CSS-hidden) spinner SVG, keyed off `[aria-busy="true"]` rather than the prop
+directly. This means both (a) a page that renders the button already loading,
+and (b) a consumer's own inline script that toggles `aria-busy`/`disabled` at
+runtime — the exact pattern `ContactForm.astro` already uses — get the correct
+spinner and non-dimmed busy styling without duplicating markup.
+
+**Verified non-regression.** All 3 existing `<Button>` call sites render plain
+text children (no nested icons relying on the old direct-child DOM structure),
+confirmed by grep before wrapping slot content in `.btn-label`. Rendered check
+confirmed the spinner is `display:none` by default (existing buttons
+unaffected) and `display:block` when `aria-busy="true"` is set, whether via the
+prop or via a script mutating the live DOM.

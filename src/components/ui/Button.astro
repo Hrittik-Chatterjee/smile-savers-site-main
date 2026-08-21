@@ -8,6 +8,20 @@ interface Props {
   href?: string;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  /**
+   * Render the busy state: disables the button, sets aria-busy, and shows a
+   * spinner in place of the label. This component has no client-side script
+   * of its own (Astro components render once), so `loading` covers two real
+   * cases: (1) a page renders the button already in a loading state, or
+   * (2) a consumer's own inline script toggles the SAME markup this prop
+   * produces by setting `aria-busy="true"` / `disabled` directly on the
+   * element at runtime -- the CSS below keys off `[aria-busy="true"]`
+   * regardless of which path set it, so both work without duplicating
+   * the spinner markup in every consumer (which is what ContactForm.astro
+   * does today, working correctly but not reusably -- see
+   * docs/design/decisions.md DDR-013).
+   */
+  loading?: boolean;
   class?: string;
   'aria-label'?: string;
 }
@@ -18,22 +32,28 @@ const {
   href,
   type = 'button',
   disabled = false,
+  loading = false,
   class: className = '',
   'aria-label': ariaLabel,
 } = Astro.props;
 
 const El = href ? 'a' : 'button';
+const isDisabled = disabled || loading;
 ---
 
 <El
   class:list={['btn', `btn-${variant}`, `btn-${size}`, className]}
   href={href}
   type={!href ? type : undefined}
-  disabled={disabled}
+  disabled={isDisabled}
   aria-label={ariaLabel}
-  aria-disabled={disabled ? 'true' : undefined}
+  aria-disabled={isDisabled ? 'true' : undefined}
+  aria-busy={loading ? 'true' : undefined}
 >
-  <slot />
+  <svg class="btn-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <path d="M21 12a9 9 0 11-6.219-8.56" />
+  </svg>
+  <span class="btn-label"><slot /></span>
 </El>
 
 <style>
@@ -62,6 +82,27 @@ const El = href ? 'a' : 'button';
   opacity: var(--opacity-disabled);
   cursor: not-allowed;
   pointer-events: none;
+}
+/* Busy overrides the plain-disabled dimming -- a spinner already communicates
+   "in progress", so full opacity keeps it legible. */
+.btn[aria-busy="true"] {
+  opacity: 1;
+}
+.btn-spinner {
+  display: none;
+  animation: btn-spin 1s linear infinite;
+}
+.btn[aria-busy="true"] .btn-spinner {
+  display: inline-block;
+}
+.btn[aria-busy="true"] .btn-label {
+  opacity: .85;
+}
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .btn-spinner { animation: none; }
 }
 
 /* ── Sizes ──────────────────────────────────── */
