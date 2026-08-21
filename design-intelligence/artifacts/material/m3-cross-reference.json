@@ -1,0 +1,109 @@
+{
+  "stage": "material",
+  "generatedAt": "2026-08-19T08:55:51.318Z",
+  "executionId": "6c686fc0-9dc2-40dd-911a-bbd347cc5d65",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "note": "All entries relationshipType=MAPPED except the one live-verified fact (material-web maintenance status), which is OBSERVED-SOURCE. No entry asserts Labs is built from Material 3 or Material 3 Expressive.",
+  "environmentLimitation": {
+    "summary": "m3.material.io is unreachable for content in this environment.",
+    "evidence": "WebFetch on https://m3.material.io/styles/shape returned only an empty \"Shape - Material Design 3\" heading with no body content — a JS-rendered SPA shell, matching the exact failure pattern already proven for labs.google (Stage 0: Chromium ERR_CONNECTION_RESET on all external hosts). WebFetch on the window-size-classes path returned HTTP 404.",
+    "consequence": "Any specific M3/M3E numeric value (shape-scale radii, type-scale sizes, motion durations, window-size-class thresholds) stated elsewhere in this project is prior public knowledge carried by the model, NOT a value independently re-verified against the canonical source in this session, and MUST be treated as VERIFY-BLOCKED for exactness rather than cited as freshly confirmed."
+  },
+  "liveVerifiedFacts": [
+    {
+      "claim": "MWC (@material/web) is in maintenance mode pending new maintainers",
+      "source": "https://raw.githubusercontent.com/material-components/material-web/main/README.md",
+      "method": "curl fetch this session",
+      "evidenceClass": "OBSERVED-SOURCE"
+    }
+  ],
+  "correspondences": [
+    {
+      "subject": "@material/web dependency decision (GAP-17)",
+      "labsEvidenceIds": [],
+      "m3Reference": "material-components/material-web (Google OSS repo, Lit-based M3 web component implementation)",
+      "m3eReference": null,
+      "relationshipType": "OBSERVED-SOURCE",
+      "confidence": "high — direct live fetch this session",
+      "rationale": "README.md fetched via raw.githubusercontent.com/material-components/material-web/main/README.md states verbatim: \"MWC is in maintenance mode pending new maintainers.\" This directly supports the plan's GAP-17 rule: @material/web must not be added as a required production dependency, and is used here as reference evidence only.",
+      "limitations": [
+        "m3.material.io itself (the canonical spec site) was NOT reachable — see limitations below."
+      ]
+    },
+    {
+      "subject": "Labs shape system (radius scale + shape-morph keyframes) vs M3/M3 Expressive shape",
+      "labsEvidenceIds": [
+        "9 distinct radius values observed (Stage 7 normalize.mjs radii[])",
+        "keyframes: bg-shape-enter, shape-morph, svg-shape-enter (Stage 3 cssom.json)",
+        "runtime-discovered shape-mask asset: /assets/images/masks/Circle.svg (Stage 4/closure EV-UI-ASSET-00003)"
+      ],
+      "m3Reference": "M3 documents a fixed shape scale (commonly: none/extra-small/small/medium/large/extra-large/full corner-radius steps)",
+      "m3eReference": "M3 Expressive documents an EXPANDED shape library with shape-morph MOTION as a first-class concept (a shape animating between states, not just a static corner radius)",
+      "relationshipType": "MAPPED",
+      "confidence": "low-to-medium — structural resemblance only (Labs uses multiple radius steps AND has literal keyframes named \"shape-morph\"/\"bg-shape-enter\"/\"svg-shape-enter\"), not confirmed against the canonical M3E spec because m3.material.io was unreachable this session",
+      "rationale": "The presence of keyframes literally named \"shape-morph\" is suggestive of M3 Expressive's documented shape-morph motion pattern, and Circle.svg is evidence Labs uses shape-mask primitives. This is exactly the kind of correspondence worth recording — but it is a naming/structural echo observed in Labs' own code, not a citation of the M3E spec, since that spec could not be fetched. Do not read this record as \"Labs implements M3 Expressive shape-morph\" — it records only that both systems use a similar CONCEPT, independently.",
+      "limitations": [
+        "m3.material.io/styles/shape returned only an empty page shell via WebFetch (JS-rendered SPA, same block class as labs.google).",
+        "Exact M3E shape-scale step count and names are VERIFY-BLOCKED this session; any specific number cited elsewhere is prior public knowledge, not a fresh verification."
+      ]
+    },
+    {
+      "subject": "Labs font-size scale vs M3 type scale (display/headline/title/body/label)",
+      "labsEvidenceIds": ["15 distinct font sizes observed (Stage 7 normalize.mjs fontSizes[])"],
+      "m3Reference": "M3 documents a named type scale (display/headline/title/body/label, each with large/medium/small variants)",
+      "m3eReference": "M3 Expressive extends the type scale with additional emphasis variants",
+      "relationshipType": "MAPPED",
+      "confidence": "low — role names (caption/body/heading-sm/.../display) assigned to Labs' font sizes in Stage 9 are this harness's rank-order INFERENCE (smallest-to-largest observed value mapped to smallest-to-largest role name), not read from any M3 or Labs source",
+      "rationale": "Both systems use a small ordered set of type sizes, which is a structural commonality shared by essentially all modern type systems, not evidence of shared implementation.",
+      "limitations": ["M3 type-scale exact px/sp values are VERIFY-BLOCKED this session."]
+    },
+    {
+      "subject": "Labs easing curves vs M3 motion tokens (standard/emphasized/decelerate/accelerate)",
+      "labsEvidenceIds": [
+        "6 distinct cubic-bezier() curves observed (Stage 3 cssom.json transitions[])"
+      ],
+      "observedCurves": [
+        "cubic-bezier(0.65, 0, 0.35, 1)",
+        "cubic-bezier(0.4, 0, 0.2, 1)",
+        "cubic-bezier(0.2, 0, 0, 1)",
+        "cubic-bezier(0.3, 0, 0, 1)",
+        "cubic-bezier(0.4, 0, 1, 1)",
+        "cubic-bezier(0.16, 1, 0.3, 1)"
+      ],
+      "m3Reference": "M3 documents named easing tokens (e.g. standard, emphasized, emphasized-decelerate, emphasized-accelerate) as specific cubic-bezier curves",
+      "m3eReference": "M3 Expressive documents a physics-based (spring) motion system as an alternative to fixed-duration easing curves",
+      "relationshipType": "MAPPED",
+      "confidence": "low — no attempt made to match Labs' specific cubic-bezier control points against M3's documented curve values, since the M3 reference values are VERIFY-BLOCKED this session",
+      "rationale": "Recording the observed curve set is honest OBSERVED-SOURCE evidence about Labs; asserting which (if any) match M3's named tokens would require the exact M3 control-point values, which could not be fetched.",
+      "limitations": [
+        "Curve-by-curve numeric matching against M3 was not attempted — would require live m3.material.io access."
+      ]
+    },
+    {
+      "subject": "Labs breakpoints vs M3 window size classes (compact/medium/expanded/large/extra-large)",
+      "labsEvidenceIds": [
+        "breakpoints (px): 400, 768, 1024, 1366, 1920, 2000 (Stage 3/6 evidence)"
+      ],
+      "m3Reference": "M3 documents named window size classes at specific dp width thresholds",
+      "m3eReference": null,
+      "relationshipType": "MAPPED",
+      "confidence": "low — M3's exact window-size-class thresholds are VERIFY-BLOCKED this session (m3.material.io/foundations/layout/.../window-size-classes returned HTTP 404 via WebFetch, and the canonical path could not be located)",
+      "rationale": "Labs' 768/1024px thresholds are common web breakpoints shared across most responsive systems, not distinctive evidence of M3 window-size-class adoption.",
+      "limitations": [
+        "Could not locate or fetch the current M3 window-size-class documentation page this session."
+      ]
+    }
+  ],
+  "counts": {
+    "correspondences": 5,
+    "byRelationshipType": {
+      "OBSERVED-SOURCE": 1,
+      "MAPPED": 4
+    }
+  },
+  "canonicalHash": "e6c4ed09dff59770ed061d9cb6ce34f12374df2ad043309e5256e89cb26015c3"
+}

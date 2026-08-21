@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-08-19T15:40:00Z",
+  "measurements": [
+    {
+      "task": "investigate the domain canonicalization issue without changing anything",
+      "taskClass": "DOMAIN_TRUTH",
+      "fullRepoBaselineBytes": 30268,
+      "compiledContextBytes": 1873,
+      "reductionPct": 93.8,
+      "requiredDebt": [
+        "DEBT-0001"
+      ],
+      "criticalConstraintsPreserved": "clinic.domain truth entity + DEBT-0001 (the only real match) both present in output -- 0 lost"
+    },
+    {
+      "task": "should we migrate to cloudflare workers or pages",
+      "taskClass": "RUNTIME_MIGRATION",
+      "fullRepoBaselineBytes": 30268,
+      "compiledContextBytes": 5757,
+      "reductionPct": 81,
+      "requiredDecisions": [
+        "ADR-0001",
+        "ADR-0002"
+      ],
+      "criticalConstraintsPreserved": "ADR-0001 correctly selected -- 0 lost"
+    },
+    {
+      "task": "xyzzy plugh completely unrelated nonsense words",
+      "taskClass": "UNKNOWN",
+      "note": "Deliberately unrelated task -- correctly returns UNKNOWN class and empty selections rather than a spurious match or an error"
+    }
+  ]
+}

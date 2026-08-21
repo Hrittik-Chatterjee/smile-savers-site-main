@@ -30,45 +30,73 @@ const currentPath = Astro.url.pathname;
 
 <!-- Mobile nav links panel -->
 <ul id="mobile-nav-links" class="mobile-nav-links">
-  {mainNavigation.map((item) => (
-    <li>
-      {item.children ? (
-        <details class="mobile-nav-details">
-          <summary class:list={['mobile-nav-link', { active: currentPath.startsWith(item.href) }]}>
+  {
+    mainNavigation.map((item) => (
+      <li>
+        {item.children ? (
+          <details class="mobile-nav-details">
+            <summary
+              class:list={['mobile-nav-link', { active: currentPath.startsWith(item.href) }]}
+            >
+              {item.label}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="mobile-nav-chevron"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </summary>
+            <ul class="mobile-submenu">
+              {item.children.map((child) => (
+                <li>
+                  <a
+                    href={child.href}
+                    class:list={['mobile-submenu-link', { active: currentPath === child.href }]}
+                  >
+                    {child.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ) : (
+          <a
+            href={item.href}
+            class:list={['mobile-nav-link', { active: currentPath === item.href }]}
+          >
             {item.label}
-            <svg xmlns="http://www.w3.org/2000/svg" class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </summary>
-          <ul class="mobile-submenu">
-            {item.children.map((child) => (
-              <li>
-                <a
-                  href={child.href}
-                  class:list={['mobile-submenu-link', { active: currentPath === child.href }]}
-                >
-                  {child.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </details>
-      ) : (
-        <a
-          href={item.href}
-          class:list={['mobile-nav-link', { active: currentPath === item.href }]}
-        >
-          {item.label}
-        </a>
-      )}
-    </li>
-  ))}
+          </a>
+        )}
+      </li>
+    ))
+  }
 
   <!-- CTA buttons inside nav list -->
   <li class="mobile-menu-cta">
     <a href={formatPhoneLink(siteConfig.phone)} class="mobile-cta-btn mobile-cta-outline">
-      <svg class="phone-ring-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      <svg
+        class="phone-ring-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+        ></path>
       </svg>
       Call {formatPhone(siteConfig.phone)}
     </a>
@@ -77,7 +105,17 @@ const currentPath = Astro.url.pathname;
   <!-- Footer info -->
   <li class="mobile-menu-footer">
     <div class="mobile-footer-item">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
         <circle cx="12" cy="10" r="3"></circle>
       </svg>
@@ -90,13 +128,28 @@ const currentPath = Astro.url.pathname;
 <style>
   /* Phone Ring Animation */
   @keyframes phone-ring {
-    0%, 100% { transform: rotate(0deg); }
-    5% { transform: rotate(15deg); }
-    10% { transform: rotate(-13deg); }
-    15% { transform: rotate(14deg); }
-    20% { transform: rotate(-12deg); }
-    25% { transform: rotate(10deg); }
-    30% { transform: rotate(0deg); }
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    5% {
+      transform: rotate(15deg);
+    }
+    10% {
+      transform: rotate(-13deg);
+    }
+    15% {
+      transform: rotate(14deg);
+    }
+    20% {
+      transform: rotate(-12deg);
+    }
+    25% {
+      transform: rotate(10deg);
+    }
+    30% {
+      transform: rotate(0deg);
+    }
   }
 
   .phone-ring-icon {
@@ -126,7 +179,9 @@ const currentPath = Astro.url.pathname;
     border: none;
     cursor: pointer;
     border-radius: var(--radius-xl);
-    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    transition:
+      background-color var(--transition-fast),
+      transform var(--transition-fast);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
@@ -289,7 +344,7 @@ const currentPath = Astro.url.pathname;
 
     /* Disabled state */
     .mobile-nav-link:disabled,
-    .mobile-nav-link[aria-disabled="true"] {
+    .mobile-nav-link[aria-disabled='true'] {
       opacity: 0.5;
       cursor: not-allowed;
       pointer-events: none;
@@ -381,7 +436,9 @@ const currentPath = Astro.url.pathname;
       font-weight: var(--font-weight-medium);
       text-decoration: none;
       border-radius: var(--radius-lg);
-      transition: background-color var(--transition-fast), border-color var(--transition-fast);
+      transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast);
     }
 
     .mobile-cta-primary {
@@ -429,13 +486,18 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
-  // @ts-nocheck
   function initMobileMenu() {
-    const toggle = document.querySelector('.mobile-toggle');
-    const navLinks = document.getElementById('mobile-nav-links');
-    const overlay = document.getElementById('mobile-menu-overlay');
+    const toggleEl = document.querySelector('.mobile-toggle');
+    const navLinksEl = document.getElementById('mobile-nav-links');
+    const overlayEl = document.getElementById('mobile-menu-overlay');
 
-    if (!toggle || !navLinks || !overlay) return;
+    if (!toggleEl || !navLinksEl || !overlayEl) return;
+
+    // Re-typed as non-null so the closures below (which TS doesn't narrow
+    // across, even for const) don't need a cast at every use site.
+    const toggle: HTMLElement = toggleEl as HTMLElement;
+    const navLinks: HTMLElement = navLinksEl as HTMLElement;
+    const overlay: HTMLElement = overlayEl as HTMLElement;
 
     // Prevent duplicate initialization (astro:page-load fires on initial load too)
     if (toggle.hasAttribute('data-initialized')) return;
@@ -463,7 +525,7 @@ const currentPath = Astro.url.pathname;
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navLinks.classList.contains('open')) {
         setMenuOpen(false);
-        (toggle as HTMLElement).focus();
+        toggle.focus();
       }
     });
 

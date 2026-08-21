@@ -22,7 +22,13 @@ interface Props {
 const { title, description, canonicalUrl, ogImage, preloadHero = false } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage} preloadHero={preloadHero}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  ogImage={ogImage}
+  preloadHero={preloadHero}
+>
   <SkipLink />
   <Header />
 
@@ -31,10 +37,10 @@ const { title, description, canonicalUrl, ogImage, preloadHero = false } = Astro
   </main>
 
   <Footer />
-  
+
   <!-- White spacer for mobile bottom bar to blend into -->
   <div class="mobile-bottom-spacer"></div>
-  
+
   <MobileBottomBar />
   <AccessibilityMenu />
 </BaseLayout>

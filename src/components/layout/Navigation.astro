@@ -18,39 +18,62 @@ const currentPath = Astro.url.pathname;
 
 <nav class:list={['navigation', className]} aria-label="Main navigation">
   <ul class="nav-list">
-    {mainNavigation.map((item) => (
-      <li class:list={['nav-item', { 'has-dropdown': item.children && item.children.length > 0 }]}>
-        <a
-          href={item.href}
-          class:list={['nav-link', { active: currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) }]}
-          aria-current={currentPath === item.href ? 'page' : undefined}
-          aria-haspopup={item.children ? 'true' : undefined}
+    {
+      mainNavigation.map((item) => (
+        <li
+          class:list={['nav-item', { 'has-dropdown': item.children && item.children.length > 0 }]}
         >
-          {item.label}
+          <a
+            href={item.href}
+            class:list={[
+              'nav-link',
+              {
+                active:
+                  currentPath === item.href ||
+                  (item.href !== '/' && currentPath.startsWith(item.href)),
+              },
+            ]}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+            aria-haspopup={item.children ? 'true' : undefined}
+          >
+            {item.label}
+            {item.children && item.children.length > 0 && (
+              <svg
+                class="dropdown-arrow"
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            )}
+          </a>
           {item.children && item.children.length > 0 && (
-            <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
+            <ul class="dropdown-menu" role="menu">
+              {item.children.map((child) => (
+                <li role="none">
+                  <a
+                    href={child.href}
+                    class:list={['dropdown-link', { active: currentPath === child.href }]}
+                    role="menuitem"
+                    aria-current={currentPath === child.href ? 'page' : undefined}
+                  >
+                    {child.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           )}
-        </a>
-        {item.children && item.children.length > 0 && (
-          <ul class="dropdown-menu" role="menu">
-            {item.children.map((child) => (
-              <li role="none">
-                <a
-                  href={child.href}
-                  class:list={['dropdown-link', { active: currentPath === child.href }]}
-                  role="menuitem"
-                  aria-current={currentPath === child.href ? 'page' : undefined}
-                >
-                  {child.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-    ))}
+        </li>
+      ))
+    }
   </ul>
 </nav>
 
@@ -82,7 +105,9 @@ const currentPath = Astro.url.pathname;
     color: var(--color-text);
     text-decoration: none;
     border-radius: var(--radius-md);
-    transition: background-color var(--transition-fast), color var(--transition-fast);
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast);
 
     &:hover {
       background-color: var(--color-surface-sunken);
@@ -125,7 +150,10 @@ const currentPath = Astro.url.pathname;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-8px);
-    transition: opacity var(--transition-fast), visibility var(--transition-fast), transform var(--transition-fast);
+    transition:
+      opacity var(--transition-fast),
+      visibility var(--transition-fast),
+      transform var(--transition-fast);
     z-index: var(--z-dropdown, 100);
   }
 
@@ -143,7 +171,9 @@ const currentPath = Astro.url.pathname;
     color: var(--color-text);
     text-decoration: none;
     border-radius: var(--radius-md);
-    transition: background-color var(--transition-fast), color var(--transition-fast);
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast);
 
     &:hover {
       background-color: var(--color-surface-sunken);

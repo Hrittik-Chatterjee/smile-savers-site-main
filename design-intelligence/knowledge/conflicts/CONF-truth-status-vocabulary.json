@@ -1,0 +1,39 @@
+{
+  "conflictId": "CONF-truth-status-vocabulary",
+  "classification": "policy-vocabulary-conflict",
+  "sources": {
+    "repo": {
+      "location": "design-intelligence/lib/core.mjs EVIDENCE_CLASSES",
+      "statuses": [
+        "OBSERVED-SOURCE",
+        "OBSERVED-MIRROR",
+        "DERIVED",
+        "MAPPED",
+        "INFERRED",
+        "UNKNOWN",
+        "VERIFY-BLOCKED"
+      ],
+      "enforcement": "assertEvidenceClass() throws on any value outside this exact set; every evidence-producing script in this project (Stages 3-20, closure-4-5.mjs) has been tested against this hard gate all session."
+    },
+    "uploadedPack": {
+      "location": "knowledge/policies/truth-status.json (external, hash-verified, archived at design-intelligence/knowledge/external-references/)",
+      "statuses": [
+        "OBSERVED",
+        "OBSERVED-SOURCE",
+        "OBSERVED-MIRROR",
+        "VERIFIED",
+        "DERIVED",
+        "MAPPED",
+        "INFERRED",
+        "UNKNOWN",
+        "VERIFY-BLOCKED",
+        "SUPERSEDED",
+        "DEPRECATED"
+      ],
+      "enforcement": "none observed -- a policy document, not code"
+    }
+  },
+  "resolution": "NOT RESOLVED -- recorded, not silently merged. The repo's 7-status enum is a hard, tested gate that every script this session has depended on; widening it (e.g. adding SUPERSEDED/DEPRECATED for future drift-tracking, which is a genuinely plausible future need once content is re-extracted after a Labs change) is a real, reasonable idea but is a deliberate code change to lib/core.mjs's assertEvidenceClass() with downstream effects on every consuming script, not something to do as a side effect of reconciling an uploaded reference pack.",
+  "recommendation": "If/when Stage 23-style drift re-extraction is actually implemented (comparing a new capture against this session's evidence graph), SUPERSEDED and DEPRECATED become genuinely necessary and should be added deliberately at that point, with the corresponding consuming-script updates. OBSERVED and VERIFIED are not adopted: this project's existing OBSERVED-SOURCE/OBSERVED-MIRROR split already carries more information than a bare OBSERVED, and VERIFIED overlaps ambiguously with DERIVED/OBSERVED-SOURCE without a clear distinguishing rule.",
+  "status": "OPEN"
+}

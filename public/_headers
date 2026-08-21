@@ -1,21 +1,27 @@
 # ═══════════════════════════════════════════════════════════
 # Cloudflare Pages — Security + Performance Headers
-# Smile Savers Dental | smilesavers.dental
+# Smile Savers Dental | dentalsmilesavers.com
 # ═══════════════════════════════════════════════════════════
 
 /*
   # ── Security ─────────────────────────────────────────────
-  X-Frame-Options: SAMEORIGIN
+  # Kept identical to functions/_middleware.js's securityHeaders — the two
+  # previously drifted (audit SEC-005: different X-Frame-Options,
+  # Permissions-Policy, and CSP values). functions/_middleware.js is the
+  # one that actually reaches the browser (it runs on every request and
+  # overwrites these), so these values exist to document the same policy
+  # in one place rather than to independently enforce anything.
+  X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=(self), payment=()
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
 
   # ── HSTS (only enable after SSL confirmed) ───────────────
   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
 
-  # ── CSP — tight, allows self + CDN fonts ─────────────────
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://maps.openstreetmap.org https://tile.openstreetmap.org https://images.pexels.com; connect-src 'self' https://api.mailchannels.net; frame-src https://www.openstreetmap.org; upgrade-insecure-requests
+  # ── CSP — matches functions/_middleware.js exactly ───────
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://maps.openstreetmap.org https://tile.openstreetmap.org; connect-src 'self'; frame-src https://www.openstreetmap.org; upgrade-insecure-requests
 
   # ── Performance ──────────────────────────────────────────
   X-Robots-Tag: index, follow
@@ -47,7 +53,7 @@
 # ── API: no caching ─────────────────────────────────────────
 /api/*
   Cache-Control: no-store, no-cache
-  Access-Control-Allow-Origin: https://smilesavers.dental
+  Access-Control-Allow-Origin: https://dentalsmilesavers.com
   Access-Control-Allow-Methods: POST, OPTIONS
   Access-Control-Allow-Headers: Content-Type
 

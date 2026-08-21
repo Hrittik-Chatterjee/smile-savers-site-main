@@ -1,0 +1,10 @@
+{
+  "id": "DEC-002",
+  "status": "LOCKED",
+  "title": "Visual gates",
+  "rules": [
+    "Use admitted Labs fixtures for strict parity where the environment is deterministic.",
+    "Use Smile Savers self-parity baselines for regression protection.",
+    "Do not claim whole-page pixel identity with live Labs when font/runtime/environment parity is unavailable."
+  ]
+}

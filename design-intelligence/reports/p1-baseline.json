@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-08-19T09:53:08.366Z",
+  "purpose": "P1 baseline snapshot captured before any P1 (semantic token model / change-impact engine / agent-context contract) work, per P1 spec section B. Establishes the exact pre-P1 state to diff against at P1 close-out.",
+  "git": {
+    "sha": "5db6a842ac25a8b9930660bac480002e02099903",
+    "branch": "claude/init-yi57kn",
+    "status": "?? design-intelligence/artifacts/semantic/\n?? design-intelligence/scripts/smile-savers-tokens.mjs"
+  },
+  "packageJsonSha256": "7e3199eb157cd3ac394ff3e593f8afbc5d619382b2cfa8e01cf50083b2da3ff5",
+  "packageLockSha256": "71f308eb58d48e9dcd0f2d654a558aec4fb8aac85f55713d10086499bc73ec0c",
+  "npmRunCheck": {
+    "errors": 0,
+    "warnings": 0,
+    "hints": 143,
+    "filesChecked": 88,
+    "status": "PASS"
+  },
+  "npmRunBuild": {
+    "pagesBuilt": 32,
+    "status": "PASS"
+  },
+  "existingDesignIntelligenceState": {
+    "releaseGateStatus": "NO-GO",
+    "gates": {
+      "EXTRACTION": "GO",
+      "TOKEN": "GO",
+      "INTEGRATION": "GO",
+      "GRAMMAR": "GO",
+      "FIXTURE": "GO",
+      "REGRESSION": "GO",
+      "ACCESSIBILITY": "NO-GO",
+      "RESPONSIVE": "GO",
+      "INTERACTION-MOTION": "GO",
+      "REPRODUCIBILITY": "GO",
+      "MIGRATION-ASSESSMENT": "GO"
+    }
+  },
+  "existingExecutionIntelligenceState": {
+    "note": "Hooks wired via .claude/settings.json; empirically did not fire mid-session in this environment (see execution-intelligence/CAPABILITY-MATRIX.json). No ledger events exist as of this baseline."
+  },
+  "uncommittedWorkAtBaselineCapture": [
+    "design-intelligence/scripts/smile-savers-tokens.mjs (new script, consumer-detection had a known Tailwind-utility-class gap being fixed as part of P1 section H)",
+    "design-intelligence/artifacts/semantic/smile-savers-tokens.json (output of the above, to be regenerated after the fix)"
+  ]
+}

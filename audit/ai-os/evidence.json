@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-08-19T15:40:00Z",
+  "items": [
+    {
+      "id": "EV-EAIS-001",
+      "class": "A",
+      "source": "npm registry (npm view typescript versions)",
+      "claim": "typescript@7.0.2 is the current latest stable release; 7.1.0-dev.* are unreleased prereleases",
+      "confidence": 1.0
+    },
+    {
+      "id": "EV-EAIS-002",
+      "class": "B",
+      "source": "tools/eais/dist/ build output (tsc -p tsconfig.json)",
+      "claim": "TS7 compiles this package with 0 errors once @types/node and types:['node'] are added -- both omissions caused real build failures, fixed by running the build and reading the actual errors, not assumed in advance",
+      "confidence": 1.0
+    },
+    {
+      "id": "EV-EAIS-003",
+      "class": "B",
+      "source": "tools/eais/tests/*.test.ts run output (audit/ai-os/test-run-output.txt)",
+      "claim": "9/9 tests pass, all reading REAL .ai/ and audit/eais/ files (no mocks) -- e.g. loadTruth() asserts clinic.domain === https://dentalsmilesavers.com against the actual persisted canonical.json",
+      "confidence": 1.0
+    },
+    {
+      "id": "EV-EAIS-004",
+      "class": "B",
+      "source": "audit/ai-os/cli-transcript.txt (real captured CLI output)",
+      "claim": "eais context correctly achieves 93.8% byte reduction for a domain-scoped task after the stopword fix (was polluted before the fix, captured and fixed live)",
+      "confidence": 1.0
+    },
+    {
+      "id": "EV-EAIS-005",
+      "class": "B",
+      "source": "audit/ai-os/cli-transcript.txt",
+      "claim": "eais gate reports overall: NO-GO, blocking: ACCESSIBILITY -- reading the real, already-known, deliberately-deferred blocker rather than a fabricated or optimistic status",
+      "confidence": 1.0
+    }
+  ]
+}

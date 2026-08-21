@@ -18,10 +18,14 @@ const services = defineCollection({
     order: z.number().int().min(0).max(100),
     duration: z.string().optional(),
     benefits: z.array(z.string().min(5)).min(1).max(10),
-    faq: z.array(z.object({
-      question: z.string().min(10),
-      answer: z.string().min(20),
-    })).optional(),
+    faq: z
+      .array(
+        z.object({
+          question: z.string().min(10),
+          answer: z.string().min(20),
+        })
+      )
+      .optional(),
   }),
 });
 
@@ -42,14 +46,22 @@ const locations = defineCollection({
     neighborhood: z.string().regex(/^[a-z0-9-]+$/),
     neighborhoodDisplay: z.string(),
     intro: z.string().min(100),
-    sections: z.array(z.object({
-      title: z.string(),
-      content: z.string(),
-    })).min(1),
-    faqs: z.array(z.object({
-      question: z.string(),
-      answer: z.string(),
-    })).min(1),
+    sections: z
+      .array(
+        z.object({
+          title: z.string(),
+          content: z.string(),
+        })
+      )
+      .min(1),
+    faqs: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        })
+      )
+      .min(1),
     relatedServices: z.array(z.string()).optional(),
   }),
 });
@@ -65,15 +77,23 @@ const glossary = defineCollection({
     term: z.string().regex(/^[a-z0-9-]+$/),
     termDisplay: z.string(),
     definition: z.string().min(50).max(300),
-    relatedTerms: z.array(z.object({
-      term: z.string(),
-      slug: z.string(),
-    })).optional(),
+    relatedTerms: z
+      .array(
+        z.object({
+          term: z.string(),
+          slug: z.string(),
+        })
+      )
+      .optional(),
     relatedServices: z.array(z.string()).optional(),
-    faqs: z.array(z.object({
-      question: z.string(),
-      answer: z.string(),
-    })).optional(),
+    faqs: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        })
+      )
+      .optional(),
   }),
 });
 
@@ -110,10 +130,14 @@ const comparisons = defineCollection({
     }),
     intro: z.string(),
     verdict: z.string(),
-    faqs: z.array(z.object({
-      question: z.string(),
-      answer: z.string(),
-    })).optional(),
+    faqs: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        })
+      )
+      .optional(),
     relatedServices: z.array(z.string()).optional(),
   }),
 });
@@ -131,16 +155,24 @@ const personas = defineCollection({
     personaDisplay: z.string(),
     tagline: z.string(),
     intro: z.string(),
-    benefits: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-      icon: z.string(),
-    })).min(3),
+    benefits: z
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+          icon: z.string(),
+        })
+      )
+      .min(3),
     services: z.array(z.string()),
-    faqs: z.array(z.object({
-      question: z.string(),
-      answer: z.string(),
-    })).optional(),
+    faqs: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        })
+      )
+      .optional(),
   }),
 });
 
@@ -150,21 +182,24 @@ const personas = defineCollection({
  */
 const team = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/team' }),
-  schema: ({ image }) => z.object({
-    name: z.string(),
-    slug: z.string(),
-    role: z.string(),
-    credentials: z.array(z.string()),
-    shortBio: z.string().max(200),
-    specialties: z.array(z.string()),
-    education: z.array(z.object({
-      institution: z.string(),
-      degree: z.string(),
-      year: z.number(),
-    })),
-    order: z.number().default(0),
-    image: image().optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      slug: z.string(),
+      role: z.string(),
+      credentials: z.array(z.string()),
+      shortBio: z.string().max(200),
+      specialties: z.array(z.string()),
+      education: z.array(
+        z.object({
+          institution: z.string(),
+          degree: z.string(),
+          year: z.number(),
+        })
+      ),
+      order: z.number().default(0),
+      image: image().optional(),
+    }),
 });
 
 /**
@@ -186,20 +221,10 @@ const testimonials = defineCollection({
   }),
 });
 
-const legal = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/legal' }),
-  schema: z.object({
-    title: z.string().min(1),
-    description: z.string().max(160),
-    lastUpdated: z.coerce.date(),
-  }),
-});
-
 export const collections = {
   services,
   team,
   testimonials,
-  legal,
   // Programmatic SEO collections
   locations,
   glossary,

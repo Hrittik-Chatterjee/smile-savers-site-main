@@ -1,0 +1,149 @@
+{
+  "generatedAt": "2026-08-19T13:15:27.665Z",
+  "note": "DERIVED throughout. Static-asset requests are excluded from all cost figures below because both architectures serve them free/unlimited once correctly configured (Workers Static Assets natively; Pages only after adding a _routes.json exclude rule -- Smile Savers currently has NO _routes.json, meaning a live Pages deployment as-configured today would NOT get free static requests, since Pages Functions default to invoking on every route with no _routes.json present -- see CF-A9-live). \"Dynamic requests\" below = Worker/Pages-Function invocations (API calls + any SSR), which is the quota that actually matters for cost.",
+  "assumptions": {
+    "inputNeuronsPerMillion": 4119,
+    "outputNeuronsPerMillion": 34868,
+    "freeNeuronsPerDay": 10000,
+    "freeRequestsPerDay": 100000,
+    "workersPaidMonthlyMinimum": 5,
+    "includedRequestsPaidPerMonth": 10000000,
+    "pricePerMillionExtraRequests": 0.3,
+    "includedCpuMsPaidPerMonth": 30000000,
+    "pricePerMillionExtraCpuMs": 0.02,
+    "aiOveragePricePer1000Neurons": 0.011
+  },
+  "visitorTrafficContext": {
+    "note": "visit tiers below are NOT separately costed -- under both architectures, page-view/static-asset traffic at any of these tiers is free (see note above), so it only matters as context for how many of those visits plausibly also trigger a dynamic request (contact form, chat widget).",
+    "tiers": [
+      1000,
+      10000,
+      50000,
+      100000,
+      500000
+    ]
+  },
+  "dynamicRequestScenarios": [
+    {
+      "dynamicRequestsPerDay": 100,
+      "monthlyEquivalentRequests": 3000,
+      "dailyFreeQuotaUtilizationPct": 0.1,
+      "exceedsWorkersFreeDailyQuota": false,
+      "workersPlanRequirement": "Free",
+      "estimatedMonthlyPlatformCost": 0
+    },
+    {
+      "dynamicRequestsPerDay": 1000,
+      "monthlyEquivalentRequests": 30000,
+      "dailyFreeQuotaUtilizationPct": 1,
+      "exceedsWorkersFreeDailyQuota": false,
+      "workersPlanRequirement": "Free",
+      "estimatedMonthlyPlatformCost": 0
+    },
+    {
+      "dynamicRequestsPerDay": 5000,
+      "monthlyEquivalentRequests": 150000,
+      "dailyFreeQuotaUtilizationPct": 5,
+      "exceedsWorkersFreeDailyQuota": false,
+      "workersPlanRequirement": "Free",
+      "estimatedMonthlyPlatformCost": 0
+    },
+    {
+      "dynamicRequestsPerDay": 10000,
+      "monthlyEquivalentRequests": 300000,
+      "dailyFreeQuotaUtilizationPct": 10,
+      "exceedsWorkersFreeDailyQuota": false,
+      "workersPlanRequirement": "Free",
+      "estimatedMonthlyPlatformCost": 0
+    },
+    {
+      "dynamicRequestsPerDay": 50000,
+      "monthlyEquivalentRequests": 1500000,
+      "dailyFreeQuotaUtilizationPct": 50,
+      "exceedsWorkersFreeDailyQuota": false,
+      "workersPlanRequirement": "Free",
+      "estimatedMonthlyPlatformCost": 0
+    },
+    {
+      "dynamicRequestsPerDay": 100000,
+      "monthlyEquivalentRequests": 3000000,
+      "dailyFreeQuotaUtilizationPct": 100,
+      "exceedsWorkersFreeDailyQuota": false,
+      "workersPlanRequirement": "Free",
+      "estimatedMonthlyPlatformCost": 0
+    }
+  ],
+  "aiRequestScenarios": [
+    {
+      "aiRequestsPerDay": 100,
+      "typicalProfile": {
+        "neuronsPerDay": 1017.3,
+        "freeCapacityUtilizationPct": 10.2,
+        "overageNeurons": 0,
+        "estimatedMonthlyAiOverageCost": 0
+      }
+    },
+    {
+      "aiRequestsPerDay": 500,
+      "typicalProfile": {
+        "neuronsPerDay": 5086.5,
+        "freeCapacityUtilizationPct": 50.9,
+        "overageNeurons": 0,
+        "estimatedMonthlyAiOverageCost": 0
+      }
+    },
+    {
+      "aiRequestsPerDay": 1000,
+      "typicalProfile": {
+        "neuronsPerDay": 10173,
+        "freeCapacityUtilizationPct": 100,
+        "overageNeurons": 173,
+        "estimatedMonthlyAiOverageCost": 0.06
+      }
+    },
+    {
+      "aiRequestsPerDay": 2500,
+      "typicalProfile": {
+        "neuronsPerDay": 25432.5,
+        "freeCapacityUtilizationPct": 100,
+        "overageNeurons": 15432.5,
+        "estimatedMonthlyAiOverageCost": 5.09
+      }
+    },
+    {
+      "aiRequestsPerDay": 5000,
+      "typicalProfile": {
+        "neuronsPerDay": 50865,
+        "freeCapacityUtilizationPct": 100,
+        "overageNeurons": 40865,
+        "estimatedMonthlyAiOverageCost": 13.49
+      }
+    },
+    {
+      "aiRequestsPerDay": 10000,
+      "typicalProfile": {
+        "neuronsPerDay": 101730,
+        "freeCapacityUtilizationPct": 100,
+        "overageNeurons": 91730,
+        "estimatedMonthlyAiOverageCost": 30.27
+      }
+    }
+  ],
+  "peakDayStressCase": {
+    "note": "Workers Free (100k req/day) and Workers AI free (10k neurons/day) both reset at 00:00 UTC (CF-A3, CF-A2) -- a single unusually busy day (e.g. a local news mention, a viral social post) is evaluated on its own, not averaged into a monthly figure, since a day that exceeds the quota fails/charges regardless of how quiet the rest of the month was.",
+    "exampleScenario": "A single day with 5,000 dynamic (API) requests and 1,000 typical-profile AI chat requests",
+    "dynamicRequestResult": {
+      "dynamicRequestsPerDay": 5000,
+      "monthlyEquivalentRequests": 150000,
+      "dailyFreeQuotaUtilizationPct": 5,
+      "exceedsWorkersFreeDailyQuota": false,
+      "workersPlanRequirement": "Free",
+      "estimatedMonthlyPlatformCost": 0
+    },
+    "aiResult": {
+      "neuronsThatDay": 10173,
+      "freeCapacityUtilizationPct": 101.7,
+      "conclusion": "Would exceed free allocation on this stress day"
+    }
+  }
+}

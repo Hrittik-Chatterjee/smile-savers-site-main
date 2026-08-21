@@ -1,0 +1,72 @@
+
+> @smile-savers/eais@0.1.0 test
+> npm run build && node --test dist/tests/*.test.js
+
+
+> @smile-savers/eais@0.1.0 build
+> tsc -p tsconfig.json
+
+TAP version 13
+# Subtest: AC2: identical task + identical repo state produces identical output
+ok 1 - AC2: identical task + identical repo state produces identical output
+  ---
+  duration_ms: 11.097297
+  type: 'test'
+  ...
+# Subtest: AC3: context compiler selects a strict subset and reports measurable reduction
+ok 2 - AC3: context compiler selects a strict subset and reports measurable reduction
+  ---
+  duration_ms: 2.252825
+  type: 'test'
+  ...
+# Subtest: an unrecognized task still returns a valid (empty) compiled context, not an error
+ok 3 - an unrecognized task still returns a valid (empty) compiled context, not an error
+  ---
+  duration_ms: 2.48676
+  type: 'test'
+  ...
+# Subtest: a Cloudflare-related task selects the runtime architecture decision
+ok 4 - a Cloudflare-related task selects the runtime architecture decision
+  ---
+  duration_ms: 2.83699
+  type: 'test'
+  ...
+# Subtest: loadState reads the real .ai/state/current.json
+ok 5 - loadState reads the real .ai/state/current.json
+  ---
+  duration_ms: 7.967826
+  type: 'test'
+  ...
+# Subtest: loadTruth reads real canonical entities
+ok 6 - loadTruth reads real canonical entities
+  ---
+  duration_ms: 1.778372
+  type: 'test'
+  ...
+# Subtest: loadDecisions reads the real ADR register
+ok 7 - loadDecisions reads the real ADR register
+  ---
+  duration_ms: 1.608706
+  type: 'test'
+  ...
+# Subtest: loadReleaseGate reads the real gate state
+ok 8 - loadReleaseGate reads the real gate state
+  ---
+  duration_ms: 2.717448
+  type: 'test'
+  ...
+# Subtest: loadDebtRegister finds the latest run directory and reads real debt items
+ok 9 - loadDebtRegister finds the latest run directory and reads real debt items
+  ---
+  duration_ms: 1.499364
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 125.002431

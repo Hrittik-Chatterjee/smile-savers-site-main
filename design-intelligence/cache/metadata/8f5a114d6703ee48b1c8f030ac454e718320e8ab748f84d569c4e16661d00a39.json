@@ -1,0 +1,14 @@
+{
+  "sha256": "8f5a114d6703ee48b1c8f030ac454e718320e8ab748f84d569c4e16661d00a39",
+  "size": 35446,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:25.952Z",
+  "sourceURL": "https://labs.google/assets/images/tools/vantage.webp",
+  "finalURL": "https://labs.google/assets/images/tools/vantage.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.419Z"
+}

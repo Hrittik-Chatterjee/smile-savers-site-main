@@ -1,0 +1,20 @@
+{
+  "name": "@smile-savers/eais",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Smile Savers lightweight Engineering AI Operating System (EAIS/EAOS) control-plane CLI. Reads/writes this repo's .ai/ and audit/eais/ persisted state. Isolated from the root Astro build (see tsconfig.json's own compilerOptions and the root tsconfig.json's exclude list) because TypeScript 7 does not yet have a stable programmatic API that Astro's type-checker requires -- see knowledge/architecture/typescript-7-astro-compatibility.md.",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "check": "npm run build && npm test",
+    "eais": "node dist/src/cli.js"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "7.0.2"
+  }
+}

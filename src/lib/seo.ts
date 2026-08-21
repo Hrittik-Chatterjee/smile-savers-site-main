@@ -87,11 +87,7 @@ export function getFAQSchema(faqs: Array<{ question: string; answer: string }>) 
 /**
  * Generate Service structured data (JSON-LD)
  */
-export function getServiceSchema(service: {
-  name: string;
-  description: string;
-  url: string;
-}) {
+export function getServiceSchema(service: { name: string; description: string; url: string }) {
   return {
     '@context': 'https://schema.org',
     '@type': 'MedicalProcedure',
@@ -109,9 +105,7 @@ export function getServiceSchema(service: {
 /**
  * Generate Breadcrumb structured data (JSON-LD)
  */
-export function getBreadcrumbSchema(
-  items: Array<{ name: string; url: string }>
-) {
+export function getBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

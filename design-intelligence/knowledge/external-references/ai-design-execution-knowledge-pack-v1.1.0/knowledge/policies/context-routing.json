@@ -1,0 +1,17 @@
+{
+  "loadOrder": [
+    "global policy",
+    "locked decisions",
+    "task constraints",
+    "relevant operational knowledge",
+    "evidence on demand",
+    "deep research only if unresolved"
+  ],
+  "defaultDoNotLoad": ["all transcripts", "all raw evidence", "all research", "all external docs"],
+  "freshness": {
+    "internal decisions": "until superseded",
+    "volatile versions": "revalidate before version-sensitive decisions",
+    "security": "revalidate before relying",
+    "latest request": "fresh retrieval required"
+  }
+}

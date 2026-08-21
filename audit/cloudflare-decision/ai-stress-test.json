@@ -1,0 +1,267 @@
+{
+  "generatedAt": "2026-08-19T13:15:27.666Z",
+  "note": "Phase 4 Counterargument D full stress table -- 3 prompt profiles x 8 request/day tiers, DERIVED from CF-A2/CF-A6 neuron rates.",
+  "profiles": {
+    "light": {
+      "inputTokens": 800,
+      "outputTokens": 100,
+      "neuronsPerRequest": 6.782,
+      "tiers": [
+        {
+          "requestsPerDay": 100,
+          "neuronsPerDay": 678.2,
+          "freeCapacityUtilizationPct": 6.8,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 250,
+          "neuronsPerDay": 1695.5,
+          "freeCapacityUtilizationPct": 17,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 500,
+          "neuronsPerDay": 3391,
+          "freeCapacityUtilizationPct": 33.9,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 750,
+          "neuronsPerDay": 5086.5,
+          "freeCapacityUtilizationPct": 50.9,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 1000,
+          "neuronsPerDay": 6782,
+          "freeCapacityUtilizationPct": 67.8,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 2500,
+          "neuronsPerDay": 16955,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 6955,
+          "estimatedAiOverageCostPerDay": 0.0765,
+          "estimatedAiOverageCostPerMonth": 2.3,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        },
+        {
+          "requestsPerDay": 5000,
+          "neuronsPerDay": 33910,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 23910,
+          "estimatedAiOverageCostPerDay": 0.263,
+          "estimatedAiOverageCostPerMonth": 7.89,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        },
+        {
+          "requestsPerDay": 10000,
+          "neuronsPerDay": 67820,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 57820,
+          "estimatedAiOverageCostPerDay": 0.636,
+          "estimatedAiOverageCostPerMonth": 19.08,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        }
+      ]
+    },
+    "typical": {
+      "inputTokens": 1200,
+      "outputTokens": 150,
+      "neuronsPerRequest": 10.173,
+      "tiers": [
+        {
+          "requestsPerDay": 100,
+          "neuronsPerDay": 1017.3,
+          "freeCapacityUtilizationPct": 10.2,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 250,
+          "neuronsPerDay": 2543.2,
+          "freeCapacityUtilizationPct": 25.4,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 500,
+          "neuronsPerDay": 5086.5,
+          "freeCapacityUtilizationPct": 50.9,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 750,
+          "neuronsPerDay": 7629.7,
+          "freeCapacityUtilizationPct": 76.3,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 1000,
+          "neuronsPerDay": 10173,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 173,
+          "estimatedAiOverageCostPerDay": 0.0019,
+          "estimatedAiOverageCostPerMonth": 0.06,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        },
+        {
+          "requestsPerDay": 2500,
+          "neuronsPerDay": 25432.5,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 15432.5,
+          "estimatedAiOverageCostPerDay": 0.1698,
+          "estimatedAiOverageCostPerMonth": 5.09,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        },
+        {
+          "requestsPerDay": 5000,
+          "neuronsPerDay": 50865,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 40865,
+          "estimatedAiOverageCostPerDay": 0.4495,
+          "estimatedAiOverageCostPerMonth": 13.49,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        },
+        {
+          "requestsPerDay": 10000,
+          "neuronsPerDay": 101730,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 91730,
+          "estimatedAiOverageCostPerDay": 1.009,
+          "estimatedAiOverageCostPerMonth": 30.27,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        }
+      ]
+    },
+    "heavy": {
+      "inputTokens": 1500,
+      "outputTokens": 200,
+      "neuronsPerRequest": 13.152,
+      "tiers": [
+        {
+          "requestsPerDay": 100,
+          "neuronsPerDay": 1315.2,
+          "freeCapacityUtilizationPct": 13.2,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 250,
+          "neuronsPerDay": 3288,
+          "freeCapacityUtilizationPct": 32.9,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 500,
+          "neuronsPerDay": 6576.1,
+          "freeCapacityUtilizationPct": 65.8,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 750,
+          "neuronsPerDay": 9864.1,
+          "freeCapacityUtilizationPct": 98.6,
+          "overageNeurons": 0,
+          "estimatedAiOverageCostPerDay": 0,
+          "estimatedAiOverageCostPerMonth": 0,
+          "freeSurvives": true,
+          "paidBecomesRational": false
+        },
+        {
+          "requestsPerDay": 1000,
+          "neuronsPerDay": 13152.1,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 3152.1,
+          "estimatedAiOverageCostPerDay": 0.0347,
+          "estimatedAiOverageCostPerMonth": 1.04,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        },
+        {
+          "requestsPerDay": 2500,
+          "neuronsPerDay": 32880.3,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 22880.3,
+          "estimatedAiOverageCostPerDay": 0.2517,
+          "estimatedAiOverageCostPerMonth": 7.55,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        },
+        {
+          "requestsPerDay": 5000,
+          "neuronsPerDay": 65760.5,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 55760.5,
+          "estimatedAiOverageCostPerDay": 0.6134,
+          "estimatedAiOverageCostPerMonth": 18.4,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        },
+        {
+          "requestsPerDay": 10000,
+          "neuronsPerDay": 131521,
+          "freeCapacityUtilizationPct": 100,
+          "overageNeurons": 121521,
+          "estimatedAiOverageCostPerDay": 1.3367,
+          "estimatedAiOverageCostPerMonth": 40.1,
+          "freeSurvives": false,
+          "paidBecomesRational": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-08-19T15:40:00Z",
+  "decision": "M3 EAOS Kernel implemented as tools/eais/, TypeScript 7.0.2, isolated from root tsconfig",
+  "alternatives_considered": [
+    "Build in the root project's TypeScript (rejected: TS7/Astro incompatibility, see EV-TS7 knowledge atom)",
+    "Separate repository (rejected: adds cross-repo coordination overhead for a tool that only reads this repo's own state)"
+  ],
+  "evidence": [
+    "EV-EAIS-001",
+    "EV-EAIS-002"
+  ],
+  "confidence": 0.95
+}

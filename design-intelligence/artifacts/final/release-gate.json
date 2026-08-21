@@ -1,0 +1,182 @@
+{
+  "stage": "gate",
+  "generatedAt": "2026-08-19T08:58:01.545Z",
+  "executionId": "bc890c82-6fe6-421a-acee-c7ec9613eac6",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "commit": "see git log — not embedded here to keep this artifact independent of git state at generation time",
+  "status": "NO-GO",
+  "gates": {
+    "EXTRACTION": {
+      "gate": "EXTRACTION",
+      "status": "GO",
+      "measurements": {
+        "mirroredAssets": 72,
+        "failedAssets": 0,
+        "sourceCoveragePct": 71
+      },
+      "artifacts": ["design-intelligence/artifacts/mirror/mirror-manifest.json"],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "Mirror complete with 0 unresolved same-origin failures."
+    },
+    "TOKEN": {
+      "gate": "TOKEN",
+      "status": "GO",
+      "measurements": {
+        "tokensWithLineage": 171,
+        "tokensWithoutLineage": 0,
+        "conflicts": 10
+      },
+      "artifacts": [
+        "design-intelligence/artifacts/graph/evidence-graph.json",
+        "design-intelligence/artifacts/tokens/reference-tokens.json"
+      ],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "Every token traces to SOURCE; 0 without lineage."
+    },
+    "INTEGRATION": {
+      "gate": "INTEGRATION",
+      "status": "GO",
+      "measurements": {
+        "importedByProduction": false,
+        "namespaceCollisions": 0,
+        "productionBuildErrors": 0
+      },
+      "artifacts": ["design-intelligence/artifacts/grammar/integration-report.json"],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "Grammar file generated additively (not imported by production), 0 namespace collisions with existing --color-*/--radius-*/--spacing-* tokens, npm run check unaffected (0 errors)."
+    },
+    "GRAMMAR": {
+      "gate": "GRAMMAR",
+      "status": "GO",
+      "measurements": {
+        "contaminationHits": 0
+      },
+      "artifacts": ["design-intelligence/artifacts/grammar/brand-separated-grammar.json"],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "Contamination scan clean — no Google brand values in grammar output."
+    },
+    "FIXTURE": {
+      "gate": "FIXTURE",
+      "status": "GO",
+      "measurements": {
+        "admitted": 1,
+        "rejected": 3,
+        "parityChecked": 1,
+        "parityPassed": 1
+      },
+      "artifacts": [
+        "design-intelligence/artifacts/visual/fixtures/fixture-admission.json",
+        "design-intelligence/artifacts/visual/diffs/parity-results.json"
+      ],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "1/1 admitted fixtures passed strict controlled reference-fixture parity (0 mismatched pixels)."
+    },
+    "REGRESSION": {
+      "gate": "REGRESSION",
+      "status": "GO",
+      "measurements": {
+        "routesChecked": 24,
+        "succeeded": 24
+      },
+      "artifacts": ["design-intelligence/artifacts/visual/site/site-baselines.json"],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "Smile Savers site baselines captured for all sampled routes x viewports."
+    },
+    "ACCESSIBILITY": {
+      "gate": "ACCESSIBILITY",
+      "status": "NO-GO",
+      "measurements": {
+        "smileSaversCriticalViolations": 6,
+        "labsInformationalViolations": 2
+      },
+      "artifacts": ["design-intelligence/artifacts/reports/accessibility-validation.json"],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "Smile Savers (normative): FAIL. Labs observations are informational only."
+    },
+    "RESPONSIVE": {
+      "gate": "RESPONSIVE",
+      "status": "GO",
+      "measurements": {
+        "realBreakpoints": 8,
+        "withStructuralChange": 2,
+        "blocked": 0
+      },
+      "artifacts": [
+        "design-intelligence/artifacts/evidence/responsive/breakpoint-transitions.json"
+      ],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "8 real breakpoints evaluated (never conflated with sample viewports)."
+    },
+    "INTERACTION-MOTION": {
+      "gate": "INTERACTION-MOTION",
+      "status": "GO",
+      "measurements": {
+        "probes": 176,
+        "observed": 140,
+        "verifyBlocked": 36
+      },
+      "artifacts": [
+        "design-intelligence/artifacts/evidence/states/interaction-states.json",
+        "design-intelligence/artifacts/evidence/runtime/index.json"
+      ],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "140/176 state probes observed; motion captured dual-mode (Mode A before stability override, Mode B for a11y)."
+    },
+    "REPRODUCIBILITY": {
+      "gate": "REPRODUCIBILITY",
+      "status": "GO",
+      "measurements": {
+        "status": "REPRODUCIBLE",
+        "unexpectedDeltas": 0,
+        "expectedDeltas": 0,
+        "stagesReproducedWithUnchangedCode": 10
+      },
+      "artifacts": ["design-intelligence/artifacts/reports/reproducibility-snapshot.json"],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "Status: REPRODUCIBLE. 10 stage(s) proven byte-identical on a second run with unchanged code: mirror, parse, capture, states, responsive, normalize, graph, tokens, material, grammar."
+    },
+    "MIGRATION-ASSESSMENT": {
+      "gate": "MIGRATION-ASSESSMENT",
+      "status": "GO",
+      "measurements": {
+        "assessed": 6,
+        "verifyBlocked": 1,
+        "noGo": 4
+      },
+      "artifacts": ["design-intelligence/artifacts/reports/migration-assessment.json"],
+      "evidenceIds": [],
+      "limitations": [],
+      "reason": "All 6 stack items assessed with live-resolved versions; NO migration performed. Recommendation: stay on current stack."
+    }
+  },
+  "productionPromotion": {
+    "status": "NOT IN CURRENT SCOPE",
+    "reason": "This project proves the extraction/grammar/token layer is valid. It does not rewire, restyle, or replace any Smile Savers production component or token. Production adoption is an explicit separate future decision."
+  },
+  "summary": {
+    "totalGates": 11,
+    "go": 10,
+    "noGo": 1,
+    "blocked": 0
+  },
+  "honestGaps": [
+    "ACCESSIBILITY is NO-GO because of PRE-EXISTING Smile Savers production defects (color-contrast on all 4 sampled routes, a missing form label on /appointments/, an invalid ARIA attribute on /) — none introduced by this project, none fixed by this project, per the additive-only / no-production-rewiring scope boundary. This NO-GO correctly reports that the current site does not pass WCAG 2.2 AA; it does not mean the design-intelligence extraction work itself failed.",
+    "Reproducibility gate is at BASELINE_ESTABLISHED, not REPRODUCIBLE — a second full pipeline run was not executed to confirm canonical-hash stability end-to-end.",
+    "Drift detection is NOT-YET-APPLICABLE — requires a second capture from a later session to compare against.",
+    "Stages 0 (audit) and 1 (production baseline) were executed as direct shell commands earlier in this session, not as standalone npm scripts — documented in git history and the plan file, not hidden, but not re-runnable via a single `npm run` command."
+  ]
+}

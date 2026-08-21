@@ -1,0 +1,113 @@
+{
+  "stage": "validate",
+  "generatedAt": "2026-08-21T22:12:42.494Z",
+  "executionId": "acce0b32-e8bc-4512-84cb-7ae3dc592782",
+  "environment": {
+    "browser": {
+      "executablePath": "/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
+      "version": "Chromium 141.0.7390.37"
+    },
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64",
+    "capture": {
+      "deviceScaleFactor": 1,
+      "colorScheme": "light",
+      "locale": "en-US",
+      "timezoneId": "UTC"
+    }
+  },
+  "note": "labsObservations is informational evidence ABOUT Labs (Labs is not shipped by this project — its accessibility posture is not this project's responsibility). smileSaversNormative is the actual pass/fail gate, run against production dist/.",
+  "labsObservations": {
+    "evidenceClass": "OBSERVED-MIRROR",
+    "axe": {
+      "violations": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious",
+          "description": "Ensure ARIA attributes are not prohibited for an element's role",
+          "help": "Elements must only use permitted ARIA attributes",
+          "nodeCount": 4,
+          "targets": [
+            [
+              "div[aria-label=\"Go to experiment 1\"]"
+            ],
+            [
+              "div[aria-label=\"Go to experiment 2\"]"
+            ],
+            [
+              "div[aria-label=\"Go to experiment 3\"]"
+            ],
+            [
+              "div[data-active=\"true\"]"
+            ]
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodeCount": 4,
+          "targets": [
+            [
+              "#experiments"
+            ],
+            [
+              ".home-carousel__about-eyebrow"
+            ],
+            [
+              ".home-carousel__about-subheading"
+            ],
+            [
+              "#stay-connected"
+            ]
+          ]
+        }
+      ],
+      "passes": 26,
+      "incomplete": 3
+    },
+    "reducedMotionMediaQueryRespected": true,
+    "crossReference": "EV-UI-MOTION-00002 (closure) — reduced-motion changes rendered visibility, which is exactly the kind of thing an a11y audit should catch; this record confirms the media query itself IS correctly honored by the mirror render."
+  },
+  "smileSaversNormative": {
+    "target": "WCAG 2.2 AA",
+    "routesChecked": [
+      "/",
+      "/services/",
+      "/appointments/",
+      "/contact/"
+    ],
+    "results": [
+      {
+        "route": "/",
+        "violations": [],
+        "passes": 30,
+        "incomplete": 2
+      },
+      {
+        "route": "/services/",
+        "violations": [],
+        "passes": 24,
+        "incomplete": 1
+      },
+      {
+        "route": "/appointments/",
+        "violations": [],
+        "passes": 25,
+        "incomplete": 1
+      },
+      {
+        "route": "/contact/",
+        "violations": [],
+        "passes": 26,
+        "incomplete": 1
+      }
+    ],
+    "totalViolations": 0,
+    "criticalOrSeriousViolations": 0,
+    "status": "PASS"
+  },
+  "canonicalHash": "fdff3009e173418ea158d55d4fe5a98aa584fe01634e5877961b1334df4aff8f"
+}

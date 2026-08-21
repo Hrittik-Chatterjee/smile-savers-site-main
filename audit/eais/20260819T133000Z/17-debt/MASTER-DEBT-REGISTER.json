@@ -1,0 +1,673 @@
+{
+  "generatedAt": "2026-08-19T14:55:00Z",
+  "count": 20,
+  "items": [
+    {
+      "id": "DEBT-0001",
+      "root_cause_id": "ROOT-DOMAIN-001",
+      "domain": "seo",
+      "severity": "P0",
+      "confidence": 0.99,
+      "status": "RESOLVED",
+      "title": "Canonical domain not centralized (7 files hardcoded smilesavers.dental)",
+      "description": "Domain literal was duplicated across wrangler.jsonc, site.ts, BaseLayout structured data, contact/chat CORS allowlists, README, and a programmatic-SEO layout, instead of deriving from one source.",
+      "evidence": [
+        "EV-AUDIT-DEP-later-not-this",
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "wrangler.jsonc",
+        "src/config/site.ts",
+        "src/layouts/BaseLayout.astro",
+        "functions/api/contact.js",
+        "functions/api/chat.js",
+        "public/_headers",
+        "README.md",
+        "src/modules/programmatic-seo/layouts/GlossaryPageLayout.astro"
+      ],
+      "affected_systems": [
+        "seo",
+        "cors",
+        "structured-data",
+        "ai-context"
+      ],
+      "dependents": [],
+      "user_impact": "Users following stale links/canonical tags land on the wrong domain",
+      "business_impact": "Search engines may index the wrong canonical URL, diluting SEO",
+      "security_impact": "CORS allowlist mismatch could reject legitimate same-origin requests",
+      "recurrence_risk": "MEDIUM -- no automated check prevents a new hardcoded domain literal from being added again",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "grep -rn \"smilesavers\\.dental\" src/ functions/ public/ wrangler.jsonc README.md CLAUDE.md returns 0 matches (verified 2026-08-19)"
+      ],
+      "rollback": "git revert commit cd7d6d7 domain-related hunks"
+    },
+    {
+      "id": "DEBT-0002",
+      "root_cause_id": "ROOT-CONTACT-001",
+      "domain": "reliability",
+      "severity": "P0",
+      "confidence": 0.999,
+      "status": "RESOLVED",
+      "title": "Contact API reported success without confirmed delivery",
+      "description": "sendViaResend() return value was never checked; missing RESEND_API_KEY path returned {success:true} unconditionally.",
+      "evidence": [
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "functions/api/contact.js"
+      ],
+      "affected_systems": [
+        "contact-form",
+        "appointment-request-flow"
+      ],
+      "dependents": [],
+      "user_impact": "A patient could believe their message was received when it was silently dropped",
+      "business_impact": "Lost leads/appointment requests with no error surfaced to the practice",
+      "security_impact": "None directly, but silent data loss for PII-bearing submissions is a trust/compliance concern",
+      "recurrence_risk": "LOW post-fix -- both failure paths now return non-success with a correlation ID",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1",
+      "spec_required": true,
+      "tdd_required": false,
+      "verification": [
+        "manual: unset RESEND_API_KEY locally, submit form, confirm 503 + correlationId returned"
+      ],
+      "rollback": "git revert commit cd7d6d7 functions/api/contact.js hunks"
+    },
+    {
+      "id": "DEBT-0003",
+      "root_cause_id": "ROOT-CONTACT-001",
+      "domain": "security",
+      "severity": "P0",
+      "confidence": 0.999,
+      "status": "RESOLVED",
+      "title": "Sensitive contact fields logged in plaintext",
+      "description": "console.log('FORM_SUBMISSION', {name,email,phone,service,urgency}) wrote PII/possibly-health-related data to Cloudflare's real-time logs.",
+      "evidence": [
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "functions/api/contact.js"
+      ],
+      "affected_systems": [
+        "logging",
+        "privacy"
+      ],
+      "dependents": [],
+      "user_impact": "Patient PII exposed to anyone with Cloudflare dashboard log access",
+      "business_impact": "Privacy/compliance exposure",
+      "security_impact": "PII in logs is a standard audit finding across security frameworks (OWASP ASVS logging controls)",
+      "recurrence_risk": "LOW post-fix",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "grep -n \"FORM_SUBMISSION\" functions/api/contact.js shows correlationId + non-PII metadata only (verified 2026-08-19)"
+      ],
+      "rollback": "git revert"
+    },
+    {
+      "id": "DEBT-0004",
+      "root_cause_id": "ROOT-CONTACT-001",
+      "domain": "security",
+      "severity": "P1",
+      "confidence": 0.99,
+      "status": "RESOLVED",
+      "title": "Partial HTML escaping enabled email HTML injection",
+      "description": "Only `message` was escaped before interpolation into the notification email HTML; name/email/phone/service were not.",
+      "evidence": [
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "functions/api/contact.js"
+      ],
+      "affected_systems": [
+        "email-delivery"
+      ],
+      "dependents": [],
+      "user_impact": "Attacker-controlled form input could alter email HTML/content sent to clinic staff",
+      "business_impact": "Reputational/phishing risk via clinic-branded emails",
+      "security_impact": "Real HTML/script injection surface, now closed via one escapeHtml() helper applied to all 5 fields",
+      "recurrence_risk": "LOW post-fix",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "manual: submit <script> in name field, confirm escaped in email body"
+      ],
+      "rollback": "git revert"
+    },
+    {
+      "id": "DEBT-0005",
+      "root_cause_id": "ROOT-CLOUDFLARE-001",
+      "domain": "security",
+      "severity": "P1",
+      "confidence": 0.98,
+      "status": "RESOLVED",
+      "title": "Wildcard/prefix-based CORS across all API routes",
+      "description": "functions/_middleware.js used Access-Control-Allow-Origin: *; functions/api/chat.js used origin.startsWith(allowlist) instead of exact equality (matches attacker-controlled lookalike origins).",
+      "evidence": [
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "functions/_middleware.js",
+        "functions/api/chat.js",
+        "functions/api/contact.js",
+        "functions/_lib/cors.js"
+      ],
+      "affected_systems": [
+        "cors"
+      ],
+      "dependents": [],
+      "user_impact": "None directly to end users",
+      "business_impact": "Cross-origin abuse surface larger than necessary",
+      "security_impact": "Exact-origin allowlist now shared via functions/_lib/cors.js, single source of truth",
+      "recurrence_risk": "LOW post-fix -- shared module prevents re-drift across the 3 call sites",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "live curl -H Origin: <attacker> ... /api/contact confirms non-allowed origin gets the canonical origin back, not an echo"
+      ],
+      "rollback": "git revert"
+    },
+    {
+      "id": "DEBT-0006",
+      "root_cause_id": "ROOT-CLOUDFLARE-001",
+      "domain": "security",
+      "severity": "P1",
+      "confidence": 0.99,
+      "status": "RESOLVED",
+      "title": "Two independently-drifted CSPs, one referencing unused domains",
+      "description": "functions/_middleware.js and public/_headers had different CSPs; the latter allowed mailchannels/pexels/cloudflareinsights, none of which are used anywhere in src/ or functions/ (grep-verified 0 hits); unsafe-eval present with 0 eval()/new Function() usage anywhere.",
+      "evidence": [
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "functions/_middleware.js",
+        "public/_headers"
+      ],
+      "affected_systems": [
+        "csp",
+        "headers"
+      ],
+      "dependents": [],
+      "user_impact": "None directly (CSP was arguably too permissive, not too strict)",
+      "business_impact": "None",
+      "security_impact": "Attack surface reduced: unsafe-eval removed, unused external domains removed from allowlist",
+      "recurrence_risk": "MEDIUM -- entrypoint.js does not currently apply either CSP live (see DEBT-0011)",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "live curl -D- shows reconciled CSP once entrypoint.js gap (DEBT-0011) is also fixed"
+      ],
+      "rollback": "git revert"
+    },
+    {
+      "id": "DEBT-0007",
+      "root_cause_id": "ROOT-CLOUDFLARE-001",
+      "domain": "security",
+      "severity": "P1",
+      "confidence": 0.99,
+      "status": "RESOLVED",
+      "title": "Chat endpoint had no real rate limiting despite documentation claiming one existed",
+      "description": "functions/api/chat.js header comment described KV/IP rate limiting; only an unrelated in-memory reply cache existed. CHAT_CACHE KV binding was commented out in wrangler.jsonc.",
+      "evidence": [
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "functions/api/chat.js",
+        "wrangler.jsonc"
+      ],
+      "affected_systems": [
+        "ai-abuse-surface",
+        "cost-control"
+      ],
+      "dependents": [],
+      "user_impact": "None directly",
+      "business_impact": "Unbounded AI endpoint abuse could exhaust the 10,000 neuron/day free budget or incur paid overage",
+      "security_impact": "Real per-IP KV-backed limiter added (20/min); fails open (not closed) if CHAT_CACHE unbound -- documented, not silently assumed fixed",
+      "recurrence_risk": "MEDIUM -- protection is only real once CHAT_CACHE is actually provisioned (npx wrangler kv namespace create), a manual step not yet done",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "code exists and is correct; runtime enforcement UNVERIFIED until CHAT_CACHE is provisioned"
+      ],
+      "rollback": "git revert"
+    },
+    {
+      "id": "DEBT-0008",
+      "root_cause_id": "ROOT-CONTENT-001",
+      "domain": "privacy",
+      "severity": "P1",
+      "confidence": 0.99,
+      "status": "RESOLVED",
+      "title": "Privacy policy was unedited WordPress boilerplate describing a different site",
+      "description": "privacy.astro described Gravatar, comment cookies, and a third domain (smilesaversandassociates.com) -- none of which exist in this Astro/Cloudflare architecture.",
+      "evidence": [
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "src/pages/privacy.astro"
+      ],
+      "affected_systems": [
+        "legal",
+        "trust"
+      ],
+      "dependents": [],
+      "user_impact": "Users cannot rely on the published policy to understand actual data handling",
+      "business_impact": "Legal/compliance risk from a materially inaccurate privacy disclosure",
+      "security_impact": "None directly, but a privacy policy this wrong undermines trust in any other privacy claim on the site",
+      "recurrence_risk": "LOW post-fix, but content should be reviewed by a human with legal authority before being treated as final",
+      "remediation_class": "MODERATE",
+      "recommended_wave": "WAVE-1",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "human/legal review still recommended, not itself a code-verifiable property"
+      ],
+      "rollback": "git revert"
+    },
+    {
+      "id": "DEBT-0009",
+      "root_cause_id": "ROOT-CONTENT-001",
+      "domain": "seo",
+      "severity": "P1",
+      "confidence": 0.97,
+      "status": "RESOLVED",
+      "title": "Unsupported AggregateRating structured data",
+      "description": "BaseLayout.astro emitted AggregateRating 5.0/200 with no repository-provenanced source; only 6 testimonial entries exist, no aggregation mechanism. Google requires review markup not be self-serving/unprovenanced.",
+      "evidence": [
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "src/layouts/BaseLayout.astro"
+      ],
+      "affected_systems": [
+        "structured-data",
+        "seo"
+      ],
+      "dependents": [],
+      "user_impact": "None directly",
+      "business_impact": "Structured-data trust/compliance risk; potential search-quality penalty for unsupported review markup",
+      "security_impact": "None",
+      "recurrence_risk": "LOW post-fix (removed rather than fabricated a replacement)",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "grep -c aggregateRating dist/index.html == 0 (verified)"
+      ],
+      "rollback": "git revert"
+    },
+    {
+      "id": "DEBT-0010",
+      "root_cause_id": "ROOT-CONTENT-001",
+      "domain": "seo",
+      "severity": "P1",
+      "confidence": 0.999,
+      "status": "RESOLVED",
+      "title": "OG image / structured-data image reference pointed at a nonexistent file",
+      "description": "site.ts defaultOgImage referenced /images/og-image.jpg, never added to public/images/.",
+      "evidence": [
+        "commit:cd7d6d7"
+      ],
+      "affected_files": [
+        "src/config/site.ts"
+      ],
+      "affected_systems": [
+        "seo",
+        "social-sharing"
+      ],
+      "dependents": [],
+      "user_impact": "Broken social-share previews",
+      "business_impact": "Weaker click-through from shared links",
+      "security_impact": "None",
+      "recurrence_risk": "LOW post-fix (repointed at an existing real image; a purpose-made OG image is still a nice-to-have, not done)",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "file exists at public/images/hero-dental-office.jpg (verified)"
+      ],
+      "rollback": "git revert"
+    },
+    {
+      "id": "DEBT-0011",
+      "root_cause_id": "ROOT-CLOUDFLARE-001",
+      "domain": "reliability",
+      "severity": "P0",
+      "confidence": 0.95,
+      "status": "RESOLVED",
+      "title": "src/entrypoint.js applies zero security headers to any response",
+      "description": "functions/_middleware.js (CSP/CORS/security headers) is a Pages-Functions-only convention, never invoked by the hand-rolled Worker entrypoint. Confirmed live: /api/contact and /api/chat return zero CSP/X-Frame-Options/etc headers in production.",
+      "evidence": [
+        "audit/cloudflare-decision/repo-vs-live.md",
+        "CF-C1",
+        "CF-C2",
+        "CF-C3"
+      ],
+      "affected_files": [
+        "src/entrypoint.js",
+        "functions/_middleware.js"
+      ],
+      "affected_systems": [
+        "security-headers",
+        "csp"
+      ],
+      "dependents": [
+        "DEBT-0006"
+      ],
+      "user_impact": "None directly observable to a typical user",
+      "business_impact": "Reduced defense-in-depth for XSS/clickjacking on API routes specifically (static pages ARE protected, via public/_headers)",
+      "security_impact": "Real, currently-live gap -- CSP/X-Frame-Options/Referrer-Policy/Permissions-Policy/X-XSS-Protection all absent from every /api/* response today",
+      "recurrence_risk": "HIGH until fixed -- will recur on any future hand-rolled entrypoint change unless a shared header-application helper is enforced",
+      "remediation_class": "MODERATE",
+      "recommended_wave": "WAVE-2 (per implementation-contract.md, requires explicit authorization -- not done this pass, per Cloudflare decision's \"no implementation without approval\" boundary)",
+      "spec_required": true,
+      "tdd_required": false,
+      "verification": [
+        "commit 191d299: applySecurityHeaders() exported from functions/_middleware.js, called on all 3 response paths in src/entrypoint.js; verified locally by invoking entrypoint.js's fetch handler directly and confirming CSP/X-Frame-Options/etc. now present on an /api/contact OPTIONS response (previously absent)",
+        "Live re-confirmed 2026-08-19T14:52Z: curl -X OPTIONS against the deployed branch preview (claude-init-yi57kn-smile-savers-site-main.lablaunchpad.workers.dev/api/contact) now returns the full CSP/X-Frame-Options/Referrer-Policy/Permissions-Policy/X-XSS-Protection set plus exact-origin CORS -- previously confirmed absent on this exact endpoint pre-fix (repo-vs-live.md)."
+      ],
+      "rollback": "n/a -- not yet implemented"
+    },
+    {
+      "id": "DEBT-0012",
+      "root_cause_id": "ROOT-TEST-001",
+      "domain": "testing",
+      "severity": "P1",
+      "confidence": 0.999,
+      "status": "OPEN",
+      "title": "Zero automated test files in the repository",
+      "description": "No test/spec files of any kind exist. CI (quality/build jobs) validates type-checking and build success only -- no behavioral regression proof for contact API, chat API, booking flow, or any business logic. PARTIAL PROGRESS (commit <pending>): 11 tests now cover the two riskiest Wave-1-changed behaviors (contact API fail-closed, chat rate limiting), proven to catch regressions by reverting the original bug and confirming the suite fails. Booking flow, content schemas, and everything else remain untested.",
+      "evidence": [
+        "file inventory, confirmed via find . -iname \"*.test.*\" -o -iname \"*.spec.*\" returning nothing"
+      ],
+      "affected_files": [
+        "functions/api/contact.js",
+        "functions/api/chat.js",
+        "src/modules/appointments/**"
+      ],
+      "affected_systems": [
+        "ci",
+        "release-confidence"
+      ],
+      "dependents": [
+        "DEBT-0002",
+        "DEBT-0007"
+      ],
+      "user_impact": "Regressions in contact/chat/booking flows can ship undetected",
+      "business_impact": "Silent breakage of the two real conversion paths (contact form, appointment request)",
+      "security_impact": "Security-relevant behavior (e.g. the fail-closed fix in DEBT-0002) has no regression test protecting it from being silently reverted",
+      "recurrence_risk": "HIGH -- every fix in this session (DEBT-0001 through DEBT-0010) has zero automated regression protection",
+      "remediation_class": "ARCHITECTURAL",
+      "recommended_wave": "WAVE-2",
+      "spec_required": true,
+      "tdd_required": true,
+      "verification": [],
+      "rollback": "n/a"
+    },
+    {
+      "id": "DEBT-0013",
+      "root_cause_id": "ROOT-CI-001",
+      "domain": "ci-cd",
+      "severity": "P1",
+      "confidence": 0.999,
+      "status": "OPEN",
+      "title": "Security and performance checks are non-blocking by design",
+      "description": "npm audit and Lighthouse CI both use continue-on-error/advisory patterns; release can proceed regardless of findings.",
+      "evidence": [
+        ".github/workflows/security.yml",
+        ".github/workflows/deploy.yml (lighthouse job)"
+      ],
+      "affected_files": [
+        ".github/workflows/security.yml",
+        ".github/workflows/deploy.yml"
+      ],
+      "affected_systems": [
+        "release-gate"
+      ],
+      "dependents": [],
+      "user_impact": "None directly",
+      "business_impact": "A high-severity dependency vulnerability or major performance regression would not block deployment",
+      "security_impact": "Release-critical properties currently have no enforcement mechanism",
+      "recurrence_risk": "MEDIUM",
+      "remediation_class": "MODERATE",
+      "recommended_wave": "WAVE-2",
+      "spec_required": true,
+      "tdd_required": false,
+      "verification": [],
+      "rollback": "n/a"
+    },
+    {
+      "id": "DEBT-0014",
+      "root_cause_id": "ROOT-CI-001",
+      "domain": "ci-cd",
+      "severity": "P2",
+      "confidence": 0.999,
+      "status": "OPEN",
+      "title": "CI Node version mismatch between workflows",
+      "description": "deploy.yml uses Node 22; security.yml uses Node 20 -- security verification does not run against the same runtime as the production build.",
+      "evidence": [
+        ".github/workflows/deploy.yml",
+        ".github/workflows/security.yml"
+      ],
+      "affected_files": [
+        ".github/workflows/security.yml"
+      ],
+      "affected_systems": [],
+      "dependents": [],
+      "user_impact": "None directly",
+      "business_impact": "Low -- but a real inconsistency that could mask Node-version-specific dependency issues",
+      "security_impact": "None",
+      "recurrence_risk": "LOW",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-2",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [],
+      "rollback": "n/a"
+    },
+    {
+      "id": "DEBT-0015",
+      "root_cause_id": "ROOT-APPOINTMENT-001",
+      "domain": "product-ux",
+      "severity": "P1",
+      "confidence": 0.999,
+      "status": "OPEN",
+      "title": "Appointment flow presents a WhatsApp message draft as a completed booking",
+      "description": "BookingWizard builds a prefilled WhatsApp message and immediately shows a success state, with no backend reservation or clinic confirmation step.",
+      "evidence": [
+        "BookingWizard.astro:707-728"
+      ],
+      "affected_files": [
+        "src/modules/appointments/**"
+      ],
+      "affected_systems": [
+        "conversion",
+        "trust"
+      ],
+      "dependents": [],
+      "user_impact": "A patient may believe an appointment is confirmed when only a message draft was opened (which they must still send, and which the clinic must still confirm)",
+      "business_impact": "Missed-appointment risk, patient frustration, potential double-booking confusion",
+      "security_impact": "None",
+      "recurrence_risk": "HIGH -- this is a product/UX decision (rename to \"request\" vs. build real scheduling), not a small code fix",
+      "remediation_class": "ARCHITECTURAL",
+      "recommended_wave": "WAVE-2 or later, needs product decision",
+      "spec_required": true,
+      "tdd_required": false,
+      "verification": [],
+      "rollback": "n/a"
+    },
+    {
+      "id": "DEBT-0016",
+      "root_cause_id": "ROOT-CONTENT-001",
+      "domain": "content",
+      "severity": "P1",
+      "confidence": 0.97,
+      "status": "OPEN",
+      "title": "Medical/clinical claims have no structured provenance or review metadata",
+      "description": "src/content/services and related collections contain clinical outcome/duration/longevity claims with no source, reviewer, or review-date fields in their frontmatter schema.",
+      "evidence": [
+        "src/content.config.ts",
+        "src/content/**/*.md"
+      ],
+      "affected_files": [
+        "src/content.config.ts"
+      ],
+      "affected_systems": [
+        "medical-truth",
+        "compliance"
+      ],
+      "dependents": [],
+      "user_impact": "Patients may rely on claims that become stale or were never clinically verified",
+      "business_impact": "Healthcare-content compliance and trust risk",
+      "security_impact": "None directly",
+      "recurrence_risk": "HIGH -- needs a clinician/practice-owner decision on which claims need sourcing, not something engineering can decide alone",
+      "remediation_class": "ARCHITECTURAL",
+      "recommended_wave": "WAVE-4 (discovery/content kernel)",
+      "spec_required": true,
+      "tdd_required": false,
+      "verification": [],
+      "rollback": "n/a"
+    },
+    {
+      "id": "DEBT-0017",
+      "root_cause_id": "ROOT-A11Y-001",
+      "domain": "accessibility",
+      "severity": "P2",
+      "confidence": 0.9,
+      "status": "OPEN",
+      "title": "Pre-existing WCAG violations found by axe-core against the built site (Stage 16, design-intelligence pipeline)",
+      "description": "Color-contrast failures on all 4 sampled routes; a missing form <label> on /appointments/ (likely BookingWizard); an invalid ARIA attribute on /. 6 total critical/serious violations.",
+      "evidence": [
+        "design-intelligence/artifacts/reports/ (Stage 16 validate.mjs output)"
+      ],
+      "affected_files": [
+        "src/modules/appointments/**",
+        "src/pages/index.astro"
+      ],
+      "affected_systems": [
+        "wcag"
+      ],
+      "dependents": [],
+      "user_impact": "Screen-reader/low-vision/keyboard users encounter real barriers on the booking form specifically",
+      "business_impact": "Legal/ADA exposure risk for a healthcare business",
+      "security_impact": "None",
+      "recurrence_risk": "MEDIUM -- these are the same 6 findings this session has deferred since P1, per the user's own explicit ordering (P1 tokens -> accessibility -> re-validate -> merge)",
+      "remediation_class": "MODERATE",
+      "recommended_wave": "WAVE-5 (experience kernel) or sooner per original ordering",
+      "spec_required": true,
+      "tdd_required": false,
+      "verification": [],
+      "rollback": "n/a"
+    },
+    {
+      "id": "DEBT-0018",
+      "root_cause_id": "ROOT-A11Y-001",
+      "domain": "accessibility",
+      "severity": "P2",
+      "confidence": 0.999,
+      "status": "OPEN",
+      "title": "TypeScript checking bypassed in 2 interactive/accessibility-relevant files",
+      "description": "@ts-nocheck in AccessibilityMenu.astro and MobileMenu.astro; @ts-ignore in DoctorsList.astro for a possibly-missing image.",
+      "evidence": [
+        "AccessibilityMenu.astro:754",
+        "MobileMenu.astro:432",
+        "DoctorsList.astro:7"
+      ],
+      "affected_files": [
+        "src/components/accessibility/AccessibilityMenu.astro",
+        "src/components/layout/MobileMenu.astro"
+      ],
+      "affected_systems": [],
+      "dependents": [],
+      "user_impact": "Reduced type-safety confidence specifically in accessibility-critical UI code",
+      "business_impact": "None directly",
+      "security_impact": "None",
+      "recurrence_risk": "LOW",
+      "remediation_class": "MODERATE",
+      "recommended_wave": "WAVE-5",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [],
+      "rollback": "n/a"
+    },
+    {
+      "id": "DEBT-0019",
+      "root_cause_id": "ROOT-CLOUDFLARE-001",
+      "domain": "architecture",
+      "severity": "P1",
+      "confidence": 0.9,
+      "status": "RESOLVED",
+      "title": "CLAUDE.md documents Pages as the architecture; live evidence says Workers",
+      "description": "CLAUDE.md's Overview/Cloudflare-specifics sections were not updated after the Cloudflare decision research concluded Workers is what's actually live.",
+      "evidence": [
+        "CLAUDE.md",
+        "audit/cloudflare-decision/CLOUDFLARE-DECISION.md"
+      ],
+      "affected_files": [
+        "CLAUDE.md"
+      ],
+      "affected_systems": [
+        "documentation-truth"
+      ],
+      "dependents": [],
+      "user_impact": "A future engineer or agent reading CLAUDE.md would be misled about the real deployment architecture",
+      "business_impact": "None directly",
+      "security_impact": "None",
+      "recurrence_risk": "MEDIUM -- exactly the kind of documentation drift this EAOS pass exists to prevent recurring",
+      "remediation_class": "EASY",
+      "recommended_wave": "WAVE-1-or-2 (small, no code risk)",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [
+        "commit 191d299: CLAUDE.md corrected throughout (Workers not Pages, Resend not MailChannels, applySecurityHeaders() mechanism documented); also fixed npm run preview:cf from `wrangler pages dev` (Pages-only, would not have exercised entrypoint.js) to `wrangler dev`, found while verifying this fix"
+      ],
+      "rollback": "n/a"
+    },
+    {
+      "id": "DEBT-0020",
+      "root_cause_id": "ROOT-DEP-002",
+      "domain": "dependency",
+      "severity": "P2",
+      "confidence": 0.5,
+      "status": "UNVERIFIED",
+      "title": "Dependency vulnerability status unknown",
+      "description": "npm audit could not reach the registry in the original audit environment; not re-run this session either.",
+      "evidence": [],
+      "affected_files": [
+        "package.json",
+        "package-lock.json"
+      ],
+      "affected_systems": [
+        "supply-chain"
+      ],
+      "dependents": [],
+      "user_impact": "Unknown",
+      "business_impact": "Unknown",
+      "security_impact": "A real unpatched vulnerability could exist undetected",
+      "recurrence_risk": "UNKNOWN until npm audit is actually run in a network-enabled environment",
+      "remediation_class": "EASY (once network-enabled)",
+      "recommended_wave": "WAVE-6 (stack hygiene)",
+      "spec_required": false,
+      "tdd_required": false,
+      "verification": [],
+      "rollback": "n/a"
+    }
+  ]
+}

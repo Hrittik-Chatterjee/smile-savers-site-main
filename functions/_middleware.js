@@ -3,48 +3,72 @@
  * Handles CORS, security headers, and request preprocessing
  */
 
-// Security headers
-const securityHeaders = {
+// CORS: exact-origin allowlist instead of '*' (audit SEC-004), shared with
+// the individual API routes via _lib/cors.js so the policy can't drift.
+import { corsHeadersFor } from './_lib/cors.js';
+
+// Security headers.
+// CSP reconciled from two previously-drifted policies (this file vs.
+// public/_headers — audit SEC-005): this file's CSP is the one that
+// actually reaches the browser, since middleware runs on every request and
+// overwrites whatever public/_headers set. Built from real usage only —
+// no Google Fonts (this project self-hosts fonts per CLAUDE.md), no
+// mailchannels/pexels/cloudflareinsights (grep found zero references to
+// any of them in src/ or functions/). 'unsafe-inline' is kept for both
+// script-src and style-src because is:inline scripts (Header.astro,
+// BaseLayout.astro) and inline style="" attributes are real and load-bearing
+// in this codebase — removing them without a nonce/hash strategy would
+// break the site. 'unsafe-eval' is removed: no eval()/new Function() usage
+// exists anywhere in src/ or functions/ (grep-verified).
+export const securityHeaders = {
   'X-Frame-Options': 'DENY',
   'X-Content-Type-Options': 'nosniff',
   'X-XSS-Protection': '1; mode=block',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:;",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://maps.openstreetmap.org https://tile.openstreetmap.org; connect-src 'self'; frame-src https://www.openstreetmap.org; upgrade-insecure-requests",
 };
 
-// CORS headers for API routes
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Access-Control-Max-Age': '86400',
-};
+// Exported so src/entrypoint.js's Worker fetch handler can apply the same
+// headers it would get "for free" under Pages' auto-invoked _middleware.js
+// convention. entrypoint.js never triggers onRequest below (it's a
+// Pages-Functions-only invocation convention), so without this explicit
+// call every /api/* response and the static-asset fallback would ship with
+// zero security headers — confirmed live via curl against production
+// before this fix (audit/cloudflare-decision/repo-vs-live.md, DEBT-0011).
+export function applySecurityHeaders(response) {
+  const newHeaders = new Headers(response.headers);
+  Object.entries(securityHeaders).forEach(([key, value]) => {
+    newHeaders.set(key, value);
+  });
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers: newHeaders,
+  });
+}
 
 export async function onRequest(context) {
   const { request, next } = context;
   const url = new URL(request.url);
+  const origin = request.headers.get('Origin');
 
   // Handle CORS preflight
   if (request.method === 'OPTIONS') {
     return new Response(null, {
       status: 204,
-      headers: corsHeaders,
+      headers: corsHeadersFor(origin),
     });
   }
 
   // Continue to the next middleware or route handler
   const response = await next();
-
-  // Add security headers to all responses
-  const newHeaders = new Headers(response.headers);
-  Object.entries(securityHeaders).forEach(([key, value]) => {
-    newHeaders.set(key, value);
-  });
+  const withSecurityHeaders = applySecurityHeaders(response);
+  const newHeaders = new Headers(withSecurityHeaders.headers);
 
   // Add CORS headers to API routes
   if (url.pathname.startsWith('/api/')) {
-    Object.entries(corsHeaders).forEach(([key, value]) => {
+    Object.entries(corsHeadersFor(origin)).forEach(([key, value]) => {
       newHeaders.set(key, value);
     });
   }
@@ -59,9 +83,9 @@ export async function onRequest(context) {
     newHeaders.set('Cache-Control', 'public, max-age=0, must-revalidate');
   }
 
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
+  return new Response(withSecurityHeaders.body, {
+    status: withSecurityHeaders.status,
+    statusText: withSecurityHeaders.statusText,
     headers: newHeaders,
   });
 }

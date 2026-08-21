@@ -1,4 +1,5 @@
 ---
+import Badge from '../../../components/ui/Badge.astro';
 /**
  * ComparisonPageLayout - Template for "[X] vs [Y]" comparison pages
  *
@@ -47,15 +48,7 @@ interface Props {
   relatedServices: string[];
 }
 
-const {
-  slug,
-  optionA,
-  optionB,
-  intro,
-  verdict,
-  faqs,
-  relatedServices,
-} = Astro.props;
+const { slug, optionA, optionB, intro, verdict, faqs, relatedServices } = Astro.props;
 
 // SEO
 const currentYear = new Date().getFullYear();
@@ -78,11 +71,13 @@ const breadcrumbs = [
 
       <!-- Hero Section -->
       <header class="comparison-hero">
-        <span class="content-type">Comparison Guide</span>
+        <Badge>Comparison Guide</Badge>
         <h1 class="page-title">
           {optionA.name} vs {optionB.name}
         </h1>
-        <p class="page-subtitle">An honest comparison to help you make the right choice for your dental health</p>
+        <p class="page-subtitle">
+          An honest comparison to help you make the right choice for your dental health
+        </p>
 
         <div class="hero-trust">
           <TrustBadges variant="inline" size="sm" />
@@ -130,27 +125,33 @@ const breadcrumbs = [
       <section class="verdict-section" aria-labelledby="verdict-heading">
         <h2 id="verdict-heading" class="section-title">Our Recommendation</h2>
         <div class="verdict-box">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="verdict-icon">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 16v-4M12 8h.01"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+            class="verdict-icon"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4M12 8h.01"></path>
           </svg>
           <div class="verdict-content" set:html={verdict} />
         </div>
       </section>
 
       <!-- FAQ Section -->
-      {faqs.length > 0 && (
-        <FAQSection
-          items={faqs}
-          title={`${optionA.name} vs ${optionB.name}: Common Questions`}
-        />
-      )}
+      {
+        faqs.length > 0 && (
+          <FAQSection items={faqs} title={`${optionA.name} vs ${optionB.name}: Common Questions`} />
+        )
+      }
 
       <!-- Related Services -->
-      <RelatedServices
-        services={relatedServices}
-        title="Related Services at Smile Savers"
-      />
+      <RelatedServices services={relatedServices} title="Related Services at Smile Savers" />
 
       <!-- CTA Banner -->
       <CTABanner
@@ -177,19 +178,6 @@ const breadcrumbs = [
     padding-block: var(--spacing-block);
     max-width: var(--container-lg);
     margin-inline: auto;
-  }
-
-  .content-type {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: var(--color-accent);
-    color: #5D4037;
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
   }
 
   .page-title {

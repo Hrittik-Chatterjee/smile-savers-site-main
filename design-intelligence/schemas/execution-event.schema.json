@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Execution-intelligence event",
+  "description": "Declarative shape for events written by execution-intelligence/record-event.mjs. rawPayload is intentionally untyped (type: object, no nested required fields) because the exact Claude Code hook payload schema per event type was not independently verified against current documentation for every event this session — see CAPABILITY-MATRIX.json.",
+  "type": "object",
+  "required": [
+    "eventId",
+    "schemaVersion",
+    "sessionId",
+    "hookEventName",
+    "timestamp",
+    "previousEventHash",
+    "payloadHash",
+    "eventHash",
+    "rawPayload"
+  ],
+  "properties": {
+    "eventId": { "type": "string" },
+    "schemaVersion": { "type": "string" },
+    "sessionId": { "type": "string" },
+    "hookEventName": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "previousEventHash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "payloadHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "eventHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "rawPayload": { "type": "object" },
+    "note": { "type": "string" }
+  },
+  "additionalProperties": false
+}

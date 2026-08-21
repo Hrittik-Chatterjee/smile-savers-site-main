@@ -1,0 +1,10 @@
+import { chromium } from 'playwright';
+const br = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+const p = await br.newPage({ viewport: { width: 1280, height: 200 } });
+await p.goto('http://localhost:4342/', { waitUntil: 'networkidle' });
+const cta = await p.locator('.hdr-cta').first();
+await cta.hover();
+await p.mouse.down();
+const bg = await cta.evaluate(el => getComputedStyle(el).backgroundColor);
+await p.mouse.up();
+console.log('background while :active =', bg);

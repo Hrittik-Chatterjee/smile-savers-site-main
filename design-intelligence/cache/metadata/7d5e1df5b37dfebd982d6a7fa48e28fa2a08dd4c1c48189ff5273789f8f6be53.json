@@ -1,0 +1,14 @@
+{
+  "sha256": "7d5e1df5b37dfebd982d6a7fa48e28fa2a08dd4c1c48189ff5273789f8f6be53",
+  "size": 18456,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:26.310Z",
+  "sourceURL": "https://labs.google/assets/images/graduation/gemini_bg.webp",
+  "finalURL": "https://labs.google/assets/images/graduation/gemini_bg.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.422Z"
+}

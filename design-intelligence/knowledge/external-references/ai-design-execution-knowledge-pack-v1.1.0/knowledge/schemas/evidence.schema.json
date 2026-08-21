@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "status", "claim", "sourceRefs", "capturedAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "status": { "type": "string" },
+    "claim": { "type": "string" },
+    "sourceRefs": { "type": "array", "items": { "type": "string" } },
+    "capturedAt": { "type": "string" },
+    "artifactHashes": { "type": "array", "items": { "type": "string" } },
+    "environment": { "type": "object" },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "generatedAt": "2026-08-19T13:35:21.695Z",
+  "count": 8,
+  "roots": [
+    {
+      "id": "ROOT-DOMAIN-001",
+      "title": "Canonical domain not centralized",
+      "status": "RESOLVED",
+      "why_it_matters": "A single hardcoded literal, duplicated 7+ places, silently drifts whenever the actual production domain changes -- this is a generic failure mode, not specific to domains.",
+      "manifestations": [
+        "canonical URL errors",
+        "OpenGraph image URL errors",
+        "structured-data @id/url errors",
+        "sitemap host mismatch",
+        "CORS allowlist mismatch",
+        "AI chat CORS origin check mismatch",
+        "README/docs drift"
+      ],
+      "dependent_debt": [
+        "DEBT-0001"
+      ],
+      "affected_systems": [
+        "seo",
+        "cors",
+        "structured-data",
+        "documentation"
+      ],
+      "downstream_finding_count": 7,
+      "recommended_wave": "WAVE-1",
+      "resolution": "commit cd7d6d7 -- single sed-verified sweep, grep confirms 0 remaining occurrences"
+    },
+    {
+      "id": "ROOT-CONTACT-001",
+      "title": "functions/api/contact.js treated all paths as success",
+      "status": "RESOLVED",
+      "why_it_matters": "A single design assumption (\"always tell the user it worked\") produced three independent-looking findings that were actually one root cause: the function never distinguished \"received\" from \"confirmed\" from \"logged only\".",
+      "manifestations": [
+        "silent delivery failure (API-001)",
+        "PII in logs used as the only fallback record (SEC-001)",
+        "unescaped fields only mattered because the email path was trusted uncritically (SEC-002 compounds the same root)"
+      ],
+      "dependent_debt": [
+        "DEBT-0002",
+        "DEBT-0003",
+        "DEBT-0004"
+      ],
+      "affected_systems": [
+        "contact-api",
+        "logging",
+        "email-delivery"
+      ],
+      "downstream_finding_count": 3,
+      "recommended_wave": "WAVE-1",
+      "resolution": "commit cd7d6d7"
+    },
+    {
+      "id": "ROOT-CLOUDFLARE-001",
+      "title": "Two Cloudflare deployment architectures configured simultaneously, neither fully correct",
+      "status": "PARTIALLY-RESOLVED (decision made, implementation deferred)",
+      "why_it_matters": "wrangler.jsonc is Workers-shaped; CI deploys via Pages action; src/entrypoint.js hand-rolls a bypass of the official Workers migration path and never wires in the security-header middleware. One architectural ambiguity produced a working-but-incomplete production system.",
+      "manifestations": [
+        "broken pages-action CI job (missing token)",
+        "wildcard/prefix CORS (independently discovered, same root: nobody had committed to one security-header owner)",
+        "drifted CSP between _middleware.js and _headers",
+        "zero security headers on live API responses (DEBT-0011, still open)",
+        "CLAUDE.md documentation drift (DEBT-0019, still open)",
+        "no _routes.json (would have meant unlimited Pages Function invocations on static assets, had Pages ever actually deployed)"
+      ],
+      "dependent_debt": [
+        "DEBT-0005",
+        "DEBT-0006",
+        "DEBT-0007",
+        "DEBT-0011",
+        "DEBT-0019"
+      ],
+      "affected_systems": [
+        "deployment",
+        "security-headers",
+        "cors",
+        "csp",
+        "ci-cd"
+      ],
+      "downstream_finding_count": 6,
+      "recommended_wave": "WAVE-1 (CI job removed, commit 296f6a3) + WAVE-2 (entrypoint header fix, not yet authorized)",
+      "resolution": "Decision: WORKERS -- CONDITIONAL GO, 80% confidence (audit/cloudflare-decision/). CI job removed (296f6a3). Entrypoint header fix NOT implemented -- requires explicit authorization per this session's \"no implementation without approval\" boundary."
+    },
+    {
+      "id": "ROOT-CONTENT-001",
+      "title": "Legal/structured-data/medical content was never derived from or verified against the actual implementation",
+      "status": "PARTIALLY-RESOLVED",
+      "why_it_matters": "privacy.astro, the AggregateRating block, and og-image reference were all authored independently of what the codebase actually does or contains -- a generic \"content written without an evidence check\" failure mode.",
+      "manifestations": [
+        "WordPress-boilerplate privacy policy (PRIV-001, fixed)",
+        "unsupported AggregateRating (SEO-001, fixed)",
+        "broken OG image reference (SEO-002, fixed)",
+        "medical claims with no provenance metadata (CONTENT-001, still open, needs clinical review not engineering)"
+      ],
+      "dependent_debt": [
+        "DEBT-0008",
+        "DEBT-0009",
+        "DEBT-0010",
+        "DEBT-0016"
+      ],
+      "affected_systems": [
+        "legal",
+        "seo",
+        "content"
+      ],
+      "downstream_finding_count": 4,
+      "recommended_wave": "WAVE-1 (3 of 4 fixed) + WAVE-4 (CONTENT-001, needs a human clinical decision)"
+    },
+    {
+      "id": "ROOT-TEST-001",
+      "title": "No automated test suite exists at any layer",
+      "status": "PARTIALLY RESOLVED -- 29 tests now exist (contact API, chat rate limiter, domain canonicalization, all 7 content-collection schemas); booking flow remains untested",
+      "why_it_matters": "Every fix made in this session (10 RESOLVED debt items) has zero regression protection. This is the single highest-leverage remaining root cause: it doesn't just represent one debt item, it multiplies the risk of every other item silently regressing.",
+      "manifestations": [
+        "TEST-001 (no test files)",
+        "CI can only catch type/build errors, not behavioral regressions",
+        "the fail-closed contact-API fix (DEBT-0002) has no test proving it stays fail-closed",
+        "the rate-limiter (DEBT-0007) has no test proving it actually limits"
+      ],
+      "dependent_debt": [
+        "DEBT-0012"
+      ],
+      "affected_systems": [
+        "testing",
+        "ci-cd",
+        "release-confidence"
+      ],
+      "downstream_finding_count": 1,
+      "recommended_wave": "WAVE-2",
+      "resolution": "Not started. Recommended first tests (highest value per this session's own fixes): contact API fail-closed behavior, chat rate-limit enforcement, domain-canonicalization regression (grep-based, cheap)."
+    },
+    {
+      "id": "ROOT-CI-001",
+      "title": "Release-critical checks are structurally non-blocking",
+      "status": "PARTIALLY RESOLVED -- DEBT-0014 (Node version mismatch) closed; DEBT-0013 (npm audit continue-on-error) narrowed but not fully closed",
+      "why_it_matters": "continue-on-error on npm audit and Lighthouse means no CI signal can ever actually stop a bad release -- a policy decision with two visible symptoms. 2026-08-21: security.yml's Node version now matches deploy.yml (DEBT-0014). npm audit findings reduced 18->3 vulnerabilities; the 2 remaining high-severity ones require a breaking Astro major bump, out of scope while stackBaseline is FROZEN, so npm audit --audit-level=high stays continue-on-error rather than fail immediately on a known, deferred gap. A third non-blocking check this graph hadn't counted -- deploy.yml's Prettier format-check -- was found and made blocking (commit 4fddadb).",
+      "manifestations": [
+        "CI-001 (security checks advisory)",
+        "CI-002 (Node version mismatch across workflows, a smaller but related CI-hygiene gap)"
+      ],
+      "dependent_debt": [
+        "DEBT-0013",
+        "DEBT-0014"
+      ],
+      "affected_systems": [
+        "ci-cd",
+        "release-gate"
+      ],
+      "downstream_finding_count": 2,
+      "recommended_wave": "WAVE-2"
+    },
+    {
+      "id": "ROOT-A11Y-001",
+      "title": "Pre-existing accessibility work never completed",
+      "status": "PARTIALLY RESOLVED -- A11Y-001 and DEBT-0017 closed 2026-08-21; DEBT-0018 (A11Y-002, TS-check bypass) still OPEN",
+      "why_it_matters": "Design-intelligence Stage 16 already found and evidenced these; they were deliberately sequenced after the P1 token-model work per explicit user instruction, then superseded in priority by the third-party audit's Wave 1, then closed for the two items that had a code-level fix. A11Y-001 (BookingWizard's alert()-based validation) was replaced with inline field-level messaging (commit 65204d6, Part 25 item 4). DEBT-0017's 6 axe-core violations are confirmed at 0 by a fresh validate.mjs re-run (see DEBT-0017 verification[] in MASTER-DEBT-REGISTER.json). DEBT-0018's @ts-nocheck bypass remains a genuinely separate, unaddressed item -- not touched by any of the above fixes.",
+      "manifestations": [
+        "A11Y-001 (alert-based validation, no field-level errors) -- RESOLVED, commit 65204d6",
+        "A11Y-002 (2 files with @ts-nocheck) -- still open, see DEBT-0018",
+        "the same 6 axe-core violations from design-intelligence Stage 16 (color-contrast x4 routes, missing label, invalid ARIA) -- RESOLVED, see DEBT-0017"
+      ],
+      "dependent_debt": [
+        "DEBT-0017",
+        "DEBT-0018"
+      ],
+      "affected_systems": [
+        "accessibility",
+        "appointments-form"
+      ],
+      "downstream_finding_count": 2,
+      "recommended_wave": "WAVE-5 for the remaining DEBT-0018 item, or sooner if the user re-prioritizes"
+    },
+    {
+      "id": "ROOT-APPOINTMENT-001",
+      "title": "Appointment flow conflates \"message drafted\" with \"appointment booked\"",
+      "status": "OPEN",
+      "why_it_matters": "A single UX/product framing choice (calling a WhatsApp-draft flow \"booking\") is the entire root cause of APP-001 -- there is no second manifestation because this is a single, self-contained product decision, not a systemic pattern.",
+      "manifestations": [
+        "APP-001 (WhatsApp draft presented as booking success)"
+      ],
+      "dependent_debt": [
+        "DEBT-0015"
+      ],
+      "affected_systems": [
+        "appointments",
+        "conversion"
+      ],
+      "downstream_finding_count": 1,
+      "recommended_wave": "Needs a product decision before any wave -- not purely an engineering fix"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-08-19T15:40:00Z",
+  "lessons": [
+    {
+      "whatWorked": "Building the tool against REAL .ai/ and audit/eais/ files from the start (never mocked) meant the first real run immediately validated the whole read path end-to-end.",
+      "whatFailed": "Two build failures (missing @types/node, wrong dist/ path in the npm script) and one logic bug (stopword false-positive) were all found by actually running the tool, not by review.",
+      "rootCause": "TS7's stricter/different default global-type resolution vs assumptions carried over from the root project's Astro-provided type setup; dist/ output path assumption didn't account for rootDir:'.' preserving src/ and tests/ subfolders.",
+      "recurrencePrevention": "README.md documents the dist/src/cli.js path explicitly. The stopword list itself IS the recurrence-prevention mechanism for the false-positive class of bug -- extend only on future demonstrated failures, not preemptively (recorded as an explicit comment in context.ts)."
+    }
+  ]
+}

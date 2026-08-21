@@ -1,0 +1,31 @@
+# Mirrored Google-owned bytes are NEVER committed.
+#
+# The mirror exists only as a local, reproducible capture surface for extracting
+# design evidence. Committing Google's HTML, CSS, JS, or imagery would
+# redistribute assets we have no licence to redistribute, and would violate the
+# project's brand-separation boundary.
+#
+# What IS committed: mirror-manifest.json (URLs, hashes, sizes, content types,
+# provenance). That is evidence about the source, not a copy of it. The mirror
+# is fully rebuildable from the manifest via `npm run mirror`.
+artifacts/mirror/files/
+
+# Derived capture artifacts: large, regenerable, and may embed Google imagery.
+artifacts/evidence/
+artifacts/visual/
+node_modules/
+
+# Content-addressed cache raw bytes: same rationale as artifacts/mirror/files/
+# above -- Google-owned bytes, large, and fully reconstructible. What IS
+# committed: cache/metadata/ (per-object provenance), cache/indexes/
+# (URL -> hash history, the drift-detection record), cache/manifests/ (what
+# each pipeline run touched). None of those contain raw Google bytes, only
+# facts ABOUT them. Rebuild via `npm run cache:migrate` (from the existing
+# mirror) or by re-running the pipeline in ONLINE_FRESH mode.
+cache/objects/
+
+# Execution-intelligence ledger: per-session, high-volume, and per the
+# project's own rule never contains reconstructed hidden reasoning. See
+# execution-intelligence/CAPABILITY-MATRIX.json for what this does and does
+# not currently capture.
+execution-intelligence/ledger/

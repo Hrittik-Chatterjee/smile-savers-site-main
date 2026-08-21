@@ -1,0 +1,247 @@
+{
+  "generatedAt": "2026-08-19T11:57:50.438Z",
+  "note": "One entry per token with a real override (the DaisyUI !important brand-lock block, global.css:21-31) or a real media-scoped :root redeclaration. Precedence is recorded as an ordered list (source order, media condition, !important, selector) rather than flattened to a single final value, since which value actually applies depends on viewport/runtime conditions this static analysis cannot resolve.",
+  "count": 10,
+  "entries": [
+    {
+      "token": "--color-primary",
+      "valueAtBase": "#102B3F !important",
+      "valueAtMaxPrecedence": "#102B3F",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "#102B3F !important",
+          "line": 24,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "override",
+          "selector": ":root, :root[data-theme=\"light\"], :where(:root,[data-theme])",
+          "value": "#102B3F",
+          "line": 49,
+          "important": false,
+          "condition": "base-scope re-declaration"
+        }
+      ]
+    },
+    {
+      "token": "--color-primary-light",
+      "valueAtBase": "#1E4A5F !important",
+      "valueAtMaxPrecedence": "#1E4A5F",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "#1E4A5F !important",
+          "line": 25,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "override",
+          "selector": ":root, :root[data-theme=\"light\"], :where(:root,[data-theme])",
+          "value": "#1E4A5F",
+          "line": 51,
+          "important": false,
+          "condition": "base-scope re-declaration"
+        }
+      ]
+    },
+    {
+      "token": "--color-primary-dark",
+      "valueAtBase": "#0A1D2B !important",
+      "valueAtMaxPrecedence": "#0A1D2B",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "#0A1D2B !important",
+          "line": 26,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "override",
+          "selector": ":root, :root[data-theme=\"light\"], :where(:root,[data-theme])",
+          "value": "#0A1D2B",
+          "line": 52,
+          "important": false,
+          "condition": "base-scope re-declaration"
+        }
+      ]
+    },
+    {
+      "token": "--color-secondary",
+      "valueAtBase": "#3DBAA7 !important",
+      "valueAtMaxPrecedence": "#3DBAA7",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "#3DBAA7 !important",
+          "line": 27,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "override",
+          "selector": ":root, :root[data-theme=\"light\"], :where(:root,[data-theme])",
+          "value": "#3DBAA7",
+          "line": 54,
+          "important": false,
+          "condition": "base-scope re-declaration"
+        }
+      ]
+    },
+    {
+      "token": "--color-secondary-light",
+      "valueAtBase": "#A8E0D6 !important",
+      "valueAtMaxPrecedence": "#A8E0D6",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "#A8E0D6 !important",
+          "line": 28,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "override",
+          "selector": ":root, :root[data-theme=\"light\"], :where(:root,[data-theme])",
+          "value": "#A8E0D6",
+          "line": 56,
+          "important": false,
+          "condition": "base-scope re-declaration"
+        }
+      ]
+    },
+    {
+      "token": "--color-secondary-dark",
+      "valueAtBase": "#1A8A78 !important",
+      "valueAtMaxPrecedence": "#1A8A78",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "#1A8A78 !important",
+          "line": 29,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "override",
+          "selector": ":root, :root[data-theme=\"light\"], :where(:root,[data-theme])",
+          "value": "#1A8A78",
+          "line": 57,
+          "important": false,
+          "condition": "base-scope re-declaration"
+        }
+      ]
+    },
+    {
+      "token": "--color-accent",
+      "valueAtBase": "#2CABDF !important",
+      "valueAtMaxPrecedence": "#2CABDF",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "#2CABDF !important",
+          "line": 30,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "override",
+          "selector": ":root, :root[data-theme=\"light\"], :where(:root,[data-theme])",
+          "value": "#2CABDF",
+          "line": 59,
+          "important": false,
+          "condition": "base-scope re-declaration"
+        }
+      ]
+    },
+    {
+      "token": "--color-accent-dark",
+      "valueAtBase": "#1A95C9 !important",
+      "valueAtMaxPrecedence": "#1A95C9",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "#1A95C9 !important",
+          "line": 31,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "override",
+          "selector": ":root, :root[data-theme=\"light\"], :where(:root,[data-theme])",
+          "value": "#1A95C9",
+          "line": 105,
+          "important": false,
+          "condition": "base-scope re-declaration"
+        }
+      ]
+    },
+    {
+      "token": "--font-size-5xl",
+      "valueAtBase": "clamp(2.75rem, 2.2rem + 2vw, 3.5rem)",
+      "valueAtMaxPrecedence": "clamp(2.75rem, 2.2rem + 2vw, 4rem)",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "clamp(2.75rem, 2.2rem + 2vw, 3.5rem)",
+          "line": 208,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "media-scoped-redeclaration",
+          "selector": ":root",
+          "value": "clamp(2.75rem, 2.2rem + 2vw, 4rem)",
+          "line": 970,
+          "important": false,
+          "condition": "(min-width: 1440px)"
+        }
+      ]
+    },
+    {
+      "token": "--container-xl",
+      "valueAtBase": "80rem",
+      "valueAtMaxPrecedence": "100rem",
+      "precedence": [
+        {
+          "order": 0,
+          "kind": "base-declaration",
+          "selector": "@theme (or :root brand-lock block, see below)",
+          "value": "80rem",
+          "line": 241,
+          "important": false
+        },
+        {
+          "order": 1,
+          "kind": "media-scoped-redeclaration",
+          "selector": ":root",
+          "value": "100rem",
+          "line": 977,
+          "important": false,
+          "condition": "(min-width: 1920px)"
+        }
+      ]
+    }
+  ]
+}

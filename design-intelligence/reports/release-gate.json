@@ -1,0 +1,167 @@
+{
+  "generatedAt": "2026-08-19T12:03:18.986Z",
+  "scope": "P1 — Smile Savers semantic token model + change-impact engine + agent-context contract. Separate from the Labs-extraction release-gate.json (design-intelligence/artifacts/final/release-gate.json).",
+  "status": "GO_WITH_KNOWN_VERIFY_BLOCKED_ITEMS",
+  "note": "Never collapsed into one score. RESPONSIVE/STATE coverage for Smile Savers own components is honestly VERIFY-BLOCKED, not silently marked GO.",
+  "gates": {
+    "TOKEN_MODEL": {
+      "gate": "TOKEN_MODEL",
+      "status": "GO",
+      "measurements": {
+        "totalTokens": 136,
+        "sourceFile": "src/styles/global.css",
+        "sourceSha256AtCapture": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008"
+      },
+      "reason": "136 tokens inventoried from src/styles/global.css, every one line-cited.",
+      "limitations": []
+    },
+    "CONSUMER_COVERAGE": {
+      "gate": "CONSUMER_COVERAGE",
+      "status": "GO",
+      "measurements": {
+        "DIRECT": 872,
+        "INDIRECT": 8,
+        "INHERITED": 0,
+        "RUNTIME": 0
+      },
+      "reason": "DIRECT (var()) and INDIRECT (Tailwind utility class) consumer detection both implemented and run; INHERITED/RUNTIME searched for, 0 found (recorded, not omitted).",
+      "limitations": [
+        "INDIRECT detection uses a mechanically-applied Tailwind v4 naming convention (evidence class DERIVED), not independently re-verified against Tailwind source this session."
+      ]
+    },
+    "RELATIONSHIP_COVERAGE": {
+      "gate": "RELATIONSHIP_COVERAGE",
+      "status": "GO",
+      "measurements": {
+        "ALIASES": 5,
+        "DERIVES_FROM": 0,
+        "CONSUMED_BY": 880,
+        "OVERRIDDEN_BY": 8,
+        "VARIES_BY": 2,
+        "AFFECTS": 0,
+        "INVALIDATES": 0,
+        "EVIDENCED_BY": 0
+      },
+      "reason": "All 8 permitted relationship types represented in the schema; ALIASES/CONSUMED_BY/OVERRIDDEN_BY/VARIES_BY populated from real data; DERIVES_FROM correctly empty (no calc()/transform tokens exist); AFFECTS/INVALIDATES/EVIDENCED_BY populated by other subsystems, not this graph directly.",
+      "limitations": []
+    },
+    "CASCADE_COVERAGE": {
+      "gate": "CASCADE_COVERAGE",
+      "status": "GO",
+      "measurements": {
+        "entriesWithOverrideOrVariance": 10
+      },
+      "reason": "10 tokens have a captured override/media-variance precedence chain — real cascade complexity found in this file, not flattened to one value.",
+      "limitations": []
+    },
+    "EVIDENCE_LINEAGE": {
+      "gate": "EVIDENCE_LINEAGE",
+      "status": "GO",
+      "measurements": {
+        "tokensWithLineage": 136,
+        "tokensWithoutLineage": 0
+      },
+      "reason": "Every token traces to a source file + line number; 0 without lineage.",
+      "limitations": []
+    },
+    "CHANGE_IMPACT": {
+      "gate": "CHANGE_IMPACT",
+      "status": "GO",
+      "measurements": {
+        "workedExamples": 2
+      },
+      "reason": "Engine implemented and demonstrated on 2 representative tokens (DIRECT/INDIRECT/POSSIBLE tiers, cascade cross-reference); not run against all tokens by design.",
+      "limitations": []
+    },
+    "EVIDENCE_INVALIDATION": {
+      "gate": "EVIDENCE_INVALIDATION",
+      "status": "GO",
+      "measurements": {
+        "total": 136,
+        "VALID": 136,
+        "STALE": 0,
+        "INVALIDATED": 0,
+        "UNKNOWN": 0
+      },
+      "reason": "Mechanism implemented (source-hash comparison flips records STALE, never deletes); all-VALID as expected this run. INVALIDATED state has no trigger mechanism built yet.",
+      "limitations": [
+        "INVALIDATED (contradictory-evidence) state is defined in the schema but has no detector implemented in P1."
+      ]
+    },
+    "AGENT_CONTEXT": {
+      "gate": "AGENT_CONTEXT",
+      "status": "GO",
+      "measurements": {
+        "fieldsPresent": [
+          "TASK",
+          "DESIGN_RULES",
+          "RELEVANT_TOKENS",
+          "RELEVANT_IMPLEMENTATION",
+          "RELEVANT_RELATIONSHIPS",
+          "CONSTRAINTS",
+          "CHANGE_IMPACT",
+          "EVIDENCE",
+          "VALIDATION"
+        ]
+      },
+      "reason": "Minimal contract implemented, substring-match only, no ranking/embedding model by design.",
+      "limitations": []
+    },
+    "SEMANTIC_VALIDATION": {
+      "gate": "SEMANTIC_VALIDATION",
+      "status": "GO",
+      "measurements": {
+        "total": 13,
+        "PASS": 12,
+        "FAIL": 0,
+        "NOT_APPLICABLE": 1
+      },
+      "reason": "12/13 checks PASS, 1 correctly N/A, 0 FAIL.",
+      "limitations": []
+    },
+    "BRAND_CONSTRAINTS": {
+      "gate": "BRAND_CONSTRAINTS",
+      "status": "GO",
+      "measurements": {
+        "googleBrandLeakageHits": 0
+      },
+      "reason": "semantic-validate.mjs google-brand-leakage check: 0 hits across all inventoried token values.",
+      "limitations": []
+    },
+    "REGRESSION_SAFETY": {
+      "gate": "REGRESSION_SAFETY",
+      "status": "GO",
+      "measurements": {
+        "baselineCheck": {
+          "errors": 0,
+          "warnings": 0,
+          "hints": 143,
+          "filesChecked": 88,
+          "status": "PASS"
+        },
+        "baselineBuild": {
+          "pagesBuilt": 32,
+          "status": "PASS"
+        },
+        "reRunCheckErrors": 0,
+        "reRunBuildPages": 32
+      },
+      "reason": "Re-ran npm run check/build after P1 additions; compared against p1-baseline.json.",
+      "limitations": []
+    },
+    "RESPONSIVE_COVERAGE_SMILE_SAVERS": {
+      "gate": "RESPONSIVE_COVERAGE_SMILE_SAVERS",
+      "status": "VERIFY-BLOCKED",
+      "measurements": {},
+      "reason": "No runtime capture of Smile Savers' own site state/responsive conditions exists (Stage 15 captured screenshots only). Out of P1 scope.",
+      "limitations": []
+    },
+    "STATE_COVERAGE_SMILE_SAVERS": {
+      "gate": "STATE_COVERAGE_SMILE_SAVERS",
+      "status": "VERIFY-BLOCKED",
+      "measurements": {},
+      "reason": "Same reason as RESPONSIVE_COVERAGE_SMILE_SAVERS.",
+      "limitations": []
+    }
+  }
+}

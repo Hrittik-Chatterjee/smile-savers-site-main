@@ -4,13 +4,13 @@
  * Contact form, info, hours, and map
  */
 
-import PageLayout from "../layouts/PageLayout.astro";
-import PageHeader from "../components/common/PageHeader.astro";
-import ContactInfo from "../modules/contact/components/ContactInfo.astro";
-import OfficeHours from "../modules/contact/components/OfficeHours.astro";
-import LocationMap from "../modules/contact/components/LocationMap.astro";
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/common/PageHeader.astro';
+import ContactInfo from '../modules/contact/components/ContactInfo.astro';
+import OfficeHours from '../modules/contact/components/OfficeHours.astro';
+import LocationMap from '../modules/contact/components/LocationMap.astro';
 
-const title = "Contact Us";
+const title = 'Contact Us';
 const description =
   "Get in touch with Smile Savers. Call us, send a message, or visit our Woodside, NY office. We're here to help with all your dental needs.";
 ---
@@ -20,10 +20,7 @@ const description =
     <PageHeader
       title="Contact Us"
       description="Have questions? We're here to help. Reach out and our team will get back to you within 24 hours."
-      breadcrumbs={[
-        { label: "Home", href: "/" },
-        { label: "Contact" }
-      ]}
+      breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Contact' }]}
     />
 
     <!-- Contact Bento Grid -->
@@ -98,7 +95,10 @@ const description =
     border: 1px solid rgba(229, 231, 235, 0.5);
     border-radius: var(--radius-2xl);
     padding: 0;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    transition:
+      transform var(--transition-fast),
+      box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
     overflow: hidden;
   }
 

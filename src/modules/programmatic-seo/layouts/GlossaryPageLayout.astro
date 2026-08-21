@@ -1,4 +1,5 @@
 ---
+import Badge from '../../../components/ui/Badge.astro';
 /**
  * GlossaryPageLayout - Template for "what is [term]" educational pages
  *
@@ -28,21 +29,13 @@ interface Props {
   term: string;
   termDisplay: string;
   definition: string;
-  content: string;  // HTML content
+  content: string; // HTML content
   faqs: FAQItem[];
   relatedTerms: { term: string; slug: string }[];
   relatedServices: string[];
 }
 
-const {
-  term,
-  termDisplay,
-  definition,
-  content,
-  faqs,
-  relatedTerms,
-  relatedServices,
-} = Astro.props;
+const { term, termDisplay, definition, content, faqs, relatedTerms, relatedServices } = Astro.props;
 
 // SEO
 const title = `What is ${termDisplay}? | Dental Guide | Smile Savers`;
@@ -58,24 +51,24 @@ const breadcrumbs = [
 
 // Schema.org Article markup
 const articleSchema = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": `What is ${termDisplay}?`,
-  "description": definition,
-  "author": {
-    "@type": "Organization",
-    "name": "Smile Savers",
-    "url": "https://smilesavers.dental"
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: `What is ${termDisplay}?`,
+  description: definition,
+  author: {
+    '@type': 'Organization',
+    name: 'Smile Savers',
+    url: 'https://dentalsmilesavers.com',
   },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Smile Savers",
-    "url": "https://smilesavers.dental"
+  publisher: {
+    '@type': 'Organization',
+    name: 'Smile Savers',
+    url: 'https://dentalsmilesavers.com',
   },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": `https://smilesavers.dental${canonicalUrl}`
-  }
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `https://dentalsmilesavers.com${canonicalUrl}`,
+  },
 };
 ---
 
@@ -86,7 +79,7 @@ const articleSchema = {
 
       <!-- Hero Section -->
       <header class="glossary-hero">
-        <span class="content-type">Dental Term</span>
+        <Badge>Dental Term</Badge>
         <h1 class="page-title">What is {termDisplay}?</h1>
 
         <div class="definition-box">
@@ -95,9 +88,18 @@ const articleSchema = {
 
         <div class="author-info">
           <div class="author-avatar">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
             </svg>
           </div>
           <div class="author-details">
@@ -121,23 +123,34 @@ const articleSchema = {
           </div>
 
           <!-- Related Terms -->
-          {relatedTerms.length > 0 && (
-            <div class="sidebar-card">
-              <h3 class="sidebar-title">Related Terms</h3>
-              <nav class="related-terms" aria-label="Related dental terms">
-                {relatedTerms.map((related) => (
-                  <a href={`/learn/${related.slug}/`} class="related-term-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                      <polyline points="15 3 21 3 21 9"/>
-                      <line x1="10" y1="14" x2="21" y2="3"/>
-                    </svg>
-                    {related.term}
-                  </a>
-                ))}
-              </nav>
-            </div>
-          )}
+          {
+            relatedTerms.length > 0 && (
+              <div class="sidebar-card">
+                <h3 class="sidebar-title">Related Terms</h3>
+                <nav class="related-terms" aria-label="Related dental terms">
+                  {relatedTerms.map((related) => (
+                    <a href={`/learn/${related.slug}/`} class="related-term-link">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        aria-hidden="true"
+                      >
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                      {related.term}
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            )
+          }
 
           <!-- Quick CTA -->
           <div class="sidebar-card sidebar-cta-card">
@@ -149,12 +162,11 @@ const articleSchema = {
       </div>
 
       <!-- FAQ Section -->
-      {faqs.length > 0 && (
-        <FAQSection
-          items={faqs}
-          title={`Common Questions About ${termDisplay}`}
-        />
-      )}
+      {
+        faqs.length > 0 && (
+          <FAQSection items={faqs} title={`Common Questions About ${termDisplay}`} />
+        )
+      }
 
       <!-- Related Services -->
       <RelatedServices
@@ -187,19 +199,6 @@ const articleSchema = {
   .glossary-hero {
     padding-block: var(--spacing-block);
     max-width: var(--container-lg);
-  }
-
-  .content-type {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: var(--color-secondary-light);
-    color: var(--color-secondary);
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
   }
 
   .page-title {
@@ -237,7 +236,9 @@ const articleSchema = {
     justify-content: center;
     width: 48px;
     height: 48px;
-    background: var(--color-primary-light);
+    /* --color-primary-light bg + --color-primary-dark text measured 1.80:1 --
+       both dark navy shades. Swapped for the proven brand-surface pair. */
+    background: var(--color-brand-surface-subtle);
     color: var(--color-primary-dark);
     border-radius: var(--radius-full);
   }

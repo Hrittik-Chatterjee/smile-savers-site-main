@@ -1,0 +1,14 @@
+{
+  "sha256": "0038654d4e95b3506a4685e2340c17a7388f42ae6f49cae5497a843bb82a04a8",
+  "size": 291914,
+  "mimeType": "text/html",
+  "retrievedAt": "2026-08-19T08:01:20.597Z",
+  "sourceURL": "https://labs.google/",
+  "finalURL": "https://labs.google/",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.368Z"
+}

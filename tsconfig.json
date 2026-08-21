@@ -17,6 +17,8 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "design-intelligence",
+    "tools/eais"
   ]
 }

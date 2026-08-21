@@ -1,0 +1,152 @@
+{
+  "generatedAt": "2026-08-19T13:35:21.695Z",
+  "note": "Entities with status VERIFIED were fixed and re-verified in Wave 1 (commit cd7d6d7) or the Cloudflare decision pass. content.medical_claims_provenance remains UNVERIFIED -- this is CONTENT-001 from the uploaded audit, explicitly deferred (needs clinical review, not engineering).",
+  "entities": [
+    {
+      "id": "clinic.domain",
+      "field": "canonical domain",
+      "canonical_value": "https://dentalsmilesavers.com",
+      "authority": "user-confirmed via AskUserQuestion, 2026-08-19",
+      "evidence": [
+        "EV-USER-DOMAIN-CONFIRM"
+      ],
+      "consumers": [
+        "wrangler.jsonc",
+        "src/config/site.ts",
+        "src/layouts/BaseLayout.astro",
+        "functions/_lib/cors.js",
+        "README.md"
+      ],
+      "conflicts": [],
+      "status": "VERIFIED",
+      "last_verified": "2026-08-19",
+      "review_due": null
+    },
+    {
+      "id": "clinic.coordinates",
+      "field": "lat/lon",
+      "canonical_value": "40.7457, -73.9025",
+      "authority": "OSM geocode, corroborated across BaseLayout.astro + LocationMap.astro before fix",
+      "evidence": [
+        "EV-DATA-001-FIX"
+      ],
+      "consumers": [
+        "src/config/site.ts",
+        "src/layouts/BaseLayout.astro (LocalBusiness schema)",
+        "LocationMap.astro"
+      ],
+      "conflicts": [],
+      "status": "VERIFIED",
+      "last_verified": "2026-08-19",
+      "review_due": null
+    },
+    {
+      "id": "clinic.hours.friday",
+      "field": "Friday hours",
+      "canonical_value": "9:00 AM - 5:00 PM",
+      "authority": "site.ts + chat.js two-source consensus",
+      "evidence": [
+        "EV-DATA-002-FIX"
+      ],
+      "consumers": [
+        "src/config/site.ts",
+        "functions/api/chat.js",
+        "functions/api/contact.js"
+      ],
+      "conflicts": [],
+      "status": "VERIFIED",
+      "last_verified": "2026-08-19",
+      "review_due": null
+    },
+    {
+      "id": "clinic.dentist_count",
+      "field": "number of dentists",
+      "canonical_value": "derived from src/content/team/ (4 as of 2026-08-19)",
+      "authority": "content collection, computed at build time",
+      "evidence": [
+        "EV-CONTENT-002-FIX"
+      ],
+      "consumers": [
+        "src/modules/homepage/components/Hero.astro"
+      ],
+      "conflicts": [],
+      "status": "VERIFIED",
+      "last_verified": "2026-08-19",
+      "review_due": "2026-11-19 (re-verify if team collection changes)"
+    },
+    {
+      "id": "runtime.architecture",
+      "field": "Cloudflare deployment architecture",
+      "canonical_value": "Workers + Workers Static Assets (de facto live; not yet formalized in CI)",
+      "authority": "live curl evidence + Cloudflare doc re-verification, audit/cloudflare-decision/",
+      "evidence": [
+        "EV-CF-C1",
+        "EV-CF-C2",
+        "EV-CF-C3",
+        "EV-CF-A1",
+        "EV-CF-A9",
+        "EV-CF-A10"
+      ],
+      "consumers": [
+        "wrangler.jsonc",
+        "src/entrypoint.js",
+        ".github/workflows/deploy.yml"
+      ],
+      "conflicts": [
+        "CLAUDE.md still describes Pages as the architecture — documentation not yet updated to match this decision"
+      ],
+      "status": "VERIFIED",
+      "last_verified": "2026-08-19",
+      "review_due": null
+    },
+    {
+      "id": "ai.model",
+      "field": "Workers AI model used by chat",
+      "canonical_value": "@cf/meta/llama-3.1-8b-instruct-fast",
+      "authority": "functions/api/chat.js:151 (repo source)",
+      "evidence": [
+        "EV-REPO-CHAT-MODEL"
+      ],
+      "consumers": [
+        "functions/api/chat.js"
+      ],
+      "conflicts": [],
+      "status": "VERIFIED",
+      "last_verified": "2026-08-19",
+      "review_due": null
+    },
+    {
+      "id": "ai.free_neuron_budget",
+      "field": "Workers AI free daily allocation",
+      "canonical_value": "10,000 neurons/day, resets 00:00 UTC",
+      "authority": "Cloudflare Workers AI Pricing, live-fetched 2026-08-19",
+      "evidence": [
+        "CF-A2"
+      ],
+      "consumers": [
+        "audit/cloudflare-decision/ai-stress-test.json"
+      ],
+      "conflicts": [],
+      "status": "VERIFIED",
+      "last_verified": "2026-08-19",
+      "review_due": "2027-02-19 (re-verify pricing before relying on it again)"
+    },
+    {
+      "id": "content.medical_claims_provenance",
+      "field": "clinical/medical claim sourcing",
+      "canonical_value": "UNKNOWN — no structured provenance/review metadata exists in src/content/",
+      "authority": "not established",
+      "evidence": [
+        "EV-CONTENT-001-UNFIXED"
+      ],
+      "consumers": [
+        "src/content/services/*.md",
+        "src/content/glossary/*.md"
+      ],
+      "conflicts": [],
+      "status": "UNVERIFIED",
+      "last_verified": null,
+      "review_due": "before any high-risk clinical claim is published or re-published"
+    }
+  ]
+}

@@ -19,12 +19,12 @@ let services = await getCollection('services');
 
 // Filter by featured if specified
 if (featured !== undefined) {
-  services = services.filter(s => s.data.featured === featured);
+  services = services.filter((s) => s.data.featured === featured);
 }
 
 // Filter by category if specified
 if (category) {
-  services = services.filter(s => s.data.category === category);
+  services = services.filter((s) => s.data.category === category);
 }
 
 // Sort by order
@@ -37,9 +37,7 @@ if (limit) {
 ---
 
 <div class="service-grid grid-content">
-  {services.map((service) => (
-    <ServiceCard service={service} />
-  ))}
+  {services.map((service) => <ServiceCard service={service} />)}
 </div>
 
 <style>

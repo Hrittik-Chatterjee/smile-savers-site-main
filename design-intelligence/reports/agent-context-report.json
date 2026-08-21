@@ -1,0 +1,331 @@
+{
+  "TASK": "change the --color-accent token",
+  "DESIGN_RULES": [
+    "Production token authority is src/styles/global.css only (brand.* / semantic.* / component.* in Labs-pipeline terms). design-intelligence/artifacts/grammar/* (reference.labs.*, reference.m3.*, reference.m3e.*) is inert reference material and must never control production UI.",
+    "No Google Labs visual identity, Google Sans, Google imagery, or Google copy may enter brand.*/semantic.*/component.* tokens or production files.",
+    "This project does not perform automatic production redesign. Any visual change to src/ requires explicit human direction outside the design-intelligence tooling.",
+    "src/styles/design-intelligence-grammar.css is additive only, never imported by production.",
+    "No Astro/TypeScript/Vite/Node upgrade, no Cloudflare Pages->Workers migration, no CMS change is performed by this tooling. design-intelligence/scripts/migration-assessment.mjs only assesses, never executes, a migration.",
+    "Evidence classes (OBSERVED-SOURCE, OBSERVED-MIRROR, DERIVED, MAPPED, INFERRED, UNKNOWN, VERIFY-BLOCKED) are never silently upgraded. A DERIVED finding (e.g. Tailwind-utility-class consumer detection) stays DERIVED until independently re-verified against primary source.",
+    "Component anatomy, patterns, anti-patterns, and design intent are not fabricated for the 42/47 components with no typed contract. UNKNOWN/VERIFY-BLOCKED is used instead of invented content.",
+    "Explicit user ordering: (1) P1 semantic token model/change-impact/agent-context, (2) fix the 6 known accessibility defects, (3) re-validate, (4) merge PR #2. Steps 2-4 are not performed during P1."
+  ],
+  "RELEVANT_TOKENS": [
+    {
+      "name": "--color-accent",
+      "domain": "color",
+      "canonicalValue": "#2CABDF !important",
+      "consumerCount": 16,
+      "orphan": false
+    }
+  ],
+  "RELEVANT_IMPLEMENTATION": [
+    "src/modules/programmatic-seo/components/CTABanner.astro",
+    "src/modules/programmatic-seo/layouts/ComparisonPageLayout.astro",
+    "src/modules/accessibility/components/AccessibilityMenu.astro",
+    "src/modules/contact/components/ContactForm.astro",
+    "src/modules/appointments/components/BookingWizard.astro",
+    "src/modules/homepage/components/Hero.astro",
+    "src/modules/homepage/components/TrustSignals.astro",
+    "src/modules/homepage/components/HomeCTA.astro",
+    "src/modules/about/components/ClinicStory.astro",
+    "src/components/ui/Button.astro",
+    "src/components/accessibility/AccessibilityMenu.astro",
+    "src/components/common/ChatWidget.astro",
+    "src/components/layout/MobileMenu.astro",
+    "src/components/layout/Header.astro",
+    "src/styles/global.css",
+    "src/pages/compare/index.astro"
+  ],
+  "RELEVANT_RELATIONSHIPS": {
+    "ALIASES": [],
+    "DERIVES_FROM": [],
+    "CONSUMED_BY": [
+      {
+        "source": "--color-accent",
+        "target": "src/modules/programmatic-seo/components/CTABanner.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/modules/programmatic-seo/components/CTABanner.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/modules/programmatic-seo/layouts/ComparisonPageLayout.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/modules/programmatic-seo/layouts/ComparisonPageLayout.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/modules/accessibility/components/AccessibilityMenu.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/modules/accessibility/components/AccessibilityMenu.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/modules/contact/components/ContactForm.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/modules/contact/components/ContactForm.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/modules/appointments/components/BookingWizard.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/modules/appointments/components/BookingWizard.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/modules/homepage/components/Hero.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/modules/homepage/components/Hero.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/modules/homepage/components/TrustSignals.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/modules/homepage/components/TrustSignals.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/modules/homepage/components/HomeCTA.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/modules/homepage/components/HomeCTA.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/modules/about/components/ClinicStory.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/modules/about/components/ClinicStory.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/components/ui/Button.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/components/ui/Button.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/components/accessibility/AccessibilityMenu.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/components/accessibility/AccessibilityMenu.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/components/common/ChatWidget.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/components/common/ChatWidget.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/components/layout/MobileMenu.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/components/layout/MobileMenu.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/components/layout/Header.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/components/layout/Header.astro",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/styles/global.css",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/styles/global.css",
+        "status": "OBSERVED-SOURCE"
+      },
+      {
+        "source": "--color-accent",
+        "target": "src/pages/compare/index.astro",
+        "type": "CONSUMED_BY",
+        "condition": "DIRECT",
+        "evidence": "grep var(--color-accent in src/pages/compare/index.astro",
+        "status": "OBSERVED-SOURCE"
+      }
+    ],
+    "OVERRIDDEN_BY": [
+      {
+        "source": "--color-accent",
+        "target": "--color-accent@line59",
+        "type": "OVERRIDDEN_BY",
+        "condition": "base-scope re-declaration",
+        "evidence": "src/styles/global.css:59",
+        "status": "OBSERVED-SOURCE"
+      }
+    ],
+    "VARIES_BY": [],
+    "AFFECTS": [],
+    "INVALIDATES": [],
+    "EVIDENCED_BY": []
+  },
+  "CONSTRAINTS": [
+    "CON-brand-authority",
+    "CON-no-google-identity",
+    "CON-no-auto-redesign",
+    "CON-additive-grammar",
+    "CON-stack-lock",
+    "CON-no-silent-evidence-promotion",
+    "CON-no-fabricated-design-knowledge",
+    "CON-p1-ordering"
+  ],
+  "CHANGE_IMPACT": [
+    {
+      "token": "--color-accent",
+      "status": "COMPUTED",
+      "domain": "color",
+      "canonicalValue": "#2CABDF !important",
+      "DIRECT": {
+        "consumerFiles": [
+          "src/modules/programmatic-seo/components/CTABanner.astro",
+          "src/modules/programmatic-seo/layouts/ComparisonPageLayout.astro",
+          "src/modules/accessibility/components/AccessibilityMenu.astro",
+          "src/modules/contact/components/ContactForm.astro",
+          "src/modules/appointments/components/BookingWizard.astro",
+          "src/modules/homepage/components/Hero.astro",
+          "src/modules/homepage/components/TrustSignals.astro",
+          "src/modules/homepage/components/HomeCTA.astro",
+          "src/modules/about/components/ClinicStory.astro",
+          "src/components/ui/Button.astro",
+          "src/components/accessibility/AccessibilityMenu.astro",
+          "src/components/common/ChatWidget.astro",
+          "src/components/layout/MobileMenu.astro",
+          "src/components/layout/Header.astro",
+          "src/styles/global.css",
+          "src/pages/compare/index.astro"
+        ],
+        "count": 16,
+        "confidence": "HIGH",
+        "basis": "literal var(--x) reference, grep-verified"
+      },
+      "INDIRECT": {
+        "consumerFiles": [],
+        "count": 0,
+        "confidence": "MEDIUM",
+        "basis": "Tailwind-utility-class usage (DERIVED) and consumers of tokens that ALIASES this one",
+        "aliasingTokens": []
+      },
+      "POSSIBLE": {
+        "relatedTokens": [
+          "--color-primary",
+          "--color-primary-light",
+          "--color-primary-dark",
+          "--color-secondary",
+          "--color-secondary-light",
+          "--color-secondary-dark",
+          "--color-accent-dark",
+          "--color-primary-content",
+          "--color-bg-clinical",
+          "--color-bg-human",
+          "--color-success",
+          "--color-warning",
+          "--color-error",
+          "--color-info",
+          "--color-neutral-50",
+          "--color-neutral-100",
+          "--color-neutral-200",
+          "--color-neutral-300",
+          "--color-neutral-400",
+          "--color-neutral-500",
+          "--color-neutral-600",
+          "--color-neutral-700",
+          "--color-neutral-800",
+          "--color-neutral-900",
+          "--color-neutral-950",
+          "--color-surface",
+          "--color-surface-elevated",
+          "--color-surface-sunken",
+          "--color-text",
+          "--color-text-muted",
+          "--color-text-inverted",
+          "--color-border",
+          "--color-border-strong",
+          "--color-gold",
+          "--color-gold-light",
+          "--color-purple",
+          "--color-purple-light",
+          "--color-brown",
+          "--color-gradient-blue-start",
+          "--color-gradient-blue-end",
+          "--color-gradient-gold-start",
+          "--color-gradient-gold-end",
+          "--color-gradient-teal-start",
+          "--color-gradient-teal-end",
+          "--color-gradient-purple-start",
+          "--color-gradient-purple-end",
+          "--color-success-light",
+          "--color-success-dark",
+          "--color-warning-light",
+          "--color-warning-dark",
+          "--color-info-light",
+          "--color-info-dark",
+          "--color-error-light",
+          "--color-error-dark",
+          "--color-whatsapp",
+          "--color-whatsapp-hover",
+          "--color-overlay-dark"
+        ],
+        "count": 57,
+        "confidence": "LOW",
+        "basis": "same design domain, no direct graph edge — included so the impact net is not silently narrow; not itself evidence of a dependency"
+      },
+      "cascadeAffected": {
+        "overriddenBy": [
+          {
+            "source": "--color-accent",
+            "target": "--color-accent@line59",
+            "type": "OVERRIDDEN_BY",
+            "condition": "base-scope re-declaration",
+            "evidence": "src/styles/global.css:59",
+            "status": "OBSERVED-SOURCE"
+          }
+        ],
+        "variesBy": []
+      },
+      "staleEvidence": [],
+      "requiredValidation": [
+        "npm run check",
+        "npm run build",
+        "manual visual check of routes rendered by DIRECT + INDIRECT consumer files listed above"
+      ],
+      "limitations": [
+        "POSSIBLE bucket is a coverage net (same domain), not a proven dependency — do not treat it as equivalent confidence to DIRECT/INDIRECT.",
+        "No automated route-level mapping exists from consumer file to rendered URL for this static Astro site; \"affected routes\" must be inferred manually from the file paths listed."
+      ]
+    }
+  ],
+  "EVIDENCE": {
+    "tokenInventorySourceSha256": "8529e91c46e8d1629772350ced1da8c6e470efe85dfa2f31bd34401a1d7e5008",
+    "evidenceCapturedAt": "2026-08-19T11:57:05.283Z"
+  },
+  "VALIDATION": [
+    "npm run check",
+    "npm run build"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "sha256": "a0b3f13743fb2200d5562a4ebbff6d6ea0189656348ee2a1704c970a11e8e453",
+  "size": 65256,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:25.110Z",
+  "sourceURL": "https://labs.google/assets/images/tools/mixboard.webp",
+  "finalURL": "https://labs.google/assets/images/tools/mixboard.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.411Z"
+}

@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-08-19T12:00:44.796Z",
+  "summary": {
+    "total": 13,
+    "PASS": 12,
+    "FAIL": 0,
+    "NOT_APPLICABLE": 1
+  },
+  "checks": [
+    {
+      "check": "duplicate-token-ids",
+      "status": "PASS",
+      "reasoning": "All 136 token IDs are unique (Map-keyed by CSS custom property name during extraction, which is inherently unique)."
+    },
+    {
+      "check": "orphan-tokens",
+      "status": "PASS",
+      "reasoning": "55/136 tokens have zero DIRECT or INDIRECT consumers (both var() and Tailwind-utility-class detection applied). Not a failure — a factual count for the report; listed in full in token-inventory.json.orphanTokenNames."
+    },
+    {
+      "check": "invalid-references",
+      "status": "PASS",
+      "reasoning": "All 5 ALIASES edges reference a declared token."
+    },
+    {
+      "check": "circular-dependencies",
+      "status": "PASS",
+      "reasoning": "No circular ALIASES chain among the 5 real alias edges. Detector self-tested against a synthetic 3-node cycle fixture (not repo data) and correctly fired: true."
+    },
+    {
+      "check": "invalid-relationship-types",
+      "status": "PASS",
+      "reasoning": "All edge types restricted to the 8 permitted values: ALIASES, DERIVES_FROM, CONSUMED_BY, OVERRIDDEN_BY, VARIES_BY, AFFECTS, INVALIDATES, EVIDENCED_BY."
+    },
+    {
+      "check": "missing-provenance",
+      "status": "PASS",
+      "reasoning": "Every token cites source file + line number."
+    },
+    {
+      "check": "stale-evidence",
+      "status": "PASS",
+      "reasoning": "evidence-invalidation-report.json present: 0 stale / 136 total."
+    },
+    {
+      "check": "contradictory-values",
+      "status": "PASS",
+      "reasoning": "8 token(s) have an override value that DIFFERS from the canonical value (not necessarily wrong — could be an intentional theme variant — flagged for human review): [{\"token\":\"--color-primary\",\"canonical\":\"#102B3F !important\",\"override\":\"#102B3F\",\"line\":49},{\"token\":\"--color-primary-light\",\"canonical\":\"#1E4A5F !important\",\"override\":\"#1E4A5F\",\"line\":51},{\"token\":\"--color-primary-dark\",\"canonical\":\"#0A1D2B !important\",\"override\":\"#0A1D2B\",\"line\":52},{\"token\":\"--color-secondary\",\"canonical\":\"#3DBAA7 !important\",\"override\":\"#3DBAA7\",\"line\":54},{\"token\":\"--color-secondary-light\",\"canonical\":\"#A8E0D6 !important\",\"override\":\"#A8E0D6\",\"line\":56},{\"token\":\"--color-secondary-dark\",\"canonical\":\"#1A8A78 !important\",\"override\":\"#1A8A78\",\"line\":57},{\"token\":\"--color-accent\",\"canonical\":\"#2CABDF !important\",\"override\":\"#2CABDF\",\"line\":59},{\"token\":\"--color-accent-dark\",\"canonical\":\"#1A95C9 !important\",\"override\":\"#1A95C9\",\"line\":105}]"
+    },
+    {
+      "check": "responsive-state-condition-conflicts",
+      "status": "PASS",
+      "reasoning": "2 VARIES_BY edge(s) checked (--font-size-5xl @1440px, --container-xl @1920px); no token has two conflicting redeclarations under the identical media condition."
+    },
+    {
+      "check": "invalid-semantic-promotion",
+      "status": "NOT_APPLICABLE",
+      "reasoning": "No layer-promotion mechanism exists for Smile Savers tokens (all uniformly SEMANTIC by explicit design decision — see token-inventory.mjs header comment). There is nothing to promote, so this check cannot fire; recorded as N/A rather than a vacuous PASS."
+    },
+    {
+      "check": "google-brand-leakage",
+      "status": "PASS",
+      "reasoning": "No Google Sans reference or Google Material palette hex value found in any Smile Savers token value (reusing the grammar.mjs contamination-scan pattern)."
+    },
+    {
+      "check": "unknown-presented-as-verified",
+      "status": "PASS",
+      "reasoning": "Every consumer record's evidence status is one of the 7 permitted classes (DIRECT consumers = OBSERVED-SOURCE, INDIRECT/Tailwind-utility consumers = DERIVED, explicitly not upgraded to OBSERVED-SOURCE)."
+    },
+    {
+      "check": "relationship-evidence-class-conformance",
+      "status": "PASS",
+      "reasoning": "All 895 relationship edges use a status value from the 7-class enum."
+    }
+  ]
+}

@@ -1,0 +1,1554 @@
+{
+  "stage": "mirror",
+  "generatedAt": "2026-08-19T08:01:27.269Z",
+  "executionId": "b27c863c-8b71-47eb-96d5-dc8bcfac7b07",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "target": "https://labs.google/",
+  "origin": "https://labs.google",
+  "counts": {
+    "mirrored": 72,
+    "failed": 0,
+    "external": 90
+  },
+  "assets": [
+    {
+      "url": "https://labs.google/",
+      "parent": null,
+      "depth": 0,
+      "status": 200,
+      "contentType": "text/html",
+      "size": 291914,
+      "sha256": "0038654d4e95b3506a4685e2340c17a7388f42ae6f49cae5497a843bb82a04a8",
+      "retrievedAt": "2026-08-19T08:01:20.597Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/index.html"
+    },
+    {
+      "url": "https://labs.google/assets/images/masks/Circle.svg",
+      "parent": "runtime-discovery",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "size": 182,
+      "sha256": "0011370ee6121018f571b232e2c216bfd6aa24d21f025fc0bbb6bb15fea8b075",
+      "retrievedAt": "2026-08-19T08:01:21.098Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/masks/Circle.svg"
+    },
+    {
+      "url": "https://labs.google/assets/preview.png",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 25725,
+      "sha256": "2ebd4341937badec8a1d2d7a865761194128a6b3abf9a33cbae7d160229d4360",
+      "retrievedAt": "2026-08-19T08:01:21.318Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/preview.png"
+    },
+    {
+      "url": "https://labs.google/assets/icons/favicon-48x48.png",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 4566,
+      "sha256": "5ac84d45c584107d3ecf89001bd846f0925037411ee5c3be415d6d5966822f53",
+      "retrievedAt": "2026-08-19T08:01:21.515Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/icons/favicon-48x48.png"
+    },
+    {
+      "url": "https://labs.google/assets/icons/favicon-32x32.png",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 4033,
+      "sha256": "9dd8909715f9d922dac06827cbd52acf16a2f4d69e1e885373b5f7de3cf8c5c0",
+      "retrievedAt": "2026-08-19T08:01:21.685Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/icons/favicon-32x32.png"
+    },
+    {
+      "url": "https://labs.google/assets/icons/favicon-16x16.png",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 3309,
+      "sha256": "1518e638ff35dacc7b253227dd933a4703b12d583814231f9ff28f8e0dcf172a",
+      "retrievedAt": "2026-08-19T08:01:21.890Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/icons/favicon-16x16.png"
+    },
+    {
+      "url": "https://labs.google/assets/icons/safari-pinned-tab.svg",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "size": 2247,
+      "sha256": "8ba5a6b514d2a8b2616dc4f33adcaf5c62c4330ae9628eb9659b5c1f0f6e9730",
+      "retrievedAt": "2026-08-19T08:01:22.053Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/icons/safari-pinned-tab.svg"
+    },
+    {
+      "url": "https://labs.google/assets/icons/apple-touch-icon.png",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/png",
+      "size": 3229,
+      "sha256": "f8d1bd54eba978b84897f0a581d98426f59fc9a031b85c7291b1720d54baebd3",
+      "retrievedAt": "2026-08-19T08:01:22.297Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/icons/apple-touch-icon.png"
+    },
+    {
+      "url": "https://labs.google/styles-3NEYF3LM.css",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "text/css",
+      "size": 4865,
+      "sha256": "9716ae4258e8248c08514ee8b067e101633f497c3457972d7ba2062f95411d29",
+      "retrievedAt": "2026-08-19T08:01:22.472Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/styles-3NEYF3LM.css"
+    },
+    {
+      "url": "https://labs.google/assets/videos/featured-hero/flow-music-hero-video-updated.webm",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:22.473Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/featured-hero/flow-music-hero-video-updated.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:22.473Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/flow-music-poster.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 128708,
+      "sha256": "6aa00d1d8d089aea5e5de17075f3d81b45634778423fabf48eabfde7deba4b26",
+      "retrievedAt": "2026-08-19T08:01:22.763Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/flow-music-poster.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/featured-hero/google-flow-1440.webm",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:22.764Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/featured-hero/google-flow-1440.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:22.764Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/google-flow-featured-hero.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 945362,
+      "sha256": "fb4215ef3c9fe73eb396b060550d065700898f4e9c0f054174ed47be13994550",
+      "retrievedAt": "2026-08-19T08:01:23.081Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/google-flow-featured-hero.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/featured-hero/f428-labs-pomelli-hero-video.webm",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.083Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/featured-hero/f428-labs-pomelli-hero-video.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.083Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/pomelli-poster.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 146040,
+      "sha256": "8afe9ca8680aff9da474893b97635f799b5abe6292a94a19e58bfba9e9f1dedb",
+      "retrievedAt": "2026-08-19T08:01:23.292Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/pomelli-poster.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/featured-hero/stitch-hero-experiment-video.webm",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.293Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/featured-hero/stitch-hero-experiment-video.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.293Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/stitch-poster.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 327864,
+      "sha256": "c0ab1bbba5316f2356753e222dbf63bf767fa862adc4d76c42e2e1c30e12205e",
+      "retrievedAt": "2026-08-19T08:01:23.447Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/stitch-poster.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/dreambeans.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.448Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/dreambeans.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.448Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/dreambeans.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 80870,
+      "sha256": "daac00eeb0feaf9ec74cf7850fe17f0770a6e39165414d0a198d52489ecd3d35",
+      "retrievedAt": "2026-08-19T08:01:23.627Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/dreambeans.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/literature-insights.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.628Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/literature-insights.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.628Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/literature-insights.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 24042,
+      "sha256": "6f792095d78fbb5eab3a41c90c0c5f058e41d747f2c1c61db5c310145359c086",
+      "retrievedAt": "2026-08-19T08:01:23.842Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/literature-insights.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/hypothesis-generation.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.842Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/hypothesis-generation.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:23.842Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/hypothesis-generation.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 29372,
+      "sha256": "e2da8df8c94f064e3d599020c609f62ee6574741097bf797d9d60732fa213126",
+      "retrievedAt": "2026-08-19T08:01:24.003Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/hypothesis-generation.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/computational-discovery.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.004Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/computational-discovery.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.004Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/computational-discovery.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 33126,
+      "sha256": "557a97940fac72f6c7e073b0ab6785ad078151113cc6f622442f7cb5e460b7eb",
+      "retrievedAt": "2026-08-19T08:01:24.151Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/computational-discovery.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/stitch.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.152Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/stitch.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.152Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/stitch.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 11822,
+      "sha256": "50b194737926ffc58e86344010b2b2cbd97c2573afbb76e6b2d36bca598d2bcc",
+      "retrievedAt": "2026-08-19T08:01:24.332Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/stitch.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/pomelli.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.332Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/pomelli.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.332Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/pomelli.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 14800,
+      "sha256": "dde4abfb6d116391d544fdabfab9632459b1d89ea71b58ce077f66616f6d573d",
+      "retrievedAt": "2026-08-19T08:01:24.507Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/pomelli.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/flow-music.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.508Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/flow-music.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.508Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/flow-music.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 480502,
+      "sha256": "e6b03ac28e1aaf8e38df3c9e95cb6a254139c3a6bf11770d7e07cd4d0171e379",
+      "retrievedAt": "2026-08-19T08:01:24.743Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/flow-music.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/genie.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.744Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/genie.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.744Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/genie.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 79510,
+      "sha256": "0c5567576c772dc22bb2fe2d78a030eb834da571df0df2bd897f2dba14ab6fb6",
+      "retrievedAt": "2026-08-19T08:01:24.912Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/genie.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/mixboard.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.913Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/mixboard.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:24.913Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/mixboard.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 65256,
+      "sha256": "a0b3f13743fb2200d5562a4ebbff6d6ea0189656348ee2a1704c970a11e8e453",
+      "retrievedAt": "2026-08-19T08:01:25.110Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/mixboard.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/opal.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.111Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/opal.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.111Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/opal.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 23958,
+      "sha256": "728c11a5132d08371bf393d3b2b8ea33a1785a7362f58521340abb359e2fdb0e",
+      "retrievedAt": "2026-08-19T08:01:25.282Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/opal.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/stax.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.283Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/stax.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.283Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/stax.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 37050,
+      "sha256": "c931b063def4439139ed185c2a7c82a835f4b06f99ff4001e280a79c51a957ed",
+      "retrievedAt": "2026-08-19T08:01:25.443Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/stax.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/jules.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.444Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/jules.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.444Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/jules.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 9178,
+      "sha256": "57e0579a497744ed8ebe29f53e32aaa22acb0130c88deab15bed175febb1a5dc",
+      "retrievedAt": "2026-08-19T08:01:25.611Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/jules.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/learn-your-way.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.612Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/learn-your-way.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.612Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/learn-your-way.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 111100,
+      "sha256": "23393a45dbf1bc22a11f8eed85657107fefad25258e991f8cbe44b88dad29734",
+      "retrievedAt": "2026-08-19T08:01:25.780Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/learn-your-way.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/vantage.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.781Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/vantage.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.781Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/vantage.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 35446,
+      "sha256": "8f5a114d6703ee48b1c8f030ac454e718320e8ab748f84d569c4e16661d00a39",
+      "retrievedAt": "2026-08-19T08:01:25.952Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/vantage.webp"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/mobile/ai-edge-eloquent.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.953Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/videos/experiments/desktop/ai-edge-eloquent.mp4",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": null,
+      "contentType": "media/skipped",
+      "size": null,
+      "sha256": null,
+      "retrievedAt": "2026-08-19T08:01:25.953Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "bodyMirrored": false,
+      "reason": "heavy media: dependency recorded, body intentionally not downloaded"
+    },
+    {
+      "url": "https://labs.google/assets/images/tools/ai-edge-eloquent.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 56560,
+      "sha256": "9c3b8adf7dc8ba556a1d8128c169253163b7775527baabc891c7f6a1c47f04b1",
+      "retrievedAt": "2026-08-19T08:01:26.129Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/tools/ai-edge-eloquent.webp"
+    },
+    {
+      "url": "https://labs.google/assets/images/graduation/gemini_bg.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 18456,
+      "sha256": "7d5e1df5b37dfebd982d6a7fa48e28fa2a08dd4c1c48189ff5273789f8f6be53",
+      "retrievedAt": "2026-08-19T08:01:26.310Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/graduation/gemini_bg.webp"
+    },
+    {
+      "url": "https://labs.google/assets/images/graduation/flow_bg_ed_1.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 194842,
+      "sha256": "74da46e877e68f9771f9e644b870a000faafb42d2b0cb5ec7be3ba8682f2ed82",
+      "retrievedAt": "2026-08-19T08:01:26.525Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/graduation/flow_bg_ed_1.webp"
+    },
+    {
+      "url": "https://labs.google/assets/images/graduation/notebook_bg.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 27408,
+      "sha256": "4c190535edc170bdde4ba38fb2b3b9758cdd978215130b5c2a864930c20bc50e",
+      "retrievedAt": "2026-08-19T08:01:26.690Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/graduation/notebook_bg.webp"
+    },
+    {
+      "url": "https://labs.google/assets/images/graduation/flow_music_bg.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 15884,
+      "sha256": "05f2b8fe0440753ded180f940579fcf5da2f68b69e02cf13e7893adffad6f867",
+      "retrievedAt": "2026-08-19T08:01:26.893Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/graduation/flow_music_bg.webp"
+    },
+    {
+      "url": "https://labs.google/assets/images/graduation/ai_studio_bg_ed_1.webp",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "image/webp",
+      "size": 23768,
+      "sha256": "790ed60f8586e63c584cc15786489d8202641001031f01e76501e6dd546c300e",
+      "retrievedAt": "2026-08-19T08:01:27.060Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/assets/images/graduation/ai_studio_bg_ed_1.webp"
+    },
+    {
+      "url": "https://labs.google/main-SHJYJPBH.js",
+      "parent": "https://labs.google/",
+      "depth": 1,
+      "status": 200,
+      "contentType": "text/javascript",
+      "size": 1714351,
+      "sha256": "8c883ef917458d8d81087d31a3e504357461284686ea435e832ad4700fd695d0",
+      "retrievedAt": "2026-08-19T08:01:27.266Z",
+      "evidenceClass": "OBSERVED-SOURCE",
+      "localPath": "mirror/files/main-SHJYJPBH.js"
+    }
+  ],
+  "externalDependencies": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&amp;family=Google+Sans+Text:wght@400;500&amp;display=block",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v64/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v23/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEp2iw.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v23/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmhjtg.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.js",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://www.gstatic.com/glue/cookienotificationbar/cookienotificationbar.min.css",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://www.googletagmanager.com/ns.html?id=GTM-WNJJ98ZQ",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiIUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiAUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPh0UvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj8UvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjYUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjMUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiMUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi0UvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj4UvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjEUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPikUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPhEUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjAUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjkUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjsUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPioUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPisUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi8UvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPlwUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiQUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPi4UvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPiYUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPj0UvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjwUvaYr.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesans/v70/4UasrENHsxJlGDuGo1OIlJfC6l_24rlCK1Yo_Iqcsih3SAyH6cAwhX9RPjIUvQ.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFp2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFh2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qGV2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEd2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qE52i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEt2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFt2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFV2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEZ2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEl2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFF2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qGl2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEh2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFB2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEF2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEN2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFJ2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFN2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFd2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qCR2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFx2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qFZ2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qF52i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEV2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qER2i1dC.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUu9-KzpRiLCAt4Unrc-xIKmCU5qEp2iw.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnhjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnpjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnkdjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmVjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmxjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmljtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnljtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnndjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmRjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmtjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnNjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnktjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmpjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnJjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmNjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmFjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnBjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnFjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnVjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVngZjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnn5jtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnRjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnnxjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmdjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmZjtiu7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/googlesanstext/v25/5aUp9-KzpRiLCAt4Unrc-xIKmCU5oLlVnmhjtg.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/cedarvillecursive/v18/yYL00g_a2veiudhUmxjo5VKkoqA-B_nuIrpw.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/spacemono/v17/i7dPIFZifjKcF5UAWdDRYE58RWq7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/spacemono/v17/i7dPIFZifjKcF5UAWdDRYE98RWq7.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/spacemono/v17/i7dPIFZifjKcF5UAWdDRYEF8RQ.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    },
+    {
+      "url": "https://fonts.gstatic.com/s/materialsymbolsoutlined/v364/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsI.woff2",
+      "parent": "https://labs.google/",
+      "mirrored": false,
+      "evidenceClass": "VERIFY-BLOCKED",
+      "reason": "cross-origin resource; not mirrored and not reachable by the browser in this environment"
+    }
+  ],
+  "canonicalHash": "9b3e65074c0e0f172c17f747b2a6ff994944652fb5e39e87b5395b9869323a9e"
+}

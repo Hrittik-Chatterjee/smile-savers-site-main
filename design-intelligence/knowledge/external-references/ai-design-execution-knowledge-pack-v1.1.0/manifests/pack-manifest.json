@@ -1,0 +1,101 @@
+{
+  "packVersion": "1.1.0",
+  "generatedAt": "2026-08-19T09:10:58.490119+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "9e2deb700675361211e028c7c4130e3f42f3de578f9ac573ba7fb0181559ac72",
+      "bytes": 679
+    },
+    {
+      "path": "adapters/claude-code/README.md",
+      "sha256": "af6c8961147bb5974db9127204ceebd0a2719f170284e4d9964003c238ef725d",
+      "bytes": 576
+    },
+    {
+      "path": "evidence/sources/grounding.md",
+      "sha256": "e1590a8c0092d532d9bec8e66fecbdee89cc8001fdd12464ed86667f71e4065c",
+      "bytes": 2237
+    },
+    {
+      "path": "knowledge/agent-adapter-contract.md",
+      "sha256": "1fe5b9e43c7444d285410617310053e7b802317453f5d32f3d442836bf3fe785",
+      "bytes": 355
+    },
+    {
+      "path": "knowledge/decisions/DEC-001.json",
+      "sha256": "ae142efef1359a04879b44b68a2d73970776e8a22f248bef42af8610001bfd47",
+      "bytes": 420
+    },
+    {
+      "path": "knowledge/decisions/DEC-002.json",
+      "sha256": "6c89a36b53e82d312a69d9ff109c4500b6a36d3991f560d8aeda2ac8b3adf74e",
+      "bytes": 332
+    },
+    {
+      "path": "knowledge/decisions/DEC-003.json",
+      "sha256": "ee4c17299d7c804ba3ef415448cfdcece27a3491573e38c2a23c7b192ff1ae44",
+      "bytes": 326
+    },
+    {
+      "path": "knowledge/policies/cache-policy.json",
+      "sha256": "29051c1b58823be666794e85d208e115fbda17916766e7b37ccb09d982bac4e4",
+      "bytes": 514
+    },
+    {
+      "path": "knowledge/policies/context-routing.json",
+      "sha256": "81d48d7c070ff085aae8c553507b8322709f696c5a3514eafc43bc4e45a64ff5",
+      "bytes": 457
+    },
+    {
+      "path": "knowledge/policies/truth-status.json",
+      "sha256": "5f74064bf86e46971815c24c1a6d7be899a4bca07066aef02facb5d3376e1182",
+      "bytes": 562
+    },
+    {
+      "path": "knowledge/schemas/evidence.schema.json",
+      "sha256": "392ca5f6b29ffae20402d27cd2eb8b570b394001bb4245818089f9969eec75f9",
+      "bytes": 463
+    },
+    {
+      "path": "knowledge/schemas/execution-event.schema.json",
+      "sha256": "0860013ac339b3fe9de62f80ae86dc361213837c737c1d4b714536719e63f223",
+      "bytes": 515
+    },
+    {
+      "path": "knowledge/token-lineage.md",
+      "sha256": "751a6afa348fba7df0b858419e30ddeee56c68bae9c23a2823d9b35381814677",
+      "bytes": 414
+    },
+    {
+      "path": "manifests/research-ledger.json",
+      "sha256": "59d8ce916d6b7143efb5e8e26f0467d9c927653e052bf4794879ecbcb95d410a",
+      "bytes": 269
+    },
+    {
+      "path": "manifests/source-index.json",
+      "sha256": "ee5ab45004e078bbe539922be3ec1530012832766e3d41ea90c97c261f8d1588",
+      "bytes": 1291
+    },
+    {
+      "path": "prompts/MASTER-CLAUDE-CODE-CAPTURE-AND-KNOWLEDGE.md",
+      "sha256": "c040bf54cef13244ddeec46f95078bcc13aebecc32456dc1a52817a0e6f4497c",
+      "bytes": 4124
+    },
+    {
+      "path": "scripts/record-hook.mjs",
+      "sha256": "9310e574560f1c4bf9a1bad98ade6aaa40e40ede9ec5c818d7f21c6afa1091e0",
+      "bytes": 835
+    },
+    {
+      "path": "scripts/verify-cache.mjs",
+      "sha256": "2bf9fc7f58750e7ceebddfdf1dead82f80b5604a4c53818f51e7f7cfeec3c354",
+      "bytes": 609
+    },
+    {
+      "path": "tests/STRESS-MATRIX.md",
+      "sha256": "cff7f453195f8665c9c92c87186582ef6b30d2d730747b77d5bedc55e5634329",
+      "bytes": 1871
+    }
+  ]
+}

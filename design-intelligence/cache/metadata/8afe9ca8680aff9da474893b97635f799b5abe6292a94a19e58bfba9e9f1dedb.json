@@ -1,0 +1,14 @@
+{
+  "sha256": "8afe9ca8680aff9da474893b97635f799b5abe6292a94a19e58bfba9e9f1dedb",
+  "size": 146040,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:23.292Z",
+  "sourceURL": "https://labs.google/assets/images/tools/pomelli-poster.webp",
+  "finalURL": "https://labs.google/assets/images/tools/pomelli-poster.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.388Z"
+}

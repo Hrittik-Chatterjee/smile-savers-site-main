@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "researchPolicy": "authoritative-first",
+  "sources": [
+    "SRC-ANTHROPIC-HOOKS",
+    "SRC-ANTHROPIC-SESSIONS",
+    "SRC-PLAYWRIGHT-TRACE",
+    "SRC-W3C-WCAG22",
+    "SRC-GOOGLE-M3",
+    "SRC-GOOGLE-M3-API",
+    "SRC-SLSA12",
+    "SRC-SLSA-PROVENANCE"
+  ],
+  "status": "VERIFIED-AT-BUILD-TIME"
+}

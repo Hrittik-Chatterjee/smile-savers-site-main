@@ -1,0 +1,14 @@
+{
+  "sha256": "8ba5a6b514d2a8b2616dc4f33adcaf5c62c4330ae9628eb9659b5c1f0f6e9730",
+  "size": 2247,
+  "mimeType": "image/svg+xml",
+  "retrievedAt": "2026-08-19T08:01:22.053Z",
+  "sourceURL": "https://labs.google/assets/icons/safari-pinned-tab.svg",
+  "finalURL": "https://labs.google/assets/icons/safari-pinned-tab.svg",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.378Z"
+}

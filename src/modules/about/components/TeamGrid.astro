@@ -2,149 +2,340 @@
 /**
  * TeamGrid — Enhanced · local images · accent colours · accessible links
  */
-import { getCollection } from "astro:content";
-import drImage from "@/assets/team/dr.jpg";
+import { getCollection } from 'astro:content';
+import drImage from '@/assets/team/dr.jpg';
 
-const team = await getCollection("team");
+const team = await getCollection('team');
 const sortedTeam = team.sort((a, b) => a.data.order - b.data.order);
 
 // Map slug to local image & accent
-const doctorMeta: Record<string, { img: string; accent: string; badge?: string }> = {
-  "dr-deepak-bhagat": { img: "/images/doctors/dr-bhagat.jpg", accent: "#2CABDF", badge: "ICOI Diplomate" },
-  "dr-julie-islam":   { img: drImage.src,  accent: "#3DBAA7", badge: "Preventive Care" },
-  "dr-dorothy-li":    { img: drImage.src,     accent: "#10B981", badge: "Emergency Specialist" },
-  "dr-sarha-avendano": { img: drImage.src,     accent: "#8B5CF6", badge: "Patient-Centered Care" },
+const doctorMeta: Record<string, { img: string; accent: string; tint: string; badge?: string }> = {
+  'dr-deepak-bhagat': {
+    img: '/images/doctors/dr-bhagat.jpg',
+    accent: 'var(--cat-cyan-ink)',
+    tint: 'var(--cat-cyan-tint)',
+    badge: 'ICOI Diplomate',
+  },
+  'dr-julie-islam': {
+    img: drImage.src,
+    accent: 'var(--cat-teal-ink)',
+    tint: 'var(--cat-teal-tint)',
+    badge: 'Preventive Care',
+  },
+  'dr-dorothy-li': {
+    img: drImage.src,
+    accent: 'var(--cat-green-ink)',
+    tint: 'var(--cat-green-tint)',
+    badge: 'Emergency Specialist',
+  },
+  'dr-sarha-avendano': {
+    img: drImage.src,
+    accent: 'var(--cat-purple-ink)',
+    tint: 'var(--cat-purple-tint)',
+    badge: 'Patient-Centered Care',
+  },
 };
 ---
 
 <section class="tg section" aria-labelledby="team-heading">
   <div class="tg-wrap">
-
     <header class="tg-hdr">
       <span class="tg-eye">Our Expert Team</span>
       <h2 id="team-heading" class="tg-h2">A Team That Feels Like Family</h2>
-      <p class="tg-sub">Four dentists. One shared commitment to making every visit comfortable and effective.</p>
+      <p class="tg-sub">
+        Four dentists. One shared commitment to making every visit comfortable and effective.
+      </p>
     </header>
 
     <div class="tg-grid">
-      {sortedTeam.map((member) => {
-        const meta = doctorMeta[member.data.slug] ?? { img: "/images/doctors/dr-bhagat.jpg", accent: "#2CABDF" };
-        const cred = member.data.credentials?.[0] ?? "DDS";
-        return (
-          <article class="tg-card" style={`--ta:${meta.accent}`}>
-
-            <div class="tg-photo">
-              <img
-                src={meta.img}
-                alt={member.data.name}
-                width="400" height="500"
-                loading="lazy"
-                class="tg-img"
-              />
-              {meta.badge && (
-                <span class="tg-badge">{meta.badge}</span>
-              )}
-            </div>
-
-            <div class="tg-info">
-              <div class="tg-name-row">
-                <div>
-                  <h3 class="tg-name">{member.data.name}</h3>
-                  <span class="tg-cred">{cred}</span>
-                </div>
+      {
+        sortedTeam.map((member) => {
+          const meta = doctorMeta[member.data.slug] ?? {
+            img: '/images/doctors/dr-bhagat.jpg',
+            accent: 'var(--cat-cyan-ink)',
+            tint: 'var(--cat-cyan-tint)',
+          };
+          const cred = member.data.credentials?.[0] ?? 'DDS';
+          return (
+            <article class="tg-card" style={`--ta:${meta.accent};--ta-tint:${meta.tint}`}>
+              <div class="tg-photo">
+                <img
+                  src={meta.img}
+                  alt={member.data.name}
+                  width="400"
+                  height="500"
+                  loading="lazy"
+                  class="tg-img"
+                />
+                {meta.badge && <span class="tg-badge">{meta.badge}</span>}
               </div>
-              {/* <p class="tg-role">{member.data.role}</p> */}
-              {member.data.specialties?.[0] && (
-                <p class="tg-spec">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                  {member.data.specialties[0]}
-                </p>
-              )}
-              <p class="tg-bio">{member.data.shortBio}</p>
-              <a href={`/team/${member.data.slug}`} class="tg-cta">
-                View Profile
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-            </div>
 
-          </article>
-        );
-      })}
+              <div class="tg-info">
+                <div class="tg-name-row">
+                  <div>
+                    <h3 class="tg-name">{member.data.name}</h3>
+                    <span class="tg-cred">{cred}</span>
+                  </div>
+                </div>
+                {/* <p class="tg-role">{member.data.role}</p> */}
+                {member.data.specialties?.[0] && (
+                  <p class="tg-spec">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {member.data.specialties[0]}
+                  </p>
+                )}
+                <p class="tg-bio">{member.data.shortBio}</p>
+                <a href={`/team/${member.data.slug}`} class="tg-cta">
+                  View Profile
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </article>
+          );
+        })
+      }
     </div>
-
   </div>
 </section>
 
 <style>
-.tg { background: var(--color-surface-elevated) }
-.tg-wrap { max-width: var(--container-xl); margin-inline: auto; padding-inline: clamp(.75rem,3vw,var(--spacing-element)) }
-.tg-hdr { text-align: center; max-width: 540px; margin-inline: auto; margin-bottom: clamp(2rem,4vw,3.5rem) }
-.tg-eye {
-  display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--color-secondary-dark); background: rgba(61,186,167,.1);
-  border-radius: 9999px; padding: .25rem .875rem; margin-bottom: .875rem;
-}
-.tg-h2 { font-size: clamp(1.75rem,3.5vw,2.5rem); font-family: var(--font-family-heading); font-weight: 700; color: var(--color-primary); letter-spacing: -.025em; line-height: 1.15; margin: 0 0 1rem }
-.tg-sub { font-size: var(--font-size-lg); color: var(--color-text-muted); line-height: 1.65; margin: 0 }
+  .tg {
+    background: var(--color-surface-elevated);
+  }
+  .tg-wrap {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+    padding-inline: clamp(0.75rem, 3vw, var(--spacing-element));
+  }
+  .tg-hdr {
+    text-align: center;
+    max-width: 540px;
+    margin-inline: auto;
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  }
+  .tg-eye {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-secondary-dark);
+    background: rgba(61, 186, 167, 0.1);
+    border-radius: 9999px;
+    padding: 0.25rem 0.875rem;
+    margin-bottom: 0.875rem;
+  }
+  .tg-h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0 0 1rem;
+  }
+  .tg-sub {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
 
-.tg-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem }
-@media(min-width:640px){ .tg-grid { grid-template-columns: repeat(2,1fr) } }
-@media(min-width:1024px){ .tg-grid { grid-template-columns: repeat(4,1fr); gap: 1.25rem } }
+  .tg-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .tg-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .tg-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+  }
 
-.tg-card {
-  background: #fff; border-radius: 1.25rem; border: 1.5px solid var(--color-border);
-  overflow: hidden; display: flex; flex-direction: column;
-  transition: all .3s ease;
-  position: relative;
-}
-.tg-card::after { content: ''; position: absolute; top:0; left:0; right:0; height:3px; background:var(--ta); opacity:0; transition:opacity .3s ease }
-.tg-card:hover { box-shadow: 0 20px 50px rgba(16,43,63,.12); transform: translateY(-4px); border-color: var(--ta) }
-.tg-card:hover::after { opacity: 1 }
+  .tg-card {
+    background: #fff;
+    border-radius: var(--radius-card);
+    border: 1.5px solid var(--color-border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .tg-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--ta);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .tg-card:hover {
+    box-shadow: 0 20px 50px rgba(16, 43, 63, 0.12);
+    transform: translateY(-4px);
+    border-color: var(--ta);
+  }
+  .tg-card:hover::after {
+    opacity: 1;
+  }
 
-.tg-photo { position: relative; aspect-ratio: 1/1; background: linear-gradient(160deg,var(--color-surface),var(--color-secondary-light)); overflow: hidden }
-.tg-img { width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform .5s ease; display:block }
-.tg-card:hover .tg-img { transform: scale(1.04) }
-.tg-badge {
-  position:absolute; bottom:.75rem; left:.75rem;
-  background: var(--ta); color:#fff;
-  font-size:.6rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
-  padding:.25rem .65rem; border-radius:9999px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.2);
-}
-.tg-card:hover .tg-name { color: var(--ta); }
-.tg-info { padding: 1.125rem; display:flex; flex-direction:column; gap:.5rem; flex:1 }
-.tg-name-row { display:flex; justify-content:space-between; align-items:flex-start }
-.tg-name { font-size:clamp(1rem,1.2vw,1.15rem); font-family:var(--font-family-heading); font-weight:700; color:var(--color-primary); margin:0 0 .2rem; line-height:1.2 }
-.tg-cred { font-size:.7rem; font-weight:600; color:var(--ta); background:color-mix(in srgb,var(--ta) 12%,transparent); padding:.15rem .5rem; border-radius:9999px }
-.tg-role { font-size:var(--font-size-sm); font-weight:600; color:var(--ta); margin:0 }
-.tg-spec { display:flex; align-items:center; gap:.35rem; font-size:.78rem; color:var(--color-text-muted); margin:0; font-weight:500 }
-.tg-spec svg { flex-shrink:0; color:var(--ta) }
-.tg-bio {
-  font-size: .8rem;
-  color: var(--color-text-muted);
-  line-height: 1.55;
-  margin: 0 0 .5rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.tg-cta {
-  display:inline-flex; align-items:center; gap:.375rem;
-  font-size:.82rem; font-weight:700; color:var(--ta); text-decoration:none;
-  min-height:44px; transition:gap .2s,color .2s;
-  margin-top:auto; padding:.5rem 1rem;
-  border:1.5px solid color-mix(in srgb,var(--ta) 30%,transparent);
-  border-radius:.6rem; width:fit-content;
-  background:color-mix(in srgb,var(--ta) 5%,transparent);
-  position: relative;
-}
-.tg-cta::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-.tg-cta:hover { gap:.625rem; border-color:var(--ta); background:color-mix(in srgb,var(--ta) 10%,transparent) }
-@media(prefers-reduced-motion:reduce){ .tg-card,.tg-img { transition:none } }
+  .tg-photo {
+    position: relative;
+    aspect-ratio: 1/1;
+    background: linear-gradient(160deg, var(--color-surface), var(--color-secondary-light));
+    overflow: hidden;
+  }
+  .tg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+  .tg-card:hover .tg-img {
+    transform: scale(1.04);
+  }
+  .tg-badge {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    background: var(--ta);
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  .tg-card:hover .tg-name {
+    color: var(--ta);
+  }
+  .tg-info {
+    padding: 1.125rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+  .tg-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .tg-name {
+    font-size: clamp(1rem, 1.2vw, 1.15rem);
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 0.2rem;
+    line-height: 1.2;
+  }
+  .tg-cred {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--ta);
+    background: var(--ta-tint);
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+  }
+  .tg-role {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--ta);
+    margin: 0;
+  }
+  .tg-spec {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    font-weight: 500;
+  }
+  .tg-spec svg {
+    flex-shrink: 0;
+    color: var(--ta);
+  }
+  .tg-bio {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.55;
+    margin: 0 0 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .tg-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--ta);
+    text-decoration: none;
+    min-height: 44px;
+    transition:
+      gap 0.2s,
+      color 0.2s;
+    margin-top: auto;
+    padding: 0.5rem 1rem;
+    border: 1.5px solid color-mix(in srgb, var(--ta) 30%, transparent);
+    border-radius: 0.6rem;
+    width: fit-content;
+    background: var(--ta-tint);
+    position: relative;
+  }
+  .tg-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .tg-cta:hover {
+    gap: 0.625rem;
+    border-color: var(--ta);
+    background: var(--ta-tint);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tg-card,
+    .tg-img {
+      transition: none;
+    }
+  }
 </style>

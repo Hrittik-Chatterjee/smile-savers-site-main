@@ -1,0 +1,36 @@
+/**
+ * Design-intelligence grammar layer — GENERATED, DO NOT HAND-EDIT.
+ * Regenerate via: npm --prefix design-intelligence run integrate
+ *
+ * ADDITIVE ONLY. This file is not imported by global.css or any component.
+ * It exists so the derived grammar (Stage 11) can be inspected as real CSS
+ * without touching production output. Values here are STRUCTURAL RELATIONSHIPS
+ * (ratios, scale-step counts) derived from labs.google evidence — never a
+ * Google color, font, or literal px copied from Labs. See:
+ * design-intelligence/artifacts/grammar/brand-separated-grammar.json
+ *
+ * Existing Smile Savers tokens (--color-*, --radius-*, --spacing-*, read live
+ * from src/styles/global.css at generation time) remain fully authoritative.
+ * Nothing here overrides them; --grammar-* is a disjoint namespace.
+ */
+
+:root {
+  /* Radius scale step count observed as a structural pattern in reference
+     evidence (9 steps); current Smile
+     Savers radius scale independently has 6 steps
+     (--radius-sm, --radius-md, --radius-lg, --radius-xl, --radius-2xl, --radius-full) and is untouched. */
+  --grammar-reference-radius-step-count: 9;
+
+  /* Spacing rhythm step count observed as a structural pattern
+     (12 distinct steps); current
+     Smile Savers spacing scale independently has 3
+     steps (--spacing-section, --spacing-block, --spacing-element) and is untouched. */
+  --grammar-reference-spacing-step-count: 12;
+
+  /* Typography hierarchy: number of consecutive-ratio steps observed. */
+  --grammar-reference-type-scale-step-count: 14;
+
+  /* Responsive rhythm: number of real breakpoints observed (Stage 3/6 evidence,
+     never the 6 harness sample viewports). */
+  --grammar-reference-breakpoint-count: 9;
+}

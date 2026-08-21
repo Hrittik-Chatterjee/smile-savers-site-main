@@ -1,0 +1,14 @@
+{
+  "sha256": "fb4215ef3c9fe73eb396b060550d065700898f4e9c0f054174ed47be13994550",
+  "size": 945362,
+  "mimeType": "image/webp",
+  "retrievedAt": "2026-08-19T08:01:23.081Z",
+  "sourceURL": "https://labs.google/assets/images/tools/google-flow-featured-hero.webp",
+  "finalURL": "https://labs.google/assets/images/tools/google-flow-featured-hero.webp",
+  "httpStatus": 200,
+  "retrievalMethod": "curl",
+  "tool": "mirror.mjs",
+  "toolVersion": null,
+  "migratedFrom": "mirror-manifest.json",
+  "migratedAt": "2026-08-19T09:17:02.386Z"
+}

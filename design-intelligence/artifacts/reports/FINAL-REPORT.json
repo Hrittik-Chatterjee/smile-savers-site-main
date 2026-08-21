@@ -1,0 +1,558 @@
+{
+  "stage": "report",
+  "generatedAt": "2026-08-19T08:58:01.473Z",
+  "executionId": "724edf2a-55b7-417e-afa8-deb9a32c84dd",
+  "environment": {
+    "node": "v22.22.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "reports": {
+    "extractionReport": {
+      "mirror": {
+        "mirrored": 72,
+        "failed": 0,
+        "external": 90
+      },
+      "cssom": {
+        "sheets": 24,
+        "rules": 896,
+        "media": 134,
+        "keyframes": 10,
+        "supports": 4,
+        "imports": 0,
+        "customProperties": 390,
+        "distinctCustomProperties": 106,
+        "stateRules": 65,
+        "transitions": 295,
+        "animations": 235,
+        "breakpoints": 9,
+        "blockedSheets": 1
+      },
+      "runtime": {
+        "captures": 12
+      }
+    },
+    "evidenceCoverageReport": {
+      "note": "\"100% full design system extracted\" is NEVER stated unless every criterion below is \"verified\" — it is not, so this report states the actual percentages.",
+      "source": {
+        "criteria": 14,
+        "verifiedCount": 10,
+        "percentVerified": 71,
+        "byCategory": {
+          "HTML": "verified",
+          "CSS": "verified",
+          "JavaScript": "partial (mirrored, not statically parsed by design — see mirror.mjs docstring)",
+          "custom properties": "verified",
+          "media queries": "verified",
+          "pseudo-state rules": "verified",
+          "transitions": "verified",
+          "keyframes": "verified",
+          "asset references": "verified",
+          "fonts": "partial (loaded/unloaded status captured; Google Sans itself VERIFY-BLOCKED per F6)",
+          "images": "verified",
+          "video": "partial (dependency recorded, bodies intentionally not downloaded)",
+          "preload/modulepreload": "partial (discovered via <link rel> scan; not exhaustively verified)",
+          "CSS imports": "verified (0 found)"
+        }
+      },
+      "design": {
+        "criteria": 17,
+        "verifiedCount": 12,
+        "percentVerified": 71,
+        "byCategory": {
+          "color": "verified",
+          "typography": "verified",
+          "spacing": "verified",
+          "sizing": "verified",
+          "layout": "verified",
+          "grid": "partial (structural sampling to depth 2, not exhaustive)",
+          "container": "verified",
+          "shape": "verified",
+          "border": "verified",
+          "elevation": "partial (box-shadow captured in element styles; not separately clustered as an elevation scale)",
+          "opacity": "partial (captured per-element; not clustered as a distinct scale)",
+          "layering": "partial (z-index captured per-element; not clustered as a distinct scale)",
+          "motion": "verified",
+          "interaction": "verified",
+          "responsive behavior": "verified",
+          "accessibility": "verified",
+          "component composition": "partial (1 component-level token inferred; broader component taxonomy not attempted, per honesty constraint against inventing coverage)"
+        }
+      }
+    },
+    "runtimeAssetReport": {
+      "note": "Same-origin mirror-gap closure. Cross-origin (fonts.gstatic.com etc.) remain VERIFY-BLOCKED by design.",
+      "totalMirrorGapsAcrossCaptures": 0,
+      "runtimeDiscoveredAssets": []
+    },
+    "interactionStateReport": {
+      "probes": 176,
+      "observed": 140,
+      "verifyBlocked": 36,
+      "byState": {
+        ":hover": {
+          "observed": 50,
+          "withDelta": 16
+        },
+        ":focus-visible": {
+          "observed": 28,
+          "withDelta": 28
+        },
+        ":focus": {
+          "observed": 44,
+          "withDelta": 14
+        },
+        ":disabled": {
+          "observed": 6,
+          "withDelta": 0
+        },
+        ":focus-within": {
+          "observed": 12,
+          "withDelta": 8
+        }
+      }
+    },
+    "responsiveReport": {
+      "note": "transitions[] are keyed on REAL breakpoints from CSSOM evidence, never on sample viewports.",
+      "realBreakpoints": 8,
+      "transitionsObserved": 8,
+      "withStructuralChange": 2,
+      "viewportSampleClassification": [
+        {
+          "viewport": "desktop-xl",
+          "width": 1440,
+          "nearestBreakpointPx": 1366,
+          "distancePx": 74,
+          "isAtABreakpoint": false
+        },
+        {
+          "viewport": "desktop",
+          "width": 1280,
+          "nearestBreakpointPx": 1366,
+          "distancePx": 86,
+          "isAtABreakpoint": false
+        },
+        {
+          "viewport": "tablet",
+          "width": 1024,
+          "nearestBreakpointPx": 1024,
+          "distancePx": 0,
+          "isAtABreakpoint": true
+        },
+        {
+          "viewport": "tablet-portrait",
+          "width": 768,
+          "nearestBreakpointPx": 768,
+          "distancePx": 0,
+          "isAtABreakpoint": true
+        },
+        {
+          "viewport": "mobile-xl",
+          "width": 430,
+          "nearestBreakpointPx": 400,
+          "distancePx": 30,
+          "isAtABreakpoint": false
+        },
+        {
+          "viewport": "mobile",
+          "width": 390,
+          "nearestBreakpointPx": 400,
+          "distancePx": 10,
+          "isAtABreakpoint": false
+        }
+      ]
+    },
+    "normalizationReport": {
+      "remBases": {
+        "elementPropertiesPx": 10,
+        "mediaQueryLengthsPx": 16,
+        "elementBasisEvidence": "Stage 3 cssom.json remBasis (computed getComputedStyle + independent 10rem DOM probe, agree=true)",
+        "mediaBasisEvidence": "Stage 3 parse.mjs matchMedia empirical test (100rem false at 1024px viewport => 16px basis, not 10px)"
+      },
+      "counts": {
+        "customProperties": 54,
+        "customPropertiesUnknownBasis": 31,
+        "distinctRadii": 36,
+        "distinctSpacing": 78,
+        "distinctFontSizes": 15,
+        "breakpointBasisMismatches": 0
+      },
+      "breakpointBasisCrossCheck": "9/9 agree"
+    },
+    "evidenceGraphReport": {
+      "nodes": 872,
+      "edges": 881,
+      "tokens": 171,
+      "tokensWithoutLineage": 0,
+      "byNodeKind": {
+        "SOURCE": 1,
+        "ASSET": 72,
+        "SELECTOR": 171,
+        "PROPERTY": 152,
+        "RAW": 152,
+        "NORMALIZED": 152,
+        "TOKEN": 171,
+        "SEMANTIC_ROLE": 1
+      }
+    },
+    "tokenReport": {
+      "counts": {
+        "atomic": 54,
+        "semantic": 54,
+        "component": 1,
+        "breakpoint": 9,
+        "motion": 10,
+        "conflicts": 10,
+        "namespaceViolations": 0
+      },
+      "conflicts": 10,
+      "conflictsByClassification": {
+        "cross-group-value-collision": 10
+      }
+    },
+    "m3CrossReferenceReport": {
+      "correspondences": 5,
+      "byRelationshipType": {
+        "OBSERVED-SOURCE": 1,
+        "MAPPED": 4
+      },
+      "liveVerifiedFacts": [
+        {
+          "claim": "MWC (@material/web) is in maintenance mode pending new maintainers",
+          "source": "https://raw.githubusercontent.com/material-components/material-web/main/README.md",
+          "method": "curl fetch this session",
+          "evidenceClass": "OBSERVED-SOURCE"
+        }
+      ],
+      "environmentLimitation": "m3.material.io is unreachable for content in this environment."
+    },
+    "grammarReport": {
+      "contaminationScanClean": true,
+      "layers": [
+        "spacingRhythm",
+        "radiusScale",
+        "typographyHierarchy",
+        "responsiveRhythm",
+        "compositionPatterns",
+        "interactionStatePatterns",
+        "motionRelationships"
+      ]
+    },
+    "integrationReport": {
+      "additiveOnly": true,
+      "namespaceCollisions": 0,
+      "generatedFile": "src/styles/design-intelligence-grammar.css",
+      "productionBuildStatus": {
+        "ranBuild": true,
+        "command": "npm run check",
+        "errors": 0,
+        "warnings": 0
+      },
+      "repoAuthoritativeValues": {
+        "--color-bg-clinical": {
+          "value": "#EFF6EE",
+          "line": 63,
+          "file": "src/styles/global.css"
+        },
+        "--color-surface": {
+          "value": "#EFF6EE",
+          "line": 89,
+          "file": "src/styles/global.css"
+        },
+        "--color-bg-human": {
+          "value": "#F4EBD9",
+          "line": 65,
+          "file": "src/styles/global.css"
+        }
+      }
+    },
+    "fixtureReport": {
+      "candidates": 4,
+      "admitted": 1,
+      "rejected": 3
+    },
+    "visualParityReport": {
+      "note": "STRICT 0-pixel parity applies ONLY to admitted fixtures (fixtureReport above), and is CONTROLLED REFERENCE-FIXTURE PARITY, never a claim about labs.google itself. This project makes NO claim of pixel parity between the Smile Savers site and labs.google, and none is measured here.",
+      "fixtureParityRun": true,
+      "fixtureParityResults": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      },
+      "siteRegressionBaselines": {
+        "total": 24,
+        "succeeded": 24,
+        "failed": 0
+      }
+    },
+    "accessibilityReport": {
+      "labsObservationsInformationalOnly": {
+        "violations": 2,
+        "reducedMotionRespected": true
+      },
+      "smileSaversNormative": {
+        "target": "WCAG 2.2 AA",
+        "routesChecked": ["/", "/services/", "/appointments/", "/contact/"],
+        "results": [
+          {
+            "route": "/",
+            "violations": [
+              {
+                "id": "aria-prohibited-attr",
+                "impact": "serious",
+                "description": "Ensure ARIA attributes are not prohibited for an element's role",
+                "help": "Elements must only use permitted ARIA attributes",
+                "nodeCount": 3,
+                "targets": [
+                  [
+                    "article[aria-label=\"Review from John Doe\"] > .tsl-stars-sm[aria-label=\"5 out of 5 stars\"][data-astro-cid-msyxxbbi=\"\"]"
+                  ],
+                  [
+                    "article[aria-label=\"Review from James K.\"] > .tsl-stars-sm[aria-label=\"5 out of 5 stars\"][data-astro-cid-msyxxbbi=\"\"]"
+                  ],
+                  [
+                    "article[aria-label=\"Review from Sofia R.\"] > .tsl-stars-sm[aria-label=\"5 out of 5 stars\"][data-astro-cid-msyxxbbi=\"\"]"
+                  ]
+                ]
+              },
+              {
+                "id": "color-contrast",
+                "impact": "serious",
+                "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+                "help": "Elements must meet minimum color contrast ratio thresholds",
+                "nodeCount": 35,
+                "targets": [
+                  [".hdr-cta"],
+                  [".cta-primary > span[data-astro-cid-ygtpsrww=\"\"]"],
+                  [".sp-eyebrow"],
+                  [".eyebrow"],
+                  ["a[href$=\"dr-deepak-bhagat\"]"]
+                ]
+              }
+            ],
+            "passes": 29,
+            "incomplete": 2
+          },
+          {
+            "route": "/services/",
+            "violations": [
+              {
+                "id": "color-contrast",
+                "impact": "serious",
+                "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+                "help": "Elements must meet minimum color contrast ratio thresholds",
+                "nodeCount": 19,
+                "targets": [
+                  [".hdr-cta"],
+                  [".btn-primary"],
+                  [".ft-ins-label"],
+                  [".ft-ins-more"],
+                  [".footer-links:nth-child(1) > .footer-heading"]
+                ]
+              }
+            ],
+            "passes": 24,
+            "incomplete": 1
+          },
+          {
+            "route": "/appointments/",
+            "violations": [
+              {
+                "id": "color-contrast",
+                "impact": "serious",
+                "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+                "help": "Elements must meet minimum color contrast ratio thresholds",
+                "nodeCount": 24,
+                "targets": [
+                  [".hdr-cta"],
+                  [".btn-primary.btn[for=\"step-2\"]"],
+                  [".hc-hours-highlight > span[data-astro-cid-kdc7bxkt=\"\"]:nth-child(1)"],
+                  [".hc-hours-highlight > span[data-astro-cid-kdc7bxkt=\"\"]:nth-child(2)"],
+                  [".hc-hours-muted > span[data-astro-cid-kdc7bxkt=\"\"]:nth-child(1)"]
+                ]
+              },
+              {
+                "id": "label",
+                "impact": "critical",
+                "description": "Ensure every form element has a label",
+                "help": "Form elements must have labels",
+                "nodeCount": 4,
+                "targets": [["#step-1"], ["#step-3"], ["#step-4"], ["#step-5"]]
+              }
+            ],
+            "passes": 25,
+            "incomplete": 1
+          },
+          {
+            "route": "/contact/",
+            "violations": [
+              {
+                "id": "color-contrast",
+                "impact": "serious",
+                "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+                "help": "Elements must meet minimum color contrast ratio thresholds",
+                "nodeCount": 18,
+                "targets": [
+                  [".hdr-cta"],
+                  [".ft-ins-label"],
+                  [".ft-ins-more"],
+                  [".footer-links:nth-child(1) > .footer-heading"],
+                  [".footer-links:nth-child(2) > .footer-heading"]
+                ]
+              }
+            ],
+            "passes": 26,
+            "incomplete": 1
+          }
+        ],
+        "totalViolations": 6,
+        "criticalOrSeriousViolations": 6,
+        "status": "FAIL"
+      }
+    },
+    "reproducibilityReport": {
+      "stage": "reproduce",
+      "generatedAt": "2026-08-19T08:56:41.336Z",
+      "executionId": "f0a28788-07f3-4c18-bd10-010bf926b69d",
+      "environment": {
+        "node": "v22.22.2",
+        "platform": "linux",
+        "arch": "x64"
+      },
+      "note": "Comparing current canonical hashes against the previously saved snapshot.",
+      "hashes": {
+        "mirror": "9b3e65074c0e0f172c17f747b2a6ff994944652fb5e39e87b5395b9869323a9e",
+        "parse": "fcd7b8fc2ab04c8e41ff56b27c011dcdd3d2ffa7f9ec942374b056e81a1b3b99",
+        "capture": "f37f790278a2967015f1f3bd0b00bfdfc9f3e1901d747134d8926f9798942c55",
+        "states": "3828a7291d5a568e4aabbd8ce59e08584c27fb31d9b4e6df367135c1e6b9fb38",
+        "responsive": "fda028c35c04dceca89f425da3ad6838958bc56bf0b645f4e14945b3c6e1f7ef",
+        "normalize": "6a0bfc8ad96c4c406553a1a89796be80da2a320561a8b394f76900aa186cf8ff",
+        "graph": "6483c8c2ecdc980c02440d3dcf035e05bfe32adfae9b7752332618c25d1653d7",
+        "tokens": "0822446ffc2a99353552f852eb5a61b6327692f5476846fd128f097a0a0a4efe",
+        "material": "e6c4ed09dff59770ed061d9cb6ce34f12374df2ad043309e5256e89cb26015c3",
+        "grammar": "f35c38ac7c0fe899828ea1e475a7576abb36d1acf9041fb15e45eb6c7aa655c8"
+      },
+      "missingHashes": [],
+      "hasPreviousSnapshot": true,
+      "unexpectedDeltas": [],
+      "expectedDeltas": [],
+      "reproducedWithUnchangedCode": [
+        "mirror",
+        "parse",
+        "capture",
+        "states",
+        "responsive",
+        "normalize",
+        "graph",
+        "tokens",
+        "material",
+        "grammar"
+      ],
+      "status": "REPRODUCIBLE"
+    },
+    "driftReport": {
+      "note": "Drift detection requires a SECOND capture from a later session to compare against this one's hashes (see reproducibility-snapshot.json). No drift can be classified on a single capture.",
+      "classification": "NOT-YET-APPLICABLE"
+    },
+    "contradictionReport": {
+      "conflicts": [
+        {
+          "conflictId": "CONF-0001",
+          "classification": "cross-group-value-collision",
+          "value": "4px",
+          "groups": ["radius", "spacing"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        },
+        {
+          "conflictId": "CONF-0002",
+          "classification": "cross-group-value-collision",
+          "value": "26px",
+          "groups": ["radius", "font-size"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        },
+        {
+          "conflictId": "CONF-0003",
+          "classification": "cross-group-value-collision",
+          "value": "50px",
+          "groups": ["radius", "spacing"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        },
+        {
+          "conflictId": "CONF-0004",
+          "classification": "cross-group-value-collision",
+          "value": "100px",
+          "groups": ["radius", "font-size"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        },
+        {
+          "conflictId": "CONF-0005",
+          "classification": "cross-group-value-collision",
+          "value": "10px",
+          "groups": ["spacing", "font-size"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        },
+        {
+          "conflictId": "CONF-0006",
+          "classification": "cross-group-value-collision",
+          "value": "12px",
+          "groups": ["spacing", "font-size"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        },
+        {
+          "conflictId": "CONF-0007",
+          "classification": "cross-group-value-collision",
+          "value": "16px",
+          "groups": ["spacing", "font-size"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        },
+        {
+          "conflictId": "CONF-0008",
+          "classification": "cross-group-value-collision",
+          "value": "18px",
+          "groups": ["spacing", "font-size"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        },
+        {
+          "conflictId": "CONF-0009",
+          "classification": "cross-group-value-collision",
+          "value": "21px",
+          "groups": ["spacing", "font-size"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        },
+        {
+          "conflictId": "CONF-0010",
+          "classification": "cross-group-value-collision",
+          "value": "24px",
+          "groups": ["spacing", "font-size"],
+          "resolution": "not-merged — value coincidence across unrelated token groups; kept as separate reference tokens",
+          "evidenceIds": []
+        }
+      ]
+    },
+    "migrationAssessment": {
+      "assessed": 6,
+      "verifyBlocked": 1,
+      "noGo": 4,
+      "recommendation": "Stay on the current stack. Of the 6 items assessed, only the Astro 6->7 bump has no other blocking factor (low-medium risk, real but boundable via visual regression); every other item is either explicitly out of scope, has insufficient live evidence gathered this session, or is actively NO-GO (TypeScript 7 preview status, Workers/TinaCMS architectural scope)."
+    }
+  },
+  "stage4to5ClosureRecordCount": 10,
+  "classificationLegend": {
+    "VERIFIED": "directly measured/observed this session",
+    "DERIVED": "computed/normalized from OBSERVED evidence",
+    "MAPPED": "correspondence to an external reference system (M3/M3E) — never provenance",
+    "INFERRED": "design-system interpretation, not a source fact",
+    "UNKNOWN": "not established",
+    "VERIFY-BLOCKED": "could not be established in this environment"
+  }
+}

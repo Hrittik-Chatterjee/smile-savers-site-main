@@ -1,0 +1,12 @@
+{
+  "id": "DEC-001",
+  "status": "LOCKED",
+  "title": "Evidence-first design intelligence",
+  "rules": [
+    "Google Labs extraction must distinguish source evidence from mirror/runtime replay.",
+    "Smile Savers keeps independent brand identity.",
+    "M3/M3E is cross-reference only, never Labs provenance without direct evidence.",
+    "Production redesign is not an automatic consequence of extraction.",
+    "Every promoted token has evidence lineage."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "note": "Sources this session actually fetched and read, with the real method and outcome for each. This is NOT the uploaded third-party pack's research-ledger.json copied in -- that pack cites w3.org/WCAG22, slsa.dev, and playwright.dev sources this session never independently checked, and its ledger status 'VERIFIED-AT-BUILD-TIME' does not distinguish which agent/session did the verifying. This ledger only contains what was verified in THIS session, by this session.",
+  "sources": [
+    {
+      "url": "https://labs.google/",
+      "method": "curl (repeated, across Stage 2 mirror crawls)",
+      "outcome": "200, SSR HTML, mirrored into design-intelligence/cache and artifacts/mirror",
+      "evidenceClass": "OBSERVED-SOURCE"
+    },
+    {
+      "url": "https://m3.material.io/styles/shape",
+      "method": "WebFetch",
+      "outcome": "Returned only an empty page heading -- JS-rendered SPA shell, same failure class as labs.google under Chromium. No shape-scale content obtained.",
+      "evidenceClass": "VERIFY-BLOCKED"
+    },
+    {
+      "url": "https://m3.material.io/foundations/layout/applying-layout/window-size-classes",
+      "method": "WebFetch",
+      "outcome": "HTTP 404",
+      "evidenceClass": "VERIFY-BLOCKED"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/material-components/material-web/main/README.md",
+      "method": "curl",
+      "outcome": "200. Verbatim: 'MWC is in maintenance mode pending new maintainers.'",
+      "evidenceClass": "OBSERVED-SOURCE"
+    },
+    {
+      "url": "https://registry.npmjs.org/{astro,typescript,vite,@astrojs/cloudflare,wrangler,tinacms}",
+      "method": "curl, dist-tags.latest field",
+      "outcome": "astro 7.2.3, typescript 7.0.2, vite 8.2.1, @astrojs/cloudflare 14.2.2, wrangler 4.124.0, tinacms 3.12.0",
+      "evidenceClass": "OBSERVED-SOURCE"
+    },
+    {
+      "url": "https://nodejs.org/dist/index.json",
+      "method": "curl",
+      "outcome": "Latest LTS v24.19.0 (Krypton)",
+      "evidenceClass": "OBSERVED-SOURCE"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/withastro/astro/main/packages/astro/CHANGELOG.md",
+      "method": "curl",
+      "outcome": "Real 7.0.0 breaking-changes entries (HTML whitespace stripping, @astrojs/db removal); confirmed Astro 6 already requires Node >=22.12.0",
+      "evidenceClass": "OBSERVED-SOURCE"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/typescript-go/main/README.md",
+      "method": "curl",
+      "outcome": "Confirmed TypeScript 7 is a from-scratch native Go port distributed under @typescript/native-preview, not an incremental tsc release",
+      "evidenceClass": "OBSERVED-SOURCE"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/hooks",
+      "method": "WebFetch",
+      "outcome": "31 documented hook event types with common/event-specific field schemas; states settings-file hook edits are normally picked up by a file watcher (documented default reload behavior)",
+      "evidenceClass": "OBSERVED-SOURCE"
+    }
+  ],
+  "notVerifiedThisSession": [
+    "https://www.w3.org/TR/WCAG22/ (cited by the uploaded pack; WCAG 2.2 AA is used as this project's accessibility TARGET per its own locked scope, but the W3C document itself was not fetched this session)",
+    "https://slsa.dev/spec/v1.2/ and /provenance (cited by the uploaded pack; not used by anything this repo actually implements)",
+    "https://playwright.dev/docs/api/class-tracing (cited by the uploaded pack; this project uses Playwright screenshots/CDP directly, not its Tracing API)",
+    "https://developer.android.com/develop/ui/compose/designsystems/material3 and the MaterialTheme kotlin reference (cited by the uploaded pack; this project's own M3 cross-reference work in scripts/material.mjs independently found m3.material.io itself unreachable and did not rely on these Android-specific pages)"
+  ]
+}

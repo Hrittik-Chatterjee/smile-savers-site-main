@@ -1,0 +1,38 @@
+{
+  "targetUrl": "https://labs.google/",
+  "origin": "https://labs.google",
+  "mirrorPort": 4410,
+  "siteUrl": "http://127.0.0.1:4321/",
+  "maxCrawlDepth": 3,
+  "maxAssets": 400,
+  "fetchTimeoutSeconds": 45,
+  "stability": {
+    "note": "Stability overrides are for screenshot determinism ONLY. They are installed AFTER motion extraction. See docs: motion Mode A must observe real durations.",
+    "disableAnimationsForScreenshots": true
+  },
+  "motionModes": [
+    {
+      "name": "A-canonical",
+      "reducedMotion": "no-preference",
+      "purpose": "canonical motion extraction"
+    },
+    { "name": "B-a11y", "reducedMotion": "reduce", "purpose": "verify reduced-motion behaviour" }
+  ],
+  "diff": {
+    "fixtureParity": {
+      "maxDifferentPixels": 0,
+      "maxDifferentRatio": 0,
+      "threshold": 0,
+      "includeAA": true
+    },
+    "siteRegression": {
+      "maxDifferentPixels": 0,
+      "maxDifferentRatio": 0,
+      "threshold": 0,
+      "includeAA": true
+    }
+  },
+  "scopeBoundary": {
+    "note": "Full-page parity against labs.google is NOT a gate and must never be claimed. Only admitted fixtures use strict 0-pixel parity."
+  }
+}

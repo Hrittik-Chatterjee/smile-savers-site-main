@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Production marketing site for Smile Savers Dental (Woodside, Queens, NYC), built with Astro 6 (static output) + Tailwind CSS v4 + DaisyUI v5, deployed to Cloudflare Pages with Cloudflare Workers AI, Workers KV, and MailChannels for backend needs. Near-zero client JS by design.
+Production marketing site for Smile Savers Dental (Woodside, Queens, NYC), built with Astro 6 (static output) + Tailwind CSS v4 + DaisyUI v5, deployed to **Cloudflare Workers + Workers Static Assets** (not Cloudflare Pages — see "Cloudflare deployment specifics" below) with Cloudflare Workers AI, Workers KV, and Resend for backend needs. Near-zero client JS by design.
 
 ## Commands
 
@@ -16,7 +16,7 @@ npm run check         # astro check only (type/content-schema errors)
 npm run lint           # alias for `npm run check`
 npm run format         # prettier --write . (astro + tailwind plugins configured)
 npm run preview       # serve the built dist/ locally
-npm run preview:cf    # serve dist/ via `wrangler pages dev` (Cloudflare Pages Functions included)
+npm run preview:cf    # `wrangler dev` — serves dist/ via src/entrypoint.js's Worker routing (fixed from `wrangler pages dev`, which was Pages-only tooling inconsistent with this project's actual architecture). Requires a real CLOUDFLARE_API_TOKEN (the AI binding runs in "remote" mode by default) — not runnable in a credential-less sandbox; verified only that the command starts and reports the correct binding set, not a full local request/response cycle.
 npm run clean         # rm -rf .astro dist
 ```
 
@@ -27,7 +27,7 @@ There is no unit test runner configured — `astro check` (type-checking + Zod c
 ## Architecture
 
 ### Rendering model
-Astro static output (`output: 'static'` in `astro.config.mjs`). Pages render to static HTML at build time; the only server-side runtime is Cloudflare Pages Functions in `functions/` (not part of the Astro build).
+Astro static output (`output: 'static'` in `astro.config.mjs`). Pages render to static HTML at build time; the only server-side runtime is `src/entrypoint.js`, a Cloudflare Worker `fetch` handler that routes `/api/*` to plain-JS handlers in `functions/api/` and falls through to Workers Static Assets for everything else (not part of the Astro build).
 
 ### Content collections drive most pages (`src/content.config.ts`)
 Eight typed collections, each with a Zod schema, loaded from `src/content/<name>/*.md`:
@@ -53,23 +53,39 @@ When adding content, copy an existing Markdown file in the target collection dir
 - `src/components/common|layout|icons|ui|accessibility/` — shared, cross-page components
 - `src/config/` — static site data as TS modules: `site.ts` (practice info/hours/social), `navigation.ts` (nav/footer links), `doctors.ts` (doctor profiles referenced outside content collections)
 - `src/styles/global.css` — Tailwind v4 `@theme` tokens (brand colors), DaisyUI overrides
-- `functions/api/` — Cloudflare Pages Functions (not Astro): `chat.js` (Workers AI chat endpoint, `@cf/meta/llama-3-8b-instruct`, in-memory + KV caching), `contact.js` (MailChannels email)
-- `functions/_middleware.js` — applies CORS, CSP/security headers, and cache-control headers to all Pages responses
+- `functions/api/` — plain-JS route handlers (`onRequestPost`/`onRequestOptions` exports, the Pages Functions naming convention, but invoked here by `src/entrypoint.js`'s own routing, not Pages): `chat.js` (Workers AI chat endpoint, `@cf/meta/llama-3.1-8b-instruct-fast`, in-memory reply cache + KV rate limiting), `contact.js` (Resend email)
+- `functions/_middleware.js` — defines CORS/CSP/security headers and cache-control logic; exports `applySecurityHeaders()`, which `src/entrypoint.js` calls explicitly on every response (its own `onRequest` export is Pages-Functions-only and not the live code path — see "Cloudflare deployment specifics")
 
 ### Path aliases (tsconfig.json)
 `@/*` → `src/*`, `@components/*`, `@lib/*`, `@config/*`, `@types/*`, `@modules/*`.
 
 ### Cloudflare deployment specifics
-- Config lives in `wrangler.jsonc` (not `wrangler.toml` despite what README says). Cloudflare Pages only supports `preview`/`production` named environments.
-- Workers AI binding (`AI`) and an optional `CHAT_CACHE` KV namespace (commented out by default — must be created via `wrangler kv namespace create` and uncommented to enable cross-request chat caching).
-- `functions/` is deployed as Cloudflare Pages Functions alongside the static `dist/` output; it is separate from Astro's own routing/build and won't be exercised by `npm run dev` — use `npm run preview:cf` to test it locally.
+- **Deployment architecture is Cloudflare Workers + Workers Static Assets, not Cloudflare Pages** — decided and evidence-verified in `audit/cloudflare-decision/` (live production `curl` checks proved Pages' `_middleware.js` convention was never actually executing; Workers Static Assets natively serving `public/_headers`/`public/_redirects` was). CI no longer has a deploy step (`cloudflare/pages-action` was removed — see `.github/workflows/deploy.yml`'s header comment); Cloudflare's own Git integration deploys automatically on push.
+- Config lives in `wrangler.jsonc` (not `wrangler.toml` despite what README says). `main: "src/entrypoint.js"` is the actual Worker entrypoint; `assets.directory: "./dist"` is the static output Workers Static Assets serves.
+- Workers AI binding (`AI`) and an optional `CHAT_CACHE` KV namespace (commented out by default — must be created via `wrangler kv namespace create` and uncommented to enable both cross-request chat caching and the real per-IP rate limiter in `functions/api/chat.js`, which fails open without it).
+- `functions/api/*.js` files use the `onRequestPost`/`onRequestOptions` naming convention (so they'd also work unmodified under real Pages Functions), but the code path that actually runs them in this project is `src/entrypoint.js`'s manual import + routing — it is not exercised by `npm run dev`; use `npm run preview:cf` to test it locally. `functions/_middleware.js`'s own `onRequest` export is dead code on this architecture (Pages-only auto-invocation convention) — its header logic is reused via the exported `applySecurityHeaders()` helper instead, called explicitly from `entrypoint.js`.
 
 ### Brand tokens
 ```css
 --color-primary:   #102B3F   /* Deep Navy */
 --color-secondary: #3DBAA7   /* Mint Teal */
---color-accent:    #2CABDF   /* Bright Cyan — CTAs */
+--color-accent:    #016785   /* Cyan 700 — CTAs ONLY, white text. 6.40:1 */
 --color-surface:   #EFF6EE   /* Mint Whisper background */
+
+--color-brand-surface: #02AEDD  /* Cyan 400 — brand fills/badges, NAVY text only. 5.63:1 */
+```
+
+The accent and brand-surface values are **derived, not chosen**: `design-intelligence/scripts/palette.mjs`
+builds an OKLCH tonal ramp from the real logo cyan in `public/logoold.svg` and assigns roles by
+measured WCAG contrast. The key rule is that the bright brand cyan is a **surface** colour (navy text)
+while CTAs use the dark end of the ramp (white text) — mid-ramp fails both. Full method and the
+full ramp: [`docs/design/colour.md`](docs/design/colour.md).
+
+To change any brand colour, edit the primitive in `design-intelligence/scripts/brand-tokens.mjs`,
+re-run it, and copy the emitted values — never hand-edit a hex in a component. Verify with:
+
+```bash
+node design-intelligence/scripts/brand-tokens.mjs --check   # drift + contrast gate
 ```
 
 ## Conventions

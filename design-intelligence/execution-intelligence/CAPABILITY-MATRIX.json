@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-08-19T09:16:00Z",
+  "claudeCodeVersion": "2.1.235",
+  "note": "Every entry below is either directly evidenced this session (method stated) or explicitly marked UNKNOWN/UNVERIFIED. Nothing here is asserted from training-data memory of Claude Code's feature set without a live check.",
+  "capabilities": [
+    {
+      "capability": "Hooks system exists and executes external commands",
+      "status": "SUPPORTED",
+      "evidence": "/root/.claude/launcher-settings.json wires SessionStart -> session-start-git-identity.sh and Stop -> stop-hook-git-check.sh. Both are real, running hooks that shaped this exact session (git identity setup, and the stop-hook-git-check.sh that prompted PR pushes earlier in this conversation).",
+      "captureMechanism": "external command hook, JSON on stdin",
+      "limitations": []
+    },
+    {
+      "capability": "Hook event types beyond SessionStart/Stop",
+      "status": "SUPPORTED",
+      "evidence": "Fetched https://code.claude.com/docs/en/hooks live via WebFetch this session (corrects the prior UNKNOWN entry). Documents 31 hook event types (SessionStart, Setup, UserPromptSubmit, UserPromptExpansion, PreToolUse, PermissionRequest, PermissionDenied, PostToolUse, PostToolUseFailure, PostToolBatch, Stop, StopFailure, SubagentStart, SubagentStop, TaskCreated, TaskCompleted, TeammateIdle, Notification, MessageDisplay, InstructionsLoaded, ConfigChange, CwdChanged, DirectoryAdded, FileChanged, WorktreeCreate, WorktreeRemove, PreCompact, PostCompact, Elicitation, ElicitationResult, SessionEnd), common fields (session_id, transcript_path, cwd, hook_event_name, permission_mode, effort, agent_id/agent_type), and event-specific fields per type (e.g. tool_name/tool_input/tool_use_id for tool events).",
+      "captureMechanism": "WebFetch of primary documentation",
+      "limitations": [
+        "Prompted by an uploaded third-party 'knowledge pack' citing this same URL for a similar claim; independently re-verified via a fresh live fetch rather than trusted on the pack's citation alone."
+      ]
+    },
+    {
+      "capability": "Project-level .claude/settings.json hooks activate mid-session via a file watcher",
+      "status": "PARTIALLY_SUPPORTED — documented behavior contradicts this environment's empirical behavior",
+      "evidence": "The same live doc fetch states: 'Direct edits to hooks in settings files are normally picked up automatically by the file watcher' — i.e. dynamic mid-session reload IS the documented default for the general Claude Code CLI product. Empirically, however, two separate tests in THIS session — immediately after writing .claude/settings.json, and again ~2 minutes and several tool calls later — both found the expected ledger directory was never created. Re-tested specifically because the new documentation contradicted the earlier empirical result, rather than accepting either claim alone.",
+      "captureMechanism": "live doc fetch + two independent empirical negative tests, deliberately spaced apart in time",
+      "limitations": [
+        "The most likely explanation is that this session runs in a managed remote/CCR execution environment (stated explicitly in this session's own system context), which may not run the same file-watcher process the interactive CLI docs describe — not that hooks are unsupported generally.",
+        "Not confirmed which of several possibilities applies: no file watcher in this harness, a watcher with a much longer debounce, or a permission gate silently blocking the hook's command execution. Recorded as PARTIALLY_SUPPORTED with an open root cause, not resolved to a single explanation without further evidence.",
+        "Only a fresh session (or an environment capability this session cannot test) could confirm whether SessionStart-time hook loading (proven working via launcher-settings.json) succeeds where mid-session file-watcher reload does not."
+      ]
+    },
+    {
+      "capability": "record-event.mjs itself (schema, hash-chaining, non-blocking exit)",
+      "status": "SUPPORTED",
+      "evidence": "Directly invoked with synthetic stdin payloads (two sequential events). Verified: exit code 0, valid JSONL written, second event's previousEventHash equals first event's eventHash. Test ledger deleted after verification so it isn't mistaken for real session data.",
+      "captureMechanism": "direct script invocation with synthetic input",
+      "limitations": [
+        "Logic is proven; live triggering by Claude Code hooks is not (see prior entry)."
+      ]
+    },
+    {
+      "capability": "Session transcript file as an execution-intelligence data source",
+      "status": "UNSUPPORTED (by design choice, not technical impossibility)",
+      "evidence": "/root/.claude/projects/.../<session-id>.jsonl exists, 1928 lines, and DOES contain assistant message entries with a 'thinking' content block. In the sampled entry the thinking string was empty with only an opaque 'signature' field populated — confirming no readable hidden reasoning is exposed even if this file were parsed.",
+      "captureMechanism": "file inspection",
+      "limitations": [
+        "This is Claude Code's internal, undocumented, versioned transcript format, not a stable public API. Building durable tooling on top of it would be fragile across Claude Code versions.",
+        "The file lives on the container's local ephemeral disk (/dev/vda) and does NOT survive session/container teardown — confirmed via `df -h`.",
+        "Per the project's own non-negotiable rule (never reconstruct hidden reasoning), this file is not used as an evidence source by any script in this project."
+      ]
+    },
+    {
+      "capability": "Durable, cross-session execution ledger",
+      "status": "PARTIALLY_SUPPORTED",
+      "evidence": "The recorder + hook config exist and are committed to git, so they will exist in any FUTURE session that checks out this branch/commit with hooks enabled. They cannot retroactively cover this session or any prior one.",
+      "captureMechanism": "n/a - forward-looking only",
+      "limitations": [
+        "Untested in an actual fresh session end-to-end; only the recorder's internal logic and the mid-session-negative-result are proven."
+      ]
+    }
+  ],
+  "summary": "The content-addressed cache (design-intelligence/lib/cache.mjs) is fully built, tested, and proven this session with real network calls (drift detection, CACHE_ONLY blocking, cache-hit reuse all directly verified). The execution-intelligence recorder exists and its internal logic is proven, but it captures NOTHING from this session: hook configuration IS documented to support mid-session file-watcher reload in the general Claude Code product (verified live), yet this specific remote/CCR-managed session does not exhibit that behavior across two independent, time-separated tests. That gap is recorded as PARTIALLY_SUPPORTED with an open root cause, not silently resolved either direction. Honest completion state, not full completion of the original 66-section request."
+}
