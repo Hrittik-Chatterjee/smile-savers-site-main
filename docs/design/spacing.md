@@ -18,20 +18,20 @@ had a real, consistent scale — it had simply never been written down.
 
 | Token | Value | px | Existing uses |
 |---|---|---|---|
-| `--space-1` | 0.25rem | 4 | 33 |
-| `--space-2` | 0.375rem | 6 | 18 |
-| `--space-3` | 0.5rem | 8 | 90 |
-| `--space-4` | 0.625rem | 10 | 28 |
-| `--space-5` | 0.75rem | 12 | 67 |
-| `--space-6` | 0.875rem | 14 | 41 |
-| `--space-7` | 1rem | 16 | 100 |
-| `--space-8` | 1.125rem | 18 | 11 |
-| `--space-9` | 1.25rem | 20 | 42 |
-| `--space-10` | 1.5rem | 24 | 56 |
-| `--space-11` | 1.75rem | 28 | 7 |
-| `--space-12` | 2rem | 32 | 41 |
-| `--space-13` | 2.5rem | 40 | 5 |
-| `--space-14` | 3rem | 48 | 3 |
+| `--spacing-scale-1` | 0.25rem | 4 | 33 |
+| `--spacing-scale-2` | 0.375rem | 6 | 18 |
+| `--spacing-scale-3` | 0.5rem | 8 | 90 |
+| `--spacing-scale-4` | 0.625rem | 10 | 28 |
+| `--spacing-scale-5` | 0.75rem | 12 | 67 |
+| `--spacing-scale-6` | 0.875rem | 14 | 41 |
+| `--spacing-scale-7` | 1rem | 16 | 100 |
+| `--spacing-scale-8` | 1.125rem | 18 | 11 |
+| `--spacing-scale-9` | 1.25rem | 20 | 42 |
+| `--spacing-scale-10` | 1.5rem | 24 | 56 |
+| `--spacing-scale-11` | 1.75rem | 28 | 7 |
+| `--spacing-scale-12` | 2rem | 32 | 41 |
+| `--spacing-scale-13` | 2.5rem | 40 | 5 |
+| `--spacing-scale-14` | 3rem | 48 | 3 |
 
 Plus three pre-existing fluid tokens, all genuinely consumed (91 uses total):
 

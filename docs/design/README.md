@@ -12,6 +12,7 @@ Every colour value here is derived by script from evidence; none were chosen by 
 | [`typography.md`](./typography.md) | The `@font-face` defect that meant the site never rendered in its own fonts, and the current setup |
 | [`spacing.md`](./spacing.md) | The measured spacing scale, and why 542 existing values were deliberately left alone |
 | [`component-state-matrix.md`](./component-state-matrix.md) | Per-component state coverage, measured from source, with real gaps named |
+| [`naming-conventions.md`](./naming-conventions.md) | File, CSS-prefix, token, prop and content-schema naming rules — includes a full lookup table for all 47 components |
 | [`visual-ui-principles.md`](./visual-ui-principles.md) | labs.google extraction graded FACT / INFERENCE / RECOMMENDATION |
 
 ## The generators

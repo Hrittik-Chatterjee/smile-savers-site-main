@@ -116,7 +116,7 @@ a designer-supplied master.
 **Evidence (FACT).** 631 literal rem spacing values measured across `src/`. 542
 (85.9%) already sit on a coherent 2px-granular scale that had never been named.
 
-**Decision.** Add `--space-1..14` documenting the measured scale, and lint new
+**Decision.** Add `--spacing-scale-1..14` documenting the measured scale, and lint new
 work against it. Do **not** rewrite the 542 already-correct values — they render
 correctly today, so churning them is regression risk with no visual gain. The 85
 off-scale uses are warnings, not errors.
@@ -151,3 +151,26 @@ production: stale hardcoded brand hex, stale `rgba()` glows, off-scale spacing,
 untokenised card radii, and font families with no `@font-face`. Gates that have
 never been observed failing are not gates, so each was verified by deliberately
 breaking it and confirming a non-zero exit.
+
+---
+
+## DDR-009 — Unify the spacing-token prefix before it had consumers
+
+**Status:** Accepted
+
+**Evidence (FACT).** The spacing scale added in DDR-006 was named
+`--space-1..14`, a different stem from the pre-existing
+`--spacing-section/-block/-element`. Two prefixes for one token domain — caught
+by re-auditing this session's own work while writing the naming-conventions
+document, not by an external report.
+
+**Decision.** Renamed to `--spacing-scale-1..14` before it acquired any
+component consumers (verified zero `var(--space-*)` references existed in
+`src/` at the time). Both the numeric scale and the semantic fluid tokens now
+share the `--spacing-` stem, distinguished by suffix pattern (`scale-N` vs a
+named role).
+
+**Rationale for recording this as a decision, not silently fixing it.** The
+document that found the drift is the same kind of audit this whole session has
+been doing to the rest of the codebase. Applying it to itself, and recording the
+result the same way, is the point.
