@@ -473,7 +473,8 @@
   box-shadow: 0 0 0 3px rgb(var(--color-accent-rgb) / .12);
   background: #fff;
 }
-.chat-input::placeholder { color: var(--color-text-muted); opacity: .7 }
+/* opacity .7 rendered #808895 = 3.58:1, failing AA for placeholder text. */
+.chat-input::placeholder { color: var(--color-text-muted) }
 .chat-send-btn {
   width: 2.125rem; height: 2.125rem;
   border-radius: 50%;
