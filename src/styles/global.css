@@ -301,6 +301,18 @@
      in sync with --color-accent above. */
   --color-accent-rgb: 1 103 133;
 
+  /* Same pattern, for --color-secondary (#3dbaa7) -- Footer.astro hardcoded
+     rgba(61,186,167,X) at 8 call sites instead of composing off a token. */
+  --color-secondary-rgb: 61 186 167;
+
+  /* Pure white as raw channels, for literal white-with-alpha compositions
+     (e.g. Footer.astro's rgba(255,255,255,X) text-opacity treatments).
+     Deliberately NOT aliased to --color-text-inverted, which resolves to
+     --color-neutral-50 (#fafafa) -- a near-white chosen for a different,
+     semantic role elsewhere; using it here would shift Footer's colors by
+     a few RGB units for no reason. */
+  --color-white-rgb: 255 255 255;
+
   --color-interactive-primary: var(--color-accent);
   --color-interactive-primary-hover: var(--color-accent-dark);
   /* No distinct :active/pressed treatment exists anywhere in the
