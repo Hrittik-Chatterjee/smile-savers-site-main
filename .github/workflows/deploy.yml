@@ -74,9 +74,14 @@ jobs:
       - name: Design lint
         run: npm run lint:design
 
+      # Blocking since 2026-08-21 (DEBT-0013/0014): was continue-on-error,
+      # the last of the two non-blocking checks named in ROOT-CI-001 (the
+      # other, Lighthouse below, stays non-blocking by deliberate design --
+      # perf budgets against live prod URLs are inherently noisy). Flipped
+      # only after running the repo through this exact check clean (commit
+      # f428749) so this doesn't fail on pre-existing drift on its first run.
       - name: Format check
         run: npx prettier --check "src/**/*.{astro,ts,css}" --log-level warn
-        continue-on-error: true   # warn only, don't block
 
 # ── Job: Build ────────────────────────────────────────────────────────────────
   build:
