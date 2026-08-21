@@ -285,3 +285,23 @@ step 5, submitted with every field empty, and confirmed via Playwright's
 `dialog` event listener that no native `alert()` fired, that the inline region
 populated with the correct list of missing fields, and visually via screenshot
 that it renders legibly as an error region.
+
+---
+
+## DDR-015 — Add the missing :active state to the header CTA
+
+**Status:** Accepted
+
+**Evidence (FACT).** `.hdr-cta` had `:hover` and `:focus-visible` but no
+`:active` (pressed) state — confirmed by direct inspection alongside the other
+two real gaps in `component-state-matrix.md`.
+
+**Decision.** Added `.hdr-cta:active`, matching the same pattern already used
+by `.btn-primary:active` in `Button.astro`: background steps to
+`--color-interactive-primary-active` (already an existing token, resolving to
+`--color-accent-dark`), transform resets to flat, shadow tightens. Lowest-risk
+of the three state-matrix gaps — pure CSS addition, no markup or script change.
+
+**Verified.** Confirmed the rule ships in the built CSS
+(`dist/_astro/PageLayout.*.css`) and resolves through the existing token chain
+rather than a new literal value.

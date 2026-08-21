@@ -109,10 +109,9 @@ code, not trusted because it was written with good intentions.
 
 | Gap | Where | Severity | Status |
 |---|---|---|---|
-| No loading state on the canonical Button | `Button.astro` | medium — forms can double-submit | Open |
-| No inline validation states in the booking wizard (used `alert()`) | `BookingWizard.astro` | medium | Open |
-| No pressed/active state on header CTA | `Header.astro` | low | Open |
+| No loading state on the canonical Button | `Button.astro` | medium — forms can double-submit | Fixed — DDR-013 |
+| No inline validation states in the booking wizard (used `alert()`) | `BookingWizard.astro` | medium | Fixed — DDR-014 |
+| No pressed/active state on header CTA | `Header.astro` | low | Fixed — DDR-015 |
 
-All three are confirmed real (re-verified by inspection alongside the two false
-claims above). Being worked through this session, each as its own verified
-commit; this table is updated to "Fixed" with a DDR reference as each lands.
+All three were confirmed real and are now fixed; see `docs/design/decisions.md`
+for the specific evidence and verification for each.
