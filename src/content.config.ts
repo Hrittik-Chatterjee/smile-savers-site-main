@@ -186,20 +186,10 @@ const testimonials = defineCollection({
   }),
 });
 
-const legal = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/legal' }),
-  schema: z.object({
-    title: z.string().min(1),
-    description: z.string().max(160),
-    lastUpdated: z.coerce.date(),
-  }),
-});
-
 export const collections = {
   services,
   team,
   testimonials,
-  legal,
   // Programmatic SEO collections
   locations,
   glossary,

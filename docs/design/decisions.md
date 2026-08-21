@@ -305,3 +305,29 @@ of the three state-matrix gaps — pure CSS addition, no markup or script change
 **Verified.** Confirmed the rule ships in the built CSS
 (`dist/_astro/PageLayout.*.css`) and resolves through the existing token chain
 rather than a new literal value.
+
+---
+
+## DDR-016 — Delete the orphaned legal.astro module and its empty collection
+
+**Status:** Accepted
+
+**Evidence (FACT), re-confirmed immediately before deletion.**
+`src/modules/legal/legal.astro`: zero imports anywhere in `src/` (grep), sits
+outside `src/pages/` so Astro's file-based router never serves it, and is the
+sole consumer of the `legal` content collection defined in
+`src/content.config.ts` — which has zero files in `src/content/legal/`. The
+real `/privacy` and `/terms` routes use the separate, actively-imported
+`LegalLayout.astro` instead (confirmed via `grep -n "LegalLayout"` in both
+page files).
+
+**Decision.** Deleted `src/modules/legal/` entirely and removed the `legal`
+collection definition from `src/content.config.ts`. This is dead code removal,
+not a judgment call — there was no live code path that could ever reach it.
+
+**Verified.** `npm run check` (0 errors, hint count dropped 143→140 as expected
+— the removed file's own unused-var hints), `npm run build` (still 32 pages,
+confirming `legal.astro` was never a route), `npm test` (15/15). Grepped for
+any other reference to the `legal` collection afterward; the only hit was an
+unrelated `PageLayout` TypeScript union type (`'legal'` as a layout-variant
+string, used by the real `LegalLayout.astro`), not the deleted collection.
