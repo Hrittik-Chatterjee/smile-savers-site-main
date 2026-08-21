@@ -1,0 +1,240 @@
+{
+  "generatedAt": "2026-08-21T13:33:44.240Z",
+  "method": "Luminance-first OKLCH ramp derived from the canonical brand asset. Hue held constant; chroma reduced only as far as the sRGB gamut requires. Roles assigned from measured WCAG contrast, not from preference.",
+  "source": {
+    "file": "public/logoold.svg",
+    "why": "The original Illustrator vector export — the only brand asset that is a true vector master. public/logo.svg is a 568KB auto-trace of it and public/logosq.svg embeds a raster.",
+    "brandColours": [
+      {
+        "hex": "#11bcee",
+        "chroma": 0.1396
+      },
+      {
+        "hex": "#0a83bb",
+        "chroma": 0.1258
+      }
+    ],
+    "primary": "#11bcee",
+    "support": "#0a83bb",
+    "goldPresent": false
+  },
+  "ramp": [
+    {
+      "step": 50,
+      "hex": "#E9F8FE",
+      "oklch": {
+        "L": 0.97,
+        "C": 0.0176,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 1.09,
+        "vsNavy": 13.42
+      },
+      "carriesWhiteText": false,
+      "carriesNavyText": true
+    },
+    {
+      "step": 100,
+      "hex": "#CAEFFF",
+      "oklch": {
+        "L": 0.93,
+        "C": 0.0436,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 1.21,
+        "vsNavy": 12.02
+      },
+      "carriesWhiteText": false,
+      "carriesNavyText": true
+    },
+    {
+      "step": 200,
+      "hex": "#8FDEFE",
+      "oklch": {
+        "L": 0.86,
+        "C": 0.0896,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 1.49,
+        "vsNavy": 9.76
+      },
+      "carriesWhiteText": false,
+      "carriesNavyText": true
+    },
+    {
+      "step": 300,
+      "hex": "#2EC9FB",
+      "oklch": {
+        "L": 0.78,
+        "C": 0.1396,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 1.93,
+        "vsNavy": 7.55
+      },
+      "carriesWhiteText": false,
+      "carriesNavyText": true
+    },
+    {
+      "step": 400,
+      "hex": "#02AEDD",
+      "oklch": {
+        "L": 0.7,
+        "C": 0.1336,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 2.59,
+        "vsNavy": 5.63
+      },
+      "carriesWhiteText": false,
+      "carriesNavyText": true
+    },
+    {
+      "step": 500,
+      "hex": "#0694BC",
+      "oklch": {
+        "L": 0.62,
+        "C": 0.1176,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 3.52,
+        "vsNavy": 4.15
+      },
+      "carriesWhiteText": false,
+      "carriesNavyText": false
+    },
+    {
+      "step": 600,
+      "hex": "#077DA0",
+      "oklch": {
+        "L": 0.55,
+        "C": 0.1036,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 4.72,
+        "vsNavy": 3.09
+      },
+      "carriesWhiteText": true,
+      "carriesNavyText": false
+    },
+    {
+      "step": 700,
+      "hex": "#016785",
+      "oklch": {
+        "L": 0.48,
+        "C": 0.0916,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 6.4,
+        "vsNavy": 2.28
+      },
+      "carriesWhiteText": true,
+      "carriesNavyText": false
+    },
+    {
+      "step": 800,
+      "hex": "#02526A",
+      "oklch": {
+        "L": 0.41,
+        "C": 0.0776,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 8.69,
+        "vsNavy": 1.68
+      },
+      "carriesWhiteText": true,
+      "carriesNavyText": false
+    },
+    {
+      "step": 900,
+      "hex": "#033E51",
+      "oklch": {
+        "L": 0.34,
+        "C": 0.0636,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 11.59,
+        "vsNavy": 1.26
+      },
+      "carriesWhiteText": true,
+      "carriesNavyText": false
+    }
+  ],
+  "selections": {
+    "ctaBackground": {
+      "step": 700,
+      "hex": "#016785",
+      "oklch": {
+        "L": 0.48,
+        "C": 0.0916,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 6.4,
+        "vsNavy": 2.28
+      },
+      "carriesWhiteText": true,
+      "carriesNavyText": false,
+      "rationale": "Lightest ramp step clearing the 5:1 CTA headroom target with white text."
+    },
+    "ctaHover": {
+      "step": 800,
+      "hex": "#02526A",
+      "oklch": {
+        "L": 0.41,
+        "C": 0.0776,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 8.69,
+        "vsNavy": 1.68
+      },
+      "carriesWhiteText": true,
+      "carriesNavyText": false,
+      "rationale": "Next step down — darker on hover, still AA with white text."
+    },
+    "ctaRejectedForThinMargin": {
+      "steps": [
+        {
+          "step": 600,
+          "hex": "#077DA0",
+          "vsWhite": 4.72
+        }
+      ],
+      "rationale": "Technically pass AA (>=4.5) but sit below the 5:1 headroom target, so they are not used for the primary action. Documented rather than silently skipped."
+    },
+    "brandSurface": {
+      "step": 400,
+      "hex": "#02AEDD",
+      "oklch": {
+        "L": 0.7,
+        "C": 0.1336,
+        "H": -134
+      },
+      "contrast": {
+        "vsWhite": 2.59,
+        "vsNavy": 5.63
+      },
+      "carriesWhiteText": false,
+      "carriesNavyText": true,
+      "rationale": "Brightest, most brand-recognisable step that safely carries NAVY text. This is the key finding: the logo cyan is a surface colour, not a white-text button colour."
+    },
+    "deadZone": {
+      "steps": [
+        500
+      ],
+      "rationale": "Mid-ramp steps fail BOTH white and navy text at AA. Never use for text-bearing surfaces."
+    },
+    "textOnBrandSurface": "#102B3F"
+  }
+}
