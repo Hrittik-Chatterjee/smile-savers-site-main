@@ -92,14 +92,27 @@ The canonical button. Variants: `primary`, `secondary`, `outline`.
 
 ## Summary of real gaps
 
-| Gap | Where | Severity |
-|---|---|---|
-| No loading state on the canonical Button | `Button.astro` | medium — forms can double-submit |
-| No submitting/success/failure states on the contact form | `ContactForm.astro` | medium — the API fails closed, but the UI does not say so |
-| No validation states in the booking wizard | `BookingWizard.astro` | medium |
-| No pressed/active state on header CTA | `Header.astro` | low |
-| No valid/positive state on form fields | `ContactForm.astro` | low |
+**Correction (2026-08-21):** this table previously listed "no submitting/
+success/failure states on the contact form" and "no valid/positive state on
+form fields" as gaps in `ContactForm.astro`. Direct re-inspection of the file
+found both already correctly implemented: a loading spinner + disabled button
+during submit (`ContactForm.astro:243-246`), a `role="status" aria-live="polite"`
+result region with distinct success/error text matching
+`functions/api/contact.js`'s actual fail-closed contract (`{success:false,
+error}` on every failure path, never a false positive), and
+`:valid`/`:invalid`-pseudo-class-driven border and icon states on every field.
+Those two rows were wrong and are removed below rather than left to mislead the
+next reader. This is the same discipline this project has applied to its own
+other documents (see `docs/design/decisions.md` DDR entries correcting earlier
+audit claims) — a table that describes code should be re-checked against the
+code, not trusted because it was written with good intentions.
 
-These are recorded, not fixed. Each needs a product decision about wording and
-behaviour, not just styling — particularly the contact-form failure state, which
-must match the API's actual fail-closed contract rather than claim success.
+| Gap | Where | Severity | Status |
+|---|---|---|---|
+| No loading state on the canonical Button | `Button.astro` | medium — forms can double-submit | Open |
+| No inline validation states in the booking wizard (used `alert()`) | `BookingWizard.astro` | medium | Open |
+| No pressed/active state on header CTA | `Header.astro` | low | Open |
+
+All three are confirmed real (re-verified by inspection alongside the two false
+claims above). Being worked through this session, each as its own verified
+commit; this table is updated to "Fixed" with a DDR reference as each lands.
