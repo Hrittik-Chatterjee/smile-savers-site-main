@@ -429,13 +429,18 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
-  // @ts-nocheck
   function initMobileMenu() {
-    const toggle = document.querySelector('.mobile-toggle');
-    const navLinks = document.getElementById('mobile-nav-links');
-    const overlay = document.getElementById('mobile-menu-overlay');
+    const toggleEl = document.querySelector('.mobile-toggle');
+    const navLinksEl = document.getElementById('mobile-nav-links');
+    const overlayEl = document.getElementById('mobile-menu-overlay');
 
-    if (!toggle || !navLinks || !overlay) return;
+    if (!toggleEl || !navLinksEl || !overlayEl) return;
+
+    // Re-typed as non-null so the closures below (which TS doesn't narrow
+    // across, even for const) don't need a cast at every use site.
+    const toggle: HTMLElement = toggleEl as HTMLElement;
+    const navLinks: HTMLElement = navLinksEl as HTMLElement;
+    const overlay: HTMLElement = overlayEl as HTMLElement;
 
     // Prevent duplicate initialization (astro:page-load fires on initial load too)
     if (toggle.hasAttribute('data-initialized')) return;
@@ -463,7 +468,7 @@ const currentPath = Astro.url.pathname;
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navLinks.classList.contains('open')) {
         setMenuOpen(false);
-        (toggle as HTMLElement).focus();
+        toggle.focus();
       }
     });
 
