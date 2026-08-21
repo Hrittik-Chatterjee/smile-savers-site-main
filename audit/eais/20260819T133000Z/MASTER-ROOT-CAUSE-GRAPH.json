@@ -112,7 +112,7 @@
     {
       "id": "ROOT-TEST-001",
       "title": "No automated test suite exists at any layer",
-      "status": "OPEN",
+      "status": "PARTIALLY RESOLVED -- 29 tests now exist (contact API, chat rate limiter, domain canonicalization, all 7 content-collection schemas); booking flow remains untested",
       "why_it_matters": "Every fix made in this session (10 RESOLVED debt items) has zero regression protection. This is the single highest-leverage remaining root cause: it doesn't just represent one debt item, it multiplies the risk of every other item silently regressing.",
       "manifestations": [
         "TEST-001 (no test files)",
@@ -135,8 +135,8 @@
     {
       "id": "ROOT-CI-001",
       "title": "Release-critical checks are structurally non-blocking",
-      "status": "OPEN",
-      "why_it_matters": "continue-on-error on npm audit and Lighthouse means no CI signal can ever actually stop a bad release -- a policy decision with two visible symptoms.",
+      "status": "PARTIALLY RESOLVED -- DEBT-0014 (Node version mismatch) closed; DEBT-0013 (npm audit continue-on-error) narrowed but not fully closed",
+      "why_it_matters": "continue-on-error on npm audit and Lighthouse means no CI signal can ever actually stop a bad release -- a policy decision with two visible symptoms. 2026-08-21: security.yml's Node version now matches deploy.yml (DEBT-0014). npm audit findings reduced 18->3 vulnerabilities; the 2 remaining high-severity ones require a breaking Astro major bump, out of scope while stackBaseline is FROZEN, so npm audit --audit-level=high stays continue-on-error rather than fail immediately on a known, deferred gap. A third non-blocking check this graph hadn't counted -- deploy.yml's Prettier format-check -- was found and made blocking (commit 4fddadb).",
       "manifestations": [
         "CI-001 (security checks advisory)",
         "CI-002 (Node version mismatch across workflows, a smaller but related CI-hygiene gap)"

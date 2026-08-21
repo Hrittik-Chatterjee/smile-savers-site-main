@@ -391,9 +391,9 @@
       "domain": "testing",
       "severity": "P1",
       "confidence": 0.999,
-      "status": "OPEN",
+      "status": "PARTIALLY RESOLVED",
       "title": "Zero automated test files in the repository",
-      "description": "No test/spec files of any kind exist. CI (quality/build jobs) validates type-checking and build success only -- no behavioral regression proof for contact API, chat API, booking flow, or any business logic. PARTIAL PROGRESS (commit <pending>): 11 tests now cover the two riskiest Wave-1-changed behaviors (contact API fail-closed, chat rate limiting), proven to catch regressions by reverting the original bug and confirming the suite fails. Booking flow, content schemas, and everything else remain untested.",
+      "description": "No test/spec files of any kind exist. CI (quality/build jobs) validates type-checking and build success only -- no behavioral regression proof for contact API, chat API, booking flow, or any business logic. PARTIAL PROGRESS: 15 tests cover the two riskiest Wave-1-changed behaviors (contact API fail-closed, chat rate limiting) plus domain canonicalization, proven to catch regressions by reverting the original bug and confirming the suite fails. 2026-08-21 (commit ecd2a45): 14 more tests added covering all 7 content-collection Zod schemas in src/content.config.ts (one valid + one invalid fixture each) -- 29 tests total. Booking flow (client-only, no API surface -- would need Playwright, not a unit test) remains the largest untested surface.",
       "evidence": [
         "file inventory, confirmed via find . -iname \"*.test.*\" -o -iname \"*.spec.*\" returning nothing"
       ],
@@ -427,9 +427,9 @@
       "domain": "ci-cd",
       "severity": "P1",
       "confidence": 0.999,
-      "status": "OPEN",
+      "status": "PARTIALLY RESOLVED",
       "title": "Security and performance checks are non-blocking by design",
-      "description": "npm audit and Lighthouse CI both use continue-on-error/advisory patterns; release can proceed regardless of findings.",
+      "description": "npm audit and Lighthouse CI both use continue-on-error/advisory patterns; release can proceed regardless of findings. 2026-08-21: found a third, previously-uncounted non-blocking check (deploy.yml's Prettier format-check) and closed it (commit 4fddadb). Also reduced the underlying npm audit findings 18->3 vulnerabilities (commit f0fee23). security.yml's `npm audit --audit-level=high` step itself stays continue-on-error: the 2 remaining high-severity findings only resolve via a breaking Astro major bump, explicitly out of scope while stackBaseline is FROZEN (.ai/constitution.md invariant 5). Lighthouse stays non-blocking by deliberate design (documented in deploy.yml's own comment) -- perf budgets against live prod URLs are inherently noisy, not a gap.",
       "evidence": [
         ".github/workflows/security.yml",
         ".github/workflows/deploy.yml (lighthouse job)"
@@ -450,7 +450,10 @@
       "recommended_wave": "WAVE-2",
       "spec_required": true,
       "tdd_required": false,
-      "verification": [],
+      "verification": [
+        "commit 4fddadb -- deploy.yml's Prettier format-check flipped from continue-on-error to blocking, after commit f428749 ran the repo through it clean",
+        "commit f0fee23 -- npm audit fix (non-force, package-lock.json only) reduced 18 vulnerabilities (1 low, 4 moderate, 13 high) to 3 (1 low, 2 high); npm run check/build/test/tokens:check/lint:design all pass against the updated lockfile"
+      ],
       "rollback": "n/a"
     },
     {
@@ -459,7 +462,7 @@
       "domain": "ci-cd",
       "severity": "P2",
       "confidence": 0.999,
-      "status": "OPEN",
+      "status": "RESOLVED",
       "title": "CI Node version mismatch between workflows",
       "description": "deploy.yml uses Node 22; security.yml uses Node 20 -- security verification does not run against the same runtime as the production build.",
       "evidence": [
@@ -479,7 +482,9 @@
       "recommended_wave": "WAVE-2",
       "spec_required": false,
       "tdd_required": false,
-      "verification": [],
+      "verification": [
+        "commit f0fee23 -- security.yml's setup-node bumped from '20' to '22', matching deploy.yml"
+      ],
       "rollback": "n/a"
     },
     {
@@ -587,7 +592,7 @@
       "domain": "accessibility",
       "severity": "P2",
       "confidence": 0.999,
-      "status": "OPEN",
+      "status": "RESOLVED",
       "title": "TypeScript checking bypassed in 2 interactive/accessibility-relevant files",
       "description": "@ts-nocheck in AccessibilityMenu.astro and MobileMenu.astro; @ts-ignore in DoctorsList.astro for a possibly-missing image.",
       "evidence": [
@@ -604,12 +609,16 @@
       "user_impact": "Reduced type-safety confidence specifically in accessibility-critical UI code",
       "business_impact": "None directly",
       "security_impact": "None",
-      "recurrence_risk": "LOW",
+      "recurrence_risk": "LOW -- closed via real typing, not by re-suppressing",
       "remediation_class": "MODERATE",
       "recommended_wave": "WAVE-5",
       "spec_required": false,
       "tdd_required": false,
-      "verification": [],
+      "verification": [
+        "commit 33431ce -- DoctorsList.astro's stale @ts-ignore removed (dr.jpg now exists); MobileMenu.astro's @ts-nocheck replaced with real typing (retyped DOM nodes as non-null HTMLElement after the guard); src/components/accessibility/AccessibilityMenu.astro (the file DEBT-0018 originally named) turned out to be dead code with zero consumers -- PageLayout.astro actually renders the separate, CSS-first src/modules/accessibility/components/AccessibilityMenu.astro -- and was deleted rather than typed",
+        "npm run check: 0 errors (was 93 files, now 92 after the dead-code deletion)",
+        "Playwright: mobile menu opens on toggle click and closes on Escape with zero page errors, confirming the retyping didn't change runtime behavior"
+      ],
       "rollback": "n/a"
     },
     {
@@ -650,11 +659,11 @@
       "root_cause_id": "ROOT-DEP-002",
       "domain": "dependency",
       "severity": "P2",
-      "confidence": 0.5,
-      "status": "UNVERIFIED",
+      "confidence": 0.9,
+      "status": "PARTIALLY RESOLVED",
       "title": "Dependency vulnerability status unknown",
-      "description": "npm audit could not reach the registry in the original audit environment; not re-run this session either.",
-      "evidence": [],
+      "description": "npm audit could not reach the registry in the original audit environment; not re-run for a long time. 2026-08-21: run for the first time (see DEBT-0013) -- found 18 vulnerabilities (1 low, 4 moderate, 13 high), fixed 15 of them via non-force `npm audit fix` (commit f0fee23), leaving 3 (1 low, 2 high) that require a breaking Astro major bump, deferred per stackBaseline FROZEN.",
+      "evidence": ["commit f0fee23"],
       "affected_files": [
         "package.json",
         "package-lock.json"
