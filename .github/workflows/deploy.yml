@@ -63,6 +63,17 @@ jobs:
       - name: Test
         run: npm test
 
+      # Design-system gates. Blocking, because every defect these catch was a
+      # real one already shipped to production: ten glow values frozen at a
+      # superseded accent, eight category colours failing WCAG in both of their
+      # roles, and two font families named but never bound by an @font-face
+      # (so the site rendered in system fonts for its entire life).
+      - name: Design token drift + contrast gate
+        run: npm run tokens:check
+
+      - name: Design lint
+        run: npm run lint:design
+
       - name: Format check
         run: npx prettier --check "src/**/*.{astro,ts,css}" --log-level warn
         continue-on-error: true   # warn only, don't block

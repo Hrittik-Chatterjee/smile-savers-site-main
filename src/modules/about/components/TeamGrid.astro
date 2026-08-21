@@ -10,10 +10,10 @@ const sortedTeam = team.sort((a, b) => a.data.order - b.data.order);
 
 // Map slug to local image & accent
 const doctorMeta: Record<string, { img: string; accent: string; badge?: string }> = {
-  "dr-deepak-bhagat": { img: "/images/doctors/dr-bhagat.jpg", accent: "#2CABDF", badge: "ICOI Diplomate" },
-  "dr-julie-islam":   { img: drImage.src,  accent: "#3DBAA7", badge: "Preventive Care" },
-  "dr-dorothy-li":    { img: drImage.src,     accent: "#10B981", badge: "Emergency Specialist" },
-  "dr-sarha-avendano": { img: drImage.src,     accent: "#8B5CF6", badge: "Patient-Centered Care" },
+  "dr-deepak-bhagat": { img: "/images/doctors/dr-bhagat.jpg", accent: "var(--cat-cyan-ink)", badge: "ICOI Diplomate" },
+  "dr-julie-islam":   { img: drImage.src,  accent: "var(--cat-teal-ink)", badge: "Preventive Care" },
+  "dr-dorothy-li":    { img: drImage.src,     accent: "var(--cat-green-ink)", badge: "Emergency Specialist" },
+  "dr-sarha-avendano": { img: drImage.src,     accent: "var(--cat-purple-ink)", badge: "Patient-Centered Care" },
 };
 ---
 
@@ -28,7 +28,7 @@ const doctorMeta: Record<string, { img: string; accent: string; badge?: string }
 
     <div class="tg-grid">
       {sortedTeam.map((member) => {
-        const meta = doctorMeta[member.data.slug] ?? { img: "/images/doctors/dr-bhagat.jpg", accent: "#2CABDF" };
+        const meta = doctorMeta[member.data.slug] ?? { img: "/images/doctors/dr-bhagat.jpg", accent: "var(--cat-cyan-ink)" };
         const cred = member.data.credentials?.[0] ?? "DDS";
         return (
           <article class="tg-card" style={`--ta:${meta.accent}`}>

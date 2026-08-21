@@ -14,12 +14,12 @@ const { title, benefits, faq, duration, category } = service.data;
 const { Content } = await render(service);
 
 const categoryColors: Record<string, string> = {
-  preventive: "#10B981",
-  cosmetic:   "#F59E0B",
-  restorative:"#3B82F6",
-  emergency:  "#EF4444",
+  preventive: "var(--cat-green-ink)",
+  cosmetic:   "var(--cat-amber-ink)",
+  restorative:"var(--cat-blue-ink)",
+  emergency:  "var(--cat-red-ink)",
 };
-const accent = categoryColors[category] ?? "#2CABDF";
+const accent = categoryColors[category] ?? "var(--cat-cyan-ink)";
 ---
 
 <article class="sd">

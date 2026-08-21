@@ -242,6 +242,28 @@
      with navy. So it is a surface/fill colour, never a white-text button colour.
      Derived in design-intelligence/scripts/palette.mjs; rationale in
      docs/design/colour.md. Pair ONLY with --color-brand-surface-text. */
+  /* ----------------------------------------
+     CATEGORY COLOURS (accessible pairs)
+     Eight category hues drive service cards, trust signals, values, team
+     badges and doctor cards. Each is used in TWO roles at once: as a solid
+     fill with white text on it, AND as a text colour on its own light tint.
+     Measured, every original value failed BOTH roles — worst was the gold
+     star at 1.71:1 against a 4.5:1 requirement.
+     Each -ink/-tint pair below is derived in
+     design-intelligence/scripts/category-palette.mjs by holding the hue and
+     walking OKLCH lightness until both roles clear 4.6:1 (AA plus margin).
+     Hue is preserved, so the categories remain visually distinguishable.
+     ALWAYS use an -ink and -tint from the same family together.
+     ---------------------------------------- */
+  --cat-cyan-ink: #03749C;   --cat-cyan-tint: #E3F5FF;   /* 5.27 / 4.71 */
+  --cat-teal-ink: #047C6D;   --cat-teal-tint: #CAFFF4;   /* 5.11 / 4.65 */
+  --cat-green-ink: #057E56;  --cat-green-tint: #CFFFE6;  /* 5.09 / 4.63 */
+  --cat-amber-ink: #996001;  --cat-amber-tint: #FFEFDE;  /* 5.21 / 4.63 */
+  --cat-red-ink: #D3242C;    --cat-red-tint: #FEEEEC;    /* 5.17 / 4.60 */
+  --cat-purple-ink: #7D4BE4; --cat-purple-tint: #F2F0FE; /* 5.25 / 4.67 */
+  --cat-blue-ink: #2068D9;   --cat-blue-tint: #EBF2FE;   /* 5.19 / 4.62 */
+  --cat-gold-ink: #8B6700;   --cat-gold-tint: #FFF0D4;   /* 5.20 / 4.62 */
+
   --color-brand-surface: #02AEDD;        /* cyan 400 — 5.63:1 with navy text */
   --color-brand-surface-subtle: #E9F8FE; /* cyan 50  — 13.42:1 with navy text */
   --color-brand-surface-text: var(--color-primary);
@@ -317,6 +339,32 @@
   /* ----------------------------------------
      SPACING
      ---------------------------------------- */
+
+  /* ----------------------------------------
+     SPACING SCALE (measured, not invented)
+     An audit of all 631 literal rem spacing values across src/ found
+     that 542 of them (85.9%) already sit on a coherent 2px-granular
+     scale — it simply had never been named. These tokens document the
+     scale that the codebase already follows, so new work has something
+     to reference and `npm run lint:design` can reject values that fall
+     off it. Existing on-scale literals were deliberately NOT rewritten:
+     they already render correctly, so churning 542 of them would be
+     risk without visual gain. Full audit: docs/design/spacing.md
+     ---------------------------------------- */
+  --space-1: 0.25rem;   /*  4px — 33 existing uses */
+  --space-2: 0.375rem;  /*  6px — 18 */
+  --space-3: 0.5rem;    /*  8px — 90 */
+  --space-4: 0.625rem;  /* 10px — 28 */
+  --space-5: 0.75rem;   /* 12px — 67 */
+  --space-6: 0.875rem;  /* 14px — 41 */
+  --space-7: 1rem;      /* 16px — 100 */
+  --space-8: 1.125rem;  /* 18px — 11 */
+  --space-9: 1.25rem;   /* 20px — 42 */
+  --space-10: 1.5rem;   /* 24px — 56 */
+  --space-11: 1.75rem;  /* 28px — 7 */
+  --space-12: 2rem;     /* 32px — 41 */
+  --space-13: 2.5rem;   /* 40px — 5 */
+  --space-14: 3rem;     /* 48px — 3 */
 
   --spacing-section: clamp(4rem, 3rem + 4vw, 6rem);
   --spacing-block: clamp(2rem, 1.5rem + 2vw, 3rem);

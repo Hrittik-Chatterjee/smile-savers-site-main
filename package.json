@@ -16,6 +16,8 @@
     "clean": "rm -rf .astro dist",
     "build:ci": "astro build --no-type-check",
     "lint": "astro check",
+    "lint:design": "node design-intelligence/scripts/design-lint.mjs",
+    "tokens:check": "node design-intelligence/scripts/brand-tokens.mjs --check",
     "preview:cf": "wrangler dev",
     "test": "node --test functions/api/__tests__/*.test.mjs"
   },
