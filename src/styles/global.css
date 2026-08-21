@@ -13,6 +13,44 @@
 }
 
 /* ============================================
+   SELF-HOSTED FONTS
+   These @font-face rules did not previously exist. BaseLayout.astro
+   preloaded both .woff2 files and --font-family-sans/-heading named
+   them, but with no @font-face the browser had nothing to bind the
+   names to, so every page silently rendered in the visitor's system
+   font while still paying to download the fonts. Verified with a
+   canvas measureText probe: "Inter Variable" and "Plus Jakarta Sans
+   Variable" measured byte-identical to a font name guaranteed not to
+   exist, and document.fonts.size was 0.
+
+   Both files are genuine variable fonts (weight axis), SIL OFL 1.1,
+   subset to the Latin ranges this site uses. Licences alongside them
+   in public/fonts/.
+
+   font-display: swap — text paints immediately in the fallback and
+   swaps when the font arrives, rather than blocking render. Chosen
+   over "optional" because the brand typeface matters here, and over
+   "block" because invisible text hurts more than a swap.
+   ============================================ */
+@font-face {
+  font-family: "Inter Variable";
+  src: url("/fonts/inter-variable.woff2") format("woff2-variations"),
+       url("/fonts/inter-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans Variable";
+  src: url("/fonts/plus-jakarta-sans-variable.woff2") format("woff2-variations"),
+       url("/fonts/plus-jakarta-sans-variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================
    DAISYUI COLOR OVERRIDE FIX
    DaisyUI light theme overrides --color-primary to purple-blue
    (oklch(45% .24 277.023)). We reassert brand colours here at
@@ -246,7 +284,11 @@
 
   --font-family-sans: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
   --font-family-heading: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", var(--font-family-sans);
-  --font-family-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+  /* No JetBrains Mono file is self-hosted and this token has zero consumers
+     (verified by grep across src/). The named families are therefore dead
+     weight that would silently resolve to ui-monospace anyway — kept as the
+     honest system stack rather than naming fonts the site does not ship. */
+  --font-family-mono: ui-monospace, "SFMono-Regular", "Menlo", monospace;
 
   /* Font Sizes (fluid) */
   --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
